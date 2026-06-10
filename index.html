@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMPACT WATCH — Mastercard Foundation Nigeria</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{--w:#fff;--off:#f8f9fb;--b:#e5e7eb;--b2:#d1d5db;--t:#111827;--t2:#4b5563;--t3:#9ca3af;
+--red:#cf2e2e;--r2:rgba(207,46,46,.08);--rb:rgba(207,46,46,.2);
+--grn:#16a34a;--g2:rgba(22,163,74,.08);--gb:rgba(22,163,74,.2);
+--amb:#d97706;--a2:rgba(217,119,6,.08);--ab:rgba(217,119,6,.2);
+--blu:#2563eb;--bl2:rgba(37,99,235,.07);--blb:rgba(37,99,235,.2);
+--pur:#7c3aed;--tel:#0d9488;--gold:#e8a020;
+--f:'DM Sans',sans-serif;--m:'DM Mono',monospace;--sh:0 1px 3px rgba(0,0,0,.07);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:var(--b2);border-radius:4px;}
+.shell{display:flex;min-height:100vh;}
+
+/* SIDEBAR */
+.sb{width:220px;min-width:220px;background:var(--w);border-right:1px solid var(--b);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;z-index:100;}
+.logo{padding:16px 14px 12px;border-bottom:1px solid var(--b);}
+.logo-row{display:flex;align-items:center;gap:8px;}
+.licon{width:30px;height:30px;background:var(--red);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.licon svg{width:15px;height:15px;stroke:white;fill:none;stroke-width:2;}
+.lname{font-size:13px;font-weight:600;}
+.lsub{font-size:10px;color:var(--t3);font-family:var(--m);}
+.cpill{margin-top:9px;background:var(--r2);border:1px solid var(--rb);border-radius:6px;padding:6px 9px;}
+.cname{font-size:11px;font-weight:500;color:var(--red);}
+.csub{font-size:10px;color:var(--t3);}
+.nav{flex:1;padding:10px;}
+.nlbl{font-size:10px;font-family:var(--m);color:var(--t3);letter-spacing:.08em;text-transform:uppercase;padding:0 6px;margin:12px 0 4px;}
+.ni{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:6px;cursor:pointer;color:var(--t2);font-size:13px;transition:all .12s;margin-bottom:1px;}
+.ni:hover{background:var(--off);color:var(--t);}
+.ni.on{background:var(--r2);color:var(--red);font-weight:500;}
+.nic{font-size:13px;width:15px;text-align:center;flex-shrink:0;}
+.nbadge{margin-left:auto;background:var(--red);color:white;font-size:9px;font-family:var(--m);padding:1px 5px;border-radius:8px;}
+.ndot{width:6px;height:6px;border-radius:50%;background:var(--grn);box-shadow:0 0 5px var(--grn);animation:p 2s infinite;margin-left:auto;}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.4}}
+.sf{padding:10px 12px;border-top:1px solid var(--b);font-size:11px;color:var(--t3);display:flex;align-items:center;gap:5px;}
+.sfd{width:6px;height:6px;border-radius:50%;background:var(--grn);box-shadow:0 0 5px var(--grn);animation:p 2s infinite;}
+
+/* MAIN */
+.main{margin-left:220px;flex:1;display:flex;flex-direction:column;}
+.tb{background:var(--w);border-bottom:1px solid var(--b);height:50px;min-height:50px;display:flex;align-items:center;gap:11px;padding:0 20px;position:sticky;top:0;z-index:50;box-shadow:var(--sh);}
+.tbt{font-size:15px;font-weight:500;flex:1;}
+.tbtag{font-size:10px;font-family:var(--m);background:var(--r2);color:var(--red);border:1px solid var(--rb);border-radius:4px;padding:2px 7px;}
+.tblive{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--grn);}
+.tbld{width:6px;height:6px;border-radius:50%;background:var(--grn);box-shadow:0 0 5px var(--grn);animation:p 1.5s infinite;}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:6px;border:1px solid var(--b2);background:var(--w);color:var(--t2);font-size:12px;cursor:pointer;transition:all .12s;font-family:var(--f);}
+.btn:hover{border-color:var(--t3);color:var(--t);}
+.btr{background:var(--red);border-color:var(--red);color:white;font-weight:500;}
+.btr:hover{background:#a82020;color:white;}
+.btg{background:var(--gold);border-color:var(--gold);color:white;font-weight:500;}
+
+.content{padding:20px;flex:1;}
+.view{display:none;}.view.on{display:block;}
+.slbl{font-size:10px;font-family:var(--m);color:var(--t3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:11px;}
+
+/* PANELS */
+.panel{background:var(--w);border:1px solid var(--b);border-radius:10px;box-shadow:var(--sh);overflow:hidden;margin-bottom:13px;}
+.ph{padding:12px 16px;border-bottom:1px solid var(--b);display:flex;align-items:center;justify-content:space-between;}
+.pt{font-size:13px;font-weight:500;}
+.pm2{font-size:11px;color:var(--t3);font-family:var(--m);}
+.pb{padding:14px 16px;}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;margin-bottom:13px;}
+.g6040{display:grid;grid-template-columns:1.5fr 1fr;gap:13px;margin-bottom:13px;}
+@media(max-width:1100px){.g2,.g6040{grid-template-columns:1fr}.g3{grid-template-columns:1fr 1fr}}
+
+/* STATS */
+.sg{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:16px;}
+.sc{background:var(--w);border:1px solid var(--b);border-radius:10px;padding:13px;box-shadow:var(--sh);position:relative;overflow:hidden;}
+.sc::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.sc.cr::after{background:linear-gradient(90deg,var(--red),transparent);}
+.sc.cg::after{background:linear-gradient(90deg,var(--grn),transparent);}
+.sc.ca::after{background:linear-gradient(90deg,var(--amb),transparent);}
+.sc.cb::after{background:linear-gradient(90deg,var(--blu),transparent);}
+.sc.co::after{background:linear-gradient(90deg,var(--gold),transparent);}
+.slb{font-size:10px;font-family:var(--m);color:var(--t3);letter-spacing:.05em;text-transform:uppercase;margin-bottom:5px;}
+.sv{font-size:23px;font-weight:300;letter-spacing:-1px;}
+.sd{font-size:11px;margin-top:3px;}
+.su{color:var(--grn);}.sdn{color:var(--red);}.snt{color:var(--t3);}
+
+/* CRISIS BANNER */
+.cris{background:var(--r2);border:1px solid var(--rb);border-radius:10px;padding:12px 15px;margin-bottom:16px;display:flex;align-items:center;gap:11px;}
+.cri{font-size:17px;}
+.crb{flex:1;}
+.crt{font-size:13px;font-weight:600;color:var(--red);margin-bottom:2px;}
+.crd{font-size:12px;color:var(--t2);}
+.crm{font-size:11px;font-family:var(--m);color:var(--t3);white-space:nowrap;}
+
+/* FEED */
+.fi{padding:10px 0;border-bottom:1px solid var(--b);display:flex;gap:9px;}
+.fi:last-child{border-bottom:none;}
+.fsrc{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;font-family:var(--m);}
+.fbdy{flex:1;min-width:0;}
+.ftit{font-size:13px;font-weight:500;line-height:1.4;margin-bottom:4px;}
+.fmeta{font-size:11px;color:var(--t3);display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+.fprog{font-size:10px;padding:2px 6px;border-radius:4px;background:var(--bl2);color:var(--blu);border:1px solid var(--blb);font-family:var(--m);}
+
+/* CHIPS */
+.chip{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:10px;font-family:var(--m);font-weight:500;}
+.cpos{background:var(--g2);color:var(--grn);border:1px solid var(--gb);}
+.cneg{background:var(--r2);color:var(--red);border:1px solid var(--rb);}
+.cneu{background:var(--off);color:var(--t3);border:1px solid var(--b);}
+.ccri{background:var(--a2);color:var(--amb);border:1px solid var(--ab);}
+.cskp{background:rgba(124,58,237,.07);color:var(--pur);border:1px solid rgba(124,58,237,.2);}
+.cadv{background:rgba(13,148,136,.07);color:var(--tel);border:1px solid rgba(13,148,136,.2);}
+
+/* TABS */
+.tabs{display:flex;padding:0 16px;border-bottom:1px solid var(--b);overflow-x:auto;}
+.tab{padding:9px 11px;font-size:12px;cursor:pointer;color:var(--t3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s;white-space:nowrap;}
+.tab:hover{color:var(--t2);}
+.tab.on{color:var(--red);border-bottom-color:var(--red);font-weight:500;}
+
+/* SOV */
+.sovr{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.sovl{font-size:12px;color:var(--t2);width:145px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sovbg{flex:1;height:5px;background:var(--off);border-radius:3px;overflow:hidden;}
+.sovf{height:100%;border-radius:3px;}
+.sovp{font-size:11px;color:var(--t3);font-family:var(--m);width:28px;text-align:right;flex-shrink:0;}
+
+/* KW */
+.kwl{display:flex;flex-wrap:wrap;gap:6px;}
+.kwc{display:inline-flex;align-items:center;gap:5px;background:var(--off);border:1px solid var(--b);border-radius:6px;padding:4px 8px;font-size:12px;cursor:pointer;transition:all .12s;}
+.kwc:hover{border-color:var(--red);color:var(--red);}
+.kwn{background:var(--r2);color:var(--red);padding:1px 5px;border-radius:3px;font-size:10px;font-family:var(--m);}
+
+/* PIDGIN */
+.pit{display:flex;justify-content:space-between;align-items:center;padding:7px 9px;border-radius:6px;margin-bottom:5px;border:1px solid var(--b);}
+.pph{font-size:12px;font-family:var(--m);}
+.ptr{font-size:10px;color:var(--t3);margin-top:2px;}
+
+/* STAKEHOLDER */
+.stk{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--b);}
+.stk:last-child{border-bottom:none;}
+.stav{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;font-family:var(--m);flex-shrink:0;}
+.stnm{font-size:12px;font-weight:500;}
+.strl{font-size:11px;color:var(--t3);}
+
+/* ALERT CARDS */
+.ac{border-radius:10px;padding:12px 14px;margin-bottom:9px;border:1px solid;}
+.acr{background:var(--r2);border-color:var(--rb);}
+.acw{background:var(--a2);border-color:var(--ab);}
+.aci{background:var(--bl2);border-color:var(--blb);}
+.aco{background:var(--g2);border-color:var(--gb);}
+.act{font-size:13px;font-weight:500;margin-bottom:3px;}
+.acd{font-size:12px;color:var(--t2);line-height:1.6;}
+.acm{font-size:11px;color:var(--t3);margin-top:5px;font-family:var(--m);}
+
+/* AI */
+.aip{background:var(--w);border:1px solid var(--b);border-radius:10px;overflow:hidden;box-shadow:var(--sh);margin-bottom:13px;}
+.aih{padding:11px 16px;background:linear-gradient(135deg,var(--r2),rgba(232,160,32,.03));border-bottom:1px solid var(--b);display:flex;align-items:center;gap:8px;}
+.aibg{background:var(--red);color:white;font-size:10px;font-weight:600;font-family:var(--m);padding:2px 7px;border-radius:4px;}
+.ait{font-size:13px;font-weight:500;flex:1;}
+.aibo{padding:14px 16px;}
+.aio{font-size:13px;line-height:1.75;color:var(--t2);min-height:60px;}
+.cur{display:inline-block;width:2px;height:13px;background:var(--red);margin-left:2px;animation:bl .8s step-end infinite;vertical-align:middle;}
+@keyframes bl{50%{opacity:0}}
+.aipr{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px;}
+.apb{display:inline-flex;align-items:center;gap:4px;background:var(--off);border:1px solid var(--b2);border-radius:20px;padding:4px 10px;font-size:11px;cursor:pointer;transition:all .12s;color:var(--t2);font-family:var(--f);}
+.apb:hover{border-color:var(--red);color:var(--red);background:var(--r2);}
+.apb:disabled{opacity:.4;cursor:not-allowed;}
+.airw{display:flex;gap:7px;margin-bottom:11px;}
+.aiin{flex:1;background:var(--off);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;color:var(--t);font-size:13px;font-family:var(--f);outline:none;}
+.aiin:focus{border-color:var(--red);}
+
+/* PROG GRID */
+.pgr{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:8px;margin-bottom:13px;}
+.pc{background:var(--w);border:1px solid var(--b);border-radius:10px;padding:12px;cursor:pointer;transition:all .15s;box-shadow:var(--sh);}
+.pc:hover{border-color:var(--red);}
+.pc.sel{border-color:var(--red);background:var(--r2);}
+.pcn{font-size:13px;font-weight:500;margin-bottom:2px;}
+.pct{font-size:10px;font-family:var(--m);color:var(--t3);margin-bottom:6px;}
+.pcs{display:flex;gap:8px;font-size:11px;color:var(--t2);}
+.pcs b{color:var(--t);}
+
+/* PROG FILTER */
+.pf{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:13px;}
+.pfb{padding:4px 10px;border-radius:20px;font-size:11px;cursor:pointer;border:1px solid var(--b2);background:var(--w);color:var(--t2);transition:all .12s;font-family:var(--f);}
+.pfb.on{background:var(--r2);border-color:var(--rb);color:var(--red);font-weight:500;}
+.pfb:hover:not(.on){background:var(--off);}
+
+/* STATE */
+.stgr{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:7px;margin-bottom:13px;}
+.stc{background:var(--w);border:1px solid var(--b);border-radius:8px;padding:9px 10px;box-shadow:var(--sh);}
+.stcn{font-size:12px;font-weight:500;margin-bottom:2px;}
+.stcv{font-size:17px;font-weight:300;letter-spacing:-.5px;}
+.stcp{font-size:10px;color:var(--t3);font-family:var(--m);margin-top:1px;}
+.stcb{height:3px;background:var(--off);border-radius:2px;margin-top:5px;overflow:hidden;}
+.stcbf{height:100%;border-radius:2px;background:var(--red);}
+
+/* SETTINGS TOGGLE */
+.setrow{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--b);}
+.setrow:last-child{border-bottom:none;}
+.tgl{width:36px;height:20px;background:var(--off);border-radius:10px;position:relative;cursor:pointer;transition:background .2s;border:1px solid var(--b2);}
+.tgl.on{background:var(--grn);}
+.tgl::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:white;transition:left .2s;box-shadow:0 1px 2px rgba(0,0,0,.15);}
+.tgl.on::after{left:18px;}
+
+/* REPORT KPI */
+.rkgr{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:13px;}
+.rk{background:var(--w);border:1px solid var(--b);border-radius:10px;padding:13px;box-shadow:var(--sh);}
+.rkv{font-size:21px;font-weight:300;letter-spacing:-.5px;color:var(--red);}
+.rkl{font-size:11px;color:var(--t3);margin-top:2px;font-family:var(--m);}
+
+.cw{position:relative;}
+.alert-ai-out{margin-top:12px;padding:12px 14px;background:var(--w);border:1px solid var(--b2);border-radius:8px;font-size:13px;line-height:1.75;color:var(--t2);}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<aside class="sb">
+  <div class="logo">
+    <div class="logo-row">
+      <div class="licon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <div><div class="lname">IMPACT WATCH</div><div class="lsub">v1.0 · NG-INTEL</div></div>
+    </div>
+    <div class="cpill"><div class="cname">Mastercard Foundation</div><div class="csub">Nigeria Programs · All sectors</div></div>
+  </div>
+  <div class="nav">
+    <div class="nlbl">Monitor</div>
+    <div class="ni on" onclick="go('dash',this,'Overview Dashboard','OVERVIEW')"><span class="nic">⬡</span>Dashboard<span class="ndot"></span></div>
+    <div class="ni" onclick="go('feed',this,'Live Media Feed','MONITORING')"><span class="nic">◈</span>Live Feed<span class="ndot"></span></div>
+    <div class="ni" onclick="go('alerts',this,'Crisis & Alerts','ALERTS')"><span class="nic">◬</span>Alerts<span class="nbadge">4</span></div>
+    <div class="nlbl">Programs</div>
+    <div class="ni" onclick="go('progs',this,'Program Monitor','PROGRAMS')"><span class="nic">◉</span>All Programs</div>
+    <div class="ni" onclick="go('geo',this,'Geographic Intelligence','GEO INTEL')"><span class="nic">◈</span>Geographic</div>
+    <div class="ni" onclick="go('stake',this,'Stakeholder Map','RELATIONS')"><span class="nic">◎</span>Stakeholders</div>
+    <div class="nlbl">Intelligence</div>
+    <div class="ni" onclick="go('sent',this,'Sentiment Engine','NLP INTEL')"><span class="nic">◎</span>Sentiment Engine</div>
+    <div class="ni" onclick="go('ai',this,'AI Intelligence','AI ANALYSIS')"><span class="nic">✦</span>AI Insights</div>
+    <div class="nlbl">Reporting</div>
+    <div class="ni" onclick="go('report',this,'Donor Reports','REPORTING')"><span class="nic">◇</span>Reports</div>
+    <div class="ni" onclick="go('config',this,'Crawler Config','SYSTEM')"><span class="nic">⚙</span>Crawler Config</div>
+    <div class="ni" onclick="go('settings',this,'Settings','SETTINGS')"><span class="nic">◎</span>Settings</div>
+  </div>
+  <div class="sf"><span class="sfd"></span>Crawl active · 18 min ago</div>
+</aside>
+
+<div class="main">
+  <div class="tb">
+    <div class="tbt" id="tbt">Overview Dashboard</div>
+    <span class="tbtag" id="tbtag">OVERVIEW</span>
+    <div class="tblive"><span class="tbld"></span>Live</div>
+    <button class="btn btr" onclick="ai('Generate a weekly media intelligence briefing for Mastercard Foundation Nigeria covering all 15 programs. Highlight top narratives, key risks, and opportunities across news, social media, and grassroots channels.','ai-dash')">✦ AI Briefing</button>
+  </div>
+
+  <div class="content">
+
+  <!-- DASHBOARD -->
+  <div id="v-dash" class="view on">
+    <div class="cris">
+      <div class="cri">◬</div>
+      <div class="crb">
+        <div class="crt">Alert — Jobberman/Young Africa Works: "scam" narrative trending on Twitter/X in Kano & Lagos</div>
+        <div class="crd">Negative mentions up 190% in 8 hrs · 3 accounts (120K combined) amplifying · Response window: 3 hours</div>
+      </div>
+      <div class="crm">1h 42m ago</div>
+      <button class="btn" style="font-size:11px;flex-shrink:0" onclick="go('alerts',null,'Crisis & Alerts','ALERTS')">View →</button>
+    </div>
+    <div class="sg">
+      <div class="sc cr"><div class="slb">Mentions (7d)</div><div class="sv">6,284</div><div class="sd su">↑ 24% vs last week</div></div>
+      <div class="sc cg"><div class="slb">Est. Reach</div><div class="sv">18.7M</div><div class="sd su">↑ 31% audience</div></div>
+      <div class="sc ca"><div class="slb">Sentiment Score</div><div class="sv">71<span style="font-size:13px;color:var(--t3)">/100</span></div><div class="sd sdn">↓ 6pts this week</div></div>
+      <div class="sc cr"><div class="slb">Active Alerts</div><div class="sv">4</div><div class="sd snt">2 critical · 2 moderate</div></div>
+      <div class="sc co"><div class="slb">Media Value</div><div class="sv">₦312M</div><div class="sd su">↑ 18% earned</div></div>
+    </div>
+    <div class="g2">
+      <div class="panel"><div class="ph"><span class="pt">Mention volume — 30 days</span><span class="pm2">All programs</span></div><div class="pb"><div class="cw" style="height:195px"><canvas id="cVol"></canvas></div></div></div>
+      <div class="panel"><div class="ph"><span class="pt">Sentiment breakdown</span><button class="btn" style="font-size:11px;padding:3px 9px" onclick="go('sent',null,'Sentiment Engine','NLP INTEL')">Details →</button></div><div class="pb"><div class="cw" style="height:195px"><canvas id="cSent"></canvas></div></div></div>
+    </div>
+    <div class="g6040">
+      <div class="panel">
+        <div class="tabs" id="ft">
+          <div class="tab on" onclick="stab(this,'ft')">Latest</div>
+          <div class="tab" onclick="stab(this,'ft')">High reach</div>
+          <div class="tab" onclick="stab(this,'ft')">Critical</div>
+        </div>
+        <div class="pb" style="padding-top:8px">
+          <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">PUN</div><div class="fbdy"><div class="ftit">Young Africa Works creates 42,000 jobs in Q2 — MCF report</div><div class="fmeta"><span>Punch · 38min · 3.1M reach</span><span class="fprog">Young Africa Works</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"I applied to Jobberman 3 times. Na who you know matter for this Nigeria" — thread growing</div><div class="fmeta"><span>@KanoYouthVoice 44K · 1h</span><span class="fprog">Jobberman</span><span class="chip ccri">critical</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">PRM</div><div class="fbdy"><div class="ftit">Babban Gona CAFI farmers report 40% yield increase in Nasarawa, Kaduna</div><div class="fmeta"><span>Premium Times · 2h · 1.4M</span><span class="fprog">Babban Gona</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">TK</div><div class="fbdy"><div class="ftit">@FashionNaija TikTok on TAFTA graduation: 280K views — "finally a program wey actually work"</div><div class="fmeta"><span>TikTok · 2h · 280K views</span><span class="fprog">TAFTA</span><span class="chip cadv">advocacy</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">VAN</div><div class="fbdy"><div class="ftit">WOFAN ICON 2 empowers 1,200 women farmers across Kaduna, Kano, Bauchi</div><div class="fmeta"><span>Vanguard · 4h · 2.2M</span><span class="fprog">WOFAN ICON 2</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f5f3ff;color:var(--pur)">LI</div><div class="fbdy"><div class="ftit">EDC Transforming Nigerian Youths: 5,000 complete first cohort across 36 states</div><div class="fmeta"><span>LinkedIn · 4h · 18K eng</span><span class="fprog">EDC</span><span class="chip cpos">positive</span></div></div></div>
+        </div>
+        <div style="padding:9px 16px;border-top:1px solid var(--b);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:11px;color:var(--t3)">6 of 6,284 mentions</span>
+          <button class="btn" style="font-size:11px;padding:3px 9px" onclick="go('feed',null,'Live Media Feed','MONITORING')">View all →</button>
+        </div>
+      </div>
+      <div>
+        <div class="panel" style="margin-bottom:13px">
+          <div class="ph"><span class="pt">Share of voice — dev sector</span></div>
+          <div class="pb" style="padding-top:11px">
+            <div class="sovr"><span class="sovl">MCF Nigeria Programs</span><div class="sovbg"><div class="sovf" style="width:41%;background:var(--red)"></div></div><span class="sovp">41%</span></div>
+            <div class="sovr"><span class="sovl">USAID Nigeria</span><div class="sovbg"><div class="sovf" style="width:22%;background:var(--blu)"></div></div><span class="sovp">22%</span></div>
+            <div class="sovr"><span class="sovl">World Bank NG</span><div class="sovbg"><div class="sovf" style="width:16%;background:var(--tel)"></div></div><span class="sovp">16%</span></div>
+            <div class="sovr"><span class="sovl">Tony Elumelu Fdn</span><div class="sovbg"><div class="sovf" style="width:13%;background:var(--pur)"></div></div><span class="sovp">13%</span></div>
+            <div class="sovr"><span class="sovl">Others</span><div class="sovbg"><div class="sovf" style="width:8%;background:var(--t3)"></div></div><span class="sovp">8%</span></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="ph"><span class="pt">Active keywords</span></div>
+          <div class="pb">
+            <div class="kwl">
+              <div class="kwc">Young Africa Works<span class="kwn">1,840</span></div>
+              <div class="kwc">Babban Gona<span class="kwn">892</span></div>
+              <div class="kwc">TAFTA<span class="kwn">641</span></div>
+              <div class="kwc">Jobberman<span class="kwn">580</span></div>
+              <div class="kwc">WOFAN ICON 2<span class="kwn">412</span></div>
+              <div class="kwc">IITA I-Youth<span class="kwn">318</span></div>
+              <div class="kwc">#YAWNigeria<span class="kwn">244</span></div>
+              <div class="kwc">Project Juriya<span class="kwn">184</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="aip">
+      <div class="aih"><span class="aibg">AI</span><span class="ait">Intelligence Engine — Nigerian English + Pidgin · All 15 MCF programs</span></div>
+      <div class="aibo">
+        <div class="aio" id="ai-dash">Click a prompt below to generate live AI analysis.</div>
+        <div class="aipr">
+          <button class="apb" onclick="ai('Summarise the most important media narratives across all Mastercard Foundation Nigeria programs this week. Include what people are saying in Pidgin and English, and flag any risks.','ai-dash')">📊 Weekly summary</button>
+          <button class="apb" onclick="ai('Analyse the Jobberman Young Africa Works skepticism narrative on Twitter. Who is driving it, what are they saying in Pidgin, how serious is it, and what should the comms response be?','ai-dash')">◬ Jobberman crisis</button>
+          <button class="apb" onclick="ai('Which MCF Nigeria programs have the most positive coverage right now and what is driving it? Give specific examples from Nigerian media.','ai-dash')">✦ Top programs</button>
+          <button class="apb" onclick="ai('Write a senior leadership media summary for Mastercard Foundation Nigeria this week. Professional tone. Include reach, sentiment, 1 win, 1 risk.','ai-dash')">◇ Leadership summary</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE FEED -->
+  <div id="v-feed" class="view">
+    <div class="pf" id="pf">
+      <button class="pfb on" onclick="fprog(this)">All programs</button>
+      <button class="pfb" onclick="fprog(this)">Young Africa Works</button>
+      <button class="pfb" onclick="fprog(this)">Babban Gona</button>
+      <button class="pfb" onclick="fprog(this)">TAFTA</button>
+      <button class="pfb" onclick="fprog(this)">WOFAN ICON 2</button>
+      <button class="pfb" onclick="fprog(this)">Jobberman</button>
+      <button class="pfb" onclick="fprog(this)">IITA I-Youth</button>
+      <button class="pfb" onclick="fprog(this)">Project Juriya</button>
+    </div>
+    <div class="panel">
+      <div class="tabs" id="cht">
+        <div class="tab on" onclick="switchFeed('all',this)">All (6,284)</div>
+        <div class="tab" onclick="switchFeed('news',this)">News (2,140)</div>
+        <div class="tab" onclick="switchFeed('twitter',this)">Twitter/X (2,890)</div>
+        <div class="tab" onclick="switchFeed('facebook',this)">Facebook (510)</div>
+        <div class="tab" onclick="switchFeed('tiktok',this)">TikTok (312)</div>
+        <div class="tab" onclick="switchFeed('youtube',this)">YouTube (248)</div>
+        <div class="tab" onclick="switchFeed('radio',this)">Radio/TV (104)</div>
+        <div class="tab" onclick="switchFeed('blogs',this)">Blogs (80)</div>
+      </div>
+      <div class="pb" style="padding-top:10px">
+        <div style="display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap">
+          <input type="text" placeholder="Search mentions, keywords…" style="flex:1;min-width:180px;background:var(--off);border:1px solid var(--b2);border-radius:6px;padding:6px 11px;font-size:12px;font-family:var(--f);color:var(--t);outline:none">
+          <select style="background:var(--w);border:1px solid var(--b2);border-radius:6px;padding:5px 9px;font-size:12px;font-family:var(--f);color:var(--t2)">
+            <option>All sentiment</option><option>Positive</option><option>Negative</option><option>Critical</option>
+          </select>
+          <select style="background:var(--w);border:1px solid var(--b2);border-radius:6px;padding:5px 9px;font-size:12px;font-family:var(--f);color:var(--t2)">
+            <option>All states</option><option>Lagos</option><option>Kano</option><option>Kaduna</option><option>Abuja FCT</option><option>Adamawa</option>
+          </select>
+        </div>
+
+        <!-- ALL FEED -->
+        <div id="feed-all">
+          <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">PUN</div><div class="fbdy"><div class="ftit">Young Africa Works creates 42,000 jobs in Q2 — MCF report</div><div class="fmeta"><span>Punch · 38min · 3.1M</span><span class="fprog">Young Africa Works</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"I applied to Jobberman 3 times. Na who you know matter for this Nigeria" — thread growing</div><div class="fmeta"><span>@KanoYouthVoice 44K · 1h</span><span class="fprog">Jobberman</span><span class="chip ccri">critical</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">RD</div><div class="fbdy"><div class="ftit">Tambari Radio Kano: WOFAN ICON 2 women speak in Hausa about land access challenges</div><div class="fmeta"><span>Radio · Kano · 3h</span><span class="fprog">WOFAN ICON 2</span><span class="chip ccri">critical</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">TK</div><div class="fbdy"><div class="ftit">@FashionNaija TAFTA graduation TikTok — 280K views, "finally a program wey work"</div><div class="fmeta"><span>TikTok · 2h · 280K</span><span class="fprog">TAFTA</span><span class="chip cadv">advocacy</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">PRM</div><div class="fbdy"><div class="ftit">Babban Gona CAFI: 40% yield increase reported in Nasarawa farming communities</div><div class="fmeta"><span>Premium Times · 2h · 1.4M</span><span class="fprog">Babban Gona</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"Dem say Project Juriya go help farmers for Adamawa. We still dey wait. 6 months don pass"</div><div class="fmeta"><span>Twitter · 5h</span><span class="fprog">Project Juriya</span><span class="chip cskp">skeptical</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">CH</div><div class="fbdy"><div class="ftit">Federal Ministry of Youth commends Mastercard Foundation's Nigeria investment strategy</div><div class="fmeta"><span>Channels TV · 5h · 9M broadcast</span><span class="chip cadv">advocacy</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f5f3ff;color:var(--pur)">LI</div><div class="fbdy"><div class="ftit">EDC: 5,000 youths complete entrepreneurship training across all 36 states</div><div class="fmeta"><span>LinkedIn · 4h · 18K eng</span><span class="fprog">EDC</span><span class="chip cpos">positive</span></div></div></div>
+        </div>
+
+        <!-- NEWS FEED -->
+        <div id="feed-news" style="display:none">
+          <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">PUN</div><div class="fbdy"><div class="ftit">Young Africa Works creates 42,000 jobs in Q2 — Mastercard Foundation report</div><div class="fmeta"><span>Punch · 38min · 3.1M reach</span><span class="fprog">Young Africa Works</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">PRM</div><div class="fbdy"><div class="ftit">Babban Gona CAFI: Farmers report 40% yield increase in Nasarawa communities</div><div class="fmeta"><span>Premium Times · 2h · 1.4M</span><span class="fprog">Babban Gona</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">VAN</div><div class="fbdy"><div class="ftit">WOFAN ICON 2 empowers 1,200 women farmers across Kaduna, Kano, Bauchi States</div><div class="fmeta"><span>Vanguard · 4h · 2.2M</span><span class="fprog">WOFAN ICON 2</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">CH</div><div class="fbdy"><div class="ftit">Federal Ministry of Youth commends Mastercard Foundation's Nigeria investment strategy</div><div class="fmeta"><span>Channels TV · 5h · 9M broadcast</span><span class="chip cadv">advocacy</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">GRD</div><div class="fbdy"><div class="ftit">TAFTA graduates 200 fashion designers — arts training model praised as replicable</div><div class="fmeta"><span>Guardian NG · 6h · 1.8M</span><span class="fprog">TAFTA</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">BDY</div><div class="fbdy"><div class="ftit">MCF-backed EDC programme reaches final cohort in all 36 states — entrepreneurship milestone</div><div class="fmeta"><span>BusinessDay · 7h · 900K</span><span class="fprog">EDC</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">DLT</div><div class="fbdy"><div class="ftit">Northern farmers await Project Juriya implementation — 6-month delay raises questions</div><div class="fmeta"><span>Daily Trust · 8h · 1.1M</span><span class="fprog">Project Juriya</span><span class="chip ccri">critical</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">SAH</div><div class="fbdy"><div class="ftit">IITA I-Youth agri-entrepreneurs from Kano win national innovation award</div><div class="fmeta"><span>Sahara Reporters · 9h · 2.4M</span><span class="fprog">IITA I-Youth</span><span class="chip cpos">positive</span></div></div></div>
+        </div>
+
+        <!-- TWITTER FEED -->
+        <div id="feed-twitter" style="display:none">
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"I applied to Jobberman 3 times. Na who you know matter for this Nigeria" — thread growing, 847 retweets</div><div class="fmeta"><span>@KanoYouthVoice · 44K · 1h</span><span class="fprog">Jobberman</span><span class="chip ccri">critical</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"Dem say Project Juriya go help farmers for Adamawa. We still dey wait. 6 months don pass" — community thread</div><div class="fmeta"><span>@AdamawaFarmersNG · 12K · 5h</span><span class="fprog">Project Juriya</span><span class="chip cskp">skeptical</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"Young Africa Works just placed my cousin in a tech role in Lagos. Program is real. Don't let the haters discourage you" — viral reply</div><div class="fmeta"><span>@LagosYouthConnect · 88K · 2h</span><span class="fprog">Young Africa Works</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"TAFTA changed my life. I was hustling in Ogun State with no direction. Now I have 4 clients. Real talk." — thread with 1.2K likes</div><div class="fmeta"><span>@TaftaGrad2024 · 3.1K · 3h</span><span class="fprog">TAFTA</span><span class="chip cadv">advocacy</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"Mastercard Foundation Nigeria programs are only helping Lagos and Abuja people. What about us in Zamfara?" — gaining traction</div><div class="fmeta"><span>@NorthernYouthNg · 31K · 4h</span><span class="chip cskp">skeptical</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"WOFAN ICON 2 training is good but the land wahala is still there. Training women without land reform is half measure" — policy voice</div><div class="fmeta"><span>@DrAmina_WomenRights · 56K · 6h</span><span class="fprog">WOFAN ICON 2</span><span class="chip ccri">critical</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"Babban Gona wey dey help farmers for North is the real MVP. My uncle farm yield don increase big time" — 2.4K retweets</div><div class="fmeta"><span>@NasarawaFarmKing · 8K · 7h</span><span class="fprog">Babban Gona</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"MCF Scholars Program changed everything for my family. Thread on how I went from Makurdi to a scholarship abroad 🧵" — viral thread 18K likes</div><div class="fmeta"><span>@BenueScholar · 14K · 8h</span><span class="fprog">Scholars Program</span><span class="chip cadv">advocacy</span></div></div></div>
+        </div>
+
+        <!-- FACEBOOK FEED -->
+        <div id="feed-facebook" style="display:none">
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">FB</div><div class="fbdy"><div class="ftit">Babban Gona CAFI community group: "Our harvest this season is the best in 5 years. God bless this program" — 2,400 reactions</div><div class="fmeta"><span>Facebook Group: Nasarawa Farmers · 3h</span><span class="fprog">Babban Gona</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">FB</div><div class="fbdy"><div class="ftit">WOFAN ICON 2 group: Women farmers in Kaduna sharing land access grievances — growing discussion, 180 comments</div><div class="fmeta"><span>Facebook Group: WOFAN Women · 4h</span><span class="fprog">WOFAN ICON 2</span><span class="chip ccri">critical</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">FB</div><div class="fbdy"><div class="ftit">Jobberman page post: "Applications for YAW Cycle 3 are open" — 890 shares but comments mixed with skepticism</div><div class="fmeta"><span>Jobberman Official Page · 5h · 1.2M followers</span><span class="fprog">Jobberman</span><span class="chip cneu">mixed</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">FB</div><div class="fbdy"><div class="ftit">TAFTA Alumni group: Graduation photos going viral — "Fashion Future is real, not just talk" — 3,100 reactions</div><div class="fmeta"><span>Facebook Group: TAFTA Alumni · 6h</span><span class="fprog">TAFTA</span><span class="chip cadv">advocacy</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">FB</div><div class="fbdy"><div class="ftit">Community page shares FCMB Easylift loan story: "This is how small businesses in rural Lagos are growing"</div><div class="fmeta"><span>Lagos Business Community · 7h</span><span class="fprog">FCMB Easylift</span><span class="chip cpos">positive</span></div></div></div>
+        </div>
+
+        <!-- TIKTOK FEED -->
+        <div id="feed-tiktok" style="display:none">
+          <div class="fi"><div class="fsrc" style="background:#f0f0ff;color:#6b00ff)">TK</div><div class="fbdy"><div class="ftit">@FashionNaija: TAFTA graduation ceremony vlog — "From zero to fashion designer in 6 months" — 280K views, 94% positive comments</div><div class="fmeta"><span>TikTok · @FashionNaija 410K · 2h</span><span class="fprog">TAFTA</span><span class="chip cadv">advocacy</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f0f0ff;color:#6b00ff)">TK</div><div class="fbdy"><div class="ftit">@AbaFashionGirl: "Ethnocentrique Fashion Future Program in Aba is 🔥 — I sew my first collection this week" — 44K views</div><div class="fmeta"><span>TikTok · @AbaFashionGirl 28K · 4h</span><span class="fprog">Ethnocentrique Fashion</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f0f0ff;color:#6b00ff)">TK</div><div class="fbdy"><div class="ftit">@KanoYouthTV: "Young Africa Works application process explained step by step" — helpful video, 32K views</div><div class="fmeta"><span>TikTok · @KanoYouthTV 18K · 5h</span><span class="fprog">Young Africa Works</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f0f0ff;color:#6b00ff)">TK</div><div class="fbdy"><div class="ftit">@LagosFarmerKid: "IITA I-Youth program gave me my first farm equipment. Watch my harvest" — 61K views, viral agri content</div><div class="fmeta"><span>TikTok · @LagosFarmerKid 52K · 6h</span><span class="fprog">IITA I-Youth</span><span class="chip cadv">advocacy</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f0f0ff;color:#6b00ff)">TK</div><div class="fbdy"><div class="ftit">@NigeriaGradLife: "MCF Scholars Program review — honest thoughts after 2 years" — 88K views, mixed comments</div><div class="fmeta"><span>TikTok · @NigeriaGradLife 94K · 8h</span><span class="fprog">Scholars Program</span><span class="chip cneu">mixed</span></div></div></div>
+        </div>
+
+        <!-- YOUTUBE FEED -->
+        <div id="feed-youtube" style="display:none">
+          <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">YT</div><div class="fbdy"><div class="ftit">Channels TV Documentary: "Young Africa Works — One Year Later" — 124K views, 91% positive sentiment in comments</div><div class="fmeta"><span>YouTube · Channels TV · 1d · 124K views</span><span class="fprog">Young Africa Works</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">YT</div><div class="fbdy"><div class="ftit">Vanguard TV: WOFAN ICON 2 women farmers speak — "We need land, not just training" — 38K views</div><div class="fmeta"><span>YouTube · Vanguard TV · 2d · 38K views</span><span class="fprog">WOFAN ICON 2</span><span class="chip ccri">critical</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">YT</div><div class="fbdy"><div class="ftit">TAFTA Official: 2024 Graduation Ceremony Full Video — 72K views, overwhelmingly positive</div><div class="fmeta"><span>YouTube · TAFTA Official · 3d · 72K views</span><span class="fprog">TAFTA</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">YT</div><div class="fbdy"><div class="ftit">BusinessDay TV: "Is MCF's Young Africa Works delivering results?" — panel discussion, 21K views</div><div class="fmeta"><span>YouTube · BusinessDay TV · 4d · 21K views</span><span class="chip cneu">neutral</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">YT</div><div class="fbdy"><div class="ftit">Babban Gona official: "CAFI Season 2 — Northern Nigeria farmers transformation stories" — 44K views</div><div class="fmeta"><span>YouTube · Babban Gona · 5d · 44K views</span><span class="fprog">Babban Gona</span><span class="chip cpos">positive</span></div></div></div>
+        </div>
+
+        <!-- RADIO/TV FEED -->
+        <div id="feed-radio" style="display:none">
+          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">RD</div><div class="fbdy"><div class="ftit">Tambari Radio Kano (Hausa): WOFAN ICON 2 women farmers speak about land access challenges — live interview</div><div class="fmeta"><span>Tambari Radio · Kano · Hausa · 3h</span><span class="fprog">WOFAN ICON 2</span><span class="chip ccri">critical</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">TV</div><div class="fbdy"><div class="ftit">Channels TV primetime: Federal Ministry of Youth commends MCF Nigeria investment — 9M broadcast reach</div><div class="fmeta"><span>Channels TV · National · 5h · 9M</span><span class="chip cadv">advocacy</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">RD</div><div class="fbdy"><div class="ftit">Brila FM Lagos: Youth employment special — Jobberman YAW placement success stories, 3 guests</div><div class="fmeta"><span>Brila FM · Lagos · 6h</span><span class="fprog">Jobberman</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">TV</div><div class="fbdy"><div class="ftit">TVC News: IITA I-Youth Kano graduates demonstrate agri-tech innovations — evening bulletin feature</div><div class="fmeta"><span>TVC News · National · 7h · 4M</span><span class="fprog">IITA I-Youth</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">RD</div><div class="fbdy"><div class="ftit">Radio Nigeria Kaduna: Community voices on Project Juriya delays — "We are still waiting" (Hausa segment)</div><div class="fmeta"><span>Radio Nigeria · Kaduna · Hausa · 8h</span><span class="fprog">Project Juriya</span><span class="chip ccri">critical</span></div></div></div>
+        </div>
+
+        <!-- BLOGS FEED -->
+        <div id="feed-blogs" style="display:none">
+          <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">BLG</div><div class="fbdy"><div class="ftit">YouthCentral.ng: "How Jobberman's Young Africa Works is actually changing lives in Lagos" — 8,400 reads</div><div class="fmeta"><span>YouthCentral.ng · 2h</span><span class="fprog">Young Africa Works</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">BLG</div><div class="fbdy"><div class="ftit">AgroNigeria.com: "Babban Gona CAFI model — why it works where other programmes failed" — 5,200 reads</div><div class="fmeta"><span>AgroNigeria.com · 4h</span><span class="fprog">Babban Gona</span><span class="chip cpos">positive</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">BLG</div><div class="fbdy"><div class="ftit">NaijaFashionHub: "TAFTA and Ethnocentrique are building Nigeria's next generation of designers" — 3,800 reads</div><div class="fmeta"><span>NaijaFashionHub.com · 5h</span><span class="fprog">TAFTA</span><span class="chip cadv">advocacy</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">BLG</div><div class="fbdy"><div class="ftit">DevelopmentNG.com: "Why MCF Nigeria programs need to communicate better in northern states" — opinion piece, 2,100 reads</div><div class="fmeta"><span>DevelopmentNG.com · 7h</span><span class="chip ccri">critical</span></div></div></div>
+          <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">BLG</div><div class="fbdy"><div class="ftit">WomenInAgricNG: "WOFAN ICON 2 is good but land reform must follow" — in-depth analysis</div><div class="fmeta"><span>WomenInAgricNG.com · 9h</span><span class="fprog">WOFAN ICON 2</span><span class="chip cskp">skeptical</span></div></div></div>
+        </div>
+
+        <div style="text-align:center;padding:12px 0">
+          <button class="btn" onclick="ai('Analyse the current MCF Nigeria media feed. What dominant narratives are emerging? What are people saying in Pidgin? Which programs need urgent communications attention?','ai-dash')">✦ AI: Analyse full feed for narratives and risks</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALERTS -->
+  <div id="v-alerts" class="view">
+    <div class="g2">
+      <div>
+        <div class="ac acr">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+            <div class="act" style="color:var(--red)">◬ CRITICAL — Jobberman "scam" narrative</div>
+            <span class="chip cneg">ACTIVE</span>
+          </div>
+          <div class="acd">Twitter thread alleging Jobberman YAW applications are fraudulent is gaining traction. 3 accounts (combined 120K) amplifying. "Jobberman scam" trending in Kano and Lagos. Negative mentions up 190% in 8 hours.</div>
+          <div class="acm">Program: Young Africa Works · Jobberman · Platform: Twitter/X · 1h 42m ago</div>
+          <div style="margin-top:9px;display:flex;gap:7px;flex-wrap:wrap">
+            <button class="btn btr" style="font-size:11px" onclick="alertAI('Draft an urgent crisis response for MCF Nigeria addressing the Twitter narrative that Jobberman Young Africa Works is fraudulent. Include: key message, who should post it, a Twitter response in Nigerian English, and a Pidgin community response for grassroots audiences.','alert-out-1')">✦ Draft response</button>
+            <button class="btn" style="font-size:11px;color:var(--grn);border-color:var(--gb)">✓ Mark resolved</button>
+          </div>
+          <div id="alert-out-1" class="alert-ai-out" style="display:none"></div>
+        </div>
+        <div class="ac acw">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+            <div class="act" style="color:var(--amb)">◬ MODERATE — WOFAN ICON 2 land access complaints</div>
+            <span class="chip ccri">WATCH</span>
+          </div>
+          <div class="acd">Hausa-language radio in Kano/Kaduna broadcasting interviews with women farmers citing land access barriers. Narrative spreading to 4 Facebook community groups.</div>
+          <div class="acm">Program: WOFAN ICON 2 · Radio + Facebook · 3h ago · Kaduna, Kano</div>
+          <div style="margin-top:9px">
+            <button class="btn" style="font-size:11px" onclick="alertAI('Analyse the WOFAN ICON 2 land access narrative in Hausa-language media in Kano and Kaduna. How serious is the reputational risk and what communications response would work best for rural northern Nigerian women farmers?','alert-out-2')">✦ Analyse + recommend</button>
+          </div>
+          <div id="alert-out-2" class="alert-ai-out" style="display:none"></div>
+        </div>
+      </div>
+      <div>
+        <div class="ac acw">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+            <div class="act" style="color:var(--amb)">◬ MODERATE — Project Juriya delay narrative</div>
+            <span class="chip cskp">WATCH</span>
+          </div>
+          <div class="acd">Community accounts in Adamawa flagging implementation delays. "6 months don pass, we still dey wait" narratives spreading. Low reach currently but growing fast.</div>
+          <div class="acm">Program: Project Juriya · Twitter/X · 5h ago · Adamawa, Nasarawa</div>
+          <div style="margin-top:9px">
+            <button class="btn" style="font-size:11px" onclick="alertAI('How should MCF Nigeria address implementation delay narratives for Project Juriya in northern communities? Give a specific, actionable strategy for both English and Pidgin/Hausa-speaking audiences.','alert-out-3')">✦ Strategy</button>
+          </div>
+          <div id="alert-out-3" class="alert-ai-out" style="display:none"></div>
+        </div>
+        <div class="ac aco">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+            <div class="act" style="color:var(--grn)">◉ OPPORTUNITY — TAFTA TikTok moment going viral</div>
+            <span class="chip cadv">AMPLIFY</span>
+          </div>
+          <div class="acd">@FashionNaija TAFTA graduation video at 280K views and climbing. Comment sentiment 94% positive. High-reach fashion influencers engaging. Window open 12–18 hours.</div>
+          <div class="acm">Program: TAFTA · TikTok · 2h ago · Reach: 280K and growing</div>
+          <div style="margin-top:9px">
+            <button class="btn btg" style="font-size:11px" onclick="alertAI('Draft 3 social media posts MCF Nigeria should use right now to amplify the viral TAFTA TikTok graduation moment: one Twitter/X post, one LinkedIn post, one Instagram caption. Youth-facing, authentic tone — not corporate.','alert-out-4')">✦ Draft amplification posts</button>
+          </div>
+          <div id="alert-out-4" class="alert-ai-out" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel"><div class="ph"><span class="pt">Crisis history — 90 days</span></div><div class="pb"><div class="cw" style="height:170px"><canvas id="cCris"></canvas></div></div></div>
+  </div>
+
+  <!-- PROGRAMS -->
+  <div id="v-progs" class="view">
+    <div class="slbl">All monitored programs — Mastercard Foundation Nigeria</div>
+    <div class="pgr">
+      <div class="pc sel"><div class="pcn">Young Africa Works</div><div class="pct">YOUTH EMPLOYABILITY · JOBBERMAN · 12 STATES</div><div class="pcs"><span><b>1,840</b> mentions</span><span style="color:var(--grn)"><b>74%</b> positive</span></div></div>
+      <div class="pc"><div class="pcn">Babban Gona CAFI & WEDI</div><div class="pct">AGRICULTURE · WOMEN · NORTHERN NG</div><div class="pcs"><span><b>892</b> mentions</span><span style="color:var(--grn)"><b>81%</b> pos</span></div></div>
+      <div class="pc"><div class="pcn">TAFTA</div><div class="pct">CREATIVE & VOCATIONAL · OGUN STATE</div><div class="pcs"><span><b>641</b> mentions</span><span style="color:var(--grn)"><b>88%</b> pos</span></div></div>
+      <div class="pc"><div class="pcn">Jobberman</div><div class="pct">YOUTH JOBS · LAGOS + 11 STATES</div><div class="pcs"><span><b>580</b> mentions</span><span style="color:var(--amb)"><b>61%</b> pos</span></div></div>
+      <div class="pc"><div class="pcn">WOFAN ICON 2</div><div class="pct">WOMEN EMPOWERMENT · 8 STATES</div><div class="pcs"><span><b>412</b> mentions</span><span style="color:var(--amb)"><b>62%</b> pos</span></div></div>
+      <div class="pc"><div class="pcn">IITA I-Youth</div><div class="pct">AGRI-YOUTH · LAGOS/KADUNA/KANO</div><div class="pcs"><span><b>318</b> mentions</span><span style="color:var(--grn)"><b>77%</b> pos</span></div></div>
+      <div class="pc"><div class="pcn">Scholars Program</div><div class="pct">EDUCATION · NATIONWIDE</div><div class="pcs"><span><b>290</b> mentions</span><span style="color:var(--grn)"><b>91%</b> pos</span></div></div>
+      <div class="pc"><div class="pcn">Project Juriya</div><div class="pct">AGRICULTURE · ADAMAWA/KADUNA/NASARAWA</div><div class="pcs"><span><b>184</b> mentions</span><span style="color:var(--amb)"><b>58%</b> pos</span></div></div>
+      <div class="pc"><div class="pcn">EDC — Transforming Youth</div><div class="pct">ENTREPRENEURSHIP · 36 STATES</div><div class="pcs"><span><b>148</b> mentions</span><span style="color:var(--grn)"><b>79%</b> pos</span></div></div>
+      <div class="pc"><div class="pcn">Ethnocentrique Fashion</div><div class="pct">FASHION · VOCATIONAL · ABA</div><div class="pcs"><span><b>162</b> mentions</span><span style="color:var(--grn)"><b>85%</b> pos</span></div></div>
+      <div class="pc"><div class="pcn">FCMB Easylift</div><div class="pct">FINANCIAL INCLUSION · RURAL NG</div><div class="pcs"><span><b>124</b> mentions</span><span style="color:var(--grn)"><b>72%</b> pos</span></div></div>
+      <div class="pc"><div class="pcn">Songhai Center</div><div class="pct">AGRO-BUSINESS · NATIONWIDE</div><div class="pcs"><span><b>98</b> mentions</span><span style="color:var(--grn)"><b>83%</b> pos</span></div></div>
+      <div class="pc"><div class="pcn">Christian Aid SEPTP</div><div class="pct">WOMEN · LIVELIHOODS</div><div class="pcs"><span><b>88</b> mentions</span><span style="color:var(--grn)"><b>76%</b> pos</span></div></div>
+      <div class="pc"><div class="pcn">WISE Program (IDH)</div><div class="pct">CASSAVA · BADAGRY/LAGOS</div><div class="pcs"><span><b>76</b> mentions</span><span style="color:var(--grn)"><b>80%</b> pos</span></div></div>
+      <div class="pc"><div class="pcn">TracTrac / ISSAM</div><div class="pct">RURAL AGRI-TECH · NASARAWA</div><div class="pcs"><span><b>64</b> mentions</span><span style="color:var(--amb)"><b>65%</b> pos</span></div></div>
+    </div>
+    <div class="panel"><div class="ph"><span class="pt">Mention volume by program — 30 days</span></div><div class="pb"><div class="cw" style="height:210px"><canvas id="cProg"></canvas></div></div></div>
+  </div>
+
+  <!-- GEOGRAPHIC -->
+  <div id="v-geo" class="view">
+    <div class="slbl">Geographic intelligence — by state</div>
+    <div class="g2">
+      <div class="panel"><div class="ph"><span class="pt">Top states by volume</span></div><div class="pb"><div class="cw" style="height:270px"><canvas id="cState"></canvas></div></div></div>
+      <div class="panel"><div class="ph"><span class="pt">Sentiment by geopolitical zone</span></div><div class="pb"><div class="cw" style="height:270px"><canvas id="cZone"></canvas></div></div></div>
+    </div>
+    <div class="slbl">State breakdown</div>
+    <div class="stgr">
+      <div class="stc"><div class="stcn">Lagos</div><div class="stcv">1,240</div><div class="stcp">YAW · TAFTA · FCMB · WISE</div><div class="stcb"><div class="stcbf" style="width:100%"></div></div></div>
+      <div class="stc"><div class="stcn">Kano</div><div class="stcv">820</div><div class="stcp">Babban Gona · WOFAN · IITA</div><div class="stcb"><div class="stcbf" style="width:66%"></div></div></div>
+      <div class="stc"><div class="stcn">Abuja FCT</div><div class="stcv">690</div><div class="stcp">YAW · Young Africa · EDC</div><div class="stcb"><div class="stcbf" style="width:56%"></div></div></div>
+      <div class="stc"><div class="stcn">Kaduna</div><div class="stcv">580</div><div class="stcp">WOFAN · Juriya · IITA</div><div class="stcb"><div class="stcbf" style="width:47%;background:var(--amb)"></div></div></div>
+      <div class="stc"><div class="stcn">Adamawa</div><div class="stcv">480</div><div class="stcp">Project Juriya · IITA · YAW</div><div class="stcb"><div class="stcbf" style="width:39%;background:var(--amb)"></div></div></div>
+      <div class="stc"><div class="stcn">Nasarawa</div><div class="stcv">410</div><div class="stcp">TracTrac · Juriya · CAFI</div><div class="stcb"><div class="stcbf" style="width:33%"></div></div></div>
+      <div class="stc"><div class="stcn">Oyo</div><div class="stcv">380</div><div class="stcp">YAW · Jobberman</div><div class="stcb"><div class="stcbf" style="width:31%"></div></div></div>
+      <div class="stc"><div class="stcn">Edo</div><div class="stcv">320</div><div class="stcp">YAW · Young Africa YEB</div><div class="stcb"><div class="stcbf" style="width:26%"></div></div></div>
+      <div class="stc"><div class="stcn">Abia (Aba)</div><div class="stcv">280</div><div class="stcp">Ethnocentrique Fashion</div><div class="stcb"><div class="stcbf" style="width:23%"></div></div></div>
+      <div class="stc"><div class="stcn">Bauchi</div><div class="stcv">260</div><div class="stcp">WOFAN · YAW</div><div class="stcb"><div class="stcbf" style="width:21%"></div></div></div>
+      <div class="stc"><div class="stcn">Enugu</div><div class="stcv">240</div><div class="stcp">YAW · Jobberman · EDC</div><div class="stcb"><div class="stcbf" style="width:19%"></div></div></div>
+      <div class="stc"><div class="stcn">Jigawa</div><div class="stcv">190</div><div class="stcp">IITA I-Youth</div><div class="stcb"><div class="stcbf" style="width:15%"></div></div></div>
+    </div>
+  </div>
+
+  <!-- STAKEHOLDERS -->
+  <div id="v-stake" class="view">
+    <div class="g3">
+      <div class="panel"><div class="ph"><span class="pt">Journalists</span></div><div class="pb" style="padding-top:8px">
+        <div class="stk"><div class="stav" style="background:#fef2f2;color:var(--red)">FO</div><div style="flex:1"><div class="stnm">Folake Okafor</div><div class="strl">Punch · Development Desk</div></div><span class="chip cpos">friendly</span></div>
+        <div class="stk"><div class="stav" style="background:#fefce8;color:var(--amb)">BU</div><div style="flex:1"><div class="stnm">Biodun Usman</div><div class="strl">Premium Times · Invest.</div></div><span class="chip ccri">critical</span></div>
+        <div class="stk"><div class="stav" style="background:#f0fdf4;color:var(--grn)">CN</div><div style="flex:1"><div class="stnm">Chidi Nwosu</div><div class="strl">BusinessDay · Youth</div></div><span class="chip cpos">friendly</span></div>
+        <div class="stk"><div class="stav" style="background:#f0fdf4;color:var(--grn)">AH</div><div style="flex:1"><div class="stnm">Aisha Hassan</div><div class="strl">Daily Trust · North</div></div><span class="chip cneu">neutral</span></div>
+        <div class="stk"><div class="stav" style="background:#eff6ff;color:var(--blu)">EM</div><div style="flex:1"><div class="stnm">Emeka Mba</div><div class="strl">Channels TV</div></div><span class="chip cpos">friendly</span></div>
+      </div></div>
+      <div class="panel"><div class="ph"><span class="pt">Influencers</span></div><div class="pb" style="padding-top:8px">
+        <div class="stk"><div class="stav" style="background:#f5f3ff;color:var(--pur)">FN</div><div style="flex:1"><div class="stnm">@FashionNaija</div><div class="strl">TikTok · 410K · Fashion</div></div><span class="chip cadv">advocate</span></div>
+        <div class="stk"><div class="stav" style="background:#fefce8;color:var(--amb)">KY</div><div style="flex:1"><div class="stnm">@KanoYouthVoice</div><div class="strl">Twitter · 44K · Youth</div></div><span class="chip ccri">critical</span></div>
+        <div class="stk"><div class="stav" style="background:#f0fdf4;color:var(--grn)">YE</div><div style="flex:1"><div class="stnm">@YemiEdu_NG</div><div class="strl">Twitter · 188K · Education</div></div><span class="chip cpos">friendly</span></div>
+        <div class="stk"><div class="stav" style="background:#fef2f2;color:var(--red)">LA</div><div style="flex:1"><div class="stnm">@LagosArtsScene</div><div class="strl">Instagram · 28K · Arts</div></div><span class="chip cadv">advocate</span></div>
+        <div class="stk"><div class="stav" style="background:#eff6ff;color:var(--blu)">AN</div><div style="flex:1"><div class="stnm">@AgroNaija</div><div class="strl">Twitter · 62K · Agriculture</div></div><span class="chip cpos">friendly</span></div>
+      </div></div>
+      <div class="panel"><div class="ph"><span class="pt">Institutional</span></div><div class="pb" style="padding-top:8px">
+        <div class="stk"><div class="stav" style="background:#eff6ff;color:var(--blu)">FMY</div><div style="flex:1"><div class="stnm">Fed. Ministry of Youth</div><div class="strl">Government partner</div></div><span class="chip cadv">supportive</span></div>
+        <div class="stk"><div class="stav" style="background:#f5f3ff;color:var(--pur)">USA</div><div style="flex:1"><div class="stnm">USAID Nigeria</div><div class="strl">Development partner</div></div><span class="chip cpos">aligned</span></div>
+        <div class="stk"><div class="stav" style="background:#fefce8;color:var(--amb)">ILO</div><div style="flex:1"><div class="stnm">ILO Nigeria</div><div class="strl">Labour org</div></div><span class="chip cpos">aligned</span></div>
+        <div class="stk"><div class="stav" style="background:#f0fdf4;color:var(--grn)">NAF</div><div style="flex:1"><div class="stnm">Min. of Agriculture</div><div class="strl">Government</div></div><span class="chip cneu">neutral</span></div>
+        <div class="stk"><div class="stav" style="background:#fef2f2;color:var(--red)">CSO</div><div style="flex:1"><div class="stnm">Kano Civil Society</div><div class="strl">Community NGO</div></div><span class="chip ccri">watchful</span></div>
+      </div></div>
+    </div>
+    <div class="aip"><div class="aih"><span class="aibg">AI</span><span class="ait">Stakeholder intelligence</span></div><div class="aibo">
+      <div class="aio" id="ai-stake">Generate stakeholder-specific insights below.</div>
+      <div class="aipr">
+        <button class="apb" onclick="ai2('Biodun Usman at Premium Times has been writing critically about MCF Nigeria programs. What outreach strategy would help shift him from critical to neutral or friendly? Be specific about messaging and timing.','ai-stake')">◎ Pitch strategy: Biodun Usman</button>
+        <button class="apb" onclick="ai2('@KanoYouthVoice (44K) is amplifying negative narratives about Jobberman. Should MCF Nigeria respond directly or work through intermediaries? Suggest a specific approach.','ai-stake')">◉ Response: @KanoYouthVoice</button>
+        <button class="apb" onclick="ai2('Which 3 influencers in northern Nigeria would be most credible as ambassadors for MCF agriculture and women empowerment programs? What makes them trusted in those communities?','ai-stake')">✦ North Nigeria ambassador strategy</button>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- SENTIMENT -->
+  <div id="v-sent" class="view">
+    <div class="g3">
+      <div class="panel"><div class="ph"><span class="pt">Sentiment distribution</span></div><div class="pb"><div class="cw" style="height:210px"><canvas id="cSentD"></canvas></div></div></div>
+      <div class="panel"><div class="ph"><span class="pt">Nigerian Pidgin tracker</span></div><div class="pb" style="padding-top:8px">
+        <div class="pit" style="background:var(--g2);border-color:var(--gb)"><div><div class="pph">"Dem try well well"</div><div class="ptr">Genuine praise — they are doing well</div></div><span class="chip cpos">positive</span></div>
+        <div class="pit" style="background:rgba(13,148,136,.07);border-color:rgba(13,148,136,.2)"><div><div class="pph">"This one na real opportunity"</div><div class="ptr">Endorsement of program value</div></div><span class="chip cadv">advocacy</span></div>
+        <div class="pit" style="background:var(--a2);border-color:var(--ab)"><div><div class="pph">"E no go work like that"</div><div class="ptr">Skepticism about approach/delivery</div></div><span class="chip cskp">skeptical</span></div>
+        <div class="pit" style="background:var(--a2);border-color:var(--ab)"><div><div class="pph">"We still dey wait"</div><div class="ptr">Frustration with implementation delays</div></div><span class="chip ccri">critical</span></div>
+        <div class="pit" style="background:var(--r2);border-color:var(--rb)"><div><div class="pph">"Na who you know matter"</div><div class="ptr">Allegations of nepotism/unfair access</div></div><span class="chip cneg">negative</span></div>
+        <div class="pit" style="background:var(--r2);border-color:var(--rb)"><div><div class="pph">"Na wash dem dey do us"</div><div class="ptr">Accusation of deception/false promises</div></div><span class="chip cneg">misinfo risk</span></div>
+      </div></div>
+      <div class="panel"><div class="ph"><span class="pt">Sentiment by channel</span></div><div class="pb"><div class="cw" style="height:210px"><canvas id="cChanS"></canvas></div></div></div>
+    </div>
+    <div class="panel"><div class="ph"><span class="pt">Sentiment trend — 30 days</span></div><div class="pb"><div class="cw" style="height:170px"><canvas id="cSentT"></canvas></div></div></div>
+  </div>
+
+  <!-- AI ENGINE -->
+  <div id="v-ai" class="view">
+    <div class="aip">
+      <div class="aih"><span class="aibg">AI</span><span class="ait">Claude Intelligence Engine — Nigerian English · Pidgin · Development sector · Youth-facing · 15 MCF programs</span></div>
+      <div class="aibo">
+        <div class="airw"><input type="text" id="aicustom" class="aiin" placeholder="Ask anything about the MCF Nigeria media landscape…"><button class="btn btr" onclick="runCustom()">✦ Generate</button></div>
+        <div class="aio" id="ai-main">Your analysis will appear here.</div>
+        <div class="aipr" style="margin-top:14px">
+          <button class="apb" onclick="ai2('What are the 5 most important emerging media narratives affecting MCF Nigeria programs this week? For each: narrative, program affected, audience driving it, risk level.','ai-main')">📊 Emerging narratives</button>
+          <button class="apb" onclick="ai2('Translate and deeply analyse what Nigerian Pidgin-speaking youth (18-35) are saying about MCF programs. What does their language reveal about real trust levels, expectations, and frustrations?','ai-main')">🇳🇬 Pidgin youth deep-dive</button>
+          <button class="apb" onclick="ai2('Analyse how MCF Nigeria programs are received across different audience segments: urban youth, rural farmers, women, creatives, policy stakeholders. What tone and framing differences exist between groups?','ai-main')">👥 Audience segments</button>
+          <button class="apb" onclick="ai2('Which of the 15 MCF Nigeria programs have the highest reputational risk right now based on media signals? What specific communications actions should be taken for each in the next 7 days?','ai-main')">◬ Risk prioritisation</button>
+          <button class="apb" onclick="ai2('Draft a media pitch for Punch health/development desk about the combined impact of MCF Nigeria programs on youth employment and women empowerment. Make it newsworthy and Nigeria-specific.','ai-main')">📰 Media pitch — Punch</button>
+          <button class="apb" onclick="ai2('What grassroots and vernacular media channels in Nigeria are important for tracking community-level sentiment about MCF programs? Include specific radio stations, local blogs, WhatsApp group types, community voices.','ai-main')">📻 Grassroots media gaps</button>
+          <button class="apb" onclick="ai2('Analyse the agriculture program cluster (Babban Gona, WOFAN ICON 2, Project Juriya, TracTrac, Songhai, WISE, IITA I-Youth). What unified narrative is emerging and what is the most powerful story to tell about their collective impact?','ai-main')">🌾 Agriculture cluster</button>
+          <button class="apb" onclick="ai2('Write a Twitter thread (6 tweets) for MCF Nigeria responding to the narrative that their programs only reach Lagos and Abuja, not rural communities. Youth-facing, evidence-based, authentic — not corporate.','ai-main')">✍ Draft response thread</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPORTS -->
+  <div id="v-report" class="view">
+    <div class="slbl">Donor & senior leadership reporting</div>
+    <div class="rkgr">
+      <div class="rk"><div class="rkv">₦312M</div><div class="rkl">Earned media value (30d)</div></div>
+      <div class="rk"><div class="rkv">18.7M</div><div class="rkl">Estimated audience reach</div></div>
+      <div class="rk"><div class="rkv">6,284</div><div class="rkl">Total mentions (30d)</div></div>
+      <div class="rk"><div class="rkv">71%</div><div class="rkl">Positive sentiment rate</div></div>
+      <div class="rk"><div class="rkv">41%</div><div class="rkl">Dev sector share of voice</div></div>
+      <div class="rk"><div class="rkv">15</div><div class="rkl">Active programs monitored</div></div>
+    </div>
+    <div class="g2">
+      <div class="panel"><div class="ph"><span class="pt">Monthly reach trend</span></div><div class="pb"><div class="cw" style="height:190px"><canvas id="cReach"></canvas></div></div></div>
+      <div class="panel"><div class="ph"><span class="pt">Media value by program (top 6)</span></div><div class="pb"><div class="cw" style="height:190px"><canvas id="cVal"></canvas></div></div></div>
+    </div>
+    <div class="aip"><div class="aih"><span class="aibg">AI</span><span class="ait">Auto-generate report sections</span></div><div class="aibo">
+      <div class="aio" id="ai-report">Generate donor and leadership report sections using live monitoring data.</div>
+      <div class="aipr">
+        <button class="apb" onclick="ai2('Write a 350-word executive media impact summary for MCF senior leadership and Imaginarium Marketing Communications. Cover: reach, media value, top 3 program wins, 1 active risk, overall sentiment trajectory. Professional, evidence-based. No filler.','ai-report')">◇ Executive summary</button>
+        <button class="apb" onclick="ai2('Write a quarterly donor report media section for MCF Nigeria programs. Include: earned media value ₦312M, reach 18.7M, 15 programs, key narrative wins across agriculture/youth/women sectors, and what the coverage reveals about community trust.','ai-report')">◈ Quarterly donor narrative</button>
+        <button class="apb" onclick="ai2('Write a one-page board briefing on the MCF Nigeria media landscape. Structure: headline finding, 3 metric highlights, 1 reputational risk, 1 strategic opportunity. Board-level audience unfamiliar with day-to-day monitoring.','ai-report')">⬡ Board briefing</button>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- CRAWLER CONFIG -->
+  <div id="v-config" class="view">
+    <div class="g2">
+      <div class="panel"><div class="ph"><span class="pt">Monitored RSS sources</span><button class="btn btr" style="font-size:11px;padding:3px 9px">+ Add</button></div><div class="pb" style="padding-top:8px">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>Punch Newspapers</span><span class="chip cpos">active</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>Premium Times</span><span class="chip cpos">active</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>Vanguard Newspapers</span><span class="chip cpos">active</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>The Cable NG</span><span class="chip cpos">active</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>Channels TV Online</span><span class="chip cpos">active</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>Guardian Nigeria</span><span class="chip cpos">active</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>BusinessDay NG</span><span class="chip cpos">active</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>Daily Trust</span><span class="chip cpos">active</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>Sahara Reporters</span><span class="chip cpos">active</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>Legit.ng</span><span class="chip cpos">active</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>Nairametrics</span><span class="chip cpos">active</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>TVC News Online</span><span class="chip cpos">active</span></div>
+        </div>
+      </div></div>
+      <div>
+        <div class="panel" style="margin-bottom:13px"><div class="ph"><span class="pt">Crawl schedule</span></div><div class="pb">
+          <div class="setrow"><div><div style="font-size:13px;font-weight:500">Crawl frequency</div><div style="font-size:12px;color:var(--t3)">How often sources are checked</div></div><select style="background:var(--off);border:1px solid var(--b2);border-radius:6px;padding:5px 9px;font-size:12px;font-family:var(--f);color:var(--t)"><option>Every 2 hours</option><option>Every 4 hours</option><option>Every hour</option></select></div>
+          <div class="setrow"><div><div style="font-size:13px;font-weight:500">Crisis mode</div><div style="font-size:12px;color:var(--t3)">When an alert is active</div></div><select style="background:var(--off);border:1px solid var(--b2);border-radius:6px;padding:5px 9px;font-size:12px;font-family:var(--f);color:var(--t)"><option>Every 30 mins</option><option>Every 15 mins</option></select></div>
+        </div></div>
+        <div class="panel"><div class="ph"><span class="pt">Alert thresholds</span></div><div class="pb">
+          <div class="setrow"><div><div style="font-size:13px;font-weight:500">Negative spike alert</div><div style="font-size:12px;color:var(--t3)">Trigger when negative mentions rise by</div></div><select style="background:var(--off);border:1px solid var(--b2);border-radius:6px;padding:5px 9px;font-size:12px;font-family:var(--f)"><option>50%+</option><option>100%+</option><option>200%+</option></select></div>
+          <div class="setrow"><div><div style="font-size:13px;font-weight:500">High-reach alert</div><div style="font-size:12px;color:var(--t3)">Trigger when source reach exceeds</div></div><select style="background:var(--off);border:1px solid var(--b2);border-radius:6px;padding:5px 9px;font-size:12px;font-family:var(--f)"><option>500K+</option><option>1M+</option><option>5M+</option></select></div>
+          <div class="setrow"><div><div style="font-size:13px;font-weight:500">Misinfo flag</div><div style="font-size:12px;color:var(--t3)">Auto-flag misinformation signals</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+        </div></div>
+      </div>
+    </div>
+    <div class="panel"><div class="ph"><span class="pt">Keyword groups by program</span><button class="btn btr" style="font-size:11px;padding:3px 9px">+ Add keyword</button></div><div class="pb">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px">
+        <div style="background:var(--off);border-radius:6px;padding:11px"><div style="font-size:10px;font-family:var(--m);color:var(--red);margin-bottom:7px;font-weight:500">YOUNG AFRICA WORKS</div><div class="kwl"><span class="kwc">Young Africa Works</span><span class="kwc">Jobberman</span><span class="kwc">#YAWNigeria</span></div></div>
+        <div style="background:var(--off);border-radius:6px;padding:11px"><div style="font-size:10px;font-family:var(--m);color:var(--red);margin-bottom:7px;font-weight:500">BABBAN GONA</div><div class="kwl"><span class="kwc">Babban Gona</span><span class="kwc">CAFI Nigeria</span><span class="kwc">WEDI Babban</span></div></div>
+        <div style="background:var(--off);border-radius:6px;padding:11px"><div style="font-size:10px;font-family:var(--m);color:var(--red);margin-bottom:7px;font-weight:500">WOFAN ICON 2</div><div class="kwl"><span class="kwc">WOFAN ICON 2</span><span class="kwc">WOFAN Nigeria</span></div></div>
+        <div style="background:var(--off);border-radius:6px;padding:11px"><div style="font-size:10px;font-family:var(--m);color:var(--red);margin-bottom:7px;font-weight:500">TAFTA</div><div class="kwl"><span class="kwc">TAFTA Nigeria</span><span class="kwc">Terra Academy Arts</span><span class="kwc">#TAFTA</span></div></div>
+        <div style="background:var(--off);border-radius:6px;padding:11px"><div style="font-size:10px;font-family:var(--m);color:var(--red);margin-bottom:7px;font-weight:500">PROJECT JURIYA</div><div class="kwl"><span class="kwc">Project Juriya</span><span class="kwc">Juriya Adamawa</span></div></div>
+        <div style="background:var(--off);border-radius:6px;padding:11px"><div style="font-size:10px;font-family:var(--m);color:var(--red);margin-bottom:7px;font-weight:500">IITA I-YOUTH</div><div class="kwl"><span class="kwc">IITA I-Youth</span><span class="kwc">IITA Nigeria youth</span></div></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div id="v-settings" class="view">
+    <div class="g2">
+      <div class="panel"><div class="ph"><span class="pt">Notifications</span></div><div class="pb">
+        <div class="setrow"><div><div style="font-size:13px;font-weight:500">Daily email digest</div><div style="font-size:12px;color:var(--t3)">Every morning at 7:00 AM</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setrow"><div><div style="font-size:13px;font-weight:500">Instant crisis alerts</div><div style="font-size:12px;color:var(--t3)">Email + WhatsApp for critical events</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setrow"><div><div style="font-size:13px;font-weight:500">Weekly PDF report</div><div style="font-size:12px;color:var(--t3)">Auto-generated, sent Fridays</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setrow"><div><div style="font-size:13px;font-weight:500">High-reach mention alert</div><div style="font-size:12px;color:var(--t3)">When audience reach exceeds 1M</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setrow"><div><div style="font-size:13px;font-weight:500">Misinfo flag alert</div><div style="font-size:12px;color:var(--t3)">Immediate alert for misinfo signals</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setrow"><div><div style="font-size:13px;font-weight:500">Pidgin narrative alerts</div><div style="font-size:12px;color:var(--t3)">When new Pidgin phrases detected</div></div><div class="tgl" onclick="this.classList.toggle('on')"></div></div>
+      </div></div>
+      <div class="panel"><div class="ph"><span class="pt">Report recipients</span></div><div class="pb">
+        <div style="font-size:10px;font-family:var(--m);color:var(--t3);margin-bottom:9px;text-transform:uppercase;letter-spacing:.06em">Senior leadership / donor level</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:13px">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>Mastercard Foundation NG team</span><span class="chip cadv">weekly PDF</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>Imaginarium Marketing Comms</span><span class="chip cpos">daily + weekly</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--off);border-radius:6px;font-size:12px"><span>Brass Agency team</span><span class="chip cpos">real-time</span></div>
+        </div>
+        <button class="btn btr" style="width:100%;justify-content:center;font-size:12px">+ Add recipient</button>
+      </div></div>
+    </div>
+  </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /shell -->
+<script>
+// CHANNEL TAB SWITCHING — shows different feed content per channel
+function switchFeed(channel, el) {
+  // Update tab highlight
+  document.querySelectorAll('#cht .tab').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  // Hide all feed sections
+  ['all','news','twitter','facebook','tiktok','youtube','radio','blogs'].forEach(c => {
+    const el = document.getElementById('feed-'+c);
+    if(el) el.style.display = 'none';
+  });
+  // Show the selected one
+  const target = document.getElementById('feed-'+channel);
+  if(target) target.style.display = 'block';
+}
+
+// ALERT AI — runs AI and shows answer inline inside the alert card, no page change
+async function alertAI(prompt, outputId) {
+  const el = document.getElementById(outputId);
+  if(!el) return;
+  el.style.display = 'block';
+  el.innerHTML = '<span style="color:var(--t3);font-style:italic">Generating response…</span><span class="cur"></span>';
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:700,system:SYS,messages:[{role:'user',content:prompt}]})});
+    if(!r.ok) throw new Error(r.status);
+    const d = await r.json();
+    const txt = d.content?.find(b=>b.type==='text')?.text || 'No response.';
+    el.innerHTML = '';
+    let i = 0;
+    const cur = document.createElement('span'); cur.className='cur'; el.appendChild(cur);
+    const iv = setInterval(()=>{
+      if(i < txt.length){ el.insertBefore(document.createTextNode(txt[i++]), cur); }
+      else { clearInterval(iv); cur.remove(); }
+    }, 8);
+  } catch(e) {
+    el.innerHTML = '<span style="color:var(--red)">AI service unavailable. Check your API key.</span>';
+  }
+}
+
+function go(id,el,title,tag){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  const v=document.getElementById('v-'+id);
+  if(v) v.classList.add('on');
+  if(el) el.classList.add('on');
+  else document.querySelectorAll('.ni').forEach(n=>{if(n.textContent.trim().toLowerCase().includes(id.substring(0,4))) n.classList.add('on');});
+  document.getElementById('tbt').textContent=title||id;
+  document.getElementById('tbtag').textContent=tag||'';
+}
+function stab(el,gid){
+  const g=document.getElementById(gid);
+  if(g) g.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+}
+function fprog(el){
+  document.querySelectorAll('#pf .pfb').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+}
+
+// CHARTS
+Chart.defaults.font.family="'DM Sans',sans-serif";
+Chart.defaults.font.size=11;
+Chart.defaults.color='#6b7280';
+Chart.defaults.borderColor='#e5e7eb';
+
+const d30=Array.from({length:10},(_,i)=>{const d=new Date();d.setDate(d.getDate()-27+i*3);return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});});
+
+new Chart(document.getElementById('cVol'),{type:'line',data:{labels:d30,datasets:[{label:'Mentions',data:[142,210,340,398,480,542,530,500,548,540],borderColor:'#cf2e2e',backgroundColor:'rgba(207,46,46,0.06)',fill:true,tension:.4,pointRadius:2,borderWidth:1.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false}}}}});
+
+new Chart(document.getElementById('cSent'),{type:'doughnut',data:{labels:['Supportive','Neutral','Critical','Skeptical','Advocacy','Negative'],datasets:[{data:[42,20,16,10,8,4],backgroundColor:['#16a34a','#9ca3af','#d97706','#7c3aed','#0d9488','#dc2626'],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{position:'right',labels:{boxWidth:9,padding:9}}}}});
+
+new Chart(document.getElementById('cCris'),{type:'bar',data:{labels:['Apr','May','Jun','Jul','Aug','Sep'],datasets:[{label:'Critical',data:[1,2,1,3,2,2],backgroundColor:'rgba(220,38,38,.7)',borderRadius:3},{label:'Moderate',data:[3,2,4,3,4,4],backgroundColor:'rgba(217,119,6,.6)',borderRadius:3},{label:'Resolved',data:[4,4,5,6,6,6],backgroundColor:'rgba(22,163,74,.4)',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:8,padding:9}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'rgba(0,0,0,0.04)'}}}}});
+
+new Chart(document.getElementById('cProg'),{type:'bar',data:{labels:['YAW','Babban Gona','TAFTA','Jobberman','WOFAN','IITA','Scholars','Juriya','EDC','FCMB'],datasets:[{data:[1840,892,641,580,412,318,290,184,148,124],backgroundColor:['#cf2e2e','#e8a020','#16a34a','#2563eb','#7c3aed','#0d9488','#cf2e2e','#e8a020','#16a34a','#2563eb'],borderRadius:4,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.04)'}}}}});
+
+new Chart(document.getElementById('cState'),{type:'bar',data:{labels:['Lagos','Kano','Abuja FCT','Kaduna','Adamawa','Nasarawa','Oyo','Edo','Abia','Bauchi'],datasets:[{data:[1240,820,690,580,480,410,380,320,280,260],backgroundColor:(ctx)=>[1,3,4].includes(ctx.dataIndex)?'rgba(217,119,6,.7)':'rgba(207,46,46,.6)',borderRadius:4,borderWidth:0}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.04)'}},y:{grid:{display:false}}}}});
+
+new Chart(document.getElementById('cZone'),{type:'bar',data:{labels:['South West','South East','South South','North Central','North West','North East'],datasets:[{label:'Positive',data:[78,74,70,64,58,62],backgroundColor:'rgba(22,163,74,.7)',borderRadius:3},{label:'Negative',data:[12,14,18,24,34,28],backgroundColor:'rgba(220,38,38,.5)',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:8,padding:8}}},scales:{x:{grid:{display:false}},y:{max:100,grid:{color:'rgba(0,0,0,0.04)'},ticks:{callback:v=>v+'%'}}}}});
+
+new Chart(document.getElementById('cSentD'),{type:'bar',data:{labels:['Supportive','Neutral','Critical','Skeptical','Advocacy','Negative'],datasets:[{data:[2640,1258,1005,628,502,251],backgroundColor:['#16a34a','#9ca3af','#d97706','#7c3aed','#0d9488','#dc2626'],borderRadius:4,borderWidth:0}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,0.04)'}},y:{grid:{display:false}}}}});
+
+new Chart(document.getElementById('cChanS'),{type:'bar',data:{labels:['News','Twitter/X','YouTube','LinkedIn','TikTok','Facebook','Radio','Blogs'],datasets:[{label:'Positive',data:[68,52,74,82,64,60,70,72],backgroundColor:'rgba(22,163,74,.7)',borderRadius:3},{label:'Negative',data:[14,32,10,8,28,24,14,16],backgroundColor:'rgba(220,38,38,.5)',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:8,padding:7}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,max:100,ticks:{callback:v=>v+'%'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+
+new Chart(document.getElementById('cSentT'),{type:'line',data:{labels:d30,datasets:[{label:'Positive',data:[72,74,70,76,73,71,75,77,72,71],borderColor:'#16a34a',fill:false,tension:.3,borderWidth:1.5,pointRadius:2},{label:'Critical/Neg',data:[14,13,16,12,14,16,13,18,22,25],borderColor:'#dc2626',fill:false,tension:.3,borderWidth:1.5,pointRadius:2},{label:'Neutral',data:[14,13,14,12,13,13,12,5,6,4],borderColor:'#9ca3af',fill:false,tension:.3,borderWidth:1,pointRadius:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:8,padding:9}}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'},grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false}}}}});
+
+new Chart(document.getElementById('cReach'),{type:'bar',data:{labels:['Apr','May','Jun','Jul','Aug','Sep'],datasets:[{label:'Reach (M)',data:[6.2,8.8,11.4,14.0,16.2,18.7],backgroundColor:'rgba(207,46,46,.6)',borderRadius:4,yAxisID:'y'},{label:'Value (₦M)',data:[88,140,188,232,272,312],borderColor:'#e8a020',fill:false,type:'line',tension:.3,borderWidth:1.5,pointRadius:2,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:8,padding:9}}},scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(0,0,0,0.04)'},position:'left'},y1:{grid:{display:false},position:'right'}}}});
+
+new Chart(document.getElementById('cVal'),{type:'doughnut',data:{labels:['Young Africa Works','Babban Gona','TAFTA','WOFAN ICON 2','Scholars','Others'],datasets:[{data:[98,62,44,38,32,38],backgroundColor:['#cf2e2e','#e8a020','#16a34a','#2563eb','#7c3aed','#9ca3af'],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'right',labels:{boxWidth:9,padding:9}}}}});
+
+// AI ENGINE
+let busy=false;
+const SYS=`You are the IMPACT WATCH AI analyst for Mastercard Foundation Nigeria programs. Your expertise covers all 15 active programs: Young Africa Works (Jobberman), Babban Gona CAFI & WEDI, TAFTA, WOFAN ICON 2, IITA I-Youth, Scholars Program, Project Juriya, Ethnocentrique Fashion Future, EDC Transforming Youth, FCMB Easylift, Songhai Center, Christian Aid SEPTP, WISE Program (IDH), TracTrac/ISSAM, Young Africa YEB. Programs operate across Nigeria targeting youth (18-35), women, rural farmers, and young creatives. You understand Nigerian media (Punch, Premium Times, Vanguard, Channels TV, Daily Trust, BusinessDay, Sahara Reporters), Nigerian Pidgin, Nigerian English, Hausa-language media, and grassroots digital communities. Report recipients include Mastercard Foundation senior leadership, Imaginarium Marketing Communications, and Brass Agency. Be direct, Nigeria-specific, and actionable. Include Pidgin examples where relevant.`;
+
+async function ai(prompt,targetId){
+  if(busy) return;
+  busy=true;
+  const el=document.getElementById(targetId||'ai-dash');
+  if(!el){busy=false;return;}
+  el.innerHTML='<span style="color:var(--t3);font-style:italic">Analysing MCF Nigeria media landscape…</span><span class="cur"></span>';
+  document.querySelectorAll('.apb').forEach(b=>b.disabled=true);
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,system:SYS,messages:[{role:'user',content:prompt}]})});
+    if(!r.ok) throw new Error(r.status);
+    const d=await r.json();
+    const txt=d.content?.find(b=>b.type==='text')?.text||'No response.';
+    el.innerHTML='';
+    let i=0;const cur=document.createElement('span');cur.className='cur';el.appendChild(cur);
+    const iv=setInterval(()=>{
+      if(i<txt.length){el.insertBefore(document.createTextNode(txt[i++]),cur);if(i%60===0)el.scrollTop=el.scrollHeight;}
+      else{clearInterval(iv);cur.remove();busy=false;document.querySelectorAll('.apb').forEach(b=>b.disabled=false);}
+    },7);
+  }catch(e){
+    el.innerHTML=`<span style="color:var(--red)">AI service unavailable. Check your API key configuration.</span>`;
+    busy=false;document.querySelectorAll('.apb').forEach(b=>b.disabled=false);
+  }
+}
+function ai2(p,t){ai(p,t);}
+function runCustom(){const v=document.getElementById('aicustom')?.value?.trim();if(v)ai(v,'ai-main');}
+
+// Auto-load welcome insight
+setTimeout(()=>ai('In 2-3 sentences, give the current media health status of Mastercard Foundation Nigeria programs. Name the biggest win and most urgent risk right now, with specific program names and states.','ai-dash'),800);
+</script>
+</body>
+</html>
