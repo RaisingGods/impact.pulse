@@ -59,6 +59,9 @@ log = logging.getLogger("impact_pulse")
 
 # ── 15 MASTERCARD FOUNDATION NIGERIA PROGRAMS ──────────────────
 PROGRAMS = {
+  "TEST": [
+    "Nigeria", "Nigerian", "Lagos"
+],
     "Young Africa Works": [
         "Young Africa Works", "YAW", "Africa Works",
         "Jobberman Young Africa", "youth employment mastercard"
