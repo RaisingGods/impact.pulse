@@ -410,6 +410,12 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
 
     <!-- DASHBOARD -->
     <div id="v-dash" class="view on">
+      <!-- LIVE DATA STATUS BANNER -->
+      <div id="live-data-banner" style="display:none;background:rgba(217,119,6,.08);border:1px solid var(--ab);border-radius:9px;padding:11px 14px;margin-top:20px;margin-bottom:12px;align-items:center;gap:10px;font-size:13px;color:var(--amb)">
+        <span style="font-size:16px">◈</span>
+        <span>Crawler is active and monitoring — no Mastercard Foundation mentions found in the last crawl cycle. Live data will appear here as soon as articles are detected. Sample data shown below.</span>
+      </div>
+
       <div class="crisis" style="margin-top:20px">
         <div class="crisis-ic">◬</div>
         <div>
@@ -1235,6 +1241,11 @@ function iwSelectClient(name, programs, icon) {
     sbClient.appendChild(sb);
   }
   if (typeof initCharts === 'function') initCharts();
+  // Load live data from crawler API
+  setTimeout(updateDashboardWithLiveData, 1000);
+  setTimeout(checkApiHealth, 500);
+  // Refresh live data every 10 minutes
+  setInterval(updateDashboardWithLiveData, 600000);
 }
 
 function iwSwitchClient() {
@@ -1464,6 +1475,121 @@ function exportCSV(){
   a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
   a.download='IMPACT-PULSE-'+new Date().toISOString().slice(0,10)+'.csv';
   a.click();
+}
+
+
+// ── LIVE DATA FROM IMPACT PULSE API ──
+const API_BASE = "https://courageous-hope-production-b90a.up.railway.app";
+
+async function fetchLiveData() {
+  try {
+    const resp = await fetch(API_BASE + "/api/summary");
+    if (!resp.ok) return null;
+    return await resp.json();
+  } catch(e) {
+    console.log("API not reachable yet:", e.message);
+    return null;
+  }
+}
+
+async function fetchLiveResults() {
+  try {
+    const resp = await fetch(API_BASE + "/api/results");
+    if (!resp.ok) return null;
+    return await resp.json();
+  } catch(e) {
+    return null;
+  }
+}
+
+async function updateDashboardWithLiveData() {
+  const data = await fetchLiveData();
+  if (!data || data.total_mentions === 0) {
+    // No live data yet — show sample data with a note
+    const banner = document.getElementById('live-data-banner');
+    if (banner) banner.style.display = 'flex';
+    return;
+  }
+
+  // Hide the sample data banner
+  const banner = document.getElementById('live-data-banner');
+  if (banner) banner.style.display = 'none';
+
+  // Update stat cards with real numbers
+  const statEls = document.querySelectorAll('.stat-val');
+  const stats = [
+    data.total_mentions?.toLocaleString() || '0',
+    data.total_mentions > 0 ? 'Live' : '--',
+    data.total_mentions > 0 ? Math.round((data.positive / data.total_mentions) * 100) + '%' : '--',
+    data.alerts?.toString() || '0',
+  ];
+
+  // Update mentions count wherever it shows 6,284
+  document.querySelectorAll('.stat-val').forEach(el => {
+    if (el.textContent.includes('6,284')) {
+      el.textContent = data.total_mentions?.toLocaleString() || '0';
+    }
+  });
+
+  // Update alerts count
+  document.querySelectorAll('.stat-val').forEach(el => {
+    if (el.textContent === '4') {
+      el.textContent = data.alerts?.toString() || '0';
+    }
+  });
+
+  // Update live feed with real articles
+  const results = await fetchLiveResults();
+  if (results && results.length > 0) {
+    const feedAll = document.getElementById('feed-all');
+    if (feedAll) {
+      feedAll.innerHTML = results.slice(-10).reverse().map(r => {
+        const sentClass = r.sentiment === 'positive' || r.sentiment === 'advocacy' ? 'cpos' :
+                          r.sentiment === 'negative' || r.sentiment === 'critical' ? 'cneg' :
+                          r.sentiment === 'skeptical' ? 'cskp' : 'cneu';
+        const src = r.source ? r.source.substring(0,3).toUpperCase() : 'SRC';
+        const prog = r.programs_confirmed?.[0] || '';
+        return `<div class="fi">
+          <div class="fsrc" style="background:var(--off2);color:var(--t2)">${src}</div>
+          <div class="fbdy">
+            <div class="ftit"><a href="${r.url}" target="_blank" style="color:var(--t);text-decoration:none">${r.title}</a></div>
+            <div class="fmeta">
+              <span>${r.source} · ${new Date(r.crawled_at).toLocaleDateString('en-GB')}</span>
+              ${prog ? `<span class="fprog">${prog}</span>` : ''}
+              <span class="chip ${sentClass}">${r.sentiment}</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+  }
+
+  // Update program cards with real counts
+  if (data.programs && Object.keys(data.programs).length > 0) {
+    Object.entries(data.programs).forEach(([prog, count]) => {
+      document.querySelectorAll('.pcn').forEach(el => {
+        if (el.textContent.trim() === prog) {
+          const pcs = el.parentElement.querySelector('.pcs');
+          if (pcs) pcs.innerHTML = `<b>${count}</b> mentions · <span style="color:var(--grn)">Live</span>`;
+        }
+      });
+    });
+  }
+}
+
+// Check API health
+async function checkApiHealth() {
+  try {
+    const resp = await fetch(API_BASE + "/api/health");
+    const data = await resp.json();
+    const dot = document.querySelector('.sb-fd');
+    if (dot && data.status === 'ok') {
+      dot.style.background = 'var(--grn)';
+    }
+  } catch(e) {
+    const dot = document.querySelector('.sb-fd');
+    if (dot) dot.style.background = 'var(--amb)';
+  }
 }
 
 // initCharts is called after login via iwSelectClient()
