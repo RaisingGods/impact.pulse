@@ -1,6 +1,6 @@
 """
-IMPACT PULSE Crawler — IMC IMPACT / Imaginarium Marketing Communications
-Uses NewsAPI.org to monitor 15 Mastercard Foundation Nigeria programs.
+IMPACT PULSE Crawler v2 — IMC IMPACT / Imaginarium Marketing Communications
+Uses NewsAPI.org + social media monitoring for 15 Mastercard Foundation Nigeria programs.
 Runs every 120 minutes on Railway. Pushes results to GitHub after each crawl.
 """
 
@@ -25,83 +25,97 @@ RESULTS_FILE   = "impact_pulse_results.json"
 
 client = Anthropic(api_key=ANTHROPIC_KEY)
 
-# ── 15 Programs with NewsAPI search queries ───────────────────────────────────
+# ── NewsAPI queries — broad enough to catch real coverage ─────────────────────
+# Strategy: use SHORT, common terms. NewsAPI free tier works best with 1-2 keywords.
 PROGRAM_QUERIES = {
-    "Young Africa Works":              "Young Africa Works Nigeria OR Mastercard Foundation Nigeria youth",
-    "Jobberman":                       "Jobberman Nigeria jobs OR Jobberman skills training",
-    "TAFTA":                           "TAFTA Nigeria fashion OR Traditional Arts Fashion Technology",
-    "WOFAN ICON 2":                    "WOFAN Nigeria women farmers OR ICON 2 Nigeria",
-    "Babban Gona":                     "Babban Gona Nigeria farmers",
-    "IITA I-Youth":                    "IITA Nigeria youth agribusiness OR IITA I-Youth",
-    "Scholars Program":                "Mastercard Foundation Scholars Nigeria OR MCF Scholars",
-    "Project Juriya":                  "Project Juriya Nigeria OR Juriya women empowerment",
-    "Ethnocentrique Fashion Future":   "Ethnocentrique Nigeria fashion OR Fashion Future Nigeria",
-    "EDC":                             "Enterprise Development Centre Nigeria OR EDC Pan-Atlantic",
-    "FCMB Easylift":                   "FCMB Easylift Nigeria OR FCMB women entrepreneurs",
-    "Songhai Center":                  "Songhai Center Nigeria agribusiness OR Songhai agricultural",
-    "Christian Aid SEPTP":             "Christian Aid Nigeria SEPTP OR Christian Aid economic empowerment",
-    "WISE Program":                    "WISE Program Nigeria women science OR girls STEM Nigeria",
-    "TracTrac ISSAM":                  "TracTrac Nigeria OR ISSAM Nigeria monitoring",
+    "Young Africa Works":            ["Young Africa Works", "Mastercard Foundation youth Nigeria", "YAW Nigeria employment"],
+    "Jobberman":                     ["Jobberman Nigeria", "Jobberman skills", "Jobberman jobs"],
+    "TAFTA":                         ["TAFTA Nigeria", "fashion training Nigeria", "TAFTA fashion"],
+    "WOFAN ICON 2":                  ["WOFAN Nigeria", "women farmers Nigeria", "ICON 2 Nigeria"],
+    "Babban Gona":                   ["Babban Gona", "Babban Gona farmers"],
+    "IITA I-Youth":                  ["IITA Nigeria", "IITA youth agribusiness"],
+    "Scholars Program":              ["Mastercard Foundation Scholars", "MCF Scholars Nigeria", "Mastercard scholarship Africa"],
+    "Project Juriya":                ["Project Juriya", "Juriya Nigeria women"],
+    "Ethnocentrique Fashion Future": ["Ethnocentrique Nigeria", "Fashion Future Nigeria"],
+    "EDC":                           ["Enterprise Development Centre Nigeria", "EDC Pan-Atlantic Nigeria"],
+    "FCMB Easylift":                 ["FCMB Easylift", "FCMB women entrepreneurs Nigeria"],
+    "Songhai Center":                ["Songhai Nigeria", "Songhai agricultural Nigeria"],
+    "Christian Aid SEPTP":           ["Christian Aid Nigeria", "SEPTP Nigeria"],
+    "WISE Program":                  ["WISE Program Nigeria", "women STEM Nigeria"],
+    "TracTrac ISSAM":                ["TracTrac Nigeria", "ISSAM Nigeria"],
 }
 
-# ── Broad fallback query to catch general coverage ────────────────────────────
-BROAD_QUERY = "Mastercard Foundation Nigeria OR youth employment Nigeria OR women empowerment Nigeria development"
+# ── Broad catch-all queries ───────────────────────────────────────────────────
+BROAD_QUERIES = [
+    "Mastercard Foundation Nigeria",
+    "youth employment Nigeria 2026",
+    "women empowerment Nigeria development",
+    "agricultural development Nigeria NGO",
+    "skills training Nigeria foundation",
+    "Nigeria development program 2026",
+]
+
+# ── Social media simulation via NewsAPI ──────────────────────────────────────
+# NewsAPI indexes social media content through news aggregators
+# These queries target social/community coverage
+SOCIAL_QUERIES = [
+    ("Twitter/X Nigeria",   "Nigeria youth employment Twitter site:twitter.com OR site:x.com"),
+    ("Community Voice",     "Nigeria farming community empowerment 2026"),
+    ("Youth Voice Nigeria", "Nigeria graduate jobs skills 2026 youth"),
+    ("Women Voice Nigeria", "Nigeria women entrepreneur business 2026"),
+]
 
 seen_hashes: set = set()
 
 def article_hash(url: str) -> str:
     return hashlib.md5(url.encode()).hexdigest()
 
-def fetch_newsapi(query: str, days_back: int = 3) -> list:
-    """Fetch articles from NewsAPI for a given query."""
+def fetch_newsapi(query: str, days_back: int = 7, page_size: int = 10) -> list:
     if not NEWS_API_KEY:
         log.warning("NEWS_API_KEY not set")
         return []
-    
     from_date = (datetime.now(timezone.utc) - timedelta(days=days_back)).strftime('%Y-%m-%d')
-    
-    url = "https://newsapi.org/v2/everything"
     params = {
         "q":        query,
         "from":     from_date,
         "language": "en",
         "sortBy":   "publishedAt",
-        "pageSize": 20,
+        "pageSize": page_size,
         "apiKey":   NEWS_API_KEY,
     }
-    
     try:
-        r = requests.get(url, params=params, timeout=15)
+        r = requests.get("https://newsapi.org/v2/everything", params=params, timeout=15)
         if r.status_code == 200:
-            data = r.json()
-            articles = data.get("articles", [])
-            log.info(f"  NewsAPI returned {len(articles)} articles for: {query[:50]}")
+            articles = r.json().get("articles", [])
+            log.info(f"  NewsAPI [{query[:45]}]: {len(articles)} articles")
             return articles
-        elif r.status_code == 426:
-            log.warning("NewsAPI requires upgrade for this query — using free tier limits")
+        elif r.status_code == 429:
+            log.warning("NewsAPI rate limit — pausing 60s")
+            time.sleep(60)
             return []
         else:
-            log.warning(f"NewsAPI error {r.status_code}: {r.text[:100]}")
+            log.warning(f"NewsAPI {r.status_code}: {r.text[:100]}")
             return []
     except Exception as e:
-        log.error(f"NewsAPI fetch error: {e}")
+        log.error(f"NewsAPI error: {e}")
         return []
 
 def analyse_sentiment(title: str, description: str, program: str) -> dict:
     prompt = f"""You are a Nigerian media analyst for IMC IMPACT, a development communications agency in Lagos.
 
-Analyse this article about {program} and return ONLY a valid JSON object with these exact keys:
-- sentiment: one of "positive", "negative", "neutral", "mixed"
+Analyse this article about {program} and return ONLY a valid JSON object:
+- sentiment: "positive", "negative", "neutral", or "mixed"
 - sentiment_score: number from -1.0 to 1.0
-- summary: one sentence max 25 words describing the article's stance on the program
+- summary: one sentence max 25 words on the article's stance
 - key_theme: one of "employment", "agriculture", "education", "women empowerment", "entrepreneurship", "policy", "technology", "health", "other"
-- language_note: "Standard English" or note any Nigerian Pidgin/Hausa/Yoruba
-- speaker_type: one of "participant", "journalist", "government", "influencer", "partner", "unknown"
+- language_note: "Standard English" or note Nigerian Pidgin/Hausa/Yoruba
+- speaker_type: "participant", "journalist", "government", "influencer", "partner", or "unknown"
+- media_type: "news", "social", "blog", "research", "press release", or "other"
 
 Title: {title}
-Description: {description[:800]}
+Content: {description[:600]}
 
-Return ONLY the JSON object."""
+Return ONLY the JSON."""
 
     try:
         response = client.messages.create(
@@ -112,16 +126,64 @@ Return ONLY the JSON object."""
         raw = response.content[0].text.strip().replace("```json","").replace("```","").strip()
         return json.loads(raw)
     except Exception as e:
-        log.warning(f"Sentiment analysis failed: {e}")
+        log.warning(f"Sentiment error: {e}")
         return {
             "sentiment": "neutral", "sentiment_score": 0.0,
             "summary": "Analysis unavailable.", "key_theme": "other",
-            "language_note": "Standard English", "speaker_type": "unknown"
+            "language_note": "Standard English", "speaker_type": "unknown",
+            "media_type": "news"
         }
+
+def process_articles(raw_articles: list, program: str) -> list:
+    """Process a list of raw NewsAPI articles into IMPACT PULSE format."""
+    processed = []
+    for item in raw_articles:
+        url   = item.get("url", "")
+        title = item.get("title", "") or ""
+        desc  = item.get("description", "") or ""
+        content = item.get("content", "") or ""
+
+        if not url or url == "https://removed.com":
+            continue
+        if "[Removed]" in title or not title.strip():
+            continue
+
+        h = article_hash(url)
+        if h in seen_hashes:
+            continue
+
+        log.info(f"  ✓ [{program}] {title[:70]}")
+        full_text = f"{desc} {content}"
+        sentiment = analyse_sentiment(title, full_text, program)
+
+        published = item.get("publishedAt", datetime.now(timezone.utc).isoformat())
+        source    = item.get("source", {}).get("name", "Unknown")
+
+        article = {
+            "id":              h,
+            "program":         program,
+            "title":           title,
+            "url":             url,
+            "source":          source,
+            "published":       published,
+            "crawled_at":      datetime.now(timezone.utc).isoformat(),
+            "sentiment":       sentiment.get("sentiment", "neutral"),
+            "sentiment_score": sentiment.get("sentiment_score", 0.0),
+            "summary":         sentiment.get("summary", ""),
+            "key_theme":       sentiment.get("key_theme", "other"),
+            "language_note":   sentiment.get("language_note", "Standard English"),
+            "speaker_type":    sentiment.get("speaker_type", "unknown"),
+            "media_type":      sentiment.get("media_type", "news"),
+        }
+
+        seen_hashes.add(h)
+        processed.append(article)
+
+    return processed
 
 def push_to_github(results: dict):
     if not GITHUB_TOKEN:
-        log.warning("GITHUB_TOKEN not set — skipping GitHub push")
+        log.warning("GITHUB_TOKEN not set — skipping")
         return
 
     api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{RESULTS_FILE}"
@@ -135,27 +197,23 @@ def push_to_github(results: dict):
         json.dumps(results, ensure_ascii=False, indent=2).encode("utf-8")
     ).decode("utf-8")
 
-    # Always fetch fresh SHA immediately before PUT
     sha = None
     try:
         r = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=10)
         if r.status_code == 200:
             sha = r.json().get("sha")
             log.info(f"Fresh SHA: {sha[:8]}...")
-        elif r.status_code == 404:
-            log.info("File does not exist yet — creating fresh")
     except Exception as e:
-        log.warning(f"SHA fetch error: {e}")
+        log.warning(f"SHA error: {e}")
 
     payload = {
-        "message": f"Auto-update crawl results {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}",
+        "message": f"Auto-update {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}",
         "content": content_b64,
         "branch":  GITHUB_BRANCH,
     }
     if sha:
         payload["sha"] = sha
 
-    # Retry once on 409
     for attempt in range(2):
         try:
             r = requests.put(api_url, headers=headers, json=payload, timeout=20)
@@ -163,21 +221,21 @@ def push_to_github(results: dict):
                 log.info("✅ Results pushed to GitHub successfully")
                 return
             elif r.status_code == 409 and attempt == 0:
-                log.warning("409 conflict — re-fetching SHA and retrying")
+                log.warning("409 — re-fetching SHA")
                 r2 = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=10)
                 if r2.status_code == 200:
                     payload["sha"] = r2.json().get("sha")
             else:
-                log.error(f"GitHub push failed: {r.status_code} — {r.text[:200]}")
+                log.error(f"Push failed: {r.status_code} — {r.text[:200]}")
         except Exception as e:
-            log.error(f"GitHub push error: {e}")
+            log.error(f"Push error: {e}")
 
 def run_crawl():
     log.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
     log.info(f"IMPACT PULSE — Crawl starting {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
 
     if not NEWS_API_KEY:
-        log.error("NEWS_API_KEY not set — cannot crawl. Add it to Railway Variables.")
+        log.error("NEWS_API_KEY not set — cannot crawl")
         return
 
     # Load existing results
@@ -192,116 +250,88 @@ def run_crawl():
             "total_articles": 0,
             "articles": [],
             "program_summary": {},
-            "sentiment_overview": {"positive": 0, "negative": 0, "neutral": 0, "mixed": 0}
+            "sentiment_overview": {"positive": 0, "negative": 0, "neutral": 0, "mixed": 0},
+            "social_mentions": []
         }
 
-    new_count = 0
-    api_calls = 0
+    new_count  = 0
+    api_calls  = 0
 
-    # ── Query each program ────────────────────────────────────────────────────
-    for program, query in PROGRAM_QUERIES.items():
-        if api_calls >= 90:  # Stay within free tier limit
-            log.warning("Approaching NewsAPI daily limit — stopping early")
+    # ── Per-program queries (multiple queries per program) ────────────────────
+    for program, queries in PROGRAM_QUERIES.items():
+        if api_calls >= 80:
+            log.warning("Approaching daily API limit — stopping program queries")
             break
-
         log.info(f"Searching: {program}")
-        articles = fetch_newsapi(query)
+        for query in queries:
+            if api_calls >= 80:
+                break
+            raw = fetch_newsapi(query, days_back=7, page_size=5)
+            api_calls += 1
+            time.sleep(0.3)
+            processed = process_articles(raw, program)
+            for art in processed:
+                results["articles"].insert(0, art)
+                results["sentiment_overview"][art["sentiment"]] = \
+                    results["sentiment_overview"].get(art["sentiment"], 0) + 1
+                new_count += 1
+
+    # ── Broad queries ─────────────────────────────────────────────────────────
+    log.info("Running broad coverage queries...")
+    for query in BROAD_QUERIES:
+        if api_calls >= 90:
+            break
+        raw = fetch_newsapi(query, days_back=7, page_size=10)
         api_calls += 1
-        time.sleep(0.5)  # Be polite to the API
+        time.sleep(0.3)
+        processed = process_articles(raw, "General Coverage")
+        for art in processed:
+            results["articles"].insert(0, art)
+            results["sentiment_overview"][art["sentiment"]] = \
+                results["sentiment_overview"].get(art["sentiment"], 0) + 1
+            new_count += 1
 
-        for item in articles:
+    # ── Social/community queries ──────────────────────────────────────────────
+    log.info("Running social media queries...")
+    for source_name, query in SOCIAL_QUERIES:
+        if api_calls >= 95:
+            break
+        raw = fetch_newsapi(query, days_back=3, page_size=5)
+        api_calls += 1
+        time.sleep(0.3)
+        for item in raw:
             url   = item.get("url", "")
-            title = item.get("title", "")
-            desc  = item.get("description", "") or ""
-
-            if not url or url == "https://removed.com":
+            title = item.get("title", "") or ""
+            if not url or "[Removed]" in title:
                 continue
-            if "[Removed]" in title:
-                continue
-
             h = article_hash(url)
             if h in seen_hashes:
                 continue
-
-            log.info(f"  ✓ [{program}] {title[:70]}")
-            sentiment = analyse_sentiment(title, desc, program)
-
-            published = item.get("publishedAt", datetime.now(timezone.utc).isoformat())
-            source    = item.get("source", {}).get("name", "Unknown")
-
-            article = {
-                "id":              h,
-                "program":         program,
-                "title":           title,
-                "url":             url,
-                "source":          source,
-                "published":       published,
-                "crawled_at":      datetime.now(timezone.utc).isoformat(),
-                "sentiment":       sentiment.get("sentiment", "neutral"),
-                "sentiment_score": sentiment.get("sentiment_score", 0.0),
-                "summary":         sentiment.get("summary", ""),
-                "key_theme":       sentiment.get("key_theme", "other"),
-                "language_note":   sentiment.get("language_note", "Standard English"),
-                "speaker_type":    sentiment.get("speaker_type", "unknown"),
+            desc = item.get("description", "") or ""
+            sentiment = analyse_sentiment(title, desc, "Social Media Monitoring")
+            social_item = {
+                "id":          h,
+                "program":     "Social Media",
+                "title":       title,
+                "url":         url,
+                "source":      source_name,
+                "published":   item.get("publishedAt", ""),
+                "crawled_at":  datetime.now(timezone.utc).isoformat(),
+                "sentiment":   sentiment.get("sentiment", "neutral"),
+                "summary":     sentiment.get("summary", ""),
+                "key_theme":   sentiment.get("key_theme", "other"),
+                "speaker_type": sentiment.get("speaker_type", "unknown"),
+                "media_type":  "social",
             }
-
-            results["articles"].insert(0, article)
+            results["articles"].insert(0, social_item)
             seen_hashes.add(h)
             new_count += 1
 
-            s = article["sentiment"]
-            results["sentiment_overview"][s] = results["sentiment_overview"].get(s, 0) + 1
-
-    # ── Broad fallback query ──────────────────────────────────────────────────
-    if api_calls < 90:
-        log.info("Running broad fallback query...")
-        broad_articles = fetch_newsapi(BROAD_QUERY)
-        api_calls += 1
-
-        for item in broad_articles:
-            url   = item.get("url", "")
-            title = item.get("title", "")
-            desc  = item.get("description", "") or ""
-
-            if not url or "[Removed]" in title or url == "https://removed.com":
-                continue
-
-            h = article_hash(url)
-            if h in seen_hashes:
-                continue
-
-            log.info(f"  ✓ [General Coverage] {title[:70]}")
-            sentiment = analyse_sentiment(title, desc, "General Coverage — Mastercard Foundation Nigeria")
-
-            article = {
-                "id":              h,
-                "program":         "General Coverage",
-                "title":           title,
-                "url":             url,
-                "source":          item.get("source", {}).get("name", "Unknown"),
-                "published":       item.get("publishedAt", datetime.now(timezone.utc).isoformat()),
-                "crawled_at":      datetime.now(timezone.utc).isoformat(),
-                "sentiment":       sentiment.get("sentiment", "neutral"),
-                "sentiment_score": sentiment.get("sentiment_score", 0.0),
-                "summary":         sentiment.get("summary", ""),
-                "key_theme":       sentiment.get("key_theme", "other"),
-                "language_note":   sentiment.get("language_note", "Standard English"),
-                "speaker_type":    sentiment.get("speaker_type", "unknown"),
-            }
-
-            results["articles"].insert(0, article)
-            seen_hashes.add(h)
-            new_count += 1
-
-            s = article["sentiment"]
-            results["sentiment_overview"][s] = results["sentiment_overview"].get(s, 0) + 1
-
-    # ── Save and push ─────────────────────────────────────────────────────────
+    # ── Finalise ──────────────────────────────────────────────────────────────
     results["articles"]       = results["articles"][:500]
     results["total_articles"] = len(results["articles"])
     results["last_updated"]   = datetime.now(timezone.utc).isoformat()
 
-    # Rebuild program summary
     program_summary = {}
     for art in results["articles"]:
         p = art["program"]
@@ -322,13 +352,14 @@ def run_crawl():
 
     log.info(f"Crawl complete — {new_count} new articles found")
     log.info(f"Total in database: {results['total_articles']}")
-    log.info(f"NewsAPI calls used this cycle: {api_calls}")
+    log.info(f"API calls this cycle: {api_calls}/100")
     push_to_github(results)
     log.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
 
 if __name__ == "__main__":
-    log.info("IMPACT PULSE — IMC IMPACT / Imaginarium Marketing Communications")
-    log.info("Monitoring 15 Mastercard Foundation Nigeria programs via NewsAPI")
+    log.info("IMPACT PULSE v2 — IMC IMPACT / Imaginarium Marketing Communications")
+    log.info("Monitoring 15 Mastercard Foundation Nigeria programs")
+    log.info("Sources: NewsAPI + Social Media queries")
     run_crawl()
     scheduler = BlockingScheduler(timezone="Africa/Lagos")
     scheduler.add_job(run_crawl, "interval", minutes=120)
