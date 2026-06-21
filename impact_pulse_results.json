@@ -1,1 +1,14 @@
-{"last_updated": "", "total_articles": 0, "articles": [], "program_summary": {}, "sentiment_overview": {"positive": 0, "negative": 0, "neutral": 0, "mixed": 0}, "geographic_summary": {}, "platform_summary": {}}
+{
+  "last_updated": "2026-06-21T19:29:01.180755+00:00",
+  "total_articles": 0,
+  "articles": [],
+  "program_summary": {},
+  "sentiment_overview": {
+    "positive": 0,
+    "negative": 0,
+    "neutral": 0,
+    "mixed": 0
+  },
+  "geographic_summary": {},
+  "platform_summary": {}
+}
