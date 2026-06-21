@@ -1,12 +1,11 @@
 """
 IMPACT PULSE Crawler — IMC IMPACT / Imaginarium Marketing Communications
-Monitors Mastercard Foundation Nigeria programs across Nigerian media.
+Uses NewsAPI.org to monitor 15 Mastercard Foundation Nigeria programs.
 Runs every 120 minutes on Railway. Pushes results to GitHub after each crawl.
 """
 
-import os, json, base64, logging, hashlib, requests, feedparser
-from datetime import datetime, timezone
-from bs4 import BeautifulSoup
+import os, json, base64, logging, hashlib, requests, time
+from datetime import datetime, timezone, timedelta
 from anthropic import Anthropic
 from apscheduler.schedulers.blocking import BlockingScheduler
 
@@ -19,161 +18,90 @@ log = logging.getLogger(__name__)
 
 ANTHROPIC_KEY  = os.environ.get("ANTHROPIC_KEY", "")
 GITHUB_TOKEN   = os.environ.get("GITHUB_TOKEN", "")
+NEWS_API_KEY   = os.environ.get("NEWS_API_KEY", "")
 GITHUB_REPO    = "RaisingGods/impact.pulse"
 GITHUB_BRANCH  = "main"
 RESULTS_FILE   = "impact_pulse_results.json"
 
 client = Anthropic(api_key=ANTHROPIC_KEY)
 
-# ── Programs with BROAD keyword sets ─────────────────────────────────────────
-# Using short, common words that will actually appear in Nigerian news headlines
-PROGRAMS = {
-    "Young Africa Works": [
-        "Young Africa Works", "Mastercard Foundation", "youth employment",
-        "job creation Nigeria", "YAW Nigeria", "Africa Works"
-    ],
-    "Jobberman": [
-        "Jobberman", "soft skills training", "job placement Nigeria",
-        "employment Nigeria", "labour market Nigeria", "jobs Nigeria"
-    ],
-    "TAFTA": [
-        "TAFTA", "fashion training Nigeria", "textile Nigeria",
-        "fashion school Nigeria", "Traditional Arts Fashion"
-    ],
-    "WOFAN ICON 2": [
-        "WOFAN", "women farmers Nigeria", "ICON 2",
-        "Women Farmers Advancement", "female farmers Nigeria"
-    ],
-    "Babban Gona": [
-        "Babban Gona", "smallholder farmers", "agricultural cooperative Nigeria",
-        "farmer cooperative Nigeria", "agric cooperative"
-    ],
-    "IITA I-Youth": [
-        "IITA", "youth agribusiness", "agribusiness Nigeria",
-        "International Institute Tropical Agriculture", "I-Youth"
-    ],
-    "Scholars Program": [
-        "Mastercard Foundation Scholars", "MCF Scholars", "Mastercard scholarship",
-        "scholarship Nigeria", "university scholarship Africa"
-    ],
-    "Project Juriya": [
-        "Project Juriya", "Juriya", "women empowerment northern Nigeria",
-        "northern Nigeria women", "Kaduna women empowerment"
-    ],
-    "Ethnocentrique Fashion Future": [
-        "Ethnocentrique", "Fashion Future", "African fashion",
-        "fashion entrepreneur Nigeria", "Aba fashion", "fashion business Nigeria"
-    ],
-    "EDC": [
-        "Enterprise Development Centre", "EDC Nigeria", "Pan-Atlantic University",
-        "SME Nigeria", "small business Nigeria", "entrepreneurship Nigeria"
-    ],
-    "FCMB Easylift": [
-        "FCMB Easylift", "Easylift", "FCMB women", "FCMB loan",
-        "women entrepreneur loan", "FCMB Nigeria"
-    ],
-    "Songhai Center": [
-        "Songhai", "agribusiness training", "Songhai Nigeria",
-        "agricultural training Nigeria", "farm training Nigeria"
-    ],
-    "Christian Aid SEPTP": [
-        "Christian Aid Nigeria", "SEPTP", "Christian Aid",
-        "economic empowerment Nigeria", "poverty Nigeria"
-    ],
-    "WISE Program": [
-        "WISE Program", "women science Nigeria", "girls education Nigeria",
-        "STEM Nigeria women", "female education Nigeria"
-    ],
-    "TracTrac ISSAM": [
-        "TracTrac", "ISSAM Nigeria", "social accountability Nigeria",
-        "program monitoring Nigeria", "community monitoring"
-    ],
+# ── 15 Programs with NewsAPI search queries ───────────────────────────────────
+PROGRAM_QUERIES = {
+    "Young Africa Works":              "Young Africa Works Nigeria OR Mastercard Foundation Nigeria youth",
+    "Jobberman":                       "Jobberman Nigeria jobs OR Jobberman skills training",
+    "TAFTA":                           "TAFTA Nigeria fashion OR Traditional Arts Fashion Technology",
+    "WOFAN ICON 2":                    "WOFAN Nigeria women farmers OR ICON 2 Nigeria",
+    "Babban Gona":                     "Babban Gona Nigeria farmers",
+    "IITA I-Youth":                    "IITA Nigeria youth agribusiness OR IITA I-Youth",
+    "Scholars Program":                "Mastercard Foundation Scholars Nigeria OR MCF Scholars",
+    "Project Juriya":                  "Project Juriya Nigeria OR Juriya women empowerment",
+    "Ethnocentrique Fashion Future":   "Ethnocentrique Nigeria fashion OR Fashion Future Nigeria",
+    "EDC":                             "Enterprise Development Centre Nigeria OR EDC Pan-Atlantic",
+    "FCMB Easylift":                   "FCMB Easylift Nigeria OR FCMB women entrepreneurs",
+    "Songhai Center":                  "Songhai Center Nigeria agribusiness OR Songhai agricultural",
+    "Christian Aid SEPTP":             "Christian Aid Nigeria SEPTP OR Christian Aid economic empowerment",
+    "WISE Program":                    "WISE Program Nigeria women science OR girls STEM Nigeria",
+    "TracTrac ISSAM":                  "TracTrac Nigeria OR ISSAM Nigeria monitoring",
 }
 
-# ── BROAD catch-all keywords — any article about Nigerian development ──────────
-BROAD_KEYWORDS = [
-    # Mastercard Foundation direct
-    "Mastercard Foundation",
-    "Mastercard Nigeria",
-    # Youth & employment
-    "youth employment", "job creation", "skills training",
-    "vocational training Nigeria", "graduate employment Nigeria",
-    "unemployment Nigeria", "employability Nigeria",
-    # Agriculture
-    "smallholder farmer", "agribusiness Nigeria", "agricultural Nigeria",
-    "farming Nigeria", "harvest Nigeria", "food security Nigeria",
-    "cooperative Nigeria", "farmer Nigeria",
-    # Women
-    "women empowerment", "female entrepreneur", "women entrepreneur",
-    "gender Nigeria", "women business Nigeria",
-    # Education & scholarship  
-    "scholarship Nigeria", "bursary Nigeria", "student grant Nigeria",
-    "university funding Nigeria", "education grant",
-    # Development/NGO general
-    "development program Nigeria", "NGO Nigeria", "foundation Nigeria",
-    "impact program Nigeria", "social enterprise Nigeria",
-    "capacity building Nigeria", "livelihood Nigeria",
-    # Specific orgs likely to appear
-    "Jobberman", "Babban Gona", "TAFTA", "WOFAN", "IITA",
-    "Enterprise Development Centre", "FCMB", "Songhai",
-    "Christian Aid", "Pan-Atlantic",
-]
-
-RSS_FEEDS = [
-    ("Punch Newspapers",     "https://punchng.com/feed/"),
-    ("Premium Times",        "https://www.premiumtimesng.com/feed/"),
-    ("The Guardian NG",      "https://guardian.ng/feed/"),
-    ("Vanguard",             "https://www.vanguardngr.com/feed/"),
-    ("BusinessDay",          "https://businessday.ng/feed/"),
-    ("The Nation",           "https://thenationonlineng.net/feed/"),
-    ("Daily Trust",          "https://dailytrust.com/feed/"),
-    ("Channels TV",          "https://www.channelstv.com/feed/"),
-    ("TechCabal",            "https://techcabal.com/feed/"),
-    ("Nairametrics",         "https://nairametrics.com/feed/"),
-    ("The Cable",            "https://www.thecable.ng/feed"),
-    ("Leadership NG",        "https://leadership.ng/feed/"),
-]
+# ── Broad fallback query to catch general coverage ────────────────────────────
+BROAD_QUERY = "Mastercard Foundation Nigeria OR youth employment Nigeria OR women empowerment Nigeria development"
 
 seen_hashes: set = set()
 
 def article_hash(url: str) -> str:
     return hashlib.md5(url.encode()).hexdigest()
 
-def fetch_article_text(url: str) -> str:
+def fetch_newsapi(query: str, days_back: int = 3) -> list:
+    """Fetch articles from NewsAPI for a given query."""
+    if not NEWS_API_KEY:
+        log.warning("NEWS_API_KEY not set")
+        return []
+    
+    from_date = (datetime.now(timezone.utc) - timedelta(days=days_back)).strftime('%Y-%m-%d')
+    
+    url = "https://newsapi.org/v2/everything"
+    params = {
+        "q":        query,
+        "from":     from_date,
+        "language": "en",
+        "sortBy":   "publishedAt",
+        "pageSize": 20,
+        "apiKey":   NEWS_API_KEY,
+    }
+    
     try:
-        r = requests.get(url, timeout=10, headers={"User-Agent": "IMCIMPACTPulse/1.0"})
-        soup = BeautifulSoup(r.text, "html.parser")
-        return " ".join(p.get_text() for p in soup.find_all("p"))[:3000]
+        r = requests.get(url, params=params, timeout=15)
+        if r.status_code == 200:
+            data = r.json()
+            articles = data.get("articles", [])
+            log.info(f"  NewsAPI returned {len(articles)} articles for: {query[:50]}")
+            return articles
+        elif r.status_code == 426:
+            log.warning("NewsAPI requires upgrade for this query — using free tier limits")
+            return []
+        else:
+            log.warning(f"NewsAPI error {r.status_code}: {r.text[:100]}")
+            return []
     except Exception as e:
-        log.warning(f"Could not fetch article text: {e}")
-        return ""
+        log.error(f"NewsAPI fetch error: {e}")
+        return []
 
-def match_program(text: str) -> str | None:
-    """Return matched program name or None."""
-    text_lower = text.lower()
-    for program, keywords in PROGRAMS.items():
-        if any(kw.lower() in text_lower for kw in keywords):
-            return program
-    # Check broad keywords — assign to "General Coverage"
-    if any(kw.lower() in text_lower for kw in BROAD_KEYWORDS):
-        return "General Coverage"
-    return None
-
-def analyse_sentiment(title: str, text: str, program: str) -> dict:
+def analyse_sentiment(title: str, description: str, program: str) -> dict:
     prompt = f"""You are a Nigerian media analyst for IMC IMPACT, a development communications agency in Lagos.
 
-Analyse this article about {program} and return ONLY a JSON object:
-- sentiment: "positive", "negative", "neutral", or "mixed"
+Analyse this article about {program} and return ONLY a valid JSON object with these exact keys:
+- sentiment: one of "positive", "negative", "neutral", "mixed"
 - sentiment_score: number from -1.0 to 1.0
-- summary: one sentence max 25 words on the article's stance
+- summary: one sentence max 25 words describing the article's stance on the program
 - key_theme: one of "employment", "agriculture", "education", "women empowerment", "entrepreneurship", "policy", "technology", "health", "other"
-- language_note: note any Nigerian Pidgin, Hausa, or Yoruba (or write "Standard English")
+- language_note: "Standard English" or note any Nigerian Pidgin/Hausa/Yoruba
 - speaker_type: one of "participant", "journalist", "government", "influencer", "partner", "unknown"
 
 Title: {title}
-Text: {text[:1500]}
+Description: {description[:800]}
 
-Return ONLY the JSON object, nothing else."""
+Return ONLY the JSON object."""
 
     try:
         response = client.messages.create(
@@ -207,28 +135,27 @@ def push_to_github(results: dict):
         json.dumps(results, ensure_ascii=False, indent=2).encode("utf-8")
     ).decode("utf-8")
 
-    # Always fetch fresh SHA immediately before PUT to avoid 409 conflicts
+    # Always fetch fresh SHA immediately before PUT
     sha = None
     try:
         r = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=10)
-        log.info(f"Fresh SHA fetch: {r.status_code}")
         if r.status_code == 200:
             sha = r.json().get("sha")
             log.info(f"Fresh SHA: {sha[:8]}...")
         elif r.status_code == 404:
-            log.info("File does not exist — will create it fresh")
+            log.info("File does not exist yet — creating fresh")
     except Exception as e:
-        log.warning(f"SHA fetch exception: {e}")
+        log.warning(f"SHA fetch error: {e}")
 
     payload = {
         "message": f"Auto-update crawl results {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}",
         "content": content_b64,
-        "branch": GITHUB_BRANCH,
+        "branch":  GITHUB_BRANCH,
     }
     if sha:
         payload["sha"] = sha
 
-    # Retry once on 409 conflict with re-fetched SHA
+    # Retry once on 409
     for attempt in range(2):
         try:
             r = requests.put(api_url, headers=headers, json=payload, timeout=20)
@@ -240,16 +167,20 @@ def push_to_github(results: dict):
                 r2 = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=10)
                 if r2.status_code == 200:
                     payload["sha"] = r2.json().get("sha")
-                    log.info(f"Retry SHA: {payload['sha'][:8]}...")
             else:
-                log.error(f"GitHub push failed: {r.status_code} — {r.text[:300]}")
+                log.error(f"GitHub push failed: {r.status_code} — {r.text[:200]}")
         except Exception as e:
-            log.error(f"GitHub push exception: {e}")
+            log.error(f"GitHub push error: {e}")
 
 def run_crawl():
     log.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-    log.info(f"IMPACT PULSE — Crawl cycle starting {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
+    log.info(f"IMPACT PULSE — Crawl starting {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
 
+    if not NEWS_API_KEY:
+        log.error("NEWS_API_KEY not set — cannot crawl. Add it to Railway Variables.")
+        return
+
+    # Load existing results
     if os.path.exists(RESULTS_FILE):
         with open(RESULTS_FILE, "r", encoding="utf-8") as f:
             results = json.load(f)
@@ -265,95 +196,139 @@ def run_crawl():
         }
 
     new_count = 0
+    api_calls = 0
 
-    for feed_name, feed_url in RSS_FEEDS:
-        try:
-            feed = feedparser.parse(feed_url)
-            entries = feed.entries[:30]
-            log.info(f"  {feed_name}: {len(entries)} entries")
+    # ── Query each program ────────────────────────────────────────────────────
+    for program, query in PROGRAM_QUERIES.items():
+        if api_calls >= 90:  # Stay within free tier limit
+            log.warning("Approaching NewsAPI daily limit — stopping early")
+            break
 
-            for entry in entries:
-                url   = getattr(entry, "link", "")
-                title = getattr(entry, "title", "No title")
-                published = getattr(entry, "published", str(datetime.now(timezone.utc).date()))
+        log.info(f"Searching: {program}")
+        articles = fetch_newsapi(query)
+        api_calls += 1
+        time.sleep(0.5)  # Be polite to the API
 
-                if not url:
-                    continue
+        for item in articles:
+            url   = item.get("url", "")
+            title = item.get("title", "")
+            desc  = item.get("description", "") or ""
 
-                h = article_hash(url)
-                if h in seen_hashes:
-                    continue
+            if not url or url == "https://removed.com":
+                continue
+            if "[Removed]" in title:
+                continue
 
-                entry_text = f"{title} {getattr(entry, 'summary', '')}"
-                matched_program = match_program(entry_text)
+            h = article_hash(url)
+            if h in seen_hashes:
+                continue
 
-                if not matched_program:
-                    continue
+            log.info(f"  ✓ [{program}] {title[:70]}")
+            sentiment = analyse_sentiment(title, desc, program)
 
-                log.info(f"    ✓ [{matched_program}] {title[:70]}")
-                article_text = fetch_article_text(url)
+            published = item.get("publishedAt", datetime.now(timezone.utc).isoformat())
+            source    = item.get("source", {}).get("name", "Unknown")
 
-                # Re-check with full text if only broad match
-                if matched_program == "General Coverage":
-                    full_match = match_program(article_text)
-                    if full_match and full_match != "General Coverage":
-                        matched_program = full_match
+            article = {
+                "id":              h,
+                "program":         program,
+                "title":           title,
+                "url":             url,
+                "source":          source,
+                "published":       published,
+                "crawled_at":      datetime.now(timezone.utc).isoformat(),
+                "sentiment":       sentiment.get("sentiment", "neutral"),
+                "sentiment_score": sentiment.get("sentiment_score", 0.0),
+                "summary":         sentiment.get("summary", ""),
+                "key_theme":       sentiment.get("key_theme", "other"),
+                "language_note":   sentiment.get("language_note", "Standard English"),
+                "speaker_type":    sentiment.get("speaker_type", "unknown"),
+            }
 
-                sentiment = analyse_sentiment(title, article_text, matched_program)
+            results["articles"].insert(0, article)
+            seen_hashes.add(h)
+            new_count += 1
 
-                article = {
-                    "id":              h,
-                    "program":         matched_program,
-                    "title":           title,
-                    "url":             url,
-                    "source":          feed_name,
-                    "published":       published,
-                    "crawled_at":      datetime.now(timezone.utc).isoformat(),
-                    "sentiment":       sentiment.get("sentiment", "neutral"),
-                    "sentiment_score": sentiment.get("sentiment_score", 0.0),
-                    "summary":         sentiment.get("summary", ""),
-                    "key_theme":       sentiment.get("key_theme", "other"),
-                    "language_note":   sentiment.get("language_note", "Standard English"),
-                    "speaker_type":    sentiment.get("speaker_type", "unknown"),
-                }
+            s = article["sentiment"]
+            results["sentiment_overview"][s] = results["sentiment_overview"].get(s, 0) + 1
 
-                results["articles"].insert(0, article)
-                seen_hashes.add(h)
-                new_count += 1
+    # ── Broad fallback query ──────────────────────────────────────────────────
+    if api_calls < 90:
+        log.info("Running broad fallback query...")
+        broad_articles = fetch_newsapi(BROAD_QUERY)
+        api_calls += 1
 
-                s = article["sentiment"]
-                results["sentiment_overview"][s] = results["sentiment_overview"].get(s, 0) + 1
+        for item in broad_articles:
+            url   = item.get("url", "")
+            title = item.get("title", "")
+            desc  = item.get("description", "") or ""
 
-        except Exception as e:
-            log.error(f"Feed error ({feed_name}): {e}")
+            if not url or "[Removed]" in title or url == "https://removed.com":
+                continue
 
-    results["articles"] = results["articles"][:500]
+            h = article_hash(url)
+            if h in seen_hashes:
+                continue
 
+            log.info(f"  ✓ [General Coverage] {title[:70]}")
+            sentiment = analyse_sentiment(title, desc, "General Coverage — Mastercard Foundation Nigeria")
+
+            article = {
+                "id":              h,
+                "program":         "General Coverage",
+                "title":           title,
+                "url":             url,
+                "source":          item.get("source", {}).get("name", "Unknown"),
+                "published":       item.get("publishedAt", datetime.now(timezone.utc).isoformat()),
+                "crawled_at":      datetime.now(timezone.utc).isoformat(),
+                "sentiment":       sentiment.get("sentiment", "neutral"),
+                "sentiment_score": sentiment.get("sentiment_score", 0.0),
+                "summary":         sentiment.get("summary", ""),
+                "key_theme":       sentiment.get("key_theme", "other"),
+                "language_note":   sentiment.get("language_note", "Standard English"),
+                "speaker_type":    sentiment.get("speaker_type", "unknown"),
+            }
+
+            results["articles"].insert(0, article)
+            seen_hashes.add(h)
+            new_count += 1
+
+            s = article["sentiment"]
+            results["sentiment_overview"][s] = results["sentiment_overview"].get(s, 0) + 1
+
+    # ── Save and push ─────────────────────────────────────────────────────────
+    results["articles"]       = results["articles"][:500]
+    results["total_articles"] = len(results["articles"])
+    results["last_updated"]   = datetime.now(timezone.utc).isoformat()
+
+    # Rebuild program summary
     program_summary = {}
     for art in results["articles"]:
         p = art["program"]
         if p not in program_summary:
-            program_summary[p] = {"count": 0, "positive": 0, "negative": 0, "neutral": 0, "mixed": 0, "last_article": ""}
+            program_summary[p] = {
+                "count": 0, "positive": 0, "negative": 0,
+                "neutral": 0, "mixed": 0, "last_article": ""
+            }
         program_summary[p]["count"] += 1
         program_summary[p][art["sentiment"]] = program_summary[p].get(art["sentiment"], 0) + 1
         if not program_summary[p]["last_article"]:
             program_summary[p]["last_article"] = art["title"]
 
     results["program_summary"] = program_summary
-    results["total_articles"]  = len(results["articles"])
-    results["last_updated"]    = datetime.now(timezone.utc).isoformat()
 
     with open(RESULTS_FILE, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
 
     log.info(f"Crawl complete — {new_count} new articles found")
     log.info(f"Total in database: {results['total_articles']}")
+    log.info(f"NewsAPI calls used this cycle: {api_calls}")
     push_to_github(results)
     log.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
 
 if __name__ == "__main__":
     log.info("IMPACT PULSE — IMC IMPACT / Imaginarium Marketing Communications")
-    log.info("Monitoring 15 Mastercard Foundation Nigeria programs")
+    log.info("Monitoring 15 Mastercard Foundation Nigeria programs via NewsAPI")
     run_crawl()
     scheduler = BlockingScheduler(timezone="Africa/Lagos")
     scheduler.add_job(run_crawl, "interval", minutes=120)
