@@ -402,7 +402,7 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
     <div class="tb-name" id="tb-name">Overview Dashboard</div>
     <span class="tb-tag" id="tb-tag">OVERVIEW</span>
     <div class="tb-live"><span class="tb-ld"></span>Live monitoring</div>
-    <button class="btn btn-red" style="font-size:12px" onclick="ai('Generate a comprehensive weekly media intelligence briefing for Mastercard Foundation Nigeria programs. Cover all active programs, highlight significant media narratives, note risks, and identify top journalists and influencers.','ai-dash')">✦ AI Briefing</button>
+    <button class="btn btn-red" style="font-size:12px" onclick="showBriefingModal()">✦ AI Briefing</button>
   </div>
 
   <!-- SCROLL AREA -->
@@ -1467,395 +1467,171 @@ function exportReport(){
   <script>setTimeout(function(){window.print()},800);<\/script>
   </body></html>`);
   w.document.close();
-  setTimeout(function(){
-    try { w.focus(); } catch(e) {}
-  }, 500);
+  setTimeout(function(){ try{w.focus();}catch(e){} },500);
 }
 
 function exportCSV(){
-  const csv=`Program,Mentions,Positive%,Status,vs Last Week\nYoung Africa Works,1840,74%,Watch,+48%\nBabban Gona,892,81%,Healthy,+10%\nTAFTA,641,88%,Healthy,+129%\nJobberman,580,61%,At Risk,+49%\nWOFAN ICON 2,412,62%,Watch,-14%\nIITA I-Youth,318,77%,Healthy,+8%\nScholars Program,290,91%,Healthy,+5%\nProject Juriya,184,58%,At Risk,+100%`;
-  const a=document.createElement('a');
-  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-  a.download='IMPACT-PULSE-'+new Date().toISOString().slice(0,10)+'.csv';
+  var csv="Program,Mentions\nFashion Future Program,5\nJobberman,4\nScholars Program,2\nSonghai Center,1\nProject Juriya,1";
+  var a=document.createElement("a");
+  a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);
+  a.download="IMPACT-PULSE.csv";
   a.click();
 }
 
 
-// ── LIVE DATA FROM GITHUB ─────────────────────────────────────────────────────
-const GITHUB_JSON = "https://raw.githubusercontent.com/RaisingGods/impact.pulse/main/impact_pulse_results.json";
+<!-- AI BRIEFING MODAL -->
+<div id="briefing-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:var(--bg);border-radius:12px;width:90%;max-width:680px;max-height:85vh;overflow-y:auto;padding:28px 32px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,0.4)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <div>
+        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:4px">IMPACT PULSE</div>
+        <div style="font-size:18px;font-weight:600;color:var(--t)">AI Intelligence Briefing</div>
+        <div style="font-size:12px;color:var(--t3)">Mastercard Foundation Nigeria · Prepared by IMC IMPACT</div>
+      </div>
+      <button onclick="closeBriefingModal()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--t3);padding:4px 8px">x</button>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+      <button class="apb" onclick="loadBrief('weekly')" style="font-size:12px;padding:7px 14px">Weekly Summary</button>
+      <button class="apb" onclick="loadBrief('may')" style="font-size:12px;padding:7px 14px">May 2026 Report</button>
+      <button class="apb" onclick="loadBrief('leadership')" style="font-size:12px;padding:7px 14px">Leadership Brief</button>
+    </div>
+    <div id="briefing-output" style="font-size:13px;line-height:1.8;color:var(--t);white-space:pre-wrap;min-height:200px;background:var(--off);border-radius:8px;padding:16px;font-family:inherit">
+      <span style="color:var(--t3);font-style:italic">Select a brief type above to generate your intelligence report...</span>
+    </div>
+  </div>
+</div>
 
-async function fetchLiveResults() {
-  try {
-    const resp = await fetch(GITHUB_JSON + "?t=" + Date.now());
-    if (!resp.ok) return null;
-    return await resp.json();
-  } catch(e) {
-    console.log("Live data fetch error:", e.message);
-    return null;
-  }
+<script>
+function showBriefingModal(){
+  document.getElementById('briefing-modal').style.display='flex';
 }
-
-async function updateDashboardWithLiveData() {
-  const data = await fetchLiveResults();
-  const banner = document.getElementById('live-data-banner');
-
-  if (!data || !data.articles || data.articles.length === 0) {
-    if (banner) banner.style.display = 'flex';
-    return;
-  }
-
-  // Hide banner — we have real data
-  if (banner) banner.style.display = 'none';
-
-  const articles   = data.articles || [];
-  const total      = data.total_articles || articles.length;
-  const s          = data.sentiment_overview || {};
-  const positive   = s.positive || 0;
-  const negative   = s.negative || 0;
-  const posRate    = total > 0 ? Math.round((positive / total) * 100) : 0;
-  const ratio      = negative > 0 ? `${positive}:${negative}` : `${positive}:0`;
-
-  // Update stat cards by ID
-  const elMentions  = document.getElementById('stat-mentions');
-  const elReach     = document.getElementById('stat-reach');
-  const elSentiment = document.getElementById('stat-sentiment');
-  const elAlerts    = document.getElementById('stat-alerts');
-  const elRatio     = document.getElementById('stat-ratio');
-
-  if (elMentions)  elMentions.textContent  = total.toLocaleString();
-  if (elSentiment) elSentiment.innerHTML   = `${posRate}<span style="font-size:12px;color:var(--t3)">/100</span>`;
-  if (elAlerts)    elAlerts.textContent    = negative.toString();
-  if (elRatio)     elRatio.textContent     = ratio;
-
-  // Update feed tab count
-  const feedTab = document.getElementById('feed-tab-all');
-  if (feedTab) feedTab.textContent = `All (${total})`;
-
-  // Update last updated
-  if (data.last_updated) {
-    const d = new Date(data.last_updated);
-    const ts = d.toLocaleString('en-NG', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'});
-    const crawlEl = document.querySelector('.sb-crawl');
-    if (crawlEl) crawlEl.textContent = 'Last updated · ' + ts;
-  }
-
-  // Update live feed with real articles
-  const feedAll = document.getElementById('feed-all');
-  if (feedAll && articles.length > 0) {
-    feedAll.innerHTML = articles.map(r => {
-      const sentClass = r.sentiment === 'positive' ? 'cpos' :
-                        r.sentiment === 'negative' ? 'cneg' :
-                        r.sentiment === 'mixed'    ? 'cskp' : 'cneu';
-      const srcAbbr = (r.source || 'SRC').substring(0,3).toUpperCase();
-      const dateStr = r.published
-        ? new Date(r.published).toLocaleDateString('en-GB', {day:'numeric', month:'short'})
-        : '';
-      return `<div class="fi">
-        <div class="fsrc" style="background:var(--off2);color:var(--t2)">${srcAbbr}</div>
-        <div class="fbdy">
-          <div class="ftit"><a href="${r.url}" target="_blank" rel="noopener" style="color:var(--t);text-decoration:none">${r.title}</a></div>
-          <div class="fmeta">
-            <span>${r.source || ''} · ${dateStr}</span>
-            ${r.program ? `<span class="fprog">${r.program}</span>` : ''}
-            <span class="chip ${sentClass}">${r.sentiment}</span>
-            ${r.key_theme ? `<span class="chip cneu" style="font-size:9px">${r.key_theme}</span>` : ''}
-          </div>
-          ${r.summary ? `<div style="font-size:11px;color:var(--t3);margin-top:3px;line-height:1.4">${r.summary}</div>` : ''}
-        </div>
-      </div>`;
-    }).join('');
-  }
-
-  // Update program health cards with real data
-  const ps = data.program_summary || {};
-  document.querySelectorAll('.pcn, .hcard-name').forEach(el => {
-    const cardName = el.textContent.trim().toLowerCase();
-    const match = Object.entries(ps).find(([k]) => {
-      const kl = k.toLowerCase();
-      return kl.includes(cardName.substring(0,6)) || cardName.includes(kl.substring(0,6));
-    });
-    if (match) {
-      const [, pd] = match;
-      const pcs = el.parentElement?.querySelector('.pcs, .hcard-sub');
-      const pct = pd.count > 0 ? Math.round(((pd.positive||0)/pd.count)*100) : 0;
-      if (pcs) pcs.innerHTML = `<b>${pct}% pos</b> · ${pd.count} mentions`;
-    }
-  });
+function closeBriefingModal(){
+  document.getElementById('briefing-modal').style.display='none';
 }
+function loadBrief(type){
+  var el=document.getElementById('briefing-output');
+  el.innerHTML='<em style="color:#888">Generating brief...</em>';
+  document.querySelectorAll('#briefing-modal .apb').forEach(function(b){b.disabled=true;});
 
-// Check crawler health
-async function checkApiHealth() {
-  try {
-    const resp = await fetch(GITHUB_JSON + "?t=" + Date.now());
-    const dot  = document.querySelector('.sb-fd');
-    if (dot) dot.style.background = resp.ok ? 'var(--grn)' : 'var(--amb)';
-  } catch(e) {
-    const dot = document.querySelector('.sb-fd');
-    if (dot) dot.style.background = 'var(--amb)';
-  }
-}
+  var briefs={
+    weekly:[
+      "IMPACT PULSE — Weekly Intelligence Brief",
+      "Mastercard Foundation Nigeria | Week of 21 June 2026",
+      "Prepared by IMC IMPACT — Imaginarium Marketing Communications",
+      "",
+      "COVERAGE SUMMARY",
+      "Total verified mentions: 17 | Positive: 16 (94%) | Priority Alert: 1",
+      "",
+      "TOP STORY — Fashion Future Program, Aba",
+      "5 Tier 1 mentions across Guardian, Punch, Pulse NG, Leadership & Bella Naija.",
+      "10,000+ jobs narrative gaining national traction.",
+      "Amplify across Foundation communications channels immediately.",
+      "",
+      "PRIORITY ALERT — Project Juriya",
+      "The Nation (29 May) names Foundation as funder of Project Juriya in Kaduna.",
+      "Community accountability questions raised around SCL implementation.",
+      "Internal review required before any external response.",
+      "",
+      "EMERGING OPPORTUNITIES",
+      "- Youth skills gap debate (EU/UNDP + TheCable) — positions Young Africa Works as solution",
+      "- Jobberman 1.1M placement milestone — strong anchor stat for donor reporting",
+      "- BusinessDay alignment — 4 mentions reflect strong investor audience resonance",
+      "",
+      "RECOMMENDED ACTIONS THIS WEEK",
+      "1. Amplify Fashion Future Program coverage on Foundation social channels",
+      "2. Brief program team on Project Juriya — verify SCL status immediately",
+      "3. Commission response piece on AI + youth employability narrative",
+      "4. Prepare Jobberman impact summary for Q2 donor report"
+    ].join("\n"),
+    may:[
+      "IMPACT PULSE — May 2026 Intelligence Summary",
+      "Mastercard Foundation Nigeria",
+      "Prepared by IMC IMPACT — Imaginarium Marketing Communications",
+      "",
+      "AT A GLANCE",
+      "- 17 total verified media mentions",
+      "- 5 programs featured in substantive national coverage",
+      "- 7 Tier 1 outlets: BusinessDay, Guardian, Punch, ThisDay, Bella Naija, Leadership, Pulse NG",
+      "- 16:1 positive to negative ratio",
+      "- 94% positive sentiment rate",
+      "",
+      "KEY NARRATIVES",
+      "",
+      "1. FASHION FUTURE PROGRAM — Story of the Month",
+      "5 Tier 1 mentions | Aba pilot closure | 10,379 people reached | 10,000+ jobs | 4,000+ MSMEs",
+      "Narrative: Strong earned media from tangible impact milestones. Program becoming flagship model for Nigeria creative economy.",
+      "",
+      "2. JOBBERMAN / YOUNG AFRICA WORKS",
+      "4 mentions | Partners Convening | 1.1M placements in 6 years",
+      "Narrative: Foundation flagship employability program showing measurable scale.",
+      "",
+      "3. SCHOLARS PROGRAM",
+      "2 mentions | PAU scholarship awareness | 2026 application cycle",
+      "",
+      "4. SONGHAI CENTER",
+      "1 mention | Federal Ministry of Information | AIRBDA trainee intake",
+      "Government endorsement — strong credibility signal.",
+      "",
+      "PRIORITY ALERT — Project Juriya",
+      "The Nation (29 May) names Foundation as funder of allegedly abandoned farms in Southern Kaduna.",
+      "Internal verification required before any public response.",
+      "",
+      "ECOSYSTEM NARRATIVES TO WATCH",
+      "- EU + UNDP Nigeria Youth Skills Gap — positioning opportunity for Young Africa Works",
+      "- AI & Nigerian Youth inequality debate — proactive Foundation response needed",
+      "- FG + UK TVET Partnership — policy backdrop strengthens workforce programming",
+      "",
+      "STRATEGIC RECOMMENDATIONS",
+      "1. Leverage Fashion Future momentum for Q3 visibility strategy",
+      "2. Prepare factual briefing note on Project Juriya within 48 hours",
+      "3. Commission Jobberman impact feature for business press"
+    ].join("\n"),
+    leadership:[
+      "IMPACT PULSE — Leadership Intelligence Brief",
+      "For: Senior Leadership, IMC IMPACT",
+      "Mastercard Foundation Nigeria | June 2026",
+      "",
+      "EXECUTIVE SUMMARY",
+      "May 2026 delivered strong earned media for Mastercard Foundation Nigeria.",
+      "Fashion Future Program pilot closure in Aba: standout story with 5 Tier 1 mentions.",
+      "",
+      "KEY METRICS FOR LEADERSHIP",
+      "- 17 verified mentions — consistent with monthly baseline",
+      "- 94% positive sentiment — above development sector average of 78%",
+      "- BusinessDay: 4 pieces — strong alignment with investor and policymaker audience",
+      "- 1 priority alert — Project Juriya requires board-level awareness",
+      "",
+      "WHAT LEADERSHIP NEEDS TO KNOW",
+      "- Fashion Future Program in Aba: best earned media of the portfolio this year",
+      "- Jobberman: 1.1 million Nigerians placed in 6 years — landmark stat for Q2 donor report",
+      "- Project Juriya Nation piece: do not respond publicly until facts confirmed with SCL",
+      "",
+      "RECOMMENDATIONS FOR LEADERSHIP ACTION",
+      "1. Approve amplification strategy for Fashion Future Program national coverage",
+      "2. Commission factual review of Project Juriya SCL implementation — within 48 hours",
+      "3. Consider proactive media engagement on AI + youth skills narrative before Q3",
+      "4. Review Q2 Impact Report timing to capitalise on current positive momentum",
+      "",
+      "IMC IMPACT will prepare a full Q2 Intelligence Deck for leadership review by 30 June 2026."
+    ].join("\n")
+  };
 
-// initCharts is called after login via iwSelectClient()
-
-// AI ENGINE
-let aiRunning=false;
-const SYS=`You are the IMPACT PULSE AI analyst for Mastercard Foundation Nigeria programs. You cover all 15 active programs: Young Africa Works (Jobberman), Babban Gona CAFI & WEDI, TAFTA, WOFAN ICON 2, IITA I-Youth, Scholars Program, Project Juriya, Ethnocentrique Fashion Future, EDC, FCMB Easylift, Songhai Center, Christian Aid SEPTP, WISE Program, TracTrac/ISSAM, Young Africa YEB. You understand Nigerian media, Nigerian Pidgin, Hausa-language media, Yoruba-language media, and grassroots digital communities. Report recipients: Mastercard Foundation senior leadership, Imaginarium Marketing Communications (IMC IMPACT). Be direct, Nigeria-specific, actionable.`;
-
-async function ai(prompt,targetId){
-  if(aiRunning)return;
-  aiRunning=true;
-  const el=document.getElementById(targetId);
-  if(!el){aiRunning=false;return;}
-  el.innerHTML='<span style="color:var(--t3);font-style:italic">Generating intelligence brief…</span>';
-  document.querySelectorAll('.apb').forEach(b=>b.disabled=true);
-
-  const p = prompt.toLowerCase();
-
-  const WEEKLY = `IMPACT PULSE — Weekly Intelligence Brief
-Mastercard Foundation Nigeria | Week of 21 June 2026
-Prepared by IMC IMPACT — Imaginarium Marketing Communications
-
-COVERAGE SUMMARY
-Total verified mentions this period: 17 | Positive: 16 (94%) | Priority Alert: 1
-
-TOP STORY — Fashion Future Program, Aba
-5 Tier 1 mentions across Guardian, Punch, Pulse NG, Leadership & Bella Naija. The 10,000+ jobs narrative is gaining national traction and should be amplified across Foundation communications channels immediately.
-
-PRIORITY ALERT — Project Juriya
-Opinion piece in The Nation (29 May) names Mastercard Foundation as funder of Project Juriya in Southern Kaduna. Community accountability questions raised around SCL implementation. Internal review recommended before any external response.
-
-EMERGING OPPORTUNITIES
-• Youth skills gap debate (EU/UNDP + TheCable) — positions Young Africa Works as solution
-• Jobberman 1.1M placement milestone — strong anchor stat for donor reporting
-• BusinessDay alignment — 4 mentions reflect strong business/investor audience resonance
-
-RECOMMENDED ACTIONS THIS WEEK
-1. Amplify Fashion Future Program coverage on Foundation social channels
-2. Brief program team on Project Juriya Nation article — verify SCL status
-3. Commission response piece on AI + youth employability narrative
-4. Prepare Jobberman impact summary for Q2 donor report`;
-
-  const MAY = `IMPACT PULSE — May 2026 Intelligence Summary
-Mastercard Foundation Nigeria
-Prepared by IMC IMPACT — Imaginarium Marketing Communications
-
-AT A GLANCE
-• 17 total verified media mentions across national and digital outlets
-• 5 programs featured in substantive coverage
-• 7 Tier 1 outlets: BusinessDay, Guardian, Punch, ThisDay, Bella Naija, Leadership, Pulse NG
-• 16:1 positive to negative ratio
-• 94% positive sentiment rate
-
-KEY NARRATIVES THIS MONTH
-
-1. FASHION FUTURE PROGRAM — Story of the Month
-5 Tier 1 mentions · Aba pilot closure · 10,379 people reached · 10,000+ jobs · 4,000+ MSMEs supported
-Narrative: Strong earned media driven by tangible impact milestones. Program becoming a flagship model for creative economy development in Nigeria.
-
-2. JOBBERMAN / YOUNG AFRICA WORKS
-4 mentions · Partners Convening coverage · 1.1M placements in 6 years
-Narrative: Foundation's flagship employability program showing measurable scale. BusinessDay dominance reflects business community validation.
-
-3. SCHOLARS PROGRAM
-2 mentions · PAU scholarship awareness · 2026 application cycle coverage
-Narrative: Education investment narrative gaining traction in student-focused digital outlets.
-
-4. SONGHAI CENTER
-1 mention · Federal Ministry of Information · AIRBDA trainee intake
-Narrative: Government endorsement of Songhai program — strong credibility signal.
-
-PRIORITY ALERT
-The Nation opinion piece (29 May) names Mastercard Foundation as funder of abandoned Project Juriya farms in Southern Kaduna. Community accountability questions raised around SCL implementation. Recommend internal review and factual verification.
-
-ECOSYSTEM NARRATIVES TO WATCH
-• EU + UNDP Nigeria Youth Skills Gap — creates positioning opportunity for Young Africa Works
-• AI & Nigerian Youth inequality debate — TheCable analysis requires proactive Foundation response
-• FG + UK TVET Partnership — policy backdrop strengthens Foundation's workforce programming
-
-STRATEGIC RECOMMENDATIONS
-• Leverage Fashion Future Program momentum for Q3 visibility strategy
-• Prepare factual briefing note on Project Juriya for leadership
-• Commission Jobberman impact feature for business press before Q2 donor report`;
-
-  const LEADERSHIP = `IMPACT PULSE — Leadership Intelligence Brief
-For: Senior Leadership, IMC IMPACT
-Mastercard Foundation Nigeria Portfolio | June 2026
-
-EXECUTIVE SUMMARY
-May 2026 delivered strong earned media performance for Mastercard Foundation Nigeria. The Fashion Future Program pilot closure in Aba emerged as the standout story, generating 5 Tier 1 mentions and establishing the 10,000+ jobs narrative as a flagship impact credential.
-
-KEY METRICS FOR LEADERSHIP ATTENTION
-• 17 verified mentions — consistent with monthly baseline
-• 94% positive sentiment — above development sector average of 78%
-• BusinessDay contributed 4 pieces — strong alignment with investor and policymaker audience
-• 1 priority alert — Project Juriya requires board-level awareness
-
-WHAT LEADERSHIP NEEDS TO KNOW
-• Fashion Future Program in Aba is generating the best earned media of the portfolio this year
-• Jobberman has now placed 1.1 million Nigerians in employment over 6 years — landmark stat
-• The Nation opinion piece on Project Juriya requires internal verification — do not respond publicly until facts are confirmed with SCL and program team
-
-RECOMMENDATIONS FOR LEADERSHIP ACTION
-1. Approve amplification strategy for Fashion Future Program national coverage
-2. Commission factual review of Project Juriya implementation status (SCL) — within 48 hours
-3. Consider proactive media engagement on AI + youth skills narrative
-4. Review Q2 Impact Report timing to capitalise on current positive momentum
-
-IMC IMPACT will prepare a full Q2 Intelligence Deck for leadership review by 30 June 2026.`;
-
-  let responseText = MAY;
-  if(p.includes('weekly')) responseText = WEEKLY;
-  if(p.includes('leadership')) responseText = LEADERSHIP;
-  if(p.includes('may') || p.includes('intelligence summary')) responseText = MAY;
-
-  setTimeout(()=>{
+  var responseText = briefs[type] || briefs['may'];
+  setTimeout(function(){
     el.innerHTML='';
-    let i=0;
-    const cur=document.createElement('span');cur.className='cur';el.appendChild(cur);
-    const iv=setInterval(()=>{
+    var i=0;
+    var cur=document.createElement('span');
+    el.appendChild(cur);
+    var iv=setInterval(function(){
       if(i<responseText.length){
         el.insertBefore(document.createTextNode(responseText[i++]),cur);
       } else {
-        clearInterval(iv);cur.remove();
-        aiRunning=false;
-        document.querySelectorAll('.apb').forEach(b=>b.disabled=false);
+        clearInterval(iv);
+        cur.remove();
+        document.querySelectorAll('#briefing-modal .apb').forEach(function(b){b.disabled=false;});
       }
-    },5);
-  },600);
-}
-
-async function alertAI(prompt,outputId){
-  const el=document.getElementById(outputId);
-  if(!el)return;
-  el.style.display='block';
-  el.innerHTML='<span style="color:var(--t3);font-style:italic">Generating strategic advisory…</span>';
-  
-  const p = prompt.toLowerCase();
-  let txt = '';
-  
-  if(p.includes('juriya') || p.includes('scl') || p.includes('demo farm') || p.includes('abandoned') || p.includes('strategic communications advisory')) {
-    txt = `STRATEGIC COMMUNICATIONS ADVISORY
-Project Juriya — Accountability Narrative
-IMC IMPACT Intelligence Unit
-
-SITUATION
-The Nation opinion piece (29 May 2026) names Mastercard Foundation as funder of Project Juriya implemented through SCL in Southern Kaduna. Demo farms in Anchuna, Kamuru, Ungwan Akau, Gumel and Assako described as abandoned.
-
-RECOMMENDED APPROACH
-1. VERIFY FIRST — Confirm SCL implementation status with program team before external communication
-2. INTERNAL BRIEF — Prepare factual summary for Foundation leadership within 48 hours
-3. HOLD EXTERNAL RESPONSE — Article removed from The Nation's main page. Monitor for re-amplification
-
-KEY MESSAGES (if response required)
-• Mastercard Foundation is committed to accountability and community impact
-• We are reviewing the concerns and engaging with implementation partners
-• Foundation's investment reflects our commitment to northern Nigerian communities
-
-IMC IMPACT RECOMMENDATION
-Monitor for 72 hours. If re-amplified, activate rapid response protocol.`;
-  } else if(p.includes('fashion') || p.includes('amplif') || p.includes('tafta') || p.includes('aba') || p.includes('fashion_amplify')) {
-    txt = `AMPLIFICATION STRATEGY
-Fashion Future Program — Coverage Surge
-IMC IMPACT Intelligence Unit
-
-OPPORTUNITY
-5 Tier 1 outlets covered the Fashion Future Program pilot closure in Aba. 10,000+ jobs narrative gaining national traction.
-
-SOCIAL MEDIA POSTS
-
-[TWITTER — Nigerian English]
-"The @MastercardFdn Fashion Future Program has created 10,000+ jobs and supported 4,000+ MSMEs in Aba! The pilot closes with 10,379 people reached — proof that investing in Nigeria's creative economy works. #FashionFuture #YouthEmpowerment"
-
-[PIDGIN — Youth Audience]
-"Aba don dey shine! Fashion Future Program wey @MastercardFdn support don create 10,000+ jobs for our people. E no be joke — e be real! Make we celebrate our own. #FashionFuture #AbaRising"
-
-[LINKEDIN — Business Leaders]
-"Mastercard Foundation's Fashion Future Program has concluded its pilot in Aba with 10,379 people reached, 10,000+ jobs created, and 4,000+ MSMEs supported. This is what strategic investment in Nigeria's creative economy looks like."`;
-  } else if(p.includes('youth_skills') || p.includes('ai_youth') || p.includes('thecable') || p.includes('eu') || p.includes('undp')) {
-    txt = `STRATEGIC ADVISORY
-Youth & AI Narrative — Positioning Strategy
-IMC IMPACT Intelligence Unit
-
-SITUATION
-TheCable and EU/UNDP raising debate on AI inequality and youth skills gap in Nigeria. Narrative overlaps directly with Foundation programming.
-
-POSITIONING OPPORTUNITY
-Mastercard Foundation's Young Africa Works, Jobberman and EDC programs are directly relevant. Position Foundation as proactive bridge between AI opportunity and youth access.
-
-KEY MESSAGES
-• Foundation believes AI should be a tool of inclusion, not exclusion
-• Young Africa Works and Jobberman actively integrating digital skills training
-• 12-state employability program ensures AI skills reach youth beyond Lagos
-
-RECOMMENDED ACTIONS
-1. Commission op-ed by Foundation representative on AI + youth inclusion
-2. Brief Jobberman on positioning within AI readiness narrative
-3. Monitor TheCable for follow-up — engage journalist proactively`;
-  } else {
-    txt = `INTELLIGENCE ADVISORY
-Mastercard Foundation Nigeria
-IMC IMPACT
-
-Strategic advisory based on May 2026 media monitoring data.
-
-KEY FINDINGS
-• 17 verified mentions across 7 Tier 1 outlets
-• Fashion Future Program is standout story of the month
-• Project Juriya requires monitoring and internal review
-• Youth employability narrative creating positive ecosystem momentum
-
-Contact IMC IMPACT for full strategic advisory and crisis communications support.`;
-  }
-  
-  el.innerHTML='';
-  let i=0;
-  const cur=document.createElement('span');cur.className='cur';el.appendChild(cur);
-  const iv=setInterval(()=>{
-    if(i<txt.length){el.insertBefore(document.createTextNode(txt[i++]),cur);}
-    else{clearInterval(iv);cur.remove();}
-  },6);
-}
-
-// CHARTS
-function initCharts(){
-  // Destroy any existing charts to prevent "can't acquire context" error
-  // Safely destroy all existing chart instances before re-initialising
-  if (typeof Chart !== 'undefined') {
-    const existingCharts = Object.values(Chart.instances || {});
-    existingCharts.forEach(ch => { try { ch.destroy(); } catch(e){} });
-  }
-  Chart.defaults.font.family="'Inter',sans-serif";
-  Chart.defaults.font.size=11;
-  Chart.defaults.color='#6b7280';
-  Chart.defaults.borderColor='#e5e7eb';
-  const d10=Array.from({length:10},(_,i)=>{const d=new Date();d.setDate(d.getDate()-27+i*3);return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});});
-
-  new Chart(document.getElementById('cVol'),{type:'line',data:{labels:d10,datasets:[{data:[142,210,340,398,480,542,530,500,548,610],borderColor:'#cf2e2e',backgroundColor:'rgba(207,46,46,.07)',fill:true,tension:.4,pointRadius:2,borderWidth:1.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}});
-
-  new Chart(document.getElementById('cSent'),{type:'doughnut',data:{labels:['Supportive','Neutral','Critical','Skeptical','Advocacy','Negative'],datasets:[{data:[42,20,16,10,8,4],backgroundColor:['#16a34a','#9ca3af','#d97706','#7c3aed','#0d9488','#dc2626'],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'right',labels:{boxWidth:8,padding:8}}}}});
-
-  new Chart(document.getElementById('cProg'),{type:'bar',data:{labels:['YAW','Babban Gona','TAFTA','Jobberman','WOFAN','IITA','Scholars','Juriya','EDC','FCMB'],datasets:[{data:[1840,892,641,580,412,318,290,184,148,124],backgroundColor:['#cf2e2e','#e8a020','#16a34a','#2563eb','#7c3aed','#0d9488','#cf2e2e','#e8a020','#16a34a','#2563eb'],borderRadius:4,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'}}}}});
-
-  new Chart(document.getElementById('cSentD'),{type:'bar',data:{labels:['Supportive','Neutral','Critical','Skeptical','Advocacy','Negative'],datasets:[{data:[2640,1258,1005,628,502,251],backgroundColor:['#16a34a','#9ca3af','#d97706','#7c3aed','#0d9488','#dc2626'],borderRadius:4,borderWidth:0}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,.04)'}},y:{grid:{display:false}}}}});
-
-  new Chart(document.getElementById('cChanS'),{type:'bar',data:{labels:['News','Twitter','YouTube','LinkedIn','TikTok','Facebook','Radio','Blogs'],datasets:[{label:'Positive',data:[68,52,74,82,64,60,70,72],backgroundColor:'rgba(22,163,74,.7)',borderRadius:3},{label:'Negative',data:[14,32,10,8,28,24,14,16],backgroundColor:'rgba(220,38,38,.5)',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:7,padding:7}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,max:100,ticks:{callback:v=>v+'%'},grid:{color:'rgba(0,0,0,.04)'}}}}});
-
-  new Chart(document.getElementById('cSentT'),{type:'line',data:{labels:d10,datasets:[{label:'Positive',data:[72,74,70,76,73,71,75,77,72,71],borderColor:'#16a34a',fill:false,tension:.3,borderWidth:1.5,pointRadius:2},{label:'Neg/Crit',data:[14,13,16,12,14,16,13,18,22,25],borderColor:'#dc2626',fill:false,tension:.3,borderWidth:1.5,pointRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:7,padding:7}}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'},grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}});
-
-  new Chart(document.getElementById('cLang'),{type:'doughnut',data:{labels:['Nigerian English','Pidgin','Hausa','Yoruba','Other'],datasets:[{data:[44,28,18,8,2],backgroundColor:['#cf2e2e','#e8a020','#16a34a','#2563eb','#9ca3af'],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'right',labels:{boxWidth:8,padding:8}}}}});
-
-  new Chart(document.getElementById('cVoice'),{type:'doughnut',data:{labels:['Participant','Media','Government','Influencer','Partner'],datasets:[{data:[28,34,14,12,12],backgroundColor:['#16a34a','#cf2e2e','#2563eb','#7c3aed','#0d9488'],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'right',labels:{boxWidth:8,padding:8}}}}});
-
-  new Chart(document.getElementById('cCmp'),{type:'bar',data:{labels:d10,datasets:[{label:'This period',data:[480,542,530,500,548,540,520,560,580,610],backgroundColor:'rgba(207,46,46,.7)',borderRadius:4},{label:'Previous',data:[360,398,410,390,430,420,400,440,460,490],backgroundColor:'rgba(207,46,46,.2)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:7,padding:7}}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'}}}}});
-
-  new Chart(document.getElementById('cReach'),{type:'bar',data:{labels:['Apr','May','Jun','Jul','Aug','Sep'],datasets:[{label:'Reach (M)',data:[6.2,8.8,11.4,14.0,16.2,18.7],backgroundColor:'rgba(207,46,46,.6)',borderRadius:4,yAxisID:'y'},{label:'Value (₦M)',data:[88,140,188,232,272,312],borderColor:'#e8a020',fill:false,type:'line',tension:.3,borderWidth:1.5,pointRadius:2,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:7,padding:7}}},scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(0,0,0,.04)'},position:'left'},y1:{grid:{display:false},position:'right'}}}});
-
-  new Chart(document.getElementById('cState'),{type:'bar',data:{labels:['Lagos','Kano','Abuja','Kaduna','Adamawa','Nasarawa','Oyo','Edo','Abia','Bauchi'],datasets:[{data:[1240,820,690,580,480,410,380,320,280,260],backgroundColor:(ctx)=>[1,3,4].includes(ctx.dataIndex)?'rgba(217,119,6,.7)':'rgba(207,46,46,.6)',borderRadius:4,borderWidth:0}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'}},y:{grid:{display:false}}}}});
-
-  new Chart(document.getElementById('cZone'),{type:'bar',data:{labels:['SW','SE','SS','NC','NW','NE'],datasets:[{label:'Positive',data:[78,74,70,64,58,62],backgroundColor:'rgba(22,163,74,.7)',borderRadius:3},{label:'Negative',data:[12,14,18,24,34,28],backgroundColor:'rgba(220,38,38,.5)',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:7,padding:7}}},scales:{x:{grid:{display:false}},y:{max:100,ticks:{callback:v=>v+'%'},grid:{color:'rgba(0,0,0,.04)'}}}}});
-
-  // Auto-load dashboard AI
-  setTimeout(()=>ai('In 2-3 sentences give the current media health status of Mastercard Foundation Nigeria programs. Name the biggest win and most urgent risk right now, with specific program names and states.','ai-dash'),800);
+    },4);
+  },300);
 }
 </script>
 </body>
