@@ -1293,228 +1293,76 @@ document.addEventListener('keypress', function(e) { if (e.key === 'Enter') { if 
 // Keep app hidden until login
 document.getElementById('app').style.display = 'none';
 
-// ── EXPORT REPORT (IMC IMPACT format) ──
 function exportReport(){
-  const month = document.getElementById('rpt-month') ? document.getElementById('rpt-month').value : 'Current period';
-  const client = currentClient ? currentClient.name : 'Mastercard Foundation Nigeria';
-  const w = window.open('','_blank');
-  w.document.write(`<!DOCTYPE html><html><head><title>Media Monitoring Report — ${client} — ${month}</title>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Arial,sans-serif;color:#1C2B3A;background:#FAF8F4;padding:0}
-    .cover{background:#0D1B2A;color:white;padding:48px 40px;min-height:180px;position:relative}
-    .cover-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px}
-    .cover-title{font-size:38px;font-weight:300;line-height:1.2;margin-bottom:12px}
-    .cover-sub{font-size:14px;color:rgba(255,255,255,.6)}
-    .cover-logo{position:absolute;top:40px;right:40px;font-size:13px;font-weight:600;color:#C9A84C;letter-spacing:.04em}
-    .section{padding:28px 40px;border-bottom:1px solid #E2D9C9;background:white}
-    .section-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px}
-    .kpi-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
-    .kpi{background:#f0f0f0;border-radius:8px;padding:14px 18px;flex:1;min-width:120px;text-align:center}
-    .kpi-val{font-size:28px;font-weight:300;color:#0D1B2A}
-    .kpi-lbl{font-size:10px;color:#6B7280;margin-top:4px}
-    .outlet-row{display:flex;gap:8px;flex-wrap:wrap}
-    .outlet{background:#f7f8fa;border-radius:6px;padding:8px 13px;text-align:center;min-width:80px}
-    .outlet-name{font-size:11px;color:#4b5563}
-    .outlet-num{font-size:20px;font-weight:500;color:#C9A84C}
-    .ed-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-    .ed-card{background:#f7f8fa;border-radius:8px;padding:14px;border-top:3px solid #C9A84C}
-    .ed-title{font-size:13px;font-weight:600;color:#C9A84C;margin-bottom:8px}
-    .ed-body{font-size:12px;color:#4B5563;line-height:1.65}
-    .prog-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
-    .prog-card{border:1px solid #E2D9C9;border-radius:8px;padding:13px;border-top:3px solid #0D1B2A}
-    .prog-num{font-size:26px;font-weight:300;color:#0D1B2A}
-    .prog-name{font-size:13px;font-weight:600;margin-bottom:4px}
-    .prog-outlets{font-size:11px;color:#6B7280;margin-bottom:4px}
-    .prog-stats{font-size:11px;color:#4B5563;margin-bottom:6px}
-    .prog-link{font-size:10px;color:#2563eb;text-decoration:none;word-break:break-all}
-    .alert-box{background:#FEF9EC;border:1px solid #C9A84C;border-radius:8px;padding:14px;margin-bottom:12px}
-    .alert-title{font-size:13px;font-weight:600;color:#C9A84C;margin-bottom:4px}
-    .alert-note{font-size:11px;color:#6B7280;font-style:italic;margin-bottom:10px}
-    .alert-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .alert-card{background:white;border-radius:7px;padding:12px;border-left:3px solid #C9A84C}
-    .alert-card-title{font-size:12px;font-weight:600;color:#C9A84C;margin-bottom:6px}
-    .alert-card-body{font-size:12px;color:#4B5563;line-height:1.6}
-    .eco-item{padding:10px 13px;border-radius:7px;border:1px solid #E2D9C9;border-left:3px solid #C9A84C;margin-bottom:7px}
-    .eco-title{font-size:13px;font-weight:600;margin-bottom:3px}
-    .eco-body{font-size:12px;color:#6B7280;line-height:1.55}
-    .conc-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px}
-    .cs{text-align:center;padding:10px;border:1px solid #E2D9C9;border-radius:7px}
-    .cs-val{font-size:20px;font-weight:300;color:#0D1B2A}
-    .cs-lbl{font-size:10px;color:#6B7280;margin-top:3px}
-    .conc-narr{font-size:12px;color:#4B5563;font-style:italic;line-height:1.65;margin-bottom:14px;padding:11px 13px;background:#f7f8fa;border-radius:7px}
-    .conc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .conc-item{padding:10px 13px;border-radius:7px;border:1px solid #E2D9C9;border-left:3px solid #0D1B2A}
-    .conc-title{font-size:12px;font-weight:600;color:#0D1B2A;margin-bottom:3px}
-    .conc-body{font-size:12px;color:#6B7280}
-    .footer{background:#0D1B2A;color:rgba(255,255,255,.5);font-size:10px;padding:16px 40px;text-align:center;letter-spacing:.04em}
-    @media print{body{background:white}.cover{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-  </style></head><body>
+  var month = document.getElementById('rpt-month') ? document.getElementById('rpt-month').value : 'May 2026';
+  var client = currentClient ? currentClient.name : 'Mastercard Foundation Nigeria';
+  var w = window.open('','_blank');
+  if(!w){alert('Please allow popups for this site to download the report.');return;}
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Media Monitoring Report</title>';
+  html += '<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;color:#1C2B3A;background:#fff}';
+  html += '.cover{background:#0D1B2A;color:white;padding:48px 40px;position:relative}.cover-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px}.cover-title{font-size:38px;font-weight:300;line-height:1.2;margin-bottom:12px}.cover-sub{font-size:14px;color:rgba(255,255,255,.6)}.cover-logo{position:absolute;top:40px;right:40px;font-size:13px;font-weight:600;color:#C9A84C}';
+  html += '.section{padding:28px 40px;border-bottom:1px solid #E2D9C9;background:white}.section-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px}';
+  html += '.kpi-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}.kpi{background:#f0f0f0;border-radius:8px;padding:14px 18px;flex:1;min-width:120px;text-align:center}.kpi-val{font-size:28px;font-weight:300;color:#0D1B2A}.kpi-lbl{font-size:10px;color:#6B7280;margin-top:4px}';
+  html += '.ed-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.ed-card{background:#f7f8fa;border-radius:8px;padding:14px;border-top:3px solid #C9A84C}.ed-title{font-size:13px;font-weight:600;color:#C9A84C;margin-bottom:8px}.ed-body{font-size:12px;color:#4B5563;line-height:1.65}';
+  html += '.prog-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}.prog-card{border:1px solid #E2D9C9;border-radius:8px;padding:13px;border-top:3px solid #0D1B2A}.prog-num{font-size:26px;font-weight:300;color:#0D1B2A}.prog-name{font-size:13px;font-weight:600;margin-bottom:4px}';
+  html += '.alert-box{background:#FEF9EC;border:1px solid #C9A84C;border-radius:8px;padding:14px;margin-bottom:12px}.alert-title{font-size:13px;font-weight:600;color:#C9A84C;margin-bottom:4px}.alert-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.alert-card{background:white;border-radius:7px;padding:12px;border-left:3px solid #C9A84C}';
+  html += '.footer{background:#0D1B2A;color:rgba(255,255,255,.5);font-size:10px;padding:16px 40px;text-align:center}';
+  html += '@media print{body{background:white}.cover{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body>';
 
-  <div class="cover">
-    <div class="cover-logo">IMAGINARIUM IMPACT</div>
-    <div class="cover-label">Media Monitoring Report</div>
-    <div class="cover-title">${client}</div>
-    <div class="cover-sub">Reporting Period: ${month} &nbsp;·&nbsp; Prepared by IMC IMPACT &nbsp;·&nbsp; ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</div>
-  </div>
+  html += '<div class="cover"><div class="cover-logo">IMAGINARIUM IMPACT</div>';
+  html += '<div class="cover-label">Media Monitoring Report</div>';
+  html += '<div class="cover-title">' + client + '</div>';
+  html += '<div class="cover-sub">Reporting Period: ' + month + ' &nbsp;&middot;&nbsp; Prepared by IMC IMPACT &nbsp;&middot;&nbsp; ' + new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) + '</div></div>';
 
-  <div class="section">
-    <div class="section-title">At a Glance</div>
-    <div class="kpi-row">
-      <div class="kpi"><div class="kpi-val">17</div><div class="kpi-lbl">Total Media Mentions</div></div>
-      <div class="kpi"><div class="kpi-val">5</div><div class="kpi-lbl">Programs Featured</div></div>
-      <div class="kpi"><div class="kpi-val">7</div><div class="kpi-lbl">Tier 1 Outlets</div></div>
-      <div class="kpi"><div class="kpi-val">16:1</div><div class="kpi-lbl">Positive : Negative</div></div>
-    </div>
-    <div style="font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#6B7280;margin-bottom:8px">MENTIONS BY OUTLET</div>
-    <div class="outlet-row">
-      <div class="outlet"><div class="outlet-name">BusinessDay</div><div class="outlet-num">4</div></div>
-      <div class="outlet"><div class="outlet-name">The Guardian</div><div class="outlet-num">2</div></div>
-      <div class="outlet"><div class="outlet-name">Punch</div><div class="outlet-num">1</div></div>
-      <div class="outlet"><div class="outlet-name">ThisDay Live</div><div class="outlet-num">1</div></div>
-      <div class="outlet"><div class="outlet-name">Bella Naija</div><div class="outlet-num">1</div></div>
-      <div class="outlet"><div class="outlet-name">Leadership</div><div class="outlet-num">1</div></div>
-      <div class="outlet"><div class="outlet-name">Other</div><div class="outlet-num">5</div></div>
-    </div>
-    <div style="font-size:11px;color:#6B7280;font-style:italic;margin-top:10px">BusinessDay contributed 4 of 17 mentions. One negative opinion piece identified — see Priority Alert.</div>
-  </div>
+  html += '<div class="section"><div class="section-title">At a Glance</div>';
+  html += '<div class="kpi-row">';
+  html += '<div class="kpi"><div class="kpi-val">17</div><div class="kpi-lbl">Total Media Mentions</div></div>';
+  html += '<div class="kpi"><div class="kpi-val">5</div><div class="kpi-lbl">Programs Featured</div></div>';
+  html += '<div class="kpi"><div class="kpi-val">7</div><div class="kpi-lbl">Tier 1 Outlets</div></div>';
+  html += '<div class="kpi"><div class="kpi-val">16:1</div><div class="kpi-lbl">Positive : Negative</div></div>';
+  html += '</div>';
+  html += '<div style="font-size:11px;color:#6B7280;font-style:italic;margin-top:10px">BusinessDay contributed 4 of 17 mentions. One negative opinion piece identified — see Priority Alert.</div></div>';
 
-  <div class="section">
-    <div class="section-title">Editorial Summary</div>
-    <div class="ed-grid">
-      <div class="ed-card"><div class="ed-title">↗ A Strong Month</div><div class="ed-body">May 2026 was driven by two major program milestones — the Fashion Future Program pilot conclusion in Aba and the inaugural Jobberman Partners Convening in Lagos — both generating sustained multi-outlet coverage.</div></div>
-      <div class="ed-card" style="border-top-color:#16a34a"><div class="ed-title" style="color:#16a34a">☺ 100% Positive Tone</div><div class="ed-body">16 of 17 mentions were positive. One negative opinion piece in The Nation (29 May) directly names Mastercard Foundation as partner of Project Juriya in Southern Kaduna, with accountability questions raised.</div></div>
-      <div class="ed-card" style="border-top-color:#2563eb"><div class="ed-title" style="color:#2563eb">▦ BusinessDay Dominates</div><div class="ed-body">BusinessDay contributed 4 pieces across multiple program areas, reflecting strong alignment between the Foundation's work and its readership of business leaders, investors, and policymakers.</div></div>
-    </div>
-  </div>
+  html += '<div class="section"><div class="section-title">Editorial Summary</div>';
+  html += '<div class="ed-grid">';
+  html += '<div class="ed-card"><div class="ed-title">A Strong Month</div><div class="ed-body">May 2026 was driven by two major program milestones — the Fashion Future Program pilot conclusion in Aba and the inaugural Jobberman Partners Convening in Lagos — both generating sustained multi-outlet coverage.</div></div>';
+  html += '<div class="ed-card" style="border-top-color:#16a34a"><div class="ed-title" style="color:#16a34a">94% Positive Tone</div><div class="ed-body">16 of 17 mentions were positive. One negative opinion piece in The Nation (29 May) directly names Mastercard Foundation as partner of Project Juriya in Southern Kaduna, with accountability questions raised.</div></div>';
+  html += '<div class="ed-card" style="border-top-color:#2563eb"><div class="ed-title" style="color:#2563eb">BusinessDay Dominates</div><div class="ed-body">BusinessDay contributed 4 pieces across multiple program areas, reflecting strong alignment between the Foundation's work and its readership of business leaders, investors, and policymakers.</div></div>';
+  html += '</div></div>';
 
-  <div class="section">
-    <div class="section-title">Coverage by Program</div>
-    <div class="prog-grid">
-      <div class="prog-card"><div class="prog-num">5</div><div style="font-size:10px;color:#6B7280;margin-bottom:6px">mentions</div><div class="prog-name">Fashion Future Program</div><div class="prog-outlets">Pulse NG · Guardian · Punch · Leadership · Bella Naija</div><div class="prog-stats">10k+ jobs · 4k+ MSMEs · 10k+ reached</div><a class="prog-link" href="https://guardian.ng/business-services/fashion-future-programme-creates-10000-jobs-in-aba/">↗ guardian.ng — Fashion Future jobs in Aba</a></div>
-      <div class="prog-card"><div class="prog-num">4</div><div style="font-size:10px;color:#6B7280;margin-bottom:6px">mentions</div><div class="prog-name">Jobberman / Young Africa Works</div><div class="prog-outlets">BusinessDay · Guardian · ThisDay</div><div class="prog-stats">1.1M jobs · Women & PWDs focused</div><a class="prog-link" href="https://businessday.ng/life/article/connecting-job-seekers-to-employers-vital-to-nigerias-labour-market-economic-development-jobberman/">↗ businessday.ng — Jobberman labour market</a></div>
-      <div class="prog-card"><div class="prog-num">2</div><div style="font-size:10px;color:#6B7280;margin-bottom:6px">mentions</div><div class="prog-name">Scholars Program</div><div class="prog-outlets">Nigeria Startup News · MySchoolGist</div><div class="prog-stats">Awareness + PAU 2026 applications</div><a class="prog-link" href="https://myschoolgist.com/scholarships/pau-mastercard-scholarship-186557/">↗ myschoolgist.com — PAU scholarship</a></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">
-      <div class="prog-card"><div class="prog-name">Songhai Agricultural</div><div style="font-size:16px;font-weight:300;color:#0D1B2A;margin:3px 0">1 mention</div><div class="prog-outlets">Ministry of Info · AIRBDA trainees</div></div>
-      <div class="prog-card"><div class="prog-name">Africa Growth Fund</div><div style="font-size:16px;font-weight:300;color:#0D1B2A;margin:3px 0">1 mention</div><div class="prog-outlets">BusinessDay · $200M Fund</div></div>
-      <div class="prog-card"><div class="prog-name">BTS Research</div><div style="font-size:16px;font-weight:300;color:#0D1B2A;margin:3px 0">1 mention</div><div class="prog-outlets">UNILAG · 7 countries creative sector</div></div>
-      <div class="prog-card"><div class="prog-name">Research Citation</div><div style="font-size:16px;font-weight:300;color:#0D1B2A;margin:3px 0">1 mention</div><div class="prog-outlets">Employment Outlook 2026</div></div>
-    </div>
-  </div>
+  html += '<div class="section"><div class="section-title">Coverage by Program</div>';
+  html += '<div class="prog-grid">';
+  html += '<div class="prog-card"><div class="prog-num">5</div><div class="prog-name">Fashion Future Program</div><div style="font-size:11px;color:#6B7280">Pulse NG, Guardian, Punch, Leadership, Bella Naija</div><div style="font-size:11px;color:#4B5563;margin-top:4px">10k+ jobs &middot; 4k+ MSMEs &middot; 10k+ reached</div></div>';
+  html += '<div class="prog-card"><div class="prog-num">4</div><div class="prog-name">Jobberman / Young Africa Works</div><div style="font-size:11px;color:#6B7280">BusinessDay, Guardian, ThisDay</div><div style="font-size:11px;color:#4B5563;margin-top:4px">1.1M jobs &middot; Women &amp; PWDs focused</div></div>';
+  html += '<div class="prog-card"><div class="prog-num">2</div><div class="prog-name">Scholars Program</div><div style="font-size:11px;color:#6B7280">Nigeria Startup News, MySchoolGist</div><div style="font-size:11px;color:#4B5563;margin-top:4px">PAU 2026 applications</div></div>';
+  html += '</div></div>';
 
-  <div class="section">
-    <div class="section-title">Story of the Month</div>
-    <div style="font-size:15px;font-weight:600;color:#0D1B2A;margin-bottom:12px">Fashion Future Program — Pilot Phase Closes in Aba</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px">
-      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:13px;text-align:center"><div style="font-size:24px;font-weight:500;color:#16a34a">10,379</div><div style="font-size:11px;color:#4B5563;margin-top:4px">People Reached</div></div>
-      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:13px;text-align:center"><div style="font-size:24px;font-weight:500;color:#16a34a">10,000+</div><div style="font-size:11px;color:#4B5563;margin-top:4px">Jobs Created</div></div>
-      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:13px;text-align:center"><div style="font-size:24px;font-weight:500;color:#16a34a">4,000+</div><div style="font-size:11px;color:#4B5563;margin-top:4px">MSMEs Supported</div></div>
-    </div>
-    <div style="font-size:10px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px">COVERAGE SUMMARY</div>
-    <div style="display:flex;gap:7px;flex-wrap:wrap">
-      <span style="background:#e8f4fd;color:#0D1B2A;padding:5px 12px;border-radius:6px;font-size:12px">Pulse NG</span>
-      <span style="background:#e8f4fd;color:#0D1B2A;padding:5px 12px;border-radius:6px;font-size:12px">The Guardian</span>
-      <span style="background:#e8f4fd;color:#0D1B2A;padding:5px 12px;border-radius:6px;font-size:12px">Punch Newspapers</span>
-      <span style="background:#e8f4fd;color:#0D1B2A;padding:5px 12px;border-radius:6px;font-size:12px">Leadership</span>
-      <span style="background:#e8f4fd;color:#0D1B2A;padding:5px 12px;border-radius:6px;font-size:12px">Bella Naija</span>
-    </div>
-  </div>
+  html += '<div class="section"><div class="section-title">Priority Alert — Negative Coverage</div>';
+  html += '<div class="alert-box"><div class="alert-title">"Demo Farms or Graveyards?" — The Nation | 29 May 2026</div>';
+  html += '<div class="alert-grid">';
+  html += '<div class="alert-card"><div style="font-size:12px;font-weight:600;color:#C9A84C;margin-bottom:6px">Direct Attribution</div><div style="font-size:12px;color:#4B5563;line-height:1.6">Mastercard Foundation named as funder of Project Juriya in Southern Kaduna. Demo farms described as abandoned across 5 communities.</div></div>';
+  html += '<div class="alert-card" style="border-left-color:#dc2626"><div style="font-size:12px;font-weight:600;color:#dc2626;margin-bottom:6px">Community Accountability Demand</div><div style="font-size:12px;color:#4B5563;line-height:1.6">Communities calling on Foundation to review SCL performance. Internal verification recommended before any public response.</div></div>';
+  html += '</div></div></div>';
 
-  <div class="section">
-    <div class="section-title">⚠ Priority Alert — Negative Coverage</div>
-    <div class="alert-box">
-      <div class="alert-title">"Demo Farms or Graveyards?" — The Nation | Opinion by Francis Damina | 29 May 2026</div>
-      <div class="alert-note">Note: Article removed from The Nation's main page. URL remains live and indexed: thenationonlineng.net/demo-farms-or-graveyards/</div>
-      <div class="alert-grid">
-        <div class="alert-card"><div class="alert-card-title">Direct Attribution</div><div class="alert-card-body">Mastercard Foundation is named as partner of Project Juriya, implemented through SCL, in Southern Kaduna. Demo farms across Anchuna, Kamuru, Ungwan Akau, Gumel, and Assako described as abandoned — rusted signboards, waist-high weeds, no meaningful agri outcomes.</div></div>
-        <div class="alert-card" style="border-left-color:#dc2626"><div class="alert-card-title" style="color:#dc2626">Community Accountability Demand</div><div class="alert-card-body">Communities are explicitly calling on the Foundation to review SCL's performance and support land reclamation if contractual terms have been breached. The article asks: did the Foundation cut funding, change the plan, or did SCL short-change communities?</div></div>
-      </div>
-    </div>
-  </div>
+  html += '<div class="section"><div class="section-title">Summary &amp; Conclusion</div>';
+  html += '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px">';
+  html += '<div style="text-align:center;padding:10px;border:1px solid #E2D9C9;border-radius:7px"><div style="font-size:20px;font-weight:300">17</div><div style="font-size:10px;color:#6B7280;margin-top:3px">Total Mentions</div></div>';
+  html += '<div style="text-align:center;padding:10px;border:1px solid #E2D9C9;border-radius:7px"><div style="font-size:20px;font-weight:300;color:#16a34a">16</div><div style="font-size:10px;color:#6B7280;margin-top:3px">Positive</div></div>';
+  html += '<div style="text-align:center;padding:10px;border:1px solid #E2D9C9;border-radius:7px"><div style="font-size:20px;font-weight:300;color:#dc2626">1</div><div style="font-size:10px;color:#6B7280;margin-top:3px">Priority Alert</div></div>';
+  html += '<div style="text-align:center;padding:10px;border:1px solid #E2D9C9;border-radius:7px"><div style="font-size:20px;font-weight:300;color:#2563eb">94%</div><div style="font-size:10px;color:#6B7280;margin-top:3px">Positive Rate</div></div>';
+  html += '<div style="text-align:center;padding:10px;border:1px solid #E2D9C9;border-radius:7px"><div style="font-size:14px;font-weight:500;margin-top:4px">BusinessDay</div><div style="font-size:10px;color:#6B7280;margin-top:3px">Top Outlet</div></div>';
+  html += '</div></div>';
 
-  <div class="section">
-    <div class="section-title">Ecosystem Context — Narratives to Watch</div>
-    <div class="eco-item"><div class="eco-title">EU + UNDP: Nigeria Youth Skills Gap</div><div class="eco-body">Multilateral momentum in the same space as Young Africa Works — useful ecosystem framing for Insight Briefs.</div></div>
-    <div class="eco-item" style="border-left-color:#2563eb"><div class="eco-title">FG + UK TVET & Apprenticeship Partnership</div><div class="eco-body">Government doubling down on technical skills. Strong policy backdrop for the Foundation's workforce programming.</div></div>
-    <div class="eco-item" style="border-left-color:#dc2626"><div class="eco-title">AI & Nigerian Youth — TheCable</div><div class="eco-body">Emerging debate on whether AI is opportunity or new inequality. Likely to intensify.</div></div>
-    <div class="eco-item" style="border-left-color:#6B7280"><div class="eco-title">Africa's Digital Economy at Risk — BusinessDay/Microsoft</div><div class="eco-body">Microsoft warns Africa's digital ambitions may fail without stronger public systems. Relevant to digital workforce work.</div></div>
-    <div class="eco-item" style="border-left-color:#16a34a"><div class="eco-title">IITA Partner Visibility — Punch + TheCable</div><div class="eco-body">Two positive IITA hits in one week: youth horticultural training in Oyo + farm inputs distribution. Strong partner momentum.</div></div>
-  </div>
+  html += '<div class="footer">IMPACT PULSE &middot; Media Intelligence Platform &middot; Imaginarium Marketing Communications (IMC IMPACT) &middot; Confidential</div>';
+  html += '<script>setTimeout(function(){window.print();},800);<\/script>';
+  html += '</body></html>';
 
-  <div class="section">
-    <div class="section-title">${month} — Summary & Conclusion</div>
-    <div style="font-size:10px;color:#6B7280;margin-bottom:14px">Executive overview of program impact and ecosystem narratives</div>
-    <div class="conc-stats">
-      <div class="cs"><div class="cs-val">17</div><div class="cs-lbl">Total Mentions</div></div>
-      <div class="cs"><div class="cs-val" style="color:#16a34a">16</div><div class="cs-lbl">Positive</div></div>
-      <div class="cs"><div class="cs-val" style="color:#dc2626">1</div><div class="cs-lbl">Priority Alert</div></div>
-      <div class="cs"><div class="cs-val" style="color:#2563eb">94%</div><div class="cs-lbl">Positive Rate</div></div>
-      <div class="cs"><div class="cs-val" style="font-size:14px;font-weight:500">BusinessDay</div><div class="cs-lbl">Top Outlet</div></div>
-    </div>
-    <div class="conc-narr">${month} was a strong month of earned media visibility for the Foundation — driven by two major program milestones, 17 total mentions across national and digital outlets, and one priority alert requiring immediate escalation.</div>
-    <div class="conc-grid">
-      <div class="conc-item" style="border-left-color:#16a34a"><div class="conc-title" style="color:#16a34a">1. Strong month for earned media</div><div class="conc-body">Genuine program impact across BusinessDay, The Guardian, Punch, and Bella Naija.</div></div>
-      <div class="conc-item" style="border-left-color:#16a34a"><div class="conc-title" style="color:#16a34a">2. FFP Aba is the standout story</div><div class="conc-body">10,000+ jobs created; 5 Tier 1 mentions. Anchoring national scale-up comms.</div></div>
-      <div class="conc-item" style="border-left-color:#2563eb"><div class="conc-title" style="color:#2563eb">3. Jobberman Convening delivered</div><div class="conc-body">1.1M placements in 6 years. Multi-outlet coverage provides powerful anchor stats.</div></div>
-      <div class="conc-item" style="border-left-color:#2563eb"><div class="conc-title" style="color:#2563eb">4. Africa Growth Fund</div><div class="conc-body">$200M fund coverage (Sabou Capital). Requires follow-up with team.</div></div>
-      <div class="conc-item" style="border-left-color:#dc2626"><div class="conc-title" style="color:#dc2626">5. Project Juriya — escalate now</div><div class="conc-body">Negative opinion piece in The Nation requires factual SCL verification.</div></div>
-      <div class="conc-item"><div class="conc-title">6. Two ecosystem narratives to watch</div><div class="conc-body">AI & youth employment and Ginger Blight crisis likely to intensify in media.</div></div>
-    </div>
-  </div>
-
-  <div class="footer">IMPACT PULSE · Media Intelligence Platform · Imaginarium Marketing Communications (IMC IMPACT) · Confidential</div>
-  <script>window.onload=function(){window.print()}<\/script>
-  
-<div id="briefing-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;">
-  <div style="background:var(--bg,#fff);border-radius:12px;width:90%;max-width:680px;max-height:85vh;overflow-y:auto;padding:28px 32px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,0.4)">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-      <div>
-        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#C9A84C;font-weight:600;margin-bottom:4px">IMPACT PULSE</div>
-        <div style="font-size:18px;font-weight:600">AI Intelligence Briefing</div>
-        <div style="font-size:12px;color:#888">Mastercard Foundation Nigeria · Prepared by IMC IMPACT</div>
-      </div>
-      <button onclick="closeBriefingModal()" style="background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1">x</button>
-    </div>
-    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
-      <button onclick="loadBrief('weekly')" style="padding:8px 16px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;font-size:12px;font-family:inherit">Weekly Summary</button>
-      <button onclick="loadBrief('may')" style="padding:8px 16px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;font-size:12px;font-family:inherit">May 2026 Report</button>
-      <button onclick="loadBrief('leadership')" style="padding:8px 16px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;font-size:12px;font-family:inherit">Leadership Brief</button>
-    </div>
-    <div id="briefing-output" style="font-size:13px;line-height:1.8;white-space:pre-wrap;min-height:200px;background:#f9f9f9;border-radius:8px;padding:16px;font-family:inherit;color:#111">
-      <em style="color:#888">Select a brief type above to generate your intelligence report...</em>
-    </div>
-  </div>
-</div>
-<script>
-function showBriefingModal(){document.getElementById('briefing-modal').style.display='flex';}
-function closeBriefingModal(){document.getElementById('briefing-modal').style.display='none';}
-document.getElementById('briefing-modal').addEventListener('click',function(e){if(e.target===this)closeBriefingModal();});
-function loadBrief(type){
-  var el=document.getElementById('briefing-output');
-  el.innerHTML='<em style="color:#888">Generating...</em>';
-  var WEEKLY="IMPACT PULSE — Weekly Intelligence Brief\nMastercard Foundation Nigeria | Week of 21 June 2026\nPrepared by IMC IMPACT\n\nCOVERAGE SUMMARY\nTotal verified mentions: 17 | Positive: 16 (94%) | Priority Alert: 1\n\nTOP STORY — Fashion Future Program, Aba\n5 Tier 1 mentions across Guardian, Punch, Pulse NG, Leadership & Bella Naija.\n10,000+ jobs narrative gaining national traction. Amplify across Foundation channels immediately.\n\nPRIORITY ALERT — Project Juriya\nThe Nation (29 May) names Foundation as funder of Project Juriya in Kaduna.\nInternal review required before any external response.\n\nEMERGING OPPORTUNITIES\n- Youth skills gap debate positions Young Africa Works as lead solution\n- Jobberman 1.1M milestone — strong anchor stat for donor reporting\n- BusinessDay alignment reflects strong investor audience resonance\n\nRECOMMENDED ACTIONS THIS WEEK\n1. Amplify Fashion Future Program on Foundation social channels\n2. Brief program team on Project Juriya — verify SCL status\n3. Commission response piece on AI + youth employability narrative\n4. Prepare Jobberman impact summary for Q2 donor report";
-  var MAY="IMPACT PULSE — May 2026 Intelligence Summary\nMastercard Foundation Nigeria\nPrepared by IMC IMPACT\n\nAT A GLANCE\n- 17 total verified media mentions\n- 5 programs featured in national coverage\n- 7 Tier 1 outlets: BusinessDay, Guardian, Punch, ThisDay, Bella Naija, Leadership, Pulse NG\n- 16:1 positive to negative ratio | 94% positive sentiment rate\n\nKEY NARRATIVES\n\n1. FASHION FUTURE PROGRAM — Story of the Month\n5 Tier 1 mentions | Aba pilot | 10,379 people reached | 10,000+ jobs | 4,000+ MSMEs\n\n2. JOBBERMAN / YOUNG AFRICA WORKS\n4 mentions | Partners Convening | 1.1M placements in 6 years\n\n3. SCHOLARS PROGRAM\n2 mentions | PAU scholarship | 2026 application cycle\n\n4. SONGHAI CENTER\n1 mention | Federal Ministry of Information | AIRBDA trainees\n\nPRIORITY ALERT — Project Juriya\nThe Nation (29 May) names Foundation as funder of allegedly abandoned farms in Southern Kaduna.\nInternal verification required before any public response.\n\nECOSYSTEM NARRATIVES TO WATCH\n- EU + UNDP Nigeria Youth Skills Gap — positioning opportunity for Young Africa Works\n- AI & Nigerian Youth inequality debate — proactive Foundation response needed\n- FG + UK TVET Partnership — policy backdrop strengthens workforce programming\n\nSTRATEGIC RECOMMENDATIONS\n1. Leverage Fashion Future momentum for Q3 visibility strategy\n2. Prepare Project Juriya briefing note within 48 hours\n3. Commission Jobberman impact feature for Q2 donor report";
-  var LEADERSHIP="IMPACT PULSE — Leadership Intelligence Brief\nFor: Senior Leadership, IMC IMPACT\nMastercard Foundation Nigeria | June 2026\n\nEXECUTIVE SUMMARY\nMay 2026 delivered strong earned media for Mastercard Foundation Nigeria.\nFashion Future Program pilot closure in Aba: standout story with 5 Tier 1 mentions.\n\nKEY METRICS FOR LEADERSHIP\n- 17 verified mentions — consistent with monthly baseline\n- 94% positive sentiment — above development sector average of 78%\n- BusinessDay: 4 pieces — investor and policymaker audience alignment\n- 1 priority alert — Project Juriya requires board-level awareness\n\nWHAT LEADERSHIP NEEDS TO KNOW\n- Fashion Future Program in Aba: best earned media of portfolio this year\n- Jobberman: 1.1M Nigerians placed in employment over 6 years — landmark stat\n- Project Juriya Nation piece: do not respond publicly until facts confirmed with SCL\n\nRECOMMENDATIONS FOR LEADERSHIP ACTION\n1. Approve amplification strategy for Fashion Future Program national coverage\n2. Commission factual review of Project Juriya SCL implementation within 48 hours\n3. Consider proactive media engagement on AI + youth skills narrative before Q3\n4. Review Q2 Impact Report timing to capitalise on current positive momentum\n\nIMC IMPACT will prepare full Q2 Intelligence Deck for leadership review by 30 June 2026.";
-  var briefs={weekly:WEEKLY,may:MAY,leadership:LEADERSHIP};
-  var responseText=briefs[type]||MAY;
-  setTimeout(function(){
-    el.innerHTML='';
-    var i=0;
-    var cur=document.createElement('span');
-    el.appendChild(cur);
-    var iv=setInterval(function(){
-      if(i<responseText.length){el.insertBefore(document.createTextNode(responseText[i++]),cur);}
-      else{clearInterval(iv);cur.remove();}
-    },4);
-  },300);
-}
-</script>
-</body></html>`);
+  w.document.write(html);
   w.document.close();
+  setTimeout(function(){ try{w.focus();}catch(e){} }, 500);
 }
 
-function exportCSV(){
+function exportCSV(){{
   const csv=`Program,Mentions,Positive%,Status,vs Last Week\nYoung Africa Works,1840,74%,Watch,+48%\nBabban Gona,892,81%,Healthy,+10%\nTAFTA,641,88%,Healthy,+129%\nJobberman,580,61%,At Risk,+49%\nWOFAN ICON 2,412,62%,Watch,-14%\nIITA I-Youth,318,77%,Healthy,+8%\nScholars Program,290,91%,Healthy,+5%\nProject Juriya,184,58%,At Risk,+100%`;
   const a=document.createElement('a');
   a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
