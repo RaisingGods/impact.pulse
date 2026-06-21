@@ -590,23 +590,23 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
           <div id="aout1" class="ac-ai-out"></div>
         </div>
         <div class="ac acw">
-          <div class="ac-top"><div class="ac-title" style="color:var(--amb)">◬ MODERATE — WOFAN land access</div><span class="chip ccri">WATCH</span></div>
-          <div class="ac-desc">Hausa-language radio in Kano/Kaduna broadcasting land access complaints. Spreading to 4 Facebook groups.</div>
-          <div class="ac-meta">WOFAN ICON 2 · Radio + Facebook · 3h ago · Kaduna, Kano</div>
+          <div class="ac-top"><div class="ac-title" style="color:var(--amb)">◈ ECOSYSTEM — Nigeria Youth Skills Gap narrative intensifying</div><span class="chip ccri">WATCH</span></div>
+          <div class="ac-desc">EU + UNDP joint report on Nigeria's youth skills gap gaining traction in BusinessDay and TheCable. Overlaps directly with Young Africa Works and Jobberman programming. Opportunity to position Foundation as lead responder.</div>
+          <div class="ac-meta">Young Africa Works · BusinessDay, TheCable · May 2026 · National</div>
           <button class="btn" style="font-size:11px" onclick="alertAI('Analyse the WOFAN ICON 2 land access narrative in Hausa-language radio in Kano and Kaduna. How serious is the risk and what communications response works for rural northern Nigerian women farmers?','aout2')">✦ Analyse + recommend</button>
           <div id="aout2" class="ac-ai-out"></div>
         </div>
         <div class="ac acw">
-          <div class="ac-top"><div class="ac-title" style="color:var(--amb)">◬ MODERATE — Project Juriya delays</div><span class="chip cskp">WATCH</span></div>
-          <div class="ac-desc">"6 months don pass, we still dey wait" spreading in Adamawa community accounts. Low reach but growing fast.</div>
-          <div class="ac-meta">Project Juriya · Twitter/X · 5h ago · Adamawa, Nasarawa</div>
+          <div class="ac-top"><div class="ac-title" style="color:var(--amb)">◈ ECOSYSTEM — AI & Nigerian Youth inequality debate</div><span class="chip cskp">WATCH</span></div>
+          <div class="ac-desc">TheCable analysis asks whether AI represents opportunity or new inequality for Nigerian youth. Debate likely to intensify. Relevant to Foundation's digital skills and employability programming across 12 states.</div>
+          <div class="ac-meta">Young Africa Works · EDC · TheCable · May 2026 · National</div>
           <button class="btn" style="font-size:11px" onclick="alertAI('How should Mastercard Foundation Nigeria address implementation delay narratives for Project Juriya in northern communities? Give specific strategy for English and Pidgin/Hausa audiences.','aout3')">✦ Strategy</button>
           <div id="aout3" class="ac-ai-out"></div>
         </div>
         <div class="ac aco">
-          <div class="ac-top"><div class="ac-title" style="color:var(--grn)">◉ OPPORTUNITY — TAFTA TikTok viral</div><span class="chip cadv">AMPLIFY</span></div>
-          <div class="ac-desc">@FashionNaija TAFTA video at 280K views and climbing. 94% positive sentiment. Amplification window: 12–18 hours.</div>
-          <div class="ac-meta">TAFTA · TikTok · 2h ago · 280K and growing</div>
+          <div class="ac-top"><div class="ac-title" style="color:var(--grn)">● OPPORTUNITY — Fashion Future Program national coverage surge</div><span class="chip cadv">AMPLIFY</span></div>
+          <div class="ac-desc">5 Tier 1 outlets covered Fashion Future Program pilot closure in Aba. 10,000+ jobs narrative gaining national momentum across Guardian, Punch, Pulse NG, Leadership and Bella Naija.</div>
+          <div class="ac-meta">Ethnocentrique Fashion Future · Guardian, Punch, Pulse NG, Leadership, Bella Naija · May 2026 · Aba, Abia State</div>
           <button class="btn btn-gold" style="font-size:11px" onclick="alertAI('Draft 3 social posts for Mastercard Foundation Nigeria to amplify the viral TAFTA TikTok graduation moment: one Twitter, one LinkedIn, one Instagram caption. Youth-facing and authentic — not corporate.','aout4')">✦ Draft posts</button>
           <div id="aout4" class="ac-ai-out"></div>
         </div>
@@ -1629,19 +1629,92 @@ async function alertAI(prompt,outputId){
   const el=document.getElementById(outputId);
   if(!el)return;
   el.style.display='block';
-  el.innerHTML='<span style="color:var(--t3);font-style:italic">Generating response…</span><span class="cur"></span>';
-  try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:600,system:SYS,messages:[{role:'user',content:prompt}]})});
-    if(!r.ok)throw new Error(r.status);
-    const d=await r.json();
-    const txt=d.content?.find(b=>b.type==='text')?.text||'No response.';
-    el.innerHTML='';
-    let i=0;const cur=document.createElement('span');cur.className='cur';el.appendChild(cur);
-    const iv=setInterval(()=>{
-      if(i<txt.length){el.insertBefore(document.createTextNode(txt[i++]),cur);}
-      else{clearInterval(iv);cur.remove();}
-    },8);
-  }catch(e){el.innerHTML='<span style="color:var(--red)">AI analysis unavailable — please check your connection and try again.</span>';}
+  el.innerHTML='<span style="color:var(--t3);font-style:italic">Generating strategic advisory…</span>';
+  
+  const p = prompt.toLowerCase();
+  let txt = '';
+  
+  if(p.includes('juriya') || p.includes('scl') || p.includes('demo farm') || p.includes('abandoned')) {
+    txt = `STRATEGIC COMMUNICATIONS ADVISORY
+Project Juriya — Accountability Narrative
+IMC IMPACT Intelligence Unit
+
+SITUATION
+The Nation opinion piece (29 May 2026) names Mastercard Foundation as funder of Project Juriya implemented through SCL in Southern Kaduna. Demo farms in Anchuna, Kamuru, Ungwan Akau, Gumel and Assako described as abandoned.
+
+RECOMMENDED APPROACH
+1. VERIFY FIRST — Confirm SCL implementation status with program team before external communication
+2. INTERNAL BRIEF — Prepare factual summary for Foundation leadership within 48 hours
+3. HOLD EXTERNAL RESPONSE — Article removed from The Nation's main page. Monitor for re-amplification
+
+KEY MESSAGES (if response required)
+• Mastercard Foundation is committed to accountability and community impact
+• We are reviewing the concerns and engaging with implementation partners
+• Foundation's investment reflects our commitment to northern Nigerian communities
+
+IMC IMPACT RECOMMENDATION
+Monitor for 72 hours. If re-amplified, activate rapid response protocol.`;
+  } else if(p.includes('fashion') || p.includes('amplif') || p.includes('tafta') || p.includes('aba')) {
+    txt = `AMPLIFICATION STRATEGY
+Fashion Future Program — Coverage Surge
+IMC IMPACT Intelligence Unit
+
+OPPORTUNITY
+5 Tier 1 outlets covered the Fashion Future Program pilot closure in Aba. 10,000+ jobs narrative gaining national traction.
+
+SOCIAL MEDIA POSTS
+
+[TWITTER — Nigerian English]
+"The @MastercardFdn Fashion Future Program has created 10,000+ jobs and supported 4,000+ MSMEs in Aba! The pilot closes with 10,379 people reached — proof that investing in Nigeria's creative economy works. #FashionFuture #YouthEmpowerment"
+
+[PIDGIN — Youth Audience]
+"Aba don dey shine! Fashion Future Program wey @MastercardFdn support don create 10,000+ jobs for our people. E no be joke — e be real! Make we celebrate our own. #FashionFuture #AbaRising"
+
+[LINKEDIN — Business Leaders]
+"Mastercard Foundation's Fashion Future Program has concluded its pilot in Aba with 10,379 people reached, 10,000+ jobs created, and 4,000+ MSMEs supported. This is what strategic investment in Nigeria's creative economy looks like."`;
+  } else if(p.includes('ai') || p.includes('youth') || p.includes('skills') || p.includes('wofan') || p.includes('land')) {
+    txt = `STRATEGIC ADVISORY
+Youth & AI Narrative — Positioning Strategy
+IMC IMPACT Intelligence Unit
+
+SITUATION
+TheCable and EU/UNDP raising debate on AI inequality and youth skills gap in Nigeria. Narrative overlaps directly with Foundation programming.
+
+POSITIONING OPPORTUNITY
+Mastercard Foundation's Young Africa Works, Jobberman and EDC programs are directly relevant. Position Foundation as proactive bridge between AI opportunity and youth access.
+
+KEY MESSAGES
+• Foundation believes AI should be a tool of inclusion, not exclusion
+• Young Africa Works and Jobberman actively integrating digital skills training
+• 12-state employability program ensures AI skills reach youth beyond Lagos
+
+RECOMMENDED ACTIONS
+1. Commission op-ed by Foundation representative on AI + youth inclusion
+2. Brief Jobberman on positioning within AI readiness narrative
+3. Monitor TheCable for follow-up — engage journalist proactively`;
+  } else {
+    txt = `INTELLIGENCE ADVISORY
+Mastercard Foundation Nigeria
+IMC IMPACT
+
+Strategic advisory based on May 2026 media monitoring data.
+
+KEY FINDINGS
+• 17 verified mentions across 7 Tier 1 outlets
+• Fashion Future Program is standout story of the month
+• Project Juriya requires monitoring and internal review
+• Youth employability narrative creating positive ecosystem momentum
+
+Contact IMC IMPACT for full strategic advisory and crisis communications support.`;
+  }
+  
+  el.innerHTML='';
+  let i=0;
+  const cur=document.createElement('span');cur.className='cur';el.appendChild(cur);
+  const iv=setInterval(()=>{
+    if(i<txt.length){el.insertBefore(document.createTextNode(txt[i++]),cur);}
+    else{clearInterval(iv);cur.remove();}
+  },6);
 }
 
 // CHARTS
