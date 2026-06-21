@@ -91,17 +91,32 @@ PROGRAMS = {
 }
 
 # ── BROAD catch-all keywords — any article about Nigerian development ──────────
-# These ensure we always capture relevant content even if program names aren't mentioned
 BROAD_KEYWORDS = [
-    "Mastercard Foundation Nigeria",
-    "youth employment Nigeria",
-    "women empowerment Nigeria",
-    "agricultural development Nigeria",
-    "skills training Nigeria",
-    "entrepreneurship Nigeria",
-    "development program Nigeria",
-    "NGO Nigeria",
-    "foundation Nigeria program",
+    # Mastercard Foundation direct
+    "Mastercard Foundation",
+    "Mastercard Nigeria",
+    # Youth & employment
+    "youth employment", "job creation", "skills training",
+    "vocational training Nigeria", "graduate employment Nigeria",
+    "unemployment Nigeria", "employability Nigeria",
+    # Agriculture
+    "smallholder farmer", "agribusiness Nigeria", "agricultural Nigeria",
+    "farming Nigeria", "harvest Nigeria", "food security Nigeria",
+    "cooperative Nigeria", "farmer Nigeria",
+    # Women
+    "women empowerment", "female entrepreneur", "women entrepreneur",
+    "gender Nigeria", "women business Nigeria",
+    # Education & scholarship  
+    "scholarship Nigeria", "bursary Nigeria", "student grant Nigeria",
+    "university funding Nigeria", "education grant",
+    # Development/NGO general
+    "development program Nigeria", "NGO Nigeria", "foundation Nigeria",
+    "impact program Nigeria", "social enterprise Nigeria",
+    "capacity building Nigeria", "livelihood Nigeria",
+    # Specific orgs likely to appear
+    "Jobberman", "Babban Gona", "TAFTA", "WOFAN", "IITA",
+    "Enterprise Development Centre", "FCMB", "Songhai",
+    "Christian Aid", "Pan-Atlantic",
 ]
 
 RSS_FEEDS = [
@@ -188,23 +203,22 @@ def push_to_github(results: dict):
         "X-GitHub-Api-Version": "2022-11-28"
     }
 
-    sha = None
-    try:
-        r = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=10)
-        log.info(f"SHA fetch status: {r.status_code}")
-        if r.status_code == 200:
-            sha = r.json().get("sha")
-            log.info(f"Existing SHA: {sha[:8]}...")
-        elif r.status_code == 404:
-            log.info("File does not exist yet — will create it")
-        else:
-            log.warning(f"SHA fetch error: {r.text[:200]}")
-    except Exception as e:
-        log.warning(f"SHA fetch exception: {e}")
-
     content_b64 = base64.b64encode(
         json.dumps(results, ensure_ascii=False, indent=2).encode("utf-8")
     ).decode("utf-8")
+
+    # Always fetch fresh SHA immediately before PUT to avoid 409 conflicts
+    sha = None
+    try:
+        r = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=10)
+        log.info(f"Fresh SHA fetch: {r.status_code}")
+        if r.status_code == 200:
+            sha = r.json().get("sha")
+            log.info(f"Fresh SHA: {sha[:8]}...")
+        elif r.status_code == 404:
+            log.info("File does not exist — will create it fresh")
+    except Exception as e:
+        log.warning(f"SHA fetch exception: {e}")
 
     payload = {
         "message": f"Auto-update crawl results {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}",
@@ -214,14 +228,23 @@ def push_to_github(results: dict):
     if sha:
         payload["sha"] = sha
 
-    try:
-        r = requests.put(api_url, headers=headers, json=payload, timeout=20)
-        if r.status_code in (200, 201):
-            log.info("✅ Results pushed to GitHub successfully")
-        else:
-            log.error(f"GitHub push failed: {r.status_code} — {r.text[:300]}")
-    except Exception as e:
-        log.error(f"GitHub push exception: {e}")
+    # Retry once on 409 conflict with re-fetched SHA
+    for attempt in range(2):
+        try:
+            r = requests.put(api_url, headers=headers, json=payload, timeout=20)
+            if r.status_code in (200, 201):
+                log.info("✅ Results pushed to GitHub successfully")
+                return
+            elif r.status_code == 409 and attempt == 0:
+                log.warning("409 conflict — re-fetching SHA and retrying")
+                r2 = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=10)
+                if r2.status_code == 200:
+                    payload["sha"] = r2.json().get("sha")
+                    log.info(f"Retry SHA: {payload['sha'][:8]}...")
+            else:
+                log.error(f"GitHub push failed: {r.status_code} — {r.text[:300]}")
+        except Exception as e:
+            log.error(f"GitHub push exception: {e}")
 
 def run_crawl():
     log.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
