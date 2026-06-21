@@ -1478,7 +1478,7 @@ function exportCSV(){
 }
 
 
-// ── LIVE DATA FROM GITHUB ──
+// ── LIVE DATA FROM GITHUB ──────────────────────────────────────────────────
 const GITHUB_JSON = "https://raw.githubusercontent.com/RaisingGods/impact.pulse/main/impact_pulse_results.json";
 
 async function fetchLiveResults() {
@@ -1494,17 +1494,15 @@ async function fetchLiveResults() {
 
 async function updateDashboardWithLiveData() {
   const data = await fetchLiveResults();
-
-  // Always show banner — hide it only if we have real articles
   const banner = document.getElementById('live-data-banner');
 
   if (!data || !data.articles || data.articles.length === 0) {
-    // No live data yet — keep sample data, show banner
+    // No real articles yet — keep sample data visible, show banner
     if (banner) banner.style.display = 'flex';
     return;
   }
 
-  // We have real data — hide banner
+  // Real data exists — hide the sample data banner
   if (banner) banner.style.display = 'none';
 
   const articles = data.articles || [];
@@ -1512,24 +1510,30 @@ async function updateDashboardWithLiveData() {
   const s = data.sentiment_overview || {};
   const positive = s.positive || 0;
   const negative = s.negative || 0;
+  const neutral = s.neutral || 0;
+  const mixed = s.mixed || 0;
   const posRate = total > 0 ? Math.round((positive / total) * 100) : 0;
 
-  // Update last updated time in footer dot
+  // Update last crawl time
   if (data.last_updated) {
     const d = new Date(data.last_updated);
     const timeStr = d.toLocaleString('en-NG', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
-    const foot = document.querySelector('.sb-foot');
-    if (foot) foot.title = 'Last crawl: ' + timeStr;
+    const footEl = document.querySelector('.sb-foot-time');
+    if (footEl) footEl.textContent = 'Crawl active · ' + timeStr;
+    else {
+      const sbFoot = document.querySelector('.sb-foot');
+      if (sbFoot) sbFoot.title = 'Last crawl: ' + timeStr;
+    }
   }
 
-  // Update main mentions stat (6,284)
+  // Update mentions stat (replaces 6,284 sample)
   document.querySelectorAll('.stat-val').forEach(el => {
-    if (el.textContent.trim() === '6,284') {
-      el.textContent = total.toLocaleString();
-    }
-    // Update sentiment score placeholder
-    if (el.textContent.trim() === '71/100') {
-      el.textContent = posRate + '/100';
+    if (el.textContent.trim() === '6,284') el.textContent = total.toLocaleString();
+    if (el.textContent.trim() === '71/100') el.textContent = posRate + '/100';
+    if (el.textContent.trim() === '18.7M') {
+      // Estimate reach: avg 50k readers per article
+      const reach = total * 50000;
+      el.textContent = reach >= 1000000 ? (reach/1000000).toFixed(1)+'M' : (reach/1000).toFixed(0)+'K';
     }
   });
 
@@ -1542,7 +1546,9 @@ async function updateDashboardWithLiveData() {
                         r.sentiment === 'mixed' ? 'cskp' : 'cneu';
       const src = r.source ? r.source.substring(0,3).toUpperCase() : 'SRC';
       const prog = r.program || '';
-      const dateStr = r.published ? new Date(r.published).toLocaleDateString('en-GB', {day:'2-digit', month:'short'}) : '';
+      const dateStr = r.published
+        ? new Date(r.published).toLocaleDateString('en-GB', {day:'2-digit', month:'short'})
+        : '';
       return `<div class="fi">
         <div class="fsrc" style="background:var(--off2);color:var(--t2)">${src}</div>
         <div class="fbdy">
@@ -1552,7 +1558,7 @@ async function updateDashboardWithLiveData() {
             ${prog ? `<span class="fprog">${prog}</span>` : ''}
             <span class="chip ${sentClass}">${r.sentiment}</span>
           </div>
-          ${r.summary ? `<div style="font-size:11px;color:var(--t3);margin-top:3px">${r.summary}</div>` : ''}
+          ${r.summary ? `<div style="font-size:11px;color:var(--t3);margin-top:3px;line-height:1.4">${r.summary}</div>` : ''}
         </div>
       </div>`;
     }).join('');
@@ -1562,12 +1568,11 @@ async function updateDashboardWithLiveData() {
   const ps = data.program_summary || {};
   if (Object.keys(ps).length > 0) {
     document.querySelectorAll('.pcn').forEach(el => {
-      const progName = el.textContent.trim();
-      // Match by program name substring
-      const match = Object.entries(ps).find(([k]) =>
-        k.toLowerCase().includes(progName.toLowerCase().substring(0, 8)) ||
-        progName.toLowerCase().includes(k.toLowerCase().substring(0, 8))
-      );
+      const cardName = el.textContent.trim().toLowerCase();
+      const match = Object.entries(ps).find(([k]) => {
+        const kl = k.toLowerCase();
+        return kl.includes(cardName.substring(0,6)) || cardName.includes(kl.substring(0,6));
+      });
       if (match) {
         const [, pdata] = match;
         const pcs = el.parentElement?.querySelector('.pcs');
@@ -1575,14 +1580,36 @@ async function updateDashboardWithLiveData() {
           const pTotal = pdata.count || 0;
           const pPos = pdata.positive || 0;
           const pPct = pTotal > 0 ? Math.round((pPos / pTotal) * 100) : 0;
+          const dot = el.parentElement?.querySelector('.pdot');
+          if (dot) {
+            dot.style.background = pPct >= 70 ? 'var(--grn)' : pPct >= 40 ? 'var(--amb)' : 'var(--red)';
+          }
           pcs.innerHTML = `<b>${pPct}% pos</b> · ${pTotal.toLocaleString()} mentions`;
         }
       }
     });
   }
+
+  // Update sentiment overview in sentiment engine section
+  const sentBars = document.querySelectorAll('.sent-bar');
+  if (sentBars.length > 0 && total > 0) {
+    sentBars.forEach(bar => {
+      const label = bar.dataset.sent;
+      let count = 0;
+      if (label === 'positive' || label === 'supportive') count = positive;
+      else if (label === 'negative') count = negative;
+      else if (label === 'neutral') count = neutral;
+      else if (label === 'mixed' || label === 'skeptical') count = mixed;
+      const pct = Math.round((count / total) * 100);
+      const fill = bar.querySelector('.sent-fill');
+      const val = bar.querySelector('.sent-val');
+      if (fill) fill.style.width = pct + '%';
+      if (val) val.textContent = count.toLocaleString();
+    });
+  }
 }
 
-// Check crawler health — green dot = live data exists
+// Check crawler health via GitHub JSON existence
 async function checkApiHealth() {
   try {
     const resp = await fetch(GITHUB_JSON + "?t=" + Date.now());
