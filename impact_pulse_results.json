@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-21T08:54:36.910659+00:00",
+  "last_updated": "2026-06-21T09:10:27.109060+00:00",
   "total_articles": 1,
   "articles": [
     {
@@ -9,10 +9,10 @@
       "url": "https://journals.plos.org/sustainabilitytransformation/article?id=10.1371/journal.pstr.0000255",
       "source": "Plos.org",
       "published": "2026-06-18T14:00:00Z",
-      "crawled_at": "2026-06-21T08:54:28.340955+00:00",
+      "crawled_at": "2026-06-21T09:10:18.610741+00:00",
       "sentiment": "mixed",
       "sentiment_score": 0.2,
-      "summary": "Article examines theoretical frameworks for youth inclusion in African agri-food systems while acknowledging significant barriers to meaningful participation.",
+      "summary": "Article explores youth inclusion opportunities in African agri-food systems while acknowledging significant barriers hindering meaningful youth participation.",
       "key_theme": "agriculture",
       "language_note": "Standard English",
       "speaker_type": "journalist"
