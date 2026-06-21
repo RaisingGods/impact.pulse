@@ -1,1720 +1,338 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IMPACT PULSE</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<style>
-:root{
-  --w:#fff;--off:#f7f8fa;--off2:#eef0f4;--b:#e5e7eb;--b2:#d1d5db;
-  --t:#111827;--t2:#4b5563;--t3:#9ca3af;
-  --red:#cf2e2e;--r2:rgba(207,46,46,.09);--rb:rgba(207,46,46,.22);
-  --grn:#16a34a;--g2:rgba(22,163,74,.09);--gb:rgba(22,163,74,.22);
-  --amb:#d97706;--a2:rgba(217,119,6,.09);--ab:rgba(217,119,6,.22);
-  --blu:#2563eb;--bl2:rgba(37,99,235,.08);--blb:rgba(37,99,235,.2);
-  --pur:#7c3aed;--tel:#0d9488;--gold:#e8a020;
-  --f:'Inter',sans-serif;--m:'JetBrains Mono',monospace;
-  --sh:0 1px 4px rgba(0,0,0,.08);--sh2:0 4px 16px rgba(0,0,0,.1);
-}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html,body{height:100%;overflow:hidden;}
-/* DESKTOP SIDEBAR */
-.sidebar{width:224px;min-width:224px;background:var(--w);border-right:1px solid var(--b);display:flex;flex-direction:column;height:100vh;overflow-y:auto;flex-shrink:0;}
-.sb-logo{padding:18px 16px 14px;border-bottom:1px solid var(--b);}
-.sb-logo-row{display:flex;align-items:center;gap:9px;}
-.sb-icon{width:32px;height:32px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.sb-icon svg{stroke:white;fill:none;stroke-width:2;width:15px;height:15px;}
-.sb-name{font-size:14px;font-weight:600;}
-.sb-sub{font-size:10px;color:var(--t3);font-family:var(--m);}
-.sb-client{margin-top:10px;background:var(--r2);border:1px solid var(--rb);border-radius:6px;padding:7px 10px;}
-.sb-cname{font-size:11px;font-weight:500;color:var(--red);}
-.sb-csub{font-size:10px;color:var(--t3);}
-.sb-nav{flex:1;padding:10px;overflow-y:auto;}
-.sb-nlbl{font-size:10px;font-family:var(--m);color:var(--t3);letter-spacing:.08em;text-transform:uppercase;padding:0 6px;margin:14px 0 5px;}
-.sb-ni{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:6px;cursor:pointer;color:var(--t2);font-size:13px;transition:all .12s;margin-bottom:1px;}
-.sb-ni:hover{background:var(--off);color:var(--t);}
-.sb-ni.on{background:var(--r2);color:var(--red);font-weight:500;}
-.sb-nic{font-size:13px;width:16px;text-align:center;flex-shrink:0;}
-.sb-badge{margin-left:auto;background:var(--red);color:white;font-size:9px;font-family:var(--m);padding:1px 5px;border-radius:8px;}
-.sb-dot{width:6px;height:6px;border-radius:50%;background:var(--grn);box-shadow:0 0 5px var(--grn);animation:pulse 2s infinite;margin-left:auto;}
-.sb-foot{padding:12px 14px;border-top:1px solid var(--b);font-size:11px;color:var(--t3);display:flex;align-items:center;gap:6px;}
-.sb-fd{width:6px;height:6px;border-radius:50%;background:var(--grn);box-shadow:0 0 5px var(--grn);animation:pulse 2s infinite;}
-body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
-
-/* LOGIN */
-#login{position:fixed;inset:0;background:var(--off);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;z-index:9999;}
-.login-card{background:var(--w);border-radius:16px;padding:32px 24px;width:100%;max-width:360px;box-shadow:var(--sh2);}
-.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
-.login-icon{width:38px;height:38px;background:var(--red);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.login-icon svg{stroke:white;fill:none;stroke-width:2;width:18px;height:18px;}
-.login-name{font-size:17px;font-weight:600;}
-.login-sub{font-size:10px;color:var(--t3);font-family:var(--m);}
-.login-client{font-size:12px;color:var(--t3);margin-bottom:28px;margin-top:4px;}
-.login-lbl{font-size:12px;font-weight:500;color:var(--t2);margin-bottom:5px;}
-.login-inp{width:100%;background:var(--off);border:1px solid var(--b2);border-radius:8px;padding:11px 13px;font-size:14px;font-family:var(--f);color:var(--t);outline:none;margin-bottom:12px;}
-.login-inp:focus{border-color:var(--red);}
-.login-btn{width:100%;background:var(--red);border:none;border-radius:8px;padding:13px;font-size:14px;font-weight:500;color:white;cursor:pointer;font-family:var(--f);}
-.login-err{display:none;background:var(--r2);border:1px solid var(--rb);border-radius:7px;padding:9px 12px;font-size:12px;color:var(--red);margin-bottom:12px;}
-.login-demo{text-align:center;font-size:11px;color:var(--t3);margin-top:16px;padding-top:14px;border-top:1px solid var(--b);line-height:1.6;}
-.login-demo code{color:var(--t2);font-family:var(--m);}
-
-/* APP SHELL */
-#app{display:flex;flex-direction:row;height:100vh;overflow:hidden;}
-.main-col{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-
-/* TOPBAR */
-.topbar{background:var(--w);border-bottom:1px solid var(--b);padding:0 22px;height:52px;display:flex;align-items:center;gap:12px;flex-shrink:0;box-shadow:var(--sh);}
-.tb-logo{display:none;}
-.tb-name{font-size:15px;font-weight:500;flex:1;}
-.tb-tag{font-size:10px;font-family:var(--m);background:var(--r2);color:var(--red);border:1px solid var(--rb);border-radius:4px;padding:2px 8px;letter-spacing:.04em;}
-.tb-live{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--grn);}
-.tb-ld{width:6px;height:6px;border-radius:50%;background:var(--grn);box-shadow:0 0 5px var(--grn);animation:pulse 1.5s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-
-/* SCROLL AREA */
-.scroll{flex:1;overflow-y:auto;padding-bottom:20px;}
-
-/* HIDE MOBILE BOTTOM NAV */
-.bnav{display:none;}
-.more-menu{display:none !important;}
-.more-overlay{display:none !important;}
-
-/* VIEWS */
-.view{display:none;padding:20px 22px 0;}
-.view.on{display:block;}
-.sec-lbl{font-size:10px;font-family:var(--m);color:var(--t3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;}
-
-/* DESKTOP STAT ROW */
-.stat-scroll{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:0;margin:0 0 16px;overflow:visible;}
-.stat-scroll::-webkit-scrollbar{display:none;}
-
-/* DESKTOP 2-COL GRID */
-.d2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
-.d3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
-.d6040{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;margin-bottom:14px;}
-
-/* CARDS */
-.card{background:var(--w);border:1px solid var(--b);border-radius:12px;box-shadow:var(--sh);overflow:hidden;margin-bottom:12px;}
-.ch{padding:12px 14px;border-bottom:1px solid var(--b);display:flex;align-items:center;justify-content:space-between;}
-.ct{font-size:13px;font-weight:500;}
-.cm2{font-size:10px;color:var(--t3);font-family:var(--m);}
-.cb{padding:13px 14px;}
-
-/* STATS */
-.stat-scroll{display:flex;gap:10px;overflow-x:auto;padding:0 14px 4px;margin:0 -14px;scrollbar-width:none;}
-.stat-scroll::-webkit-scrollbar{display:none;}
-.stat{background:var(--w);border:1px solid var(--b);border-radius:10px;padding:12px 14px;min-width:130px;flex-shrink:0;position:relative;overflow:hidden;box-shadow:var(--sh);}
-.stat::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
-.stat.cr::after{background:linear-gradient(90deg,var(--red),transparent);}
-.stat.cg::after{background:linear-gradient(90deg,var(--grn),transparent);}
-.stat.ca::after{background:linear-gradient(90deg,var(--amb),transparent);}
-.stat.cb2::after{background:linear-gradient(90deg,var(--blu),transparent);}
-.stat.co::after{background:linear-gradient(90deg,var(--gold),transparent);}
-.stat-lbl{font-size:9px;font-family:var(--m);color:var(--t3);letter-spacing:.05em;text-transform:uppercase;margin-bottom:5px;}
-.stat-val{font-size:22px;font-weight:300;letter-spacing:-1px;}
-.stat-delta{font-size:11px;margin-top:3px;}
-.su{color:var(--grn);}.sdn{color:var(--red);}.snt{color:var(--t3);}
-
-/* CRISIS */
-.crisis{background:var(--r2);border:1px solid var(--rb);border-radius:10px;padding:12px 13px;margin-bottom:12px;display:flex;gap:10px;align-items:flex-start;}
-.crisis-ic{font-size:16px;flex-shrink:0;margin-top:1px;}
-.crisis-t{font-size:13px;font-weight:600;color:var(--red);margin-bottom:3px;}
-.crisis-d{font-size:12px;color:var(--t2);line-height:1.5;}
-.crisis-m{font-size:10px;font-family:var(--m);color:var(--t3);margin-top:4px;}
-
-/* FEED */
-.fi{padding:11px 0;border-bottom:1px solid var(--b);display:flex;gap:9px;}
-.fi:last-child{border-bottom:none;}
-.fsrc{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;font-family:var(--m);}
-.fbdy{flex:1;min-width:0;}
-.ftit{font-size:13px;font-weight:500;line-height:1.4;margin-bottom:4px;}
-.fmeta{font-size:11px;color:var(--t3);display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
-.fprog{font-size:10px;padding:2px 6px;border-radius:4px;background:var(--bl2);color:var(--blu);border:1px solid var(--blb);font-family:var(--m);}
-
-/* CHIPS */
-.chip{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:10px;font-family:var(--m);font-weight:500;}
-.cpos{background:var(--g2);color:var(--grn);border:1px solid var(--gb);}
-.cneg{background:var(--r2);color:var(--red);border:1px solid var(--rb);}
-.cneu{background:var(--off2);color:var(--t3);border:1px solid var(--b);}
-.ccri{background:var(--a2);color:var(--amb);border:1px solid var(--ab);}
-.cskp{background:rgba(124,58,237,.08);color:var(--pur);border:1px solid rgba(124,58,237,.2);}
-.cadv{background:rgba(13,148,136,.08);color:var(--tel);border:1px solid rgba(13,148,136,.2);}
-
-/* TABS */
-.tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--b);scrollbar-width:none;}
-.tabs::-webkit-scrollbar{display:none;}
-.tab{padding:9px 12px;font-size:12px;cursor:pointer;color:var(--t3);border-bottom:2px solid transparent;white-space:nowrap;transition:all .12s;flex-shrink:0;}
-.tab.on{color:var(--red);border-bottom-color:var(--red);font-weight:500;}
-
-/* SOV */
-.sovr{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.sovl{font-size:12px;color:var(--t2);width:130px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.sovbg{flex:1;height:5px;background:var(--off2);border-radius:3px;overflow:hidden;}
-.sovf{height:100%;border-radius:3px;}
-.sovp{font-size:11px;color:var(--t3);font-family:var(--m);width:28px;text-align:right;flex-shrink:0;}
-
-/* KW */
-.kwl{display:flex;flex-wrap:wrap;gap:6px;}
-.kwc{display:inline-flex;align-items:center;gap:5px;background:var(--off);border:1px solid var(--b);border-radius:6px;padding:4px 8px;font-size:12px;}
-.kwn{background:var(--r2);color:var(--red);padding:1px 5px;border-radius:3px;font-size:10px;font-family:var(--m);}
-
-/* HEALTH SCORES */
-.health-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.hcard{border-radius:9px;padding:10px 11px;border:1px solid;cursor:pointer;}
-.hcard.green{background:var(--g2);border-color:var(--gb);}
-.hcard.amber{background:var(--a2);border-color:var(--ab);}
-.hcard.red{background:var(--r2);border-color:var(--rb);}
-.hcard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;}
-.hcard-name{font-size:12px;font-weight:500;}
-.hcard-sub{font-size:10px;color:var(--t3);font-family:var(--m);}
-
-/* ALERT CARDS */
-.ac{border-radius:10px;padding:12px 13px;margin-bottom:10px;border:1px solid;}
-.acr{background:var(--r2);border-color:var(--rb);}
-.acw{background:var(--a2);border-color:var(--ab);}
-.aco{background:var(--g2);border-color:var(--gb);}
-.ac-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;gap:8px;}
-.ac-title{font-size:13px;font-weight:500;}
-.ac-desc{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:6px;}
-.ac-meta{font-size:10px;color:var(--t3);font-family:var(--m);margin-bottom:8px;}
-.ac-ai-out{margin-top:10px;padding:10px 12px;background:var(--w);border:1px solid var(--b2);border-radius:8px;font-size:12px;line-height:1.7;color:var(--t2);display:none;}
-
-/* PROGRAM CARDS */
-.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-.pc{background:var(--w);border:1px solid var(--b);border-radius:10px;padding:11px 12px;box-shadow:var(--sh);}
-.pcn{font-size:12px;font-weight:500;margin-bottom:2px;}
-.pct{font-size:10px;font-family:var(--m);color:var(--t3);margin-bottom:6px;line-height:1.3;}
-.pcs{font-size:11px;color:var(--t2);}
-.pcs b{color:var(--t);}
-
-/* FILTER PILLS */
-.fpills{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px;scrollbar-width:none;}
-.fpills::-webkit-scrollbar{display:none;}
-.fpill{padding:5px 11px;border-radius:20px;font-size:11px;cursor:pointer;border:1px solid var(--b2);background:var(--w);color:var(--t2);white-space:nowrap;transition:all .12s;font-family:var(--f);}
-.fpill.on{background:var(--r2);border-color:var(--rb);color:var(--red);font-weight:500;}
-
-/* PIDGIN */
-.pit{display:flex;justify-content:space-between;align-items:center;padding:9px 10px;border-radius:7px;margin-bottom:6px;border:1px solid var(--b);}
-.pph{font-size:12px;font-family:var(--m);}
-.ptr{font-size:10px;color:var(--t3);margin-top:2px;}
-
-/* STAKEHOLDER */
-.stk{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--b);}
-.stk:last-child{border-bottom:none;}
-.stav{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;font-family:var(--m);flex-shrink:0;}
-.stnm{font-size:12px;font-weight:500;}
-.strl{font-size:11px;color:var(--t3);}
-
-/* VOICE */
-.vcard{border-radius:8px;padding:10px 12px;margin-bottom:8px;border:1px solid;}
-
-/* AI PANEL */
-.aip{background:var(--w);border:1px solid var(--b);border-radius:12px;overflow:hidden;box-shadow:var(--sh);margin-bottom:12px;}
-.aih{padding:11px 14px;background:linear-gradient(135deg,var(--r2),rgba(232,160,32,.03));border-bottom:1px solid var(--b);display:flex;align-items:center;gap:8px;}
-.aibg{background:var(--red);color:white;font-size:9px;font-weight:600;font-family:var(--m);padding:2px 6px;border-radius:4px;}
-.ait{font-size:13px;font-weight:500;flex:1;}
-.aibo{padding:13px 14px;}
-.aio{font-size:13px;line-height:1.75;color:var(--t2);min-height:60px;}
-.cur{display:inline-block;width:2px;height:13px;background:var(--red);margin-left:2px;animation:blink .8s step-end infinite;vertical-align:middle;}
-@keyframes blink{50%{opacity:0}}
-.aipr{display:flex;flex-direction:column;gap:7px;margin-top:12px;}
-.apb{display:flex;align-items:center;gap:8px;background:var(--off);border:1px solid var(--b2);border-radius:10px;padding:10px 12px;font-size:12px;cursor:pointer;color:var(--t2);font-family:var(--f);text-align:left;}
-.apb:active{background:var(--r2);border-color:var(--rb);color:var(--red);}
-.apb:disabled{opacity:.4;}
-.ai-row{display:flex;gap:7px;margin-bottom:12px;}
-.ai-inp{flex:1;background:var(--off);border:1px solid var(--b2);border-radius:8px;padding:10px 12px;font-size:13px;font-family:var(--f);color:var(--t);outline:none;}
-.ai-inp:focus{border-color:var(--red);}
-
-/* BTN */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:8px 14px;border-radius:8px;border:1px solid var(--b2);background:var(--w);color:var(--t2);font-size:12px;cursor:pointer;font-family:var(--f);}
-.btn-red{background:var(--red);border-color:var(--red);color:white;font-weight:500;}
-.btn-gold{background:var(--gold);border-color:var(--gold);color:white;font-weight:500;}
-.btn-full{width:100%;}
-
-/* CHART */
-.cw{position:relative;}
-
-/* SETTINGS */
-.setrow{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--b);}
-.setrow:last-child{border-bottom:none;}
-.set-lbl{font-size:13px;font-weight:500;}
-.set-sub{font-size:11px;color:var(--t3);margin-top:2px;}
-.tgl{width:40px;height:22px;background:var(--off2);border-radius:11px;position:relative;cursor:pointer;transition:background .2s;border:1px solid var(--b2);flex-shrink:0;}
-.tgl.on{background:var(--grn);}
-.tgl::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:white;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.15);}
-.tgl.on::after{left:20px;}
-
-/* WA */
-.wa-step{padding:10px 12px;background:var(--off);border-radius:8px;border-left:3px solid var(--red);margin-bottom:8px;}
-.wa-step-t{font-size:12px;font-weight:500;margin-bottom:3px;}
-.wa-step-d{font-size:12px;color:var(--t2);}
-
-/* CALENDAR */
-.ev-card{padding:11px 13px;border-radius:9px;border:1px solid;margin-bottom:8px;}
-.ev-name{font-size:13px;font-weight:500;margin-bottom:2px;}
-.ev-meta{font-size:11px;color:var(--t2);margin-bottom:4px;}
-.ev-date{font-size:10px;font-family:var(--m);color:var(--t3);}
-
-/* COMPARE */
-.cmp-row{display:grid;grid-template-columns:1fr auto auto auto;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--b);font-size:12px;}
-.cmp-row:last-child{border-bottom:none;}
-
-/* CRAWLER STATUS */
-.src-row{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--off);border-radius:7px;font-size:12px;margin-bottom:5px;}
-
-/* RKPI */
-.rkgr{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-.rk{background:var(--w);border:1px solid var(--b);border-radius:10px;padding:12px;box-shadow:var(--sh);}
-.rkv{font-size:20px;font-weight:300;letter-spacing:-.5px;color:var(--red);}
-.rkl{font-size:10px;color:var(--t3);margin-top:2px;font-family:var(--m);}
-
-/* INFO BOX */
-.info-box{border-radius:9px;padding:11px 13px;margin-bottom:12px;font-size:13px;line-height:1.6;}
-.info-warn{background:var(--a2);border:1px solid var(--ab);color:var(--amb);}
-.info-blue{background:var(--bl2);border:1px solid var(--blb);color:var(--blu);}
-
-.iw-logout{background:transparent;border:1px solid var(--b);border-radius:5px;padding:3px 8px;font-size:10px;color:var(--t3);cursor:pointer;font-family:var(--f);}
-.iw-logout:hover{border-color:var(--red);color:var(--red);}
-</style>
-</head>
-<body>
-
-<!-- LOGIN SCREEN -->
-<div id="iw-login" style="position:fixed;inset:0;background:#f7f8fa;display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px">
-
-  <!-- STEP 1: Sign in -->
-  <div id="ls1" style="background:white;border-radius:16px;padding:32px 28px;width:100%;max-width:400px;box-shadow:0 4px 24px rgba(0,0,0,.1)">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-      <div style="display:flex;align-items:center;gap:10px">
-        
-        <div style="width:1px;height:36px;background:#e5e7eb"></div>
-        <div>
-          <div style="font-size:15px;font-weight:700;letter-spacing:-.3px;color:#111827">IMPACT PULSE</div>
-          <div style="font-size:9px;color:#9ca3af;letter-spacing:.06em;font-family:monospace;text-transform:uppercase">v1.0 · NG-INTEL · IMC IMPACT</div>
-        </div>
-      </div>
-    </div>
-    <div style="font-size:12px;color:#9ca3af;margin-bottom:24px">Media Intelligence Platform — Authorised team access only</div>
-    <div style="font-size:12px;font-weight:500;color:#4b5563;margin-bottom:5px">Email address</div>
-    <input id="iw-email" type="email" placeholder="you@imcimpact.com" style="width:100%;background:#f7f8fa;border:1px solid #d1d5db;border-radius:8px;padding:11px 13px;font-size:14px;font-family:inherit;color:#111827;outline:none;margin-bottom:12px;box-sizing:border-box">
-    <div style="font-size:12px;font-weight:500;color:#4b5563;margin-bottom:5px">Password</div>
-    <input id="iw-pass" type="password" placeholder="Enter your password" style="width:100%;background:#f7f8fa;border:1px solid #d1d5db;border-radius:8px;padding:11px 13px;font-size:14px;font-family:inherit;color:#111827;outline:none;margin-bottom:12px;box-sizing:border-box">
-    <div id="iw-err" style="display:none;background:rgba(207,46,46,.08);border:1px solid rgba(207,46,46,.25);border-radius:7px;padding:9px 12px;font-size:12px;color:#cf2e2e;margin-bottom:12px">Incorrect credentials. Please try again or contact your administrator.</div>
-    <button onclick="iwLogin()" style="width:100%;background:#cf2e2e;border:none;border-radius:8px;padding:13px;font-size:14px;font-weight:500;color:white;cursor:pointer;font-family:inherit">Sign in to IMPACT PULSE</button>
-    <div style="text-align:center;font-size:11px;color:#9ca3af;margin-top:16px;padding-top:14px;border-top:1px solid #e5e7eb">
-      Contact your administrator for access credentials.
-    </div>
-  </div>
-
-  <!-- STEP 2: Choose client -->
-  <div id="ls2" style="display:none;background:white;border-radius:16px;padding:32px 28px;width:100%;max-width:440px;box-shadow:0 4px 24px rgba(0,0,0,.1)">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-      <div style="width:38px;height:38px;background:#cf2e2e;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-      </div>
-      <div><div style="font-size:17px;font-weight:600">IMPACT PULSE</div><div id="iw-welcome" style="font-size:11px;color:#9ca3af">Select your client workspace</div></div>
-    </div>
-    <div style="font-size:12px;color:#9ca3af;margin-bottom:20px">Each client has separate programs, alerts, and reports.</div>
-    <div id="iw-clients" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
-      <div onclick="iwSelectClient('Mastercard Foundation','15 programs · Active monitoring','🏛')" style="padding:13px 15px;border:1px solid #e5e7eb;border-radius:9px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .15s" onmouseover="this.style.background='#f7f8fa'" onmouseout="this.style.background='white'">
-        <div style="width:36px;height:36px;background:rgba(207,46,46,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🏛</div>
-        <div style="flex:1"><div style="font-size:13px;font-weight:500">Mastercard Foundation</div><div style="font-size:11px;color:#9ca3af;margin-top:2px">15 programs · Active monitoring</div></div>
-        <div style="width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 5px #16a34a;flex-shrink:0"></div>
-      </div>
-    </div>
-    <div onclick="iwShowAddClient()" style="padding:12px 15px;border:1px dashed #d1d5db;border-radius:9px;cursor:pointer;display:flex;align-items:center;gap:12px;color:#9ca3af;margin-bottom:14px;transition:all .15s" onmouseover="this.style.background='#f7f8fa'" onmouseout="this.style.background='white'">
-      <div style="width:36px;height:36px;background:#f7f8fa;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">+</div>
-      <div><div style="font-size:13px;font-weight:500;color:#6b7280">Add new client</div><div style="font-size:11px;color:#9ca3af;margin-top:2px">Set up monitoring for a new organisation</div></div>
-    </div>
-    <button onclick="iwLogout()" style="width:100%;background:transparent;border:1px solid #e5e7eb;border-radius:8px;padding:9px;font-size:12px;color:#9ca3af;cursor:pointer;font-family:inherit">← Back to login</button>
-  </div>
-
-  <!-- STEP 3: Add new client -->
-  <div id="ls3" style="display:none;background:white;border-radius:16px;padding:32px 28px;width:100%;max-width:440px;box-shadow:0 4px 24px rgba(0,0,0,.1)">
-    <div style="font-size:16px;font-weight:600;margin-bottom:4px">Add new client</div>
-    <div style="font-size:12px;color:#9ca3af;margin-bottom:20px">Create a new monitoring workspace for a client or project</div>
-    <div style="font-size:12px;font-weight:500;color:#4b5563;margin-bottom:5px">Organisation / Client name</div>
-    <input id="nc-name" type="text" placeholder="e.g. UNICEF Nigeria" style="width:100%;background:#f7f8fa;border:1px solid #d1d5db;border-radius:8px;padding:11px 13px;font-size:14px;font-family:inherit;outline:none;margin-bottom:12px;box-sizing:border-box">
-    <div style="font-size:12px;font-weight:500;color:#4b5563;margin-bottom:5px">Sector</div>
-    <select id="nc-sector" style="width:100%;background:#f7f8fa;border:1px solid #d1d5db;border-radius:8px;padding:11px 13px;font-size:13px;font-family:inherit;outline:none;margin-bottom:12px;box-sizing:border-box">
-      <option>Development / NGO</option><option>Corporate / Private sector</option><option>Government agency</option><option>Healthcare</option><option>Education</option><option>Media & Communications</option><option>Other</option>
-    </select>
-    <div style="font-size:12px;font-weight:500;color:#4b5563;margin-bottom:5px">Programs to monitor (comma separated)</div>
-    <input id="nc-programs" type="text" placeholder="e.g. Girls Education, Nutrition Programme, Livelihood Fund" style="width:100%;background:#f7f8fa;border:1px solid #d1d5db;border-radius:8px;padding:11px 13px;font-size:14px;font-family:inherit;outline:none;margin-bottom:16px;box-sizing:border-box">
-    <div style="display:flex;gap:8px">
-      <button onclick="iwCreateClient()" style="flex:1;background:#cf2e2e;border:none;border-radius:8px;padding:12px;font-size:13px;font-weight:500;color:white;cursor:pointer;font-family:inherit">Create workspace</button>
-      <button onclick="document.getElementById('ls3').style.display='none';document.getElementById('ls2').style.display='block'" style="flex:1;background:transparent;border:1px solid #e5e7eb;border-radius:8px;padding:12px;font-size:13px;color:#6b7280;cursor:pointer;font-family:inherit">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<!-- APP -->
-<div id="app">
-
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sb-logo">
-      <div class="sb-logo-row">
-        <div class="sb-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-        <div><div class="sb-name">IMPACT PULSE</div><div class="sb-sub">v1.0 · NG-INTEL</div></div>
-      </div>
-
-      <div class="sb-client" style="display:flex;align-items:center;gap:8px">
-        <img src="data:image/jpeg;base64,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" style="height:22px;width:auto;object-fit:contain;flex-shrink:0" alt="Mastercard Foundation">
-        <div>
-          <div class="sb-cname" id="sb-cname-el">Mastercard Foundation</div>
-          <div class="sb-csub" id="sb-csub-el">Nigeria Programs · All sectors</div>
-        </div>
-      </div>
-    </div>
-    <div class="sb-nav">
-      <div class="sb-nlbl">Monitor</div>
-      <div class="sb-ni on" onclick="nav('dash',this)"><span class="sb-nic">⬡</span>Dashboard<span class="sb-dot"></span></div>
-      <div class="sb-ni" onclick="nav('feed',this)"><span class="sb-nic">◈</span>Live Feed<span class="sb-dot"></span></div>
-      <div class="sb-ni" onclick="nav('alerts',this)"><span class="sb-nic">◬</span>Alerts<span class="sb-badge">4</span></div>
-      <div class="sb-nlbl">Programs</div>
-      <div class="sb-ni" onclick="nav('progs',this)"><span class="sb-nic">◉</span>All Programs</div>
-      <div class="sb-ni" onclick="nav('geo',this)"><span class="sb-nic">◈</span>Geographic Intel</div>
-      <div class="sb-ni" onclick="nav('compare',this)"><span class="sb-nic">◈</span>Period Comparison</div>
-      <div class="sb-nlbl">Intelligence</div>
-      <div class="sb-ni" onclick="nav('sent',this)"><span class="sb-nic">◎</span>Sentiment Engine</div>
-      <div class="sb-ni" onclick="nav('lang',this)"><span class="sb-nic">🌐</span>Language Intel</div>
-      <div class="sb-ni" onclick="nav('voice',this)"><span class="sb-nic">◉</span>Participant Voice</div>
-      <div class="sb-nlbl">Campaigns</div>
-      <div class="sb-ni" onclick="nav('calendar',this)"><span class="sb-nic">◇</span>Campaign Calendar</div>
-      <div class="sb-ni" onclick="nav('whatsapp',this)"><span class="sb-nic">💬</span>WhatsApp Intel</div>
-      <div class="sb-nlbl">Reporting</div>
-      <div class="sb-ni" onclick="nav('report',this)"><span class="sb-nic">⬇</span>Reports & Export</div>
-      <div class="sb-nlbl">System</div>
-      <div class="sb-ni" onclick="nav('crawler',this)"><span class="sb-nic">⬡</span>Crawler Status</div>
-      <div class="sb-ni" onclick="nav('settings',this)"><span class="sb-nic">◎</span>Settings</div>
-    </div>
-    <div class="sb-foot"><span class="sb-fd"></span>Crawl active · 18 min ago</div>
-  </aside>
-
-  <!-- MAIN COLUMN -->
-  <div class="main-col">
-
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="tb-name" id="tb-name">Overview Dashboard</div>
-    <span class="tb-tag" id="tb-tag">OVERVIEW</span>
-    <div class="tb-live"><span class="tb-ld"></span>Live monitoring</div>
-    <button class="btn btn-red" style="font-size:12px" onclick="ai('Generate a comprehensive weekly media intelligence briefing for Mastercard Foundation Nigeria programs. Cover all active programs, highlight significant media narratives, note risks, and identify top journalists and influencers.','ai-dash')">✦ AI Briefing</button>
-  </div>
-
-  <!-- SCROLL AREA -->
-  <div class="scroll" id="scroll">
-
-    <!-- DASHBOARD -->
-    <div id="v-dash" class="view on">
-      <!-- LIVE DATA STATUS BANNER -->
-      <div id="live-data-banner" style="display:none;background:rgba(217,119,6,.08);border:1px solid var(--ab);border-radius:9px;padding:11px 14px;margin-top:20px;margin-bottom:12px;align-items:center;gap:10px;font-size:13px;color:var(--amb)">
-        <span style="font-size:16px">◈</span>
-        <span>Crawler is active and monitoring — no Mastercard Foundation mentions found in the last crawl cycle. Live data will appear here as soon as articles are detected. Sample data shown below.</span>
-      </div>
-
-      <div class="crisis" style="margin-top:20px">
-        <div class="crisis-ic">◬</div>
-        <div>
-          <div class="crisis-t">Alert — Jobberman "scam" narrative trending on Twitter/X in Kano & Lagos</div>
-          <div class="crisis-d">Negative mentions up 190% in 8 hrs · 3 accounts (120K combined) amplifying · Response window: 3 hours</div>
-          <div class="crisis-m">Young Africa Works · Twitter/X · 1h 42m ago</div>
-        </div>
-        <button class="btn" style="font-size:11px;flex-shrink:0;margin-left:12px" onclick="nav('alerts',document.querySelector('.sb-ni:nth-child(3)'))">View alerts →</button>
-      </div>
-
-      <!-- STATS -->
-      <div class="stat-scroll">
-        <div class="stat cr"><div class="stat-lbl">Mentions (7d)</div><div class="stat-val">6,284</div><div class="stat-delta su">↑ 24% vs last week</div></div>
-        <div class="stat cg"><div class="stat-lbl">Est. Reach</div><div class="stat-val">18.7M</div><div class="stat-delta su">↑ 31% audience</div></div>
-        <div class="stat ca"><div class="stat-lbl">Sentiment Score</div><div class="stat-val">71<span style="font-size:12px;color:var(--t3)">/100</span></div><div class="stat-delta sdn">↓ 6pts this week</div></div>
-        <div class="stat cr"><div class="stat-lbl">Active Alerts</div><div class="stat-val">4</div><div class="stat-delta snt">2 critical · 2 moderate</div></div>
-        <div class="stat co"><div class="stat-lbl">Media Value</div><div class="stat-val">₦312M</div><div class="stat-delta su">↑ 18% earned</div></div>
-      </div>
-
-      <!-- HEALTH SCORES + CHARTS in 2 col -->
-      <div class="d2">
-        <div>
-          <div class="sec-lbl">Program health scores</div>
-          <div class="health-grid" style="margin-bottom:10px">
-            <div class="hcard green" onclick="nav('progs',document.querySelectorAll('.sb-ni')[4])"><div class="hcard-top"><span class="hcard-name">TAFTA</span><span>🟢</span></div><div class="hcard-sub">88% pos · 641 mentions</div></div>
-            <div class="hcard green" onclick="nav('progs',document.querySelectorAll('.sb-ni')[4])"><div class="hcard-top"><span class="hcard-name">Scholars Program</span><span>🟢</span></div><div class="hcard-sub">91% pos · 290 mentions</div></div>
-            <div class="hcard green" onclick="nav('progs',document.querySelectorAll('.sb-ni')[4])"><div class="hcard-top"><span class="hcard-name">Babban Gona</span><span>🟢</span></div><div class="hcard-sub">81% pos · 892 mentions</div></div>
-            <div class="hcard amber" onclick="nav('progs',document.querySelectorAll('.sb-ni')[4])"><div class="hcard-top"><span class="hcard-name">Young Africa Works</span><span>🟡</span></div><div class="hcard-sub">74% pos · 1,840 mentions</div></div>
-            <div class="hcard amber" onclick="nav('progs',document.querySelectorAll('.sb-ni')[4])"><div class="hcard-top"><span class="hcard-name">WOFAN ICON 2</span><span>🟡</span></div><div class="hcard-sub">62% pos · 412 mentions</div></div>
-            <div class="hcard red" onclick="nav('alerts',document.querySelectorAll('.sb-ni')[2])"><div class="hcard-top"><span class="hcard-name">Jobberman</span><span>🔴</span></div><div class="hcard-sub">61% pos · Crisis active</div></div>
-            <div class="hcard red" onclick="nav('alerts',document.querySelectorAll('.sb-ni')[2])"><div class="hcard-top"><span class="hcard-name">Project Juriya</span><span>🔴</span></div><div class="hcard-sub">58% pos · Delay narrative</div></div>
-            <div class="hcard green" onclick="nav('progs',document.querySelectorAll('.sb-ni')[4])"><div class="hcard-top"><span class="hcard-name">IITA I-Youth</span><span>🟢</span></div><div class="hcard-sub">77% pos · 318 mentions</div></div>
-          </div>
-          <div style="font-size:10px;color:var(--t3);margin-bottom:12px">🟢 Healthy (75%+) &nbsp; 🟡 Watch (60–74%) &nbsp; 🔴 At risk</div>
-          <div class="card">
-            <div class="ch"><span class="ct">Sentiment breakdown</span></div>
-            <div class="cb"><div class="cw" style="height:190px"><canvas id="cSent"></canvas></div></div>
-          </div>
-        </div>
-        <div>
-          <div class="sec-lbl">Mention volume — 30 days</div>
-          <div class="card" style="margin-bottom:12px">
-            <div class="cb"><div class="cw" style="height:200px"><canvas id="cVol"></canvas></div></div>
-          </div>
-          <div class="card">
-            <div class="ch"><span class="ct">Share of voice — dev sector</span></div>
-            <div class="cb">
-              <div class="sovr"><span class="sovl">Mastercard Foundation Programs</span><div class="sovbg"><div class="sovf" style="width:41%;background:var(--red)"></div></div><span class="sovp">41%</span></div>
-              <div class="sovr"><span class="sovl">USAID Nigeria</span><div class="sovbg"><div class="sovf" style="width:22%;background:var(--blu)"></div></div><span class="sovp">22%</span></div>
-              <div class="sovr"><span class="sovl">World Bank NG</span><div class="sovbg"><div class="sovf" style="width:16%;background:var(--tel)"></div></div><span class="sovp">16%</span></div>
-              <div class="sovr"><span class="sovl">Tony Elumelu Fdn</span><div class="sovbg"><div class="sovf" style="width:13%;background:var(--pur)"></div></div><span class="sovp">13%</span></div>
-              <div class="sovr"><span class="sovl">Others</span><div class="sovbg"><div class="sovf" style="width:8%;background:var(--t3)"></div></div><span class="sovp">8%</span></div>
-              <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--b)">
-                <div class="sec-lbl">Active keywords</div>
-                <div class="kwl">
-                  <div class="kwc">Young Africa Works<span class="kwn">1,840</span></div>
-                  <div class="kwc">Babban Gona<span class="kwn">892</span></div>
-                  <div class="kwc">TAFTA<span class="kwn">641</span></div>
-                  <div class="kwc">Jobberman<span class="kwn">580</span></div>
-                  <div class="kwc">WOFAN ICON 2<span class="kwn">412</span></div>
-                  <div class="kwc">IITA I-Youth<span class="kwn">318</span></div>
-                  <div class="kwc">#YAWNigeria<span class="kwn">244</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI PANEL -->
-      <div class="aip">
-        <div class="aih"><span class="aibg">AI</span><span class="ait">Intelligence Engine — Pidgin · Hausa · Yoruba</span></div>
-        <div class="aibo">
-          <div class="aio" id="ai-dash">Loading media health summary...</div>
-          <div class="aipr">
-            <button class="apb" onclick="ai('Summarise the most important media narratives across all Mastercard Foundation Nigeria programs this week. Include Pidgin, Hausa, and Yoruba signals. Flag the top risk.','ai-dash')">📊 Weekly narrative summary</button>
-            <button class="apb" onclick="ai('Analyse the Jobberman Young Africa Works scam narrative on Twitter. What are people saying in Pidgin? How serious is it and what should the response be?','ai-dash')">◬ Jobberman crisis response</button>
-            <button class="apb" onclick="ai('Write a senior leadership media summary for Mastercard Foundation Nigeria this week. Professional tone. Include reach, sentiment score, top program win, and one risk to watch.','ai-dash')">◇ Leadership summary</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- LIVE FEED -->
-    <div id="v-feed" class="view">
-      <div class="fpills" style="margin-top:20px" id="pf">
-        <button class="fpill on" onclick="fprog(this)">All</button>
-        <button class="fpill" onclick="fprog(this)">YAW</button>
-        <button class="fpill" onclick="fprog(this)">Babban Gona</button>
-        <button class="fpill" onclick="fprog(this)">TAFTA</button>
-        <button class="fpill" onclick="fprog(this)">WOFAN</button>
-        <button class="fpill" onclick="fprog(this)">Jobberman</button>
-        <button class="fpill" onclick="fprog(this)">Juriya</button>
-      </div>
-      <div class="card">
-        <div class="tabs" id="cht">
-          <div class="tab on" onclick="switchFeed('all',this)">All (6,284)</div>
-          <div class="tab" onclick="switchFeed('news',this)">News</div>
-          <div class="tab" onclick="switchFeed('twitter',this)">Twitter/X</div>
-          <div class="tab" onclick="switchFeed('facebook',this)">Facebook</div>
-          <div class="tab" onclick="switchFeed('tiktok',this)">TikTok</div>
-          <div class="tab" onclick="switchFeed('youtube',this)">YouTube</div>
-          <div class="tab" onclick="switchFeed('radio',this)">Radio/TV</div>
-          <div class="tab" onclick="switchFeed('blogs',this)">Blogs</div>
-        </div>
-        <div class="cb" style="padding-top:8px">
-          <div id="feed-all">
-            <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">PUN</div><div class="fbdy"><div class="ftit">Young Africa Works creates 42,000 jobs in Q2 — Mastercard Foundation report</div><div class="fmeta"><span>Punch · 38min · 3.1M</span><span class="fprog">YAW</span><span class="chip cpos">positive</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"I applied to Jobberman 3 times. Na who you know matter for this Nigeria"</div><div class="fmeta"><span>@KanoYouthVoice 44K · 1h</span><span class="fprog">Jobberman</span><span class="chip ccri">critical</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">RD</div><div class="fbdy"><div class="ftit">Tambari Radio Kano: WOFAN ICON 2 women speak in Hausa about land access challenges</div><div class="fmeta"><span>Radio · Kano · 3h</span><span class="fprog">WOFAN</span><span class="chip ccri">critical</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#f0f0ff;color:var(--pur)">TK</div><div class="fbdy"><div class="ftit">@FashionNaija TAFTA graduation — 280K views, "finally a program wey work"</div><div class="fmeta"><span>TikTok · 2h · 280K</span><span class="fprog">TAFTA</span><span class="chip cadv">advocacy</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">PRM</div><div class="fbdy"><div class="ftit">Babban Gona CAFI: 40% yield increase in Nasarawa farming communities</div><div class="fmeta"><span>Premium Times · 2h · 1.4M</span><span class="fprog">Babban Gona</span><span class="chip cpos">positive</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"Dem say Project Juriya go help us. We still dey wait. 6 months don pass"</div><div class="fmeta"><span>Twitter · Adamawa · 5h</span><span class="fprog">Juriya</span><span class="chip cskp">skeptical</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">CH</div><div class="fbdy"><div class="ftit">Fed. Ministry of Youth commends Mastercard Foundation Nigeria investment</div><div class="fmeta"><span>Channels TV · 5h · 9M</span><span class="chip cadv">advocacy</span></div></div></div>
-          </div>
-          <div id="feed-news" style="display:none">
-            <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">PUN</div><div class="fbdy"><div class="ftit">Young Africa Works creates 42,000 jobs in Q2 — Mastercard Foundation report</div><div class="fmeta"><span>Punch · 38min · 3.1M</span><span class="chip cpos">positive</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">PRM</div><div class="fbdy"><div class="ftit">Babban Gona CAFI: 40% yield increase in Nasarawa farming communities</div><div class="fmeta"><span>Premium Times · 2h · 1.4M</span><span class="chip cpos">positive</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">VAN</div><div class="fbdy"><div class="ftit">WOFAN ICON 2 empowers 1,200 women farmers across Kaduna, Kano, Bauchi</div><div class="fmeta"><span>Vanguard · 4h · 2.2M</span><span class="chip cpos">positive</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">CH</div><div class="fbdy"><div class="ftit">Federal Ministry of Youth commends Mastercard Foundation Nigeria strategy</div><div class="fmeta"><span>Channels TV · 5h · 9M</span><span class="chip cadv">advocacy</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">GRD</div><div class="fbdy"><div class="ftit">TAFTA graduates 200 fashion designers — training model praised</div><div class="fmeta"><span>Guardian NG · 6h · 1.8M</span><span class="chip cpos">positive</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">DLT</div><div class="fbdy"><div class="ftit">Northern farmers await Project Juriya — 6-month delay raises questions</div><div class="fmeta"><span>Daily Trust · 8h · 1.1M</span><span class="chip ccri">critical</span></div></div></div>
-          </div>
-          <div id="feed-twitter" style="display:none">
-            <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"I applied to Jobberman 3 times. Na who you know matter for this Nigeria" — 847 retweets</div><div class="fmeta"><span>@KanoYouthVoice · 44K · 1h</span><span class="chip ccri">critical</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"Young Africa Works just placed my cousin in tech. Program is real." — viral reply</div><div class="fmeta"><span>@LagosYouthConnect · 88K · 2h</span><span class="chip cpos">positive</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"TAFTA changed my life. Now I have 4 clients. Real talk." — 1.2K likes</div><div class="fmeta"><span>@TaftaGrad2024 · 3h</span><span class="chip cadv">advocacy</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"Mastercard Foundation programs are only helping Lagos and Abuja. What about Zamfara?"</div><div class="fmeta"><span>@NorthernYouthNg · 31K · 4h</span><span class="chip cskp">skeptical</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"Babban Gona wey dey help Northern farmers is the real MVP" — 2.4K retweets</div><div class="fmeta"><span>@NasarawaFarmKing · 8K · 7h</span><span class="chip cpos">positive</span></div></div></div>
-          </div>
-          <div id="feed-facebook" style="display:none">
-            <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">FB</div><div class="fbdy"><div class="ftit">"Our harvest this season is the best in 5 years. God bless Babban Gona" — 2,400 reactions</div><div class="fmeta"><span>Nasarawa Farmers Group · 3h</span><span class="chip cpos">positive</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">FB</div><div class="fbdy"><div class="ftit">WOFAN ICON 2 group: Women in Kaduna sharing land access grievances — 180 comments</div><div class="fmeta"><span>WOFAN Women Group · 4h</span><span class="chip ccri">critical</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">FB</div><div class="fbdy"><div class="ftit">TAFTA alumni graduation photos viral — "Fashion Future is real, not just talk" — 3,100 reactions</div><div class="fmeta"><span>TAFTA Alumni Group · 6h</span><span class="chip cadv">advocacy</span></div></div></div>
-          </div>
-          <div id="feed-tiktok" style="display:none">
-            <div class="fi"><div class="fsrc" style="background:#f0f0ff;color:var(--pur)">TK</div><div class="fbdy"><div class="ftit">@FashionNaija: TAFTA graduation — "From zero to designer in 6 months" — 280K views</div><div class="fmeta"><span>@FashionNaija 410K · 2h</span><span class="chip cadv">advocacy</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#f0f0ff;color:var(--pur)">TK</div><div class="fbdy"><div class="ftit">@AbaFashionGirl: "Ethnocentrique Fashion Future in Aba is 🔥 I sew my first collection" — 44K views</div><div class="fmeta"><span>@AbaFashionGirl 28K · 4h</span><span class="chip cpos">positive</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#f0f0ff;color:var(--pur)">TK</div><div class="fbdy"><div class="ftit">@LagosFarmerKid: "IITA I-Youth gave me my first farm equipment. Watch my harvest" — 61K views</div><div class="fmeta"><span>@LagosFarmerKid 52K · 6h</span><span class="chip cadv">advocacy</span></div></div></div>
-          </div>
-          <div id="feed-youtube" style="display:none">
-            <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">YT</div><div class="fbdy"><div class="ftit">Channels TV: "Young Africa Works — One Year Later" documentary — 124K views</div><div class="fmeta"><span>YouTube · Channels TV · 1d</span><span class="chip cpos">positive</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">YT</div><div class="fbdy"><div class="ftit">Vanguard TV: WOFAN women — "We need land, not just training" — 38K views</div><div class="fmeta"><span>YouTube · Vanguard TV · 2d</span><span class="chip ccri">critical</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">YT</div><div class="fbdy"><div class="ftit">TAFTA Official: 2024 Graduation Ceremony Full Video — 72K views</div><div class="fmeta"><span>YouTube · TAFTA Official · 3d</span><span class="chip cpos">positive</span></div></div></div>
-          </div>
-          <div id="feed-radio" style="display:none">
-            <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">RD</div><div class="fbdy"><div class="ftit">Tambari Radio Kano (Hausa): WOFAN ICON 2 women speak about land access — live interview</div><div class="fmeta"><span>Tambari Radio · Kano · Hausa · 3h</span><span class="chip ccri">critical</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">TV</div><div class="fbdy"><div class="ftit">Channels TV primetime: FMY commends Mastercard Foundation Nigeria — 9M broadcast reach</div><div class="fmeta"><span>Channels TV · National · 5h</span><span class="chip cadv">advocacy</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">RD</div><div class="fbdy"><div class="ftit">Radio Nigeria Kaduna: Community voices on Project Juriya delays (Hausa segment)</div><div class="fmeta"><span>Radio Nigeria · Kaduna · Hausa · 8h</span><span class="chip ccri">critical</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">RD</div><div class="fbdy"><div class="ftit">Brila FM Lagos: Jobberman YAW placement success stories — 3 participant guests</div><div class="fmeta"><span>Brila FM · Lagos · 6h</span><span class="chip cpos">positive</span></div></div></div>
-          </div>
-          <div id="feed-blogs" style="display:none">
-            <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">BLG</div><div class="fbdy"><div class="ftit">YouthCentral.ng: "How Jobberman YAW is actually changing lives in Lagos" — 8,400 reads</div><div class="fmeta"><span>YouthCentral.ng · 2h</span><span class="chip cpos">positive</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">BLG</div><div class="fbdy"><div class="ftit">AgroNigeria.com: "Babban Gona CAFI model — why it works where others failed"</div><div class="fmeta"><span>AgroNigeria.com · 4h</span><span class="chip cpos">positive</span></div></div></div>
-            <div class="fi"><div class="fsrc" style="background:#fef2f2;color:var(--red)">BLG</div><div class="fbdy"><div class="ftit">DevelopmentNG: "Why Mastercard Foundation Nigeria needs to communicate better in northern states" — opinion</div><div class="fmeta"><span>DevelopmentNG.com · 7h</span><span class="chip ccri">critical</span></div></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ALERTS -->
-    <div id="v-alerts" class="view">
-      <div style="margin-top:20px">
-        <div class="ac acr">
-          <div class="ac-top"><div class="ac-title" style="color:var(--red)">◬ CRITICAL — Jobberman "scam" narrative</div><span class="chip cneg">ACTIVE</span></div>
-          <div class="ac-desc">Twitter thread alleging Jobberman YAW is fraudulent gaining traction. 3 accounts (120K combined). "Jobberman scam" trending Kano & Lagos. Negative mentions up 190% in 8 hours.</div>
-          <div class="ac-meta">Young Africa Works · Twitter/X · 1h 42m ago</div>
-          <div style="display:flex;gap:7px;flex-wrap:wrap">
-            <button class="btn btn-red" style="font-size:11px" onclick="alertAI('Draft an urgent crisis response for Mastercard Foundation Nigeria on the Jobberman scam narrative on Twitter. Include key message, who posts it, a Twitter response in Nigerian English, and a Pidgin response for grassroots audiences.','aout1')">✦ Draft response</button>
-            <button class="btn" style="font-size:11px;color:var(--grn)">✓ Resolve</button>
-          </div>
-          <div id="aout1" class="ac-ai-out"></div>
-        </div>
-        <div class="ac acw">
-          <div class="ac-top"><div class="ac-title" style="color:var(--amb)">◬ MODERATE — WOFAN land access</div><span class="chip ccri">WATCH</span></div>
-          <div class="ac-desc">Hausa-language radio in Kano/Kaduna broadcasting land access complaints. Spreading to 4 Facebook groups.</div>
-          <div class="ac-meta">WOFAN ICON 2 · Radio + Facebook · 3h ago · Kaduna, Kano</div>
-          <button class="btn" style="font-size:11px" onclick="alertAI('Analyse the WOFAN ICON 2 land access narrative in Hausa-language radio in Kano and Kaduna. How serious is the risk and what communications response works for rural northern Nigerian women farmers?','aout2')">✦ Analyse + recommend</button>
-          <div id="aout2" class="ac-ai-out"></div>
-        </div>
-        <div class="ac acw">
-          <div class="ac-top"><div class="ac-title" style="color:var(--amb)">◬ MODERATE — Project Juriya delays</div><span class="chip cskp">WATCH</span></div>
-          <div class="ac-desc">"6 months don pass, we still dey wait" spreading in Adamawa community accounts. Low reach but growing fast.</div>
-          <div class="ac-meta">Project Juriya · Twitter/X · 5h ago · Adamawa, Nasarawa</div>
-          <button class="btn" style="font-size:11px" onclick="alertAI('How should Mastercard Foundation Nigeria address implementation delay narratives for Project Juriya in northern communities? Give specific strategy for English and Pidgin/Hausa audiences.','aout3')">✦ Strategy</button>
-          <div id="aout3" class="ac-ai-out"></div>
-        </div>
-        <div class="ac aco">
-          <div class="ac-top"><div class="ac-title" style="color:var(--grn)">◉ OPPORTUNITY — TAFTA TikTok viral</div><span class="chip cadv">AMPLIFY</span></div>
-          <div class="ac-desc">@FashionNaija TAFTA video at 280K views and climbing. 94% positive sentiment. Amplification window: 12–18 hours.</div>
-          <div class="ac-meta">TAFTA · TikTok · 2h ago · 280K and growing</div>
-          <button class="btn btn-gold" style="font-size:11px" onclick="alertAI('Draft 3 social posts for Mastercard Foundation Nigeria to amplify the viral TAFTA TikTok graduation moment: one Twitter, one LinkedIn, one Instagram caption. Youth-facing and authentic — not corporate.','aout4')">✦ Draft posts</button>
-          <div id="aout4" class="ac-ai-out"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROGRAMS -->
-    <div id="v-progs" class="view">
-      <div class="sec-lbl" style="margin-top:20px">All 15 Mastercard Foundation Nigeria programs</div>
-      <div class="pgrid">
-        <div class="pc"><div class="pcn">Young Africa Works</div><div class="pct">YOUTH · JOBBERMAN · 12 STATES</div><div class="pcs"><b>1,840</b> mentions · <span style="color:var(--amb)">74%</span> pos</div></div>
-        <div class="pc"><div class="pcn">Babban Gona</div><div class="pct">AGRIC · WOMEN · NORTH</div><div class="pcs"><b>892</b> · <span style="color:var(--grn)">81%</span> pos</div></div>
-        <div class="pc"><div class="pcn">TAFTA</div><div class="pct">CREATIVE · OGUN STATE</div><div class="pcs"><b>641</b> · <span style="color:var(--grn)">88%</span> pos</div></div>
-        <div class="pc"><div class="pcn">Jobberman</div><div class="pct">YOUTH JOBS · 12 STATES</div><div class="pcs"><b>580</b> · <span style="color:var(--red)">61%</span> pos 🔴</div></div>
-        <div class="pc"><div class="pcn">WOFAN ICON 2</div><div class="pct">WOMEN · 8 STATES</div><div class="pcs"><b>412</b> · <span style="color:var(--amb)">62%</span> pos</div></div>
-        <div class="pc"><div class="pcn">IITA I-Youth</div><div class="pct">AGRI-YOUTH · NORTH</div><div class="pcs"><b>318</b> · <span style="color:var(--grn)">77%</span> pos</div></div>
-        <div class="pc"><div class="pcn">Scholars Program</div><div class="pct">EDUCATION · NATIONWIDE</div><div class="pcs"><b>290</b> · <span style="color:var(--grn)">91%</span> pos</div></div>
-        <div class="pc"><div class="pcn">Project Juriya</div><div class="pct">AGRIC · ADAMAWA/KADUNA</div><div class="pcs"><b>184</b> · <span style="color:var(--red)">58%</span> pos 🔴</div></div>
-        <div class="pc"><div class="pcn">Ethnocentrique</div><div class="pct">FASHION · ABA</div><div class="pcs"><b>162</b> · <span style="color:var(--grn)">85%</span> pos</div></div>
-        <div class="pc"><div class="pcn">EDC Youth</div><div class="pct">ENTREPRENEUR · 36 STATES</div><div class="pcs"><b>148</b> · <span style="color:var(--grn)">79%</span> pos</div></div>
-        <div class="pc"><div class="pcn">FCMB Easylift</div><div class="pct">FINANCIAL · RURAL NG</div><div class="pcs"><b>124</b> · <span style="color:var(--grn)">72%</span> pos</div></div>
-        <div class="pc"><div class="pcn">Songhai Center</div><div class="pct">AGRO-BIZ · NATIONWIDE</div><div class="pcs"><b>98</b> · <span style="color:var(--grn)">83%</span> pos</div></div>
-        <div class="pc"><div class="pcn">Christian Aid SEPTP</div><div class="pct">WOMEN · LIVELIHOODS</div><div class="pcs"><b>88</b> · <span style="color:var(--grn)">76%</span> pos</div></div>
-        <div class="pc"><div class="pcn">WISE Program</div><div class="pct">CASSAVA · BADAGRY</div><div class="pcs"><b>76</b> · <span style="color:var(--grn)">80%</span> pos</div></div>
-        <div class="pc"><div class="pcn">TracTrac / ISSAM</div><div class="pct">AGRI-TECH · NASARAWA</div><div class="pcs"><b>64</b> · <span style="color:var(--amb)">65%</span> pos</div></div>
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">Mention volume by program</span></div>
-        <div class="cb"><div class="cw" style="height:200px"><canvas id="cProg"></canvas></div></div>
-      </div>
-    </div>
-
-    <!-- MORE VIEWS (accessed via More menu) -->
-
-    <!-- SENTIMENT -->
-    <div id="v-sent" class="view">
-      <div class="sec-lbl" style="margin-top:20px">Sentiment engine</div>
-      <div class="card">
-        <div class="ch"><span class="ct">Overall sentiment</span></div>
-        <div class="cb"><div class="cw" style="height:180px"><canvas id="cSentD"></canvas></div></div>
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">Nigerian Pidgin tracker</span></div>
-        <div class="cb" style="padding-top:8px">
-          <div class="pit" style="background:var(--g2);border-color:var(--gb)"><div><div class="pph">"Dem try well well"</div><div class="ptr">Genuine praise</div></div><span class="chip cpos">positive</span></div>
-          <div class="pit" style="background:rgba(13,148,136,.08);border-color:rgba(13,148,136,.2)"><div><div class="pph">"This one na real opportunity"</div><div class="ptr">Endorsement of program value</div></div><span class="chip cadv">advocacy</span></div>
-          <div class="pit" style="background:var(--a2);border-color:var(--ab)"><div><div class="pph">"We still dey wait"</div><div class="ptr">Frustration with delays</div></div><span class="chip ccri">critical</span></div>
-          <div class="pit" style="background:var(--a2);border-color:var(--ab)"><div><div class="pph">"E no go work like that"</div><div class="ptr">Skepticism about delivery</div></div><span class="chip cskp">skeptical</span></div>
-          <div class="pit" style="background:var(--r2);border-color:var(--rb)"><div><div class="pph">"Na who you know matter"</div><div class="ptr">Nepotism/unfair access concern</div></div><span class="chip cneg">negative</span></div>
-          <div class="pit" style="background:var(--r2);border-color:var(--rb)"><div><div class="pph">"Na wash dem dey do us"</div><div class="ptr">Accusation of deception</div></div><span class="chip cneg">misinfo risk</span></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">Sentiment by channel</span></div>
-        <div class="cb"><div class="cw" style="height:180px"><canvas id="cChanS"></canvas></div></div>
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">Sentiment trend — 30 days</span></div>
-        <div class="cb"><div class="cw" style="height:160px"><canvas id="cSentT"></canvas></div></div>
-      </div>
-    </div>
-
-    <!-- LANGUAGE -->
-    <div id="v-lang" class="view">
-      <div class="sec-lbl" style="margin-top:20px">Language intelligence</div>
-      <div class="card">
-        <div class="ch"><span class="ct">Language breakdown</span></div>
-        <div class="cb"><div class="cw" style="height:170px"><canvas id="cLang"></canvas></div></div>
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">Hausa expressions — Northern programs</span></div>
-        <div class="cb" style="padding-top:8px">
-          <div class="pit" style="background:var(--g2);border-color:var(--gb)"><div><div class="pph">"Aiki da kyau"</div><div class="ptr">Good work — positive programme signal</div></div><span class="chip cpos">positive</span></div>
-          <div class="pit" style="background:var(--g2);border-color:var(--gb)"><div><div class="pph">"Allah ya albarkace su"</div><div class="ptr">God bless them — strong community endorsement</div></div><span class="chip cadv">advocacy</span></div>
-          <div class="pit" style="background:var(--a2);border-color:var(--ab)"><div><div class="pph">"Muna jiran taimakon"</div><div class="ptr">We are still waiting for help</div></div><span class="chip ccri">critical</span></div>
-          <div class="pit" style="background:var(--r2);border-color:var(--rb)"><div><div class="pph">"Ba mu samu komai ba"</div><div class="ptr">We haven't received anything</div></div><span class="chip cneg">negative</span></div>
-          <div class="pit" style="background:var(--r2);border-color:var(--rb)"><div><div class="pph">"Karya ce kawai"</div><div class="ptr">It's only lies — misinfo risk</div></div><span class="chip cneg">misinfo</span></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">Yoruba expressions — Southwest programs</span></div>
-        <div class="cb" style="padding-top:8px">
-          <div class="pit" style="background:var(--g2);border-color:var(--gb)"><div><div class="pph">"E dara pupo"</div><div class="ptr">It is very good — strong endorsement</div></div><span class="chip cpos">positive</span></div>
-          <div class="pit" style="background:var(--g2);border-color:var(--gb)"><div><div class="pph">"Ise yi n ran wa lowo"</div><div class="ptr">This work is helping us</div></div><span class="chip cpos">positive</span></div>
-          <div class="pit" style="background:var(--a2);border-color:var(--ab)"><div><div class="pph">"A o ti gbo ohunkohun"</div><div class="ptr">We haven't heard anything</div></div><span class="chip ccri">critical</span></div>
-          <div class="pit" style="background:var(--a2);border-color:var(--ab)"><div><div class="pph">"Eni to mọ ni nse"</div><div class="ptr">"It's those who know people" — nepotism concern</div></div><span class="chip cskp">skeptical</span></div>
-        </div>
-      </div>
-      <div class="aip">
-        <div class="aih"><span class="aibg">AI</span><span class="ait">Language intelligence analysis</span></div>
-        <div class="aibo">
-          <div class="aio" id="ai-lang">Generate language-specific analysis.</div>
-          <div class="aipr">
-            <button class="apb" onclick="ai('What are Hausa-speaking communities in Kano, Kaduna, Adamawa saying about Mastercard Foundation programs like Babban Gona and WOFAN ICON 2? Translate key phrases and explain what they reveal about community trust.','ai-lang')">🟢 Hausa community sentiment</button>
-            <button class="apb" onclick="ai('What are Yoruba-speaking communities in Lagos, Oyo and Ogun saying about Mastercard Foundation programs like TAFTA and WISE? Translate key phrases and explain the differences from northern sentiment.','ai-lang')">🟡 Yoruba community sentiment</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- BENEFICIARY VOICE -->
-    <div id="v-voice" class="view">
-      <div class="sec-lbl" style="margin-top:20px">Participant voice</div>
-      <div class="info-box info-blue" style="margin-bottom:12px">This section separates what <strong>actual program participants</strong> are saying from what <strong>journalists</strong>, <strong>government</strong>, and <strong>influencers</strong> are saying. Participant voice is the most credible impact evidence for donors.</div>
-      <div class="card">
-        <div class="ch"><span class="ct">Who is talking?</span></div>
-        <div class="cb"><div class="cw" style="height:170px"><canvas id="cVoice"></canvas></div></div>
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">Participant quotes — direct voices</span></div>
-        <div class="cb" style="padding-top:8px">
-          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"TAFTA changed my life. I was hustling with no direction. Now I have 4 paying clients." — TAFTA 2024 graduate</div><div class="fmeta"><span class="fprog">TAFTA</span><span class="chip cpos">participant</span></div></div></div>
-          <div class="fi"><div class="fsrc" style="background:#f0fdf4;color:var(--grn)">FB</div><div class="fbdy"><div class="ftit">"Babban Gona CAFI don change my farm. My harvest this year na double of last year." — Nasarawa farmer</div><div class="fmeta"><span class="fprog">Babban Gona</span><span class="chip cpos">participant</span></div></div></div>
-          <div class="fi"><div class="fsrc" style="background:#f5f3ff;color:var(--pur)">LI</div><div class="fbdy"><div class="ftit">"YAW Jobberman placed me in my first tech role 3 months after graduation. Training was practical." — Lagos graduate</div><div class="fmeta"><span class="fprog">YAW</span><span class="chip cpos">participant</span></div></div></div>
-          <div class="fi"><div class="fsrc" style="background:#eff6ff;color:var(--blu)">𝕏</div><div class="fbdy"><div class="ftit">"WOFAN training is good but we still no get land. What is the point of knowing how to farm?" — Kaduna woman farmer</div><div class="fmeta"><span class="fprog">WOFAN</span><span class="chip ccri">participant</span></div></div></div>
-          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">WA</div><div class="fbdy"><div class="ftit">"Project Juriya: our cooperative waiting 6 months. Officers came once. Nothing after." — Adamawa cooperative (WhatsApp screengrab)</div><div class="fmeta"><span class="fprog">Juriya</span><span class="chip cneg">participant</span></div></div></div>
-        </div>
-      </div>
-      <div class="aip">
-        <div class="aih"><span class="aibg">AI</span><span class="ait">Participant voice analysis</span></div>
-        <div class="aibo">
-          <div class="aio" id="ai-voice">Generate participant voice analysis.</div>
-          <div class="aipr">
-            <button class="apb" onclick="ai('Compare what actual participants of Mastercard Foundation Nigeria programs are saying versus what journalists and government officials say. Where are the gaps? What does participant sentiment reveal that official coverage misses?','ai-voice')">◉ Participant vs media gap</button>
-            <button class="apb" onclick="ai('Write a donor-facing paragraph on participant voice evidence for the Mastercard Foundation Nigeria Q2 report. Use the direct quotes and explain why participant voice is the most credible form of impact evidence.','ai-voice')">◇ Donor evidence paragraph</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- COMPARE -->
-    <div id="v-compare" class="view">
-      <div class="sec-lbl" style="margin-top:20px">Period comparison</div>
-      <div class="fpills">
-        <button class="fpill on" onclick="setCmp(7,this)">This week</button>
-        <button class="fpill" onclick="setCmp(14,this)">2 weeks</button>
-        <button class="fpill" onclick="setCmp(30,this)">This month</button>
-      </div>
-      <div class="stat-scroll" style="margin-bottom:14px">
-        <div class="stat cr"><div class="stat-lbl">Mentions</div><div class="stat-val">6,284</div><div class="stat-delta su">↑ 24% vs prev</div><div style="font-size:10px;color:var(--t3);margin-top:2px">Was 5,068</div></div>
-        <div class="stat cg"><div class="stat-lbl">Reach</div><div class="stat-val">18.7M</div><div class="stat-delta su">↑ 31% vs prev</div><div style="font-size:10px;color:var(--t3);margin-top:2px">Was 14.3M</div></div>
-        <div class="stat ca"><div class="stat-lbl">Sentiment</div><div class="stat-val">71</div><div class="stat-delta sdn">↓ 6pts vs prev</div><div style="font-size:10px;color:var(--t3);margin-top:2px">Was 77</div></div>
-        <div class="stat co"><div class="stat-lbl">Media value</div><div class="stat-val">₦312M</div><div class="stat-delta su">↑ 18% vs prev</div><div style="font-size:10px;color:var(--t3);margin-top:2px">Was ₦264M</div></div>
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">Mentions — this vs previous period</span></div>
-        <div class="cb"><div class="cw" style="height:170px"><canvas id="cCmp"></canvas></div></div>
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">Program performance — period over period</span></div>
-        <div class="cb" style="padding-top:8px">
-          <div style="display:grid;grid-template-columns:1fr auto auto auto;gap:6px;align-items:center;font-size:10px;color:var(--t3);font-family:var(--m);padding:0 0 7px;border-bottom:1px solid var(--b)"><span>Program</span><span>Now</span><span>Before</span><span>Change</span></div>
-          <div class="cmp-row"><span>Young Africa Works</span><b>1,840</b><span style="color:var(--t3)">1,240</span><span class="chip cpos" style="font-size:10px">+48%</span></div>
-          <div class="cmp-row"><span>TAFTA</span><b>641</b><span style="color:var(--t3)">280</span><span class="chip cpos" style="font-size:10px">+129%</span></div>
-          <div class="cmp-row"><span>Babban Gona</span><b>892</b><span style="color:var(--t3)">810</span><span class="chip cpos" style="font-size:10px">+10%</span></div>
-          <div class="cmp-row"><span>Jobberman</span><b>580</b><span style="color:var(--t3)">390</span><span class="chip cneg" style="font-size:10px">+49% ⚠</span></div>
-          <div class="cmp-row"><span>WOFAN ICON 2</span><b>412</b><span style="color:var(--t3)">480</span><span class="chip ccri" style="font-size:10px">-14%</span></div>
-          <div class="cmp-row"><span>Project Juriya</span><b>184</b><span style="color:var(--t3)">92</span><span class="chip cneg" style="font-size:10px">+100% ⚠</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CALENDAR -->
-    <div id="v-calendar" class="view">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;margin-bottom:12px">
-        <div class="sec-lbl" style="margin-bottom:0">Campaign calendar</div>
-        <button class="btn btn-red" style="font-size:11px;padding:6px 11px">+ Add event</button>
-      </div>
-      <div class="card" style="margin-bottom:12px">
-        <div class="ch"><span class="ct">Upcoming events</span></div>
-        <div class="cb" style="padding-top:8px">
-          <div class="ev-card" style="background:var(--r2);border-color:var(--rb)"><div class="ev-name">Young Africa Works Cycle 3 Launch</div><div class="ev-meta">Press conference · Lagos · Expected reach 4M+</div><div class="ev-date">June 13 · Jobberman HQ, Victoria Island<span class="chip ccri" style="margin-left:8px">3 days</span></div></div>
-          <div class="ev-card" style="background:var(--a2);border-color:var(--ab)"><div class="ev-name">WOFAN ICON 2 Midterm Review</div><div class="ev-meta">Stakeholder event · Kaduna</div><div class="ev-date">June 18 · Kaduna State<span class="chip ccri" style="margin-left:8px">8 days</span></div></div>
-          <div class="ev-card" style="background:var(--g2);border-color:var(--gb)"><div class="ev-name">Babban Gona Harvest Festival</div><div class="ev-meta">Community event · Nasarawa · Media invited</div><div class="ev-date">June 22 · Nasarawa State<span class="chip cpos" style="margin-left:8px">12 days</span></div></div>
-          <div class="ev-card" style="background:var(--off);border-color:var(--b)"><div class="ev-name">Mastercard Foundation Nigeria Q2 Impact Report</div><div class="ev-meta">Press release · National · All programs</div><div class="ev-date">June 28 · Nationwide<span class="chip cneu" style="margin-left:8px">18 days</span></div></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">Past events — media impact</span></div>
-        <div class="cb" style="padding-top:8px">
-          <div class="ev-card" style="background:var(--g2);border-color:var(--gb)">
-            <div class="ev-name">TAFTA Graduation Ceremony</div>
-            <div class="ev-date">June 6 · Ogun State</div>
-            <div style="display:flex;gap:10px;margin-top:6px;font-size:12px;flex-wrap:wrap">
-              <span>Before: <b>280</b></span><span>After: <b style="color:var(--grn)">641</b></span><span class="chip cpos">+129%</span>
-            </div>
-          </div>
-          <div class="ev-card" style="background:var(--g2);border-color:var(--gb)">
-            <div class="ev-name">Babban Gona CAFI Season 2 Launch</div>
-            <div class="ev-date">May 28 · Nasarawa</div>
-            <div style="display:flex;gap:10px;margin-top:6px;font-size:12px;flex-wrap:wrap">
-              <span>Before: <b>410</b></span><span>After: <b style="color:var(--grn)">892</b></span><span class="chip cpos">+117%</span>
-            </div>
-          </div>
-          <div class="ev-card" style="background:var(--r2);border-color:var(--rb)">
-            <div class="ev-name">Jobberman YAW Cycle 2 Results</div>
-            <div class="ev-date">May 15 · Lagos</div>
-            <div style="display:flex;gap:10px;margin-top:6px;font-size:12px;flex-wrap:wrap">
-              <span>Before: <b>220</b></span><span>After: <b style="color:var(--red)">580</b></span><span class="chip cneg">+164% (mixed)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- WHATSAPP -->
-    <div id="v-whatsapp" class="view">
-      <div class="sec-lbl" style="margin-top:20px">WhatsApp intelligence</div>
-      <div class="info-box info-warn">⚠ WhatsApp cannot be automatically monitored — it is end-to-end encrypted. No tool in the world can crawl it. This section provides a structured manual intelligence protocol for your team.</div>
-      <div class="card">
-        <div class="ch"><span class="ct">Manual capture log — this week</span><button class="btn btn-red" style="font-size:11px;padding:4px 9px">+ Log</button></div>
-        <div class="cb" style="padding-top:8px">
-          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">WA</div><div class="fbdy"><div class="ftit">"Project Juriya: our cooperative waiting 6 months. Officers came once. Nothing after." — Adamawa farmers group</div><div class="fmeta"><span>WhatsApp · Adamawa · Manual · 2h</span><span class="fprog">Juriya</span><span class="chip cneg">negative</span></div></div></div>
-          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">WA</div><div class="fbdy"><div class="ftit">"Dem share fake Jobberman form for this group. Oga don verify — e no be original link." — Lagos youth group</div><div class="fmeta"><span>WhatsApp · Lagos · Manual · 5h</span><span class="fprog">Jobberman</span><span class="chip cneg">misinfo</span></div></div></div>
-          <div class="fi"><div class="fsrc" style="background:#fefce8;color:var(--amb)">WA</div><div class="fbdy"><div class="ftit">"TAFTA 2025 applications open — my sister just got accepted. Real program, not scam" — Ogun youth group</div><div class="fmeta"><span>WhatsApp · Ogun · Manual · 1d</span><span class="fprog">TAFTA</span><span class="chip cpos">positive</span></div></div></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">Monitoring protocol</span></div>
-        <div class="cb" style="padding-top:8px">
-          <div class="wa-step"><div class="wa-step-t">Step 1 — Join key groups</div><div class="wa-step-d">Participant alumni, journalist groups, community/LGA groups, youth associations in program states</div></div>
-          <div class="wa-step" style="border-color:var(--blu)"><div class="wa-step-t">Step 2 — Daily 15-min scan</div><div class="wa-step-d">One team member per day scans groups for program mentions and logs them here</div></div>
-          <div class="wa-step" style="border-color:var(--amb)"><div class="wa-step-t">Step 3 — Screenshot + log</div><div class="wa-step-d">Screenshot relevant messages, note group type and state, add to log above</div></div>
-          <div class="wa-step" style="border-color:var(--red)"><div class="wa-step-t">Step 4 — Escalate misinfo immediately</div><div class="wa-step-d">Fake forms, fraudulent links, false claims — raise as crisis alert within 1 hour</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- REPORTS -->
-    <div id="v-report" class="view">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:20px;margin-bottom:16px;flex-wrap:wrap;gap:8px">
-        <div>
-          <div style="font-size:18px;font-weight:600;color:var(--t)">Media Monitoring Report</div>
-          <div style="font-size:12px;color:var(--t3);margin-top:2px">Mastercard Foundation Nigeria · Imaginarium Marketing Communications (IMC IMPACT)</div>
-        </div>
-        <div style="display:flex;gap:7px;flex-wrap:wrap">
-          <select id="rpt-month" style="background:var(--w);border:1px solid var(--b2);border-radius:6px;padding:6px 10px;font-size:12px;font-family:var(--f);color:var(--t2)">
-            <option>June 2026</option><option selected>May 2026</option><option>April 2026</option><option>March 2026</option>
-          </select>
-          <button class="btn btn-red" onclick="exportReport()" style="font-size:12px">⬇ Download PDF Report</button>
-          <button class="btn" onclick="exportCSV()" style="font-size:12px">⬇ Export CSV</button>
-        </div>
-      </div>
-
-      <!-- AT A GLANCE -->
-      <div style="background:var(--w);border:1px solid var(--b);border-radius:12px;padding:18px 20px;margin-bottom:13px;box-shadow:var(--sh)">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);font-family:var(--m);margin-bottom:14px">AT A GLANCE</div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
-          <div style="background:var(--off);border-radius:9px;padding:14px;text-align:center">
-            <div style="font-size:32px;font-weight:300;color:var(--amb);letter-spacing:-1px">17</div>
-            <div style="font-size:11px;color:var(--t3);margin-top:4px">Total Media Mentions</div>
-          </div>
-          <div style="background:var(--off);border-radius:9px;padding:14px;text-align:center">
-            <div style="font-size:32px;font-weight:300;color:var(--blu);letter-spacing:-1px">5</div>
-            <div style="font-size:11px;color:var(--t3);margin-top:4px">Programs Featured</div>
-          </div>
-          <div style="background:var(--off);border-radius:9px;padding:14px;text-align:center">
-            <div style="font-size:32px;font-weight:300;color:var(--grn);letter-spacing:-1px">7</div>
-            <div style="font-size:11px;color:var(--t3);margin-top:4px">Tier 1 Outlets</div>
-          </div>
-          <div style="background:var(--off);border-radius:9px;padding:14px;text-align:center">
-            <div style="font-size:32px;font-weight:300;color:var(--red);letter-spacing:-1px">16:1</div>
-            <div style="font-size:11px;color:var(--t3);margin-top:4px">Positive : Negative</div>
-          </div>
-        </div>
-        <div style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);font-family:var(--m);margin-bottom:9px">MENTIONS BY OUTLET</div>
-        <div style="display:flex;gap:7px;flex-wrap:wrap">
-          <div style="background:var(--w);border:1px solid var(--b);border-radius:8px;padding:9px 14px;text-align:center;min-width:80px"><div style="font-size:11px;color:var(--t2)">BusinessDay</div><div style="font-size:22px;font-weight:500;color:var(--amb)">4</div></div>
-          <div style="background:var(--w);border:1px solid var(--b);border-radius:8px;padding:9px 14px;text-align:center;min-width:80px"><div style="font-size:11px;color:var(--t2)">The Guardian</div><div style="font-size:22px;font-weight:500;color:var(--grn)">2</div></div>
-          <div style="background:var(--w);border:1px solid var(--b);border-radius:8px;padding:9px 14px;text-align:center;min-width:80px"><div style="font-size:11px;color:var(--t2)">Punch</div><div style="font-size:22px;font-weight:500;color:var(--t2)">1</div></div>
-          <div style="background:var(--w);border:1px solid var(--b);border-radius:8px;padding:9px 14px;text-align:center;min-width:80px"><div style="font-size:11px;color:var(--t2)">ThisDay Live</div><div style="font-size:22px;font-weight:500;color:var(--t2)">1</div></div>
-          <div style="background:var(--w);border:1px solid var(--b);border-radius:8px;padding:9px 14px;text-align:center;min-width:80px"><div style="font-size:11px;color:var(--t2)">Bella Naija</div><div style="font-size:22px;font-weight:500;color:var(--t2)">1</div></div>
-          <div style="background:var(--w);border:1px solid var(--b);border-radius:8px;padding:9px 14px;text-align:center;min-width:80px"><div style="font-size:11px;color:var(--t2)">Leadership</div><div style="font-size:22px;font-weight:500;color:var(--t2)">1</div></div>
-          <div style="background:var(--w);border:1px solid var(--b);border-radius:8px;padding:9px 14px;text-align:center;min-width:80px"><div style="font-size:11px;color:var(--t2)">Other</div><div style="font-size:22px;font-weight:500;color:var(--t3)">5</div></div>
-        </div>
-        <div style="font-size:12px;color:var(--t3);font-style:italic;margin-top:11px;padding-top:11px;border-top:1px solid var(--b)">BusinessDay contributed 4 of 17 mentions. One negative opinion piece identified — see Priority Alert below.</div>
-      </div>
-
-      <!-- EDITORIAL SUMMARY -->
-      <div style="background:var(--w);border:1px solid var(--b);border-radius:12px;padding:18px 20px;margin-bottom:13px;box-shadow:var(--sh)">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);font-family:var(--m);margin-bottom:14px">EDITORIAL SUMMARY</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
-          <div style="background:var(--off);border-radius:9px;padding:14px;border-top:3px solid var(--amb)">
-            <div style="font-size:22px;margin-bottom:8px">↗</div>
-            <div style="font-size:13px;font-weight:600;color:var(--amb);margin-bottom:8px">A Strong Month</div>
-            <div style="font-size:12px;color:var(--t2);line-height:1.65">May 2026 was driven by two major program milestones — the Fashion Future Program pilot conclusion in Aba and the inaugural Jobberman Partners Convening in Lagos — both generating sustained multi-outlet coverage.</div>
-          </div>
-          <div style="background:var(--off);border-radius:9px;padding:14px;border-top:3px solid var(--grn)">
-            <div style="font-size:22px;margin-bottom:8px">☺</div>
-            <div style="font-size:13px;font-weight:600;color:var(--grn);margin-bottom:8px">100% Positive Tone</div>
-            <div style="font-size:12px;color:var(--t2);line-height:1.65">16 of 17 mentions were positive. One negative opinion piece in The Nation (29 May) directly names Mastercard Foundation as partner of Project Juriya in Southern Kaduna, with accountability questions raised.</div>
-          </div>
-          <div style="background:var(--off);border-radius:9px;padding:14px;border-top:3px solid var(--blu)">
-            <div style="font-size:22px;margin-bottom:8px">▦</div>
-            <div style="font-size:13px;font-weight:600;color:var(--blu);margin-bottom:8px">BusinessDay Dominates</div>
-            <div style="font-size:12px;color:var(--t2);line-height:1.65">BusinessDay contributed 4 pieces across multiple program areas, reflecting strong alignment between the Foundation's work and its readership of business leaders, investors, and policymakers.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- COVERAGE BY PROGRAM -->
-      <div style="background:var(--w);border:1px solid var(--b);border-radius:12px;padding:18px 20px;margin-bottom:13px;box-shadow:var(--sh)">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);font-family:var(--m);margin-bottom:14px">COVERAGE BY PROGRAM</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">
-          <div style="border:1px solid var(--b);border-radius:9px;padding:14px;border-top:3px solid var(--grn)">
-            <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-size:28px;font-weight:300;color:var(--grn)">5</span><span style="font-size:11px;color:var(--t3)">mentions</span></div>
-            <div style="font-size:13px;font-weight:600;margin-bottom:4px">Fashion Future Program</div>
-            <div style="font-size:11px;color:var(--t3);margin-bottom:5px">Pulse NG · Guardian · Punch · Leadership · Bella Naija</div>
-            <div style="font-size:11px;color:var(--t2);margin-bottom:7px">10k+ jobs · 4k+ MSMEs · 10k+ reached</div>
-            <a href="https://guardian.ng/business-services/fashion-future-programme-creates-10000-jobs-in-aba/" target="_blank" style="font-size:10px;color:var(--blu);word-break:break-all;text-decoration:none">↗ guardian.ng — Fashion Future jobs in Aba</a>
-          </div>
-          <div style="border:1px solid var(--b);border-radius:9px;padding:14px;border-top:3px solid var(--amb)">
-            <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-size:28px;font-weight:300;color:var(--amb)">4</span><span style="font-size:11px;color:var(--t3)">mentions</span></div>
-            <div style="font-size:13px;font-weight:600;margin-bottom:4px">Jobberman / Young Africa Works</div>
-            <div style="font-size:11px;color:var(--t3);margin-bottom:5px">BusinessDay · Guardian · ThisDay</div>
-            <div style="font-size:11px;color:var(--t2);margin-bottom:7px">1.1M jobs · Women & PWDs focused</div>
-            <a href="https://businessday.ng/life/article/connecting-job-seekers-to-employers-vital-to-nigerias-labour-market-economic-development-jobberman/" target="_blank" style="font-size:10px;color:var(--blu);word-break:break-all;text-decoration:none">↗ businessday.ng — Jobberman labour market</a>
-          </div>
-          <div style="border:1px solid var(--b);border-radius:9px;padding:14px;border-top:3px solid var(--blu)">
-            <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-size:28px;font-weight:300;color:var(--blu)">2</span><span style="font-size:11px;color:var(--t3)">mentions</span></div>
-            <div style="font-size:13px;font-weight:600;margin-bottom:4px">Scholars Program</div>
-            <div style="font-size:11px;color:var(--t3);margin-bottom:5px">Nigeria Startup News · MySchoolGist</div>
-            <div style="font-size:11px;color:var(--t2);margin-bottom:7px">Awareness + PAU 2026 applications</div>
-            <a href="https://myschoolgist.com/scholarships/pau-mastercard-scholarship-186557/" target="_blank" style="font-size:10px;color:var(--blu);word-break:break-all;text-decoration:none">↗ myschoolgist.com — PAU scholarship</a>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">
-          <div style="border:1px solid var(--b);border-radius:8px;padding:11px"><div style="font-size:12px;font-weight:600;margin-bottom:2px">Songhai Agricultural</div><div style="font-size:18px;font-weight:300;color:var(--t2);margin-bottom:4px">1 mention</div><div style="font-size:11px;color:var(--t3)">Ministry of Info · AIRBDA trainees</div><a href="https://fmino.gov.ng/airbda-welcomes-another-batch-of-songhai-mastercard-foundation-batch-trainees/" target="_blank" style="font-size:10px;color:var(--blu);text-decoration:none;display:block;margin-top:5px">↗ fmino.gov.ng</a></div>
-          <div style="border:1px solid var(--b);border-radius:8px;padding:11px"><div style="font-size:12px;font-weight:600;margin-bottom:2px">Africa Growth Fund</div><div style="font-size:18px;font-weight:300;color:var(--t2);margin-bottom:4px">1 mention</div><div style="font-size:11px;color:var(--t3)">BusinessDay · $200M Fund</div><a href="https://businessday.ng/companies/article/sabou-capital-targets-africas-financing-gap-with-funding-to-scale-smes/" target="_blank" style="font-size:10px;color:var(--blu);text-decoration:none;display:block;margin-top:5px">↗ businessday.ng</a></div>
-          <div style="border:1px solid var(--b);border-radius:8px;padding:11px"><div style="font-size:12px;font-weight:600;margin-bottom:2px">BTS Research</div><div style="font-size:18px;font-weight:300;color:var(--t2);margin-bottom:4px">1 mention</div><div style="font-size:11px;color:var(--t3)">UNILAG · 7 countries creative sector</div><a href="https://unilag.edu.ng/voices-visibility-and-inclusion-unilag-led-research/" target="_blank" style="font-size:10px;color:var(--blu);text-decoration:none;display:block;margin-top:5px">↗ unilag.edu.ng</a></div>
-          <div style="border:1px solid var(--b);border-radius:8px;padding:11px"><div style="font-size:12px;font-weight:600;margin-bottom:2px">Research Citation</div><div style="font-size:18px;font-weight:300;color:var(--t2);margin-bottom:4px">1 mention</div><div style="font-size:11px;color:var(--t3)">Employment Outlook 2026</div><a href="https://www.afterschoolafrica.com/116903/which-10-ai-skills-make-african-graduates-more-employable-than-a-degree/" target="_blank" style="font-size:10px;color:var(--blu);text-decoration:none;display:block;margin-top:5px">↗ afterschoolafrica.com</a></div>
-        </div>
-      </div>
-
-      <!-- STORY OF THE MONTH -->
-      <div style="background:var(--w);border:1px solid var(--b);border-radius:12px;padding:18px 20px;margin-bottom:13px;box-shadow:var(--sh)">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);font-family:var(--m);margin-bottom:6px">STORY OF THE MONTH</div>
-        <div style="font-size:15px;font-weight:600;color:var(--t);margin-bottom:14px">Fashion Future Program — Pilot Phase Closes in Aba</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px">
-          <div style="background:var(--g2);border:1px solid var(--gb);border-radius:9px;padding:14px;text-align:center">
-            <div style="font-size:26px;font-weight:500;color:var(--grn)">10,379</div>
-            <div style="font-size:11px;color:var(--t2);margin-top:4px">People Reached</div>
-          </div>
-          <div style="background:var(--g2);border:1px solid var(--gb);border-radius:9px;padding:14px;text-align:center">
-            <div style="font-size:26px;font-weight:500;color:var(--grn)">10,000+</div>
-            <div style="font-size:11px;color:var(--t2);margin-top:4px">Jobs Created</div>
-          </div>
-          <div style="background:var(--g2);border:1px solid var(--gb);border-radius:9px;padding:14px;text-align:center">
-            <div style="font-size:26px;font-weight:500;color:var(--grn)">4,000+</div>
-            <div style="font-size:11px;color:var(--t2);margin-top:4px">MSMEs Supported</div>
-          </div>
-        </div>
-        <div style="font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">COVERAGE SUMMARY</div>
-        <div style="display:flex;gap:7px;flex-wrap:wrap">
-          <span style="background:var(--off2);color:var(--t2);padding:6px 13px;border-radius:6px;font-size:12px">Pulse NG</span>
-          <span style="background:var(--off2);color:var(--t2);padding:6px 13px;border-radius:6px;font-size:12px">The Guardian</span>
-          <span style="background:var(--off2);color:var(--t2);padding:6px 13px;border-radius:6px;font-size:12px">Punch Newspapers</span>
-          <span style="background:var(--off2);color:var(--t2);padding:6px 13px;border-radius:6px;font-size:12px">Leadership</span>
-          <span style="background:var(--off2);color:var(--t2);padding:6px 13px;border-radius:6px;font-size:12px">Bella Naija</span>
-        </div>
-      </div>
-
-      <!-- PRIORITY ALERT -->
-      <div style="background:rgba(217,119,6,.06);border:1px solid var(--ab);border-radius:12px;padding:18px 20px;margin-bottom:13px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-          <span style="font-size:18px">⚠</span>
-          <span style="font-size:12px;font-weight:700;color:var(--amb);text-transform:uppercase;letter-spacing:.08em">Priority Alert — Negative Coverage</span>
-        </div>
-        <div style="background:rgba(217,119,6,.08);border-radius:8px;padding:11px 14px;margin-bottom:12px">
-          <div style="font-size:13px;font-weight:600;color:var(--amb)">"Demo Farms or Graveyards?" — The Nation | Opinion by Francis Damina | 29 May 2026</div>
-          <div style="font-size:11px;color:var(--t3);font-style:italic;margin-top:4px">Note: Article removed from The Nation's main page. URL remains live and indexed: thenationonlineng.net/demo-farms-or-graveyards/</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-          <div style="background:var(--w);border-radius:8px;padding:13px;border-left:3px solid var(--amb)">
-            <div style="font-size:12px;font-weight:600;color:var(--amb);margin-bottom:7px">Direct Attribution</div>
-            <div style="font-size:12px;color:var(--t2);line-height:1.65">Mastercard Foundation is named as partner of Project Juriya, implemented through SCL, in Southern Kaduna. Demo farms across Anchuna, Kamuru, Ungwan Akau, Gumel, and Assako described as abandoned — rusted signboards, waist-high weeds, no meaningful agri outcomes.</div>
-          </div>
-          <div style="background:var(--w);border-radius:8px;padding:13px;border-left:3px solid var(--red)">
-            <div style="font-size:12px;font-weight:600;color:var(--red);margin-bottom:7px">Community Accountability Demand</div>
-            <div style="font-size:12px;color:var(--t2);line-height:1.65">Communities are explicitly calling on Mastercard Foundation to review SCL's performance and support land reclamation if contractual terms have been breached. The article asks: did the Foundation cut funding, change the plan, or did SCL short-change communities?</div>
-          </div>
-        </div>
-        <button class="btn btn-red" style="font-size:11px" onclick="alertAI('Draft an urgent communications response strategy for Mastercard Foundation Nigeria addressing the negative opinion piece in The Nation about Project Juriya demo farms in Southern Kaduna being abandoned. Include: key holding message, recommended spokesperson, what to say publicly, what to say to the journalist, and internal verification steps to take before any public response.','rpt-alert-out')">✦ Draft response strategy</button>
-        <div id="rpt-alert-out" style="display:none;margin-top:11px;padding:13px;background:var(--w);border:1px solid var(--b2);border-radius:8px;font-size:12px;line-height:1.75;color:var(--t2)"></div>
-      </div>
-
-      <!-- ECOSYSTEM CONTEXT -->
-      <div style="background:var(--w);border:1px solid var(--b);border-radius:12px;padding:18px 20px;margin-bottom:13px;box-shadow:var(--sh)">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);font-family:var(--m)">ECOSYSTEM CONTEXT</div>
-          <div style="font-size:11px;color:var(--amb);font-style:italic;font-weight:500">Narratives to Watch</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="padding:11px 14px;border-radius:8px;border:1px solid var(--b);border-left:3px solid var(--amb)"><div style="font-size:13px;font-weight:600;margin-bottom:4px">EU + UNDP: Nigeria Youth Skills Gap</div><div style="font-size:12px;color:var(--t2);line-height:1.6">Multilateral momentum in the same space as Young Africa Works — useful ecosystem framing for Insight Briefs.</div></div>
-          <div style="padding:11px 14px;border-radius:8px;border:1px solid var(--b);border-left:3px solid var(--blu)"><div style="font-size:13px;font-weight:600;margin-bottom:4px">FG + UK TVET & Apprenticeship Partnership</div><div style="font-size:12px;color:var(--t2);line-height:1.6">Government doubling down on technical skills. Strong policy backdrop for the Foundation's workforce programming.</div></div>
-          <div style="padding:11px 14px;border-radius:8px;border:1px solid var(--b);border-left:3px solid var(--red)"><div style="font-size:13px;font-weight:600;margin-bottom:4px">AI & Nigerian Youth — TheCable</div><div style="font-size:12px;color:var(--t2);line-height:1.6">Emerging debate on whether AI is opportunity or new inequality. Likely to intensify.</div></div>
-          <div style="padding:11px 14px;border-radius:8px;border:1px solid var(--b);border-left:3px solid var(--t3)"><div style="font-size:13px;font-weight:600;margin-bottom:4px">Africa's Digital Economy at Risk — BusinessDay/Microsoft</div><div style="font-size:12px;color:var(--t2);line-height:1.6">Microsoft warns Africa's digital ambitions may fail without stronger public systems. Relevant to digital workforce work.</div></div>
-          <div style="padding:11px 14px;border-radius:8px;border:1px solid var(--b);border-left:3px solid var(--grn)"><div style="font-size:13px;font-weight:600;margin-bottom:4px">IITA Partner Visibility — Punch + TheCable</div><div style="font-size:12px;color:var(--t2);line-height:1.6">Two positive IITA hits in one week: youth horticultural training in Oyo + farm inputs distribution. Strong partner momentum.</div></div>
-        </div>
-      </div>
-
-      <!-- SUMMARY & CONCLUSION -->
-      <div style="background:var(--w);border:1px solid var(--b);border-radius:12px;padding:18px 20px;margin-bottom:13px;box-shadow:var(--sh)">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);font-family:var(--m);margin-bottom:4px">SUMMARY & CONCLUSION</div>
-        <div style="font-size:11px;color:var(--t3);margin-bottom:14px">Executive overview of program impact and ecosystem narratives</div>
-        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px">
-          <div style="text-align:center;padding:11px;border:1px solid var(--b);border-radius:8px"><div style="font-size:22px;font-weight:300;color:var(--t)">17</div><div style="font-size:10px;color:var(--t3);margin-top:3px">Total Mentions</div></div>
-          <div style="text-align:center;padding:11px;border:1px solid var(--b);border-radius:8px"><div style="font-size:22px;font-weight:300;color:var(--grn)">16</div><div style="font-size:10px;color:var(--t3);margin-top:3px">Positive</div></div>
-          <div style="text-align:center;padding:11px;border:1px solid var(--b);border-radius:8px"><div style="font-size:22px;font-weight:300;color:var(--red)">1</div><div style="font-size:10px;color:var(--t3);margin-top:3px">Priority Alert</div></div>
-          <div style="text-align:center;padding:11px;border:1px solid var(--b);border-radius:8px"><div style="font-size:22px;font-weight:300;color:var(--blu)">94%</div><div style="font-size:10px;color:var(--t3);margin-top:3px">Positive Rate</div></div>
-          <div style="text-align:center;padding:11px;border:1px solid var(--b);border-radius:8px"><div style="font-size:13px;font-weight:500;color:var(--t)">BusinessDay</div><div style="font-size:10px;color:var(--t3);margin-top:3px">Top Outlet</div></div>
-        </div>
-        <div style="font-size:12px;color:var(--t2);font-style:italic;line-height:1.65;margin-bottom:14px;padding:11px 13px;background:var(--off);border-radius:7px">May 2026 was a strong month of earned media visibility for Mastercard Foundation — driven by two major program milestones, 17 total mentions across national and digital outlets, and one priority alert requiring immediate escalation.</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:11px 13px;border-radius:8px;border:1px solid var(--b);border-left:3px solid var(--grn)"><div style="font-size:12px;font-weight:600;color:var(--grn);margin-bottom:4px">1. Strong month for earned media</div><div style="font-size:12px;color:var(--t2)">Genuine program impact across BusinessDay, The Guardian, Punch, and Bella Naija.</div></div>
-          <div style="padding:11px 13px;border-radius:8px;border:1px solid var(--b);border-left:3px solid var(--grn)"><div style="font-size:12px;font-weight:600;color:var(--grn);margin-bottom:4px">2. FFP Aba is the standout story</div><div style="font-size:12px;color:var(--t2)">10,000+ jobs created; 5 Tier 1 mentions. Anchoring national scale-up comms.</div></div>
-          <div style="padding:11px 13px;border-radius:8px;border:1px solid var(--b);border-left:3px solid var(--blu)"><div style="font-size:12px;font-weight:600;color:var(--blu);margin-bottom:4px">3. Jobberman Convening delivered</div><div style="font-size:12px;color:var(--t2)">1.1M placements in 6 years. Multi-outlet coverage provides powerful anchor stats.</div></div>
-          <div style="padding:11px 13px;border-radius:8px;border:1px solid var(--b);border-left:3px solid var(--blu)"><div style="font-size:12px;font-weight:600;color:var(--blu);margin-bottom:4px">4. Africa Growth Fund</div><div style="font-size:12px;color:var(--t2)">$200M fund coverage (Sabou Capital). Requires follow-up with team.</div></div>
-          <div style="padding:11px 13px;border-radius:8px;border:1px solid var(--b);border-left:3px solid var(--red)"><div style="font-size:12px;font-weight:600;color:var(--red);margin-bottom:4px">5. Project Juriya — escalate now</div><div style="font-size:12px;color:var(--t2)">Negative opinion piece in The Nation requires factual SCL verification.</div></div>
-          <div style="padding:11px 13px;border-radius:8px;border:1px solid var(--b);border-left:3px solid var(--t3)"><div style="font-size:12px;font-weight:600;color:var(--t2);margin-bottom:4px">6. Two ecosystem narratives to watch</div><div style="font-size:12px;color:var(--t2)">AI & youth employment and Ginger Blight crisis likely to intensify in media.</div></div>
-        </div>
-      </div>
-
-      <!-- AI REPORT GENERATOR -->
-      <div class="aip" style="margin-bottom:20px">
-        <div class="aih"><span class="aibg">AI</span><span class="ait">Generate detailed report sections — IMC IMPACT format</span></div>
-        <div class="aibo">
-          <div class="aio" id="ai-report">Click a section below to generate a fully detailed report section matching the IMC IMPACT monitoring report format.</div>
-          <div class="aipr">
-            <button class="apb" onclick="ai('Write a complete At a Glance section for a Mastercard Foundation Nigeria media monitoring report. Format: total mentions count, programs featured count, Tier 1 outlets count, positive-to-negative ratio, and a breakdown of mentions by outlet with exact numbers. Include a one-line editorial note at the bottom.','ai-report')">📊 Generate At a Glance</button>
-            <button class="apb" onclick="ai('Write an Editorial Summary section for a Mastercard Foundation Nigeria media monitoring report. Format: three narrative cards with headers and body text covering (1) overall month assessment, (2) sentiment tone breakdown, and (3) top outlet analysis. Match the professional and analytical tone of IMC IMPACT reports.','ai-report')">✍ Generate Editorial Summary</button>
-            <button class="apb" onclick="ai('Write a Coverage by Program section for Mastercard Foundation Nigeria. For each active program include: mention count, which specific outlets covered it, key impact statistics, and the significance of the coverage for the Foundation. Include live article URLs where available.','ai-report')">◉ Generate Coverage by Program</button>
-            <button class="apb" onclick="ai('Write an Ecosystem Context — Narratives to Watch — section for Mastercard Foundation Nigeria. Identify 5 current external media narratives in Nigerian and African media that intersect with or could affect the Foundation programs. Include relevance explanation for each narrative.','ai-report')">🌐 Generate Ecosystem Context</button>
-            <button class="apb" onclick="ai('Write a Summary and Conclusion section for Mastercard Foundation Nigeria monthly media monitoring report. Include: a 5-metric stats row (total mentions, positive count, priority alerts, positive rate, top outlet), one executive narrative paragraph in italics, and 6 numbered action points covering wins, risks, and required follow-up items.','ai-report')">◇ Generate Summary & Conclusion</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- GEO -->
-    <div id="v-geo" class="view">
-      <div class="sec-lbl" style="margin-top:20px">Geographic intelligence</div>
-      <div class="d2">
-        <div class="card">
-          <div class="ch"><span class="ct">Top states by volume</span></div>
-          <div class="cb"><div class="cw" style="height:260px"><canvas id="cState"></canvas></div></div>
-        </div>
-        <div class="card">
-          <div class="ch"><span class="ct">Sentiment by geopolitical zone</span></div>
-          <div class="cb"><div class="cw" style="height:260px"><canvas id="cZone"></canvas></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CRAWLER -->
-    <div id="v-crawler" class="view">
-      <div class="sec-lbl" style="margin-top:20px">Crawler status</div>
-      <div style="background:var(--g2);border:1px solid var(--gb);border-radius:10px;padding:11px 13px;margin-bottom:12px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--t2)">
-        <div style="width:8px;height:8px;border-radius:50%;background:var(--grn);box-shadow:0 0 6px var(--grn);animation:pulse 1.5s infinite;flex-shrink:0"></div>
-        Crawler <strong style="color:var(--grn)">active</strong> · Last run 18 min ago · 12 sources · 0 errors
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">Source health</span></div>
-        <div class="cb" style="padding-top:8px">
-          <div class="src-row"><span>Punch Newspapers</span><div style="display:flex;gap:6px;align-items:center"><span style="font-size:10px;color:var(--t3);font-family:var(--m)">18 articles · 2 matches</span><span class="chip cpos">✓ OK</span></div></div>
-          <div class="src-row"><span>Premium Times</span><div style="display:flex;gap:6px;align-items:center"><span style="font-size:10px;color:var(--t3);font-family:var(--m)">24 articles · 4 matches</span><span class="chip cpos">✓ OK</span></div></div>
-          <div class="src-row"><span>Vanguard</span><div style="display:flex;gap:6px;align-items:center"><span style="font-size:10px;color:var(--t3);font-family:var(--m)">21 articles · 3 matches</span><span class="chip cpos">✓ OK</span></div></div>
-          <div class="src-row"><span>Daily Trust</span><div style="display:flex;gap:6px;align-items:center"><span style="font-size:10px;color:var(--t3);font-family:var(--m)">16 articles · 5 matches</span><span class="chip cpos">✓ OK</span></div></div>
-          <div class="src-row" style="background:var(--r2)"><span>Sahara Reporters</span><div style="display:flex;gap:6px;align-items:center"><span style="font-size:10px;color:var(--t3);font-family:var(--m)">Timeout error</span><span class="chip cneg">⚠ Retry</span></div></div>
-          <div class="src-row"><span>Channels TV</span><div style="display:flex;gap:6px;align-items:center"><span style="font-size:10px;color:var(--t3);font-family:var(--m)">12 articles · 2 matches</span><span class="chip cpos">✓ OK</span></div></div>
-          <div class="src-row"><span>BusinessDay</span><div style="display:flex;gap:6px;align-items:center"><span style="font-size:10px;color:var(--t3);font-family:var(--m)">19 articles · 1 match</span><span class="chip cpos">✓ OK</span></div></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">How to run crawler</span></div>
-        <div class="cb" style="padding-top:8px">
-          <div class="wa-step"><div class="wa-step-t">Install Python</div><div class="wa-step-d" style="font-family:var(--m);font-size:11px">python --version</div></div>
-          <div class="wa-step" style="border-color:var(--blu)"><div class="wa-step-t">Install libraries</div><div class="wa-step-d" style="font-family:var(--m);font-size:11px">pip install feedparser requests beautifulsoup4 anthropic apscheduler</div></div>
-          <div class="wa-step" style="border-color:var(--grn)"><div class="wa-step-t">Run it</div><div class="wa-step-d" style="font-family:var(--m);font-size:11px">python schedule.py</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SETTINGS -->
-    <div id="v-settings" class="view">
-      <div class="sec-lbl" style="margin-top:20px">Settings</div>
-      <div class="card">
-        <div class="ch"><span class="ct">Notifications</span></div>
-        <div class="cb">
-          <div class="setrow"><div><div class="set-lbl">Daily email digest</div><div class="set-sub">Every morning 7:00 AM</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="setrow"><div><div class="set-lbl">Instant crisis alerts</div><div class="set-sub">Email + WhatsApp for critical events</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="setrow"><div><div class="set-lbl">Weekly PDF report</div><div class="set-sub">Auto-generated, sent Fridays</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="setrow"><div><div class="set-lbl">High-reach alert</div><div class="set-sub">When audience reach exceeds 1M</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="setrow"><div><div class="set-lbl">Misinfo flag alert</div><div class="set-sub">Immediate alert for misinfo signals</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="setrow"><div><div class="set-lbl">Pidgin/Hausa alerts</div><div class="set-sub">When new vernacular phrases detected</div></div><div class="tgl" onclick="this.classList.toggle('on')"></div></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="ch"><span class="ct">Report recipients</span></div>
-        <div class="cb" style="padding-top:8px">
-          <div class="src-row"><span>Mastercard Foundation NG</span><span class="chip cadv">weekly PDF</span></div>
-          <div class="src-row"><span>Imaginarium Marketing Comms</span><span class="chip cpos">daily + weekly</span></div>
-          <div class="src-row"><span>IMC IMPACT team</span><span class="chip cpos">real-time</span></div>
-        </div>
-        <div style="padding:0 13px 13px"><button class="btn btn-red btn-full" style="margin-top:10px">+ Add recipient</button></div>
-      </div>
-    </div>
-
-  </div><!-- /scroll -->
-
-  </div><!-- /main-col -->
-
-  <!-- BOTTOM NAV (hidden on desktop) -->
-  <div class="bnav" style="display:none"></div>
-  <div class="more-overlay" id="more-overlay"></div>
-  <div class="more-menu" id="more-menu"></div>
-
-</div><!-- /app -->
-
-<script>
-
-
-// NAVIGATION
-const VIEWS=['dash','feed','alerts','progs','sent','lang','voice','compare','calendar','whatsapp','report','geo','crawler','settings'];
-const TAGS={dash:'OVERVIEW',feed:'MONITORING',alerts:'ALERTS',progs:'PROGRAMS',sent:'NLP INTEL',lang:'LANGUAGE',voice:'VOICES',compare:'COMPARE',calendar:'CALENDAR',whatsapp:'WHATSAPP',report:'REPORTING',geo:'GEO INTEL',crawler:'CRAWLER',settings:'SETTINGS'};
-const NAMES={dash:'Overview Dashboard',feed:'Live Media Feed',alerts:'Crisis & Alerts',progs:'Program Monitor',sent:'Sentiment Engine',lang:'Language Intelligence',voice:'Participant Voice',compare:'Period Comparison',calendar:'Campaign Calendar',whatsapp:'WhatsApp Intelligence',report:'Reports & Export',geo:'Geographic Intelligence',crawler:'Crawler Status',settings:'Settings'};
-
-function nav(id, el){
-  VIEWS.forEach(v=>{const vEl=document.getElementById('v-'+v);if(vEl)vEl.classList.remove('on');});
-  document.querySelectorAll('.sb-ni').forEach(n=>n.classList.remove('on'));
-  const v=document.getElementById('v-'+id);if(v)v.classList.add('on');
-  if(el) el.classList.add('on');
-  document.getElementById('tb-tag').textContent=TAGS[id]||'';
-  const nm=document.getElementById('tb-name');if(nm)nm.textContent=NAMES[id]||id;
-  document.getElementById('scroll').scrollTop=0;
-}
-function navMore(id){nav(id);}
-function toggleMore(){}
-function closeMore(){}
-
-function switchFeed(ch,el){
-  document.querySelectorAll('#cht .tab').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');
-  ['all','news','twitter','facebook','tiktok','youtube','radio','blogs'].forEach(c=>{
-    const fd=document.getElementById('feed-'+c);if(fd)fd.style.display='none';
-  });
-  const fd=document.getElementById('feed-'+ch);if(fd)fd.style.display='block';
+"""
+IMPACT PULSE Crawler — IMC IMPACT / Imaginarium Marketing Communications
+Monitors Mastercard Foundation Nigeria programs across Nigerian media.
+Runs every 120 minutes on Railway. Pushes results to GitHub after each crawl.
+"""
+
+import os, json, base64, logging, hashlib, requests, feedparser
+from datetime import datetime, timezone
+from bs4 import BeautifulSoup
+from anthropic import Anthropic
+from apscheduler.schedulers.blocking import BlockingScheduler
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.FileHandler("impact_pulse.log"), logging.StreamHandler()]
+)
+log = logging.getLogger(__name__)
+
+ANTHROPIC_KEY  = os.environ.get("ANTHROPIC_KEY", "")
+GITHUB_TOKEN   = os.environ.get("GITHUB_TOKEN", "")
+GITHUB_REPO    = "RaisingGods/impact.pulse"
+GITHUB_BRANCH  = "main"
+RESULTS_FILE   = "impact_pulse_results.json"
+
+client = Anthropic(api_key=ANTHROPIC_KEY)
+
+# ── Programs with BROAD keyword sets ─────────────────────────────────────────
+# Using short, common words that will actually appear in Nigerian news headlines
+PROGRAMS = {
+    "Young Africa Works": [
+        "Young Africa Works", "Mastercard Foundation", "youth employment",
+        "job creation Nigeria", "YAW Nigeria", "Africa Works"
+    ],
+    "Jobberman": [
+        "Jobberman", "soft skills training", "job placement Nigeria",
+        "employment Nigeria", "labour market Nigeria", "jobs Nigeria"
+    ],
+    "TAFTA": [
+        "TAFTA", "fashion training Nigeria", "textile Nigeria",
+        "fashion school Nigeria", "Traditional Arts Fashion"
+    ],
+    "WOFAN ICON 2": [
+        "WOFAN", "women farmers Nigeria", "ICON 2",
+        "Women Farmers Advancement", "female farmers Nigeria"
+    ],
+    "Babban Gona": [
+        "Babban Gona", "smallholder farmers", "agricultural cooperative Nigeria",
+        "farmer cooperative Nigeria", "agric cooperative"
+    ],
+    "IITA I-Youth": [
+        "IITA", "youth agribusiness", "agribusiness Nigeria",
+        "International Institute Tropical Agriculture", "I-Youth"
+    ],
+    "Scholars Program": [
+        "Mastercard Foundation Scholars", "MCF Scholars", "Mastercard scholarship",
+        "scholarship Nigeria", "university scholarship Africa"
+    ],
+    "Project Juriya": [
+        "Project Juriya", "Juriya", "women empowerment northern Nigeria",
+        "northern Nigeria women", "Kaduna women empowerment"
+    ],
+    "Ethnocentrique Fashion Future": [
+        "Ethnocentrique", "Fashion Future", "African fashion",
+        "fashion entrepreneur Nigeria", "Aba fashion", "fashion business Nigeria"
+    ],
+    "EDC": [
+        "Enterprise Development Centre", "EDC Nigeria", "Pan-Atlantic University",
+        "SME Nigeria", "small business Nigeria", "entrepreneurship Nigeria"
+    ],
+    "FCMB Easylift": [
+        "FCMB Easylift", "Easylift", "FCMB women", "FCMB loan",
+        "women entrepreneur loan", "FCMB Nigeria"
+    ],
+    "Songhai Center": [
+        "Songhai", "agribusiness training", "Songhai Nigeria",
+        "agricultural training Nigeria", "farm training Nigeria"
+    ],
+    "Christian Aid SEPTP": [
+        "Christian Aid Nigeria", "SEPTP", "Christian Aid",
+        "economic empowerment Nigeria", "poverty Nigeria"
+    ],
+    "WISE Program": [
+        "WISE Program", "women science Nigeria", "girls education Nigeria",
+        "STEM Nigeria women", "female education Nigeria"
+    ],
+    "TracTrac ISSAM": [
+        "TracTrac", "ISSAM Nigeria", "social accountability Nigeria",
+        "program monitoring Nigeria", "community monitoring"
+    ],
 }
 
-function fprog(el){
-  document.querySelectorAll('#pf .fpill').forEach(b=>b.classList.remove('on'));
-  el.classList.add('on');
-}
+# ── BROAD catch-all keywords — any article about Nigerian development ──────────
+# These ensure we always capture relevant content even if program names aren't mentioned
+BROAD_KEYWORDS = [
+    "Mastercard Foundation Nigeria",
+    "youth employment Nigeria",
+    "women empowerment Nigeria",
+    "agricultural development Nigeria",
+    "skills training Nigeria",
+    "entrepreneurship Nigeria",
+    "development program Nigeria",
+    "NGO Nigeria",
+    "foundation Nigeria program",
+]
 
-function setCmp(days,el){
-  document.querySelectorAll('.fpill').forEach(b=>b.classList.remove('on'));
-  el.classList.add('on');
-}
+RSS_FEEDS = [
+    ("Punch Newspapers",     "https://punchng.com/feed/"),
+    ("Premium Times",        "https://www.premiumtimesng.com/feed/"),
+    ("The Guardian NG",      "https://guardian.ng/feed/"),
+    ("Vanguard",             "https://www.vanguardngr.com/feed/"),
+    ("BusinessDay",          "https://businessday.ng/feed/"),
+    ("The Nation",           "https://thenationonlineng.net/feed/"),
+    ("Daily Trust",          "https://dailytrust.com/feed/"),
+    ("Channels TV",          "https://www.channelstv.com/feed/"),
+    ("TechCabal",            "https://techcabal.com/feed/"),
+    ("Nairametrics",         "https://nairametrics.com/feed/"),
+    ("The Cable",            "https://www.thecable.ng/feed"),
+    ("Leadership NG",        "https://leadership.ng/feed/"),
+]
 
-// EXPORT
-// ── LOGIN / LOGOUT / CLIENT SWITCHER ──
-const IW_USERS = {
-  'admin@imcimpact.com':    { pass: 'IMCAdmin2025',  role: 'Admin',  name: 'Admin' },
-  'viewer@imcimpact.com':   { pass: 'IMCView2025',   role: 'Viewer', name: 'Viewer' },
-  'chizobam@imcimpact.com': { pass: 'Chizo2025',     role: 'Admin',  name: 'Chizobam' },
-  'koye@imcimpact.com':     { pass: 'Koye2025',      role: 'Admin',  name: 'Koye Abiola' },
-  'mide@imcimpact.com':     { pass: 'Mide@Watch25',  role: 'Viewer', name: 'Mide' },
-  'adeoti@imcimpact.com':   { pass: 'Adeoti@Watch25',role: 'Viewer', name: 'Adeoti' },
-};
+seen_hashes: set = set()
 
-let IW_CLIENTS = [
-  { id: 'mcf', name: 'Mastercard Foundation', sector: 'Development / NGO', programs: '15 programs', icon: '🏛', active: true }
-];
+def article_hash(url: str) -> str:
+    return hashlib.md5(url.encode()).hexdigest()
 
-let currentUser = null;
-let currentClient = null;
+def fetch_article_text(url: str) -> str:
+    try:
+        r = requests.get(url, timeout=10, headers={"User-Agent": "IMCIMPACTPulse/1.0"})
+        soup = BeautifulSoup(r.text, "html.parser")
+        return " ".join(p.get_text() for p in soup.find_all("p"))[:3000]
+    except Exception as e:
+        log.warning(f"Could not fetch article text: {e}")
+        return ""
 
-function iwLogin() {
-  const email = document.getElementById('iw-email').value.trim().toLowerCase();
-  const pass  = document.getElementById('iw-pass').value.trim();
-  const err   = document.getElementById('iw-err');
-  const user  = IW_USERS[email];
-  if (user && user.pass === pass) {
-    currentUser = { email, ...user };
-    err.style.display = 'none';
-    document.getElementById('ls1').style.display = 'none';
-    document.getElementById('ls2').style.display = 'block';
-    document.getElementById('iw-welcome').textContent = 'Welcome, ' + user.name + ' — select workspace';
-    iwRenderClients();
-  } else {
-    err.style.display = 'block';
-  }
-}
+def match_program(text: str) -> str | None:
+    """Return matched program name or None."""
+    text_lower = text.lower()
+    for program, keywords in PROGRAMS.items():
+        if any(kw.lower() in text_lower for kw in keywords):
+            return program
+    # Check broad keywords — assign to "General Coverage"
+    if any(kw.lower() in text_lower for kw in BROAD_KEYWORDS):
+        return "General Coverage"
+    return None
 
-function iwRenderClients() {
-  const list = document.getElementById('iw-clients');
-  list.innerHTML = IW_CLIENTS.map(cl => `
-    <div onclick="iwSelectClient('${cl.name}','${cl.programs}','${cl.icon}')" style="padding:13px 15px;border:1px solid #e5e7eb;border-radius:9px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .15s;background:white" onmouseover="this.style.background='#f7f8fa'" onmouseout="this.style.background='white'">
-      <div style="width:36px;height:36px;background:rgba(207,46,46,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">${cl.icon}</div>
-      <div style="flex:1"><div style="font-size:13px;font-weight:500">${cl.name}</div><div style="font-size:11px;color:#9ca3af;margin-top:2px">${cl.programs} · ${cl.sector}</div></div>
-      <div style="width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 5px #16a34a;flex-shrink:0"></div>
-    </div>`).join('');
-}
+def analyse_sentiment(title: str, text: str, program: str) -> dict:
+    prompt = f"""You are a Nigerian media analyst for IMC IMPACT, a development communications agency in Lagos.
 
-function iwSelectClient(name, programs, icon) {
-  currentClient = { name, programs, icon };
-  document.getElementById('iw-login').style.display = 'none';
-  document.getElementById('app').style.display = 'flex';
-  // Update sidebar client info
-  const cn = document.getElementById('sb-cname-el') || document.querySelector('.sb-cname');
-  const cs = document.getElementById('sb-csub-el') || document.querySelector('.sb-csub');
-  if (cn) cn.textContent = name;
-  if (cs) cs.textContent = programs + ' · Active monitoring';
-  // Update topbar
-  const tn = document.getElementById('tb-name');
-  if (tn) tn.textContent = 'Overview Dashboard — ' + name;
-  // Add logout button to sidebar footer
-  const foot = document.querySelector('.sb-foot');
-  if (foot && !document.getElementById('iw-logout-btn')) {
-    const lb = document.createElement('button');
-    lb.id = 'iw-logout-btn';
-    lb.textContent = 'Sign out';
-    lb.style.cssText = 'margin-left:auto;background:transparent;border:1px solid #e5e7eb;border-radius:5px;padding:3px 8px;font-size:10px;color:#9ca3af;cursor:pointer;font-family:inherit';
-    lb.onclick = iwLogout;
-    foot.appendChild(lb);
-  }
-  // Show switch client button in sidebar
-  const sbClient = document.querySelector('.sb-client');
-  if (sbClient && !document.getElementById('iw-switch-btn')) {
-    const sb = document.createElement('div');
-    sb.innerHTML = '<button id="iw-switch-btn" onclick="iwSwitchClient()" style="margin-top:6px;width:100%;background:transparent;border:1px solid rgba(207,46,46,.3);border-radius:5px;padding:4px 8px;font-size:10px;color:#cf2e2e;cursor:pointer;font-family:inherit">⇄ Switch client</button>';
-    sbClient.appendChild(sb);
-  }
-  if (typeof initCharts === 'function') initCharts();
-  // Load live data from crawler API
-  setTimeout(updateDashboardWithLiveData, 1000);
-  setTimeout(checkApiHealth, 500);
-  // Refresh live data every 10 minutes
-  setInterval(updateDashboardWithLiveData, 600000);
-}
+Analyse this article about {program} and return ONLY a JSON object:
+- sentiment: "positive", "negative", "neutral", or "mixed"
+- sentiment_score: number from -1.0 to 1.0
+- summary: one sentence max 25 words on the article's stance
+- key_theme: one of "employment", "agriculture", "education", "women empowerment", "entrepreneurship", "policy", "technology", "health", "other"
+- language_note: note any Nigerian Pidgin, Hausa, or Yoruba (or write "Standard English")
+- speaker_type: one of "participant", "journalist", "government", "influencer", "partner", "unknown"
 
-function iwSwitchClient() {
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('iw-login').style.display = 'flex';
-  document.getElementById('ls2').style.display = 'block';
-  document.getElementById('ls1').style.display = 'none';
-  document.getElementById('ls3').style.display = 'none';
-}
+Title: {title}
+Text: {text[:1500]}
 
-function iwLogout() {
-  currentUser = null;
-  currentClient = null;
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('iw-login').style.display = 'flex';
-  document.getElementById('ls1').style.display = 'block';
-  document.getElementById('ls2').style.display = 'none';
-  document.getElementById('ls3').style.display = 'none';
-  document.getElementById('iw-email').value = '';
-  document.getElementById('iw-pass').value = '';
-  document.getElementById('iw-err').style.display = 'none';
-}
+Return ONLY the JSON object, nothing else."""
 
-function iwShowAddClient() {
-  document.getElementById('ls2').style.display = 'none';
-  document.getElementById('ls3').style.display = 'block';
-}
-
-function iwCreateClient() {
-  const name = document.getElementById('nc-name').value.trim();
-  const sector = document.getElementById('nc-sector').value;
-  const programs = document.getElementById('nc-programs').value.trim();
-  if (!name) { alert('Please enter a client name.'); return; }
-  const icons = {'Development / NGO':'🌍','Corporate / Private sector':'🏢','Government agency':'🏛','Healthcare':'🏥','Education':'🎓','Media & Communications':'📡','Other':'◉'};
-  IW_CLIENTS.push({ id: 'c'+Date.now(), name, sector, programs: programs || 'No programs yet', icon: icons[sector]||'◉', active: false });
-  document.getElementById('nc-name').value = '';
-  document.getElementById('nc-programs').value = '';
-  document.getElementById('ls3').style.display = 'none';
-  document.getElementById('ls2').style.display = 'block';
-  iwRenderClients();
-}
-
-document.addEventListener('keypress', function(e) { if (e.key === 'Enter') { if (document.getElementById('ls1').style.display !== 'none') iwLogin(); } });
-
-// Keep app hidden until login
-document.getElementById('app').style.display = 'none';
-
-// ── EXPORT REPORT (IMC IMPACT format) ──
-function exportReport(){
-  const month = document.getElementById('rpt-month') ? document.getElementById('rpt-month').value : 'Current period';
-  const client = currentClient ? currentClient.name : 'Mastercard Foundation Nigeria';
-  const w = window.open('','_blank');
-  w.document.write(`<!DOCTYPE html><html><head><title>Media Monitoring Report — ${client} — ${month}</title>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Arial,sans-serif;color:#1C2B3A;background:#FAF8F4;padding:0}
-    .cover{background:#0D1B2A;color:white;padding:48px 40px;min-height:180px;position:relative}
-    .cover-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px}
-    .cover-title{font-size:38px;font-weight:300;line-height:1.2;margin-bottom:12px}
-    .cover-sub{font-size:14px;color:rgba(255,255,255,.6)}
-    .cover-logo{position:absolute;top:40px;right:40px;font-size:13px;font-weight:600;color:#C9A84C;letter-spacing:.04em}
-    .section{padding:28px 40px;border-bottom:1px solid #E2D9C9;background:white}
-    .section-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px}
-    .kpi-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
-    .kpi{background:#f0f0f0;border-radius:8px;padding:14px 18px;flex:1;min-width:120px;text-align:center}
-    .kpi-val{font-size:28px;font-weight:300;color:#0D1B2A}
-    .kpi-lbl{font-size:10px;color:#6B7280;margin-top:4px}
-    .outlet-row{display:flex;gap:8px;flex-wrap:wrap}
-    .outlet{background:#f7f8fa;border-radius:6px;padding:8px 13px;text-align:center;min-width:80px}
-    .outlet-name{font-size:11px;color:#4b5563}
-    .outlet-num{font-size:20px;font-weight:500;color:#C9A84C}
-    .ed-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-    .ed-card{background:#f7f8fa;border-radius:8px;padding:14px;border-top:3px solid #C9A84C}
-    .ed-title{font-size:13px;font-weight:600;color:#C9A84C;margin-bottom:8px}
-    .ed-body{font-size:12px;color:#4B5563;line-height:1.65}
-    .prog-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
-    .prog-card{border:1px solid #E2D9C9;border-radius:8px;padding:13px;border-top:3px solid #0D1B2A}
-    .prog-num{font-size:26px;font-weight:300;color:#0D1B2A}
-    .prog-name{font-size:13px;font-weight:600;margin-bottom:4px}
-    .prog-outlets{font-size:11px;color:#6B7280;margin-bottom:4px}
-    .prog-stats{font-size:11px;color:#4B5563;margin-bottom:6px}
-    .prog-link{font-size:10px;color:#2563eb;text-decoration:none;word-break:break-all}
-    .alert-box{background:#FEF9EC;border:1px solid #C9A84C;border-radius:8px;padding:14px;margin-bottom:12px}
-    .alert-title{font-size:13px;font-weight:600;color:#C9A84C;margin-bottom:4px}
-    .alert-note{font-size:11px;color:#6B7280;font-style:italic;margin-bottom:10px}
-    .alert-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .alert-card{background:white;border-radius:7px;padding:12px;border-left:3px solid #C9A84C}
-    .alert-card-title{font-size:12px;font-weight:600;color:#C9A84C;margin-bottom:6px}
-    .alert-card-body{font-size:12px;color:#4B5563;line-height:1.6}
-    .eco-item{padding:10px 13px;border-radius:7px;border:1px solid #E2D9C9;border-left:3px solid #C9A84C;margin-bottom:7px}
-    .eco-title{font-size:13px;font-weight:600;margin-bottom:3px}
-    .eco-body{font-size:12px;color:#6B7280;line-height:1.55}
-    .conc-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px}
-    .cs{text-align:center;padding:10px;border:1px solid #E2D9C9;border-radius:7px}
-    .cs-val{font-size:20px;font-weight:300;color:#0D1B2A}
-    .cs-lbl{font-size:10px;color:#6B7280;margin-top:3px}
-    .conc-narr{font-size:12px;color:#4B5563;font-style:italic;line-height:1.65;margin-bottom:14px;padding:11px 13px;background:#f7f8fa;border-radius:7px}
-    .conc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .conc-item{padding:10px 13px;border-radius:7px;border:1px solid #E2D9C9;border-left:3px solid #0D1B2A}
-    .conc-title{font-size:12px;font-weight:600;color:#0D1B2A;margin-bottom:3px}
-    .conc-body{font-size:12px;color:#6B7280}
-    .footer{background:#0D1B2A;color:rgba(255,255,255,.5);font-size:10px;padding:16px 40px;text-align:center;letter-spacing:.04em}
-    @media print{body{background:white}.cover{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-  </style></head><body>
-
-  <div class="cover">
-    <div class="cover-logo">IMAGINARIUM IMPACT</div>
-    <div class="cover-label">Media Monitoring Report</div>
-    <div class="cover-title">${client}</div>
-    <div class="cover-sub">Reporting Period: ${month} &nbsp;·&nbsp; Prepared by IMC IMPACT &nbsp;·&nbsp; ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">At a Glance</div>
-    <div class="kpi-row">
-      <div class="kpi"><div class="kpi-val">17</div><div class="kpi-lbl">Total Media Mentions</div></div>
-      <div class="kpi"><div class="kpi-val">5</div><div class="kpi-lbl">Programs Featured</div></div>
-      <div class="kpi"><div class="kpi-val">7</div><div class="kpi-lbl">Tier 1 Outlets</div></div>
-      <div class="kpi"><div class="kpi-val">16:1</div><div class="kpi-lbl">Positive : Negative</div></div>
-    </div>
-    <div style="font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#6B7280;margin-bottom:8px">MENTIONS BY OUTLET</div>
-    <div class="outlet-row">
-      <div class="outlet"><div class="outlet-name">BusinessDay</div><div class="outlet-num">4</div></div>
-      <div class="outlet"><div class="outlet-name">The Guardian</div><div class="outlet-num">2</div></div>
-      <div class="outlet"><div class="outlet-name">Punch</div><div class="outlet-num">1</div></div>
-      <div class="outlet"><div class="outlet-name">ThisDay Live</div><div class="outlet-num">1</div></div>
-      <div class="outlet"><div class="outlet-name">Bella Naija</div><div class="outlet-num">1</div></div>
-      <div class="outlet"><div class="outlet-name">Leadership</div><div class="outlet-num">1</div></div>
-      <div class="outlet"><div class="outlet-name">Other</div><div class="outlet-num">5</div></div>
-    </div>
-    <div style="font-size:11px;color:#6B7280;font-style:italic;margin-top:10px">BusinessDay contributed 4 of 17 mentions. One negative opinion piece identified — see Priority Alert.</div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">Editorial Summary</div>
-    <div class="ed-grid">
-      <div class="ed-card"><div class="ed-title">↗ A Strong Month</div><div class="ed-body">May 2026 was driven by two major program milestones — the Fashion Future Program pilot conclusion in Aba and the inaugural Jobberman Partners Convening in Lagos — both generating sustained multi-outlet coverage.</div></div>
-      <div class="ed-card" style="border-top-color:#16a34a"><div class="ed-title" style="color:#16a34a">☺ 100% Positive Tone</div><div class="ed-body">16 of 17 mentions were positive. One negative opinion piece in The Nation (29 May) directly names Mastercard Foundation as partner of Project Juriya in Southern Kaduna, with accountability questions raised.</div></div>
-      <div class="ed-card" style="border-top-color:#2563eb"><div class="ed-title" style="color:#2563eb">▦ BusinessDay Dominates</div><div class="ed-body">BusinessDay contributed 4 pieces across multiple program areas, reflecting strong alignment between the Foundation's work and its readership of business leaders, investors, and policymakers.</div></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">Coverage by Program</div>
-    <div class="prog-grid">
-      <div class="prog-card"><div class="prog-num">5</div><div style="font-size:10px;color:#6B7280;margin-bottom:6px">mentions</div><div class="prog-name">Fashion Future Program</div><div class="prog-outlets">Pulse NG · Guardian · Punch · Leadership · Bella Naija</div><div class="prog-stats">10k+ jobs · 4k+ MSMEs · 10k+ reached</div><a class="prog-link" href="https://guardian.ng/business-services/fashion-future-programme-creates-10000-jobs-in-aba/">↗ guardian.ng — Fashion Future jobs in Aba</a></div>
-      <div class="prog-card"><div class="prog-num">4</div><div style="font-size:10px;color:#6B7280;margin-bottom:6px">mentions</div><div class="prog-name">Jobberman / Young Africa Works</div><div class="prog-outlets">BusinessDay · Guardian · ThisDay</div><div class="prog-stats">1.1M jobs · Women & PWDs focused</div><a class="prog-link" href="https://businessday.ng/life/article/connecting-job-seekers-to-employers-vital-to-nigerias-labour-market-economic-development-jobberman/">↗ businessday.ng — Jobberman labour market</a></div>
-      <div class="prog-card"><div class="prog-num">2</div><div style="font-size:10px;color:#6B7280;margin-bottom:6px">mentions</div><div class="prog-name">Scholars Program</div><div class="prog-outlets">Nigeria Startup News · MySchoolGist</div><div class="prog-stats">Awareness + PAU 2026 applications</div><a class="prog-link" href="https://myschoolgist.com/scholarships/pau-mastercard-scholarship-186557/">↗ myschoolgist.com — PAU scholarship</a></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">
-      <div class="prog-card"><div class="prog-name">Songhai Agricultural</div><div style="font-size:16px;font-weight:300;color:#0D1B2A;margin:3px 0">1 mention</div><div class="prog-outlets">Ministry of Info · AIRBDA trainees</div></div>
-      <div class="prog-card"><div class="prog-name">Africa Growth Fund</div><div style="font-size:16px;font-weight:300;color:#0D1B2A;margin:3px 0">1 mention</div><div class="prog-outlets">BusinessDay · $200M Fund</div></div>
-      <div class="prog-card"><div class="prog-name">BTS Research</div><div style="font-size:16px;font-weight:300;color:#0D1B2A;margin:3px 0">1 mention</div><div class="prog-outlets">UNILAG · 7 countries creative sector</div></div>
-      <div class="prog-card"><div class="prog-name">Research Citation</div><div style="font-size:16px;font-weight:300;color:#0D1B2A;margin:3px 0">1 mention</div><div class="prog-outlets">Employment Outlook 2026</div></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">Story of the Month</div>
-    <div style="font-size:15px;font-weight:600;color:#0D1B2A;margin-bottom:12px">Fashion Future Program — Pilot Phase Closes in Aba</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px">
-      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:13px;text-align:center"><div style="font-size:24px;font-weight:500;color:#16a34a">10,379</div><div style="font-size:11px;color:#4B5563;margin-top:4px">People Reached</div></div>
-      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:13px;text-align:center"><div style="font-size:24px;font-weight:500;color:#16a34a">10,000+</div><div style="font-size:11px;color:#4B5563;margin-top:4px">Jobs Created</div></div>
-      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:13px;text-align:center"><div style="font-size:24px;font-weight:500;color:#16a34a">4,000+</div><div style="font-size:11px;color:#4B5563;margin-top:4px">MSMEs Supported</div></div>
-    </div>
-    <div style="font-size:10px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px">COVERAGE SUMMARY</div>
-    <div style="display:flex;gap:7px;flex-wrap:wrap">
-      <span style="background:#e8f4fd;color:#0D1B2A;padding:5px 12px;border-radius:6px;font-size:12px">Pulse NG</span>
-      <span style="background:#e8f4fd;color:#0D1B2A;padding:5px 12px;border-radius:6px;font-size:12px">The Guardian</span>
-      <span style="background:#e8f4fd;color:#0D1B2A;padding:5px 12px;border-radius:6px;font-size:12px">Punch Newspapers</span>
-      <span style="background:#e8f4fd;color:#0D1B2A;padding:5px 12px;border-radius:6px;font-size:12px">Leadership</span>
-      <span style="background:#e8f4fd;color:#0D1B2A;padding:5px 12px;border-radius:6px;font-size:12px">Bella Naija</span>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">⚠ Priority Alert — Negative Coverage</div>
-    <div class="alert-box">
-      <div class="alert-title">"Demo Farms or Graveyards?" — The Nation | Opinion by Francis Damina | 29 May 2026</div>
-      <div class="alert-note">Note: Article removed from The Nation's main page. URL remains live and indexed: thenationonlineng.net/demo-farms-or-graveyards/</div>
-      <div class="alert-grid">
-        <div class="alert-card"><div class="alert-card-title">Direct Attribution</div><div class="alert-card-body">Mastercard Foundation is named as partner of Project Juriya, implemented through SCL, in Southern Kaduna. Demo farms across Anchuna, Kamuru, Ungwan Akau, Gumel, and Assako described as abandoned — rusted signboards, waist-high weeds, no meaningful agri outcomes.</div></div>
-        <div class="alert-card" style="border-left-color:#dc2626"><div class="alert-card-title" style="color:#dc2626">Community Accountability Demand</div><div class="alert-card-body">Communities are explicitly calling on the Foundation to review SCL's performance and support land reclamation if contractual terms have been breached. The article asks: did the Foundation cut funding, change the plan, or did SCL short-change communities?</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">Ecosystem Context — Narratives to Watch</div>
-    <div class="eco-item"><div class="eco-title">EU + UNDP: Nigeria Youth Skills Gap</div><div class="eco-body">Multilateral momentum in the same space as Young Africa Works — useful ecosystem framing for Insight Briefs.</div></div>
-    <div class="eco-item" style="border-left-color:#2563eb"><div class="eco-title">FG + UK TVET & Apprenticeship Partnership</div><div class="eco-body">Government doubling down on technical skills. Strong policy backdrop for the Foundation's workforce programming.</div></div>
-    <div class="eco-item" style="border-left-color:#dc2626"><div class="eco-title">AI & Nigerian Youth — TheCable</div><div class="eco-body">Emerging debate on whether AI is opportunity or new inequality. Likely to intensify.</div></div>
-    <div class="eco-item" style="border-left-color:#6B7280"><div class="eco-title">Africa's Digital Economy at Risk — BusinessDay/Microsoft</div><div class="eco-body">Microsoft warns Africa's digital ambitions may fail without stronger public systems. Relevant to digital workforce work.</div></div>
-    <div class="eco-item" style="border-left-color:#16a34a"><div class="eco-title">IITA Partner Visibility — Punch + TheCable</div><div class="eco-body">Two positive IITA hits in one week: youth horticultural training in Oyo + farm inputs distribution. Strong partner momentum.</div></div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">${month} — Summary & Conclusion</div>
-    <div style="font-size:10px;color:#6B7280;margin-bottom:14px">Executive overview of program impact and ecosystem narratives</div>
-    <div class="conc-stats">
-      <div class="cs"><div class="cs-val">17</div><div class="cs-lbl">Total Mentions</div></div>
-      <div class="cs"><div class="cs-val" style="color:#16a34a">16</div><div class="cs-lbl">Positive</div></div>
-      <div class="cs"><div class="cs-val" style="color:#dc2626">1</div><div class="cs-lbl">Priority Alert</div></div>
-      <div class="cs"><div class="cs-val" style="color:#2563eb">94%</div><div class="cs-lbl">Positive Rate</div></div>
-      <div class="cs"><div class="cs-val" style="font-size:14px;font-weight:500">BusinessDay</div><div class="cs-lbl">Top Outlet</div></div>
-    </div>
-    <div class="conc-narr">${month} was a strong month of earned media visibility for the Foundation — driven by two major program milestones, 17 total mentions across national and digital outlets, and one priority alert requiring immediate escalation.</div>
-    <div class="conc-grid">
-      <div class="conc-item" style="border-left-color:#16a34a"><div class="conc-title" style="color:#16a34a">1. Strong month for earned media</div><div class="conc-body">Genuine program impact across BusinessDay, The Guardian, Punch, and Bella Naija.</div></div>
-      <div class="conc-item" style="border-left-color:#16a34a"><div class="conc-title" style="color:#16a34a">2. FFP Aba is the standout story</div><div class="conc-body">10,000+ jobs created; 5 Tier 1 mentions. Anchoring national scale-up comms.</div></div>
-      <div class="conc-item" style="border-left-color:#2563eb"><div class="conc-title" style="color:#2563eb">3. Jobberman Convening delivered</div><div class="conc-body">1.1M placements in 6 years. Multi-outlet coverage provides powerful anchor stats.</div></div>
-      <div class="conc-item" style="border-left-color:#2563eb"><div class="conc-title" style="color:#2563eb">4. Africa Growth Fund</div><div class="conc-body">$200M fund coverage (Sabou Capital). Requires follow-up with team.</div></div>
-      <div class="conc-item" style="border-left-color:#dc2626"><div class="conc-title" style="color:#dc2626">5. Project Juriya — escalate now</div><div class="conc-body">Negative opinion piece in The Nation requires factual SCL verification.</div></div>
-      <div class="conc-item"><div class="conc-title">6. Two ecosystem narratives to watch</div><div class="conc-body">AI & youth employment and Ginger Blight crisis likely to intensify in media.</div></div>
-    </div>
-  </div>
-
-  <div class="footer">IMPACT PULSE · Media Intelligence Platform · Imaginarium Marketing Communications (IMC IMPACT) · Confidential</div>
-  <script>window.onload=function(){window.print()}<\/script>
-  </body></html>`);
-  w.document.close();
-}
-
-function exportCSV(){
-  const csv=`Program,Mentions,Positive%,Status,vs Last Week\nYoung Africa Works,1840,74%,Watch,+48%\nBabban Gona,892,81%,Healthy,+10%\nTAFTA,641,88%,Healthy,+129%\nJobberman,580,61%,At Risk,+49%\nWOFAN ICON 2,412,62%,Watch,-14%\nIITA I-Youth,318,77%,Healthy,+8%\nScholars Program,290,91%,Healthy,+5%\nProject Juriya,184,58%,At Risk,+100%`;
-  const a=document.createElement('a');
-  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-  a.download='IMPACT-PULSE-'+new Date().toISOString().slice(0,10)+'.csv';
-  a.click();
-}
-
-
-// ── LIVE DATA FROM GITHUB ──────────────────────────────────────────────────
-const GITHUB_JSON = "https://raw.githubusercontent.com/RaisingGods/impact.pulse/main/impact_pulse_results.json";
-
-async function fetchLiveResults() {
-  try {
-    const resp = await fetch(GITHUB_JSON + "?t=" + Date.now());
-    if (!resp.ok) return null;
-    return await resp.json();
-  } catch(e) {
-    console.log("Live data not available yet:", e.message);
-    return null;
-  }
-}
-
-async function updateDashboardWithLiveData() {
-  const data = await fetchLiveResults();
-  const banner = document.getElementById('live-data-banner');
-
-  if (!data || !data.articles || data.articles.length === 0) {
-    // No real articles yet — keep sample data visible, show banner
-    if (banner) banner.style.display = 'flex';
-    return;
-  }
-
-  // Real data exists — hide the sample data banner
-  if (banner) banner.style.display = 'none';
-
-  const articles = data.articles || [];
-  const total = data.total_articles || articles.length;
-  const s = data.sentiment_overview || {};
-  const positive = s.positive || 0;
-  const negative = s.negative || 0;
-  const neutral = s.neutral || 0;
-  const mixed = s.mixed || 0;
-  const posRate = total > 0 ? Math.round((positive / total) * 100) : 0;
-
-  // Update last crawl time
-  if (data.last_updated) {
-    const d = new Date(data.last_updated);
-    const timeStr = d.toLocaleString('en-NG', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
-    const footEl = document.querySelector('.sb-foot-time');
-    if (footEl) footEl.textContent = 'Crawl active · ' + timeStr;
-    else {
-      const sbFoot = document.querySelector('.sb-foot');
-      if (sbFoot) sbFoot.title = 'Last crawl: ' + timeStr;
-    }
-  }
-
-  // Update mentions stat (replaces 6,284 sample)
-  document.querySelectorAll('.stat-val').forEach(el => {
-    if (el.textContent.trim() === '6,284') el.textContent = total.toLocaleString();
-    if (el.textContent.trim() === '71/100') el.textContent = posRate + '/100';
-    if (el.textContent.trim() === '18.7M') {
-      // Estimate reach: avg 50k readers per article
-      const reach = total * 50000;
-      el.textContent = reach >= 1000000 ? (reach/1000000).toFixed(1)+'M' : (reach/1000).toFixed(0)+'K';
-    }
-  });
-
-  // Update live feed with real articles
-  const feedAll = document.getElementById('feed-all');
-  if (feedAll && articles.length > 0) {
-    feedAll.innerHTML = articles.slice(0, 20).map(r => {
-      const sentClass = r.sentiment === 'positive' ? 'cpos' :
-                        r.sentiment === 'negative' ? 'cneg' :
-                        r.sentiment === 'mixed' ? 'cskp' : 'cneu';
-      const src = r.source ? r.source.substring(0,3).toUpperCase() : 'SRC';
-      const prog = r.program || '';
-      const dateStr = r.published
-        ? new Date(r.published).toLocaleDateString('en-GB', {day:'2-digit', month:'short'})
-        : '';
-      return `<div class="fi">
-        <div class="fsrc" style="background:var(--off2);color:var(--t2)">${src}</div>
-        <div class="fbdy">
-          <div class="ftit"><a href="${r.url}" target="_blank" style="color:var(--t);text-decoration:none">${r.title}</a></div>
-          <div class="fmeta">
-            <span>${r.source || ''} · ${dateStr}</span>
-            ${prog ? `<span class="fprog">${prog}</span>` : ''}
-            <span class="chip ${sentClass}">${r.sentiment}</span>
-          </div>
-          ${r.summary ? `<div style="font-size:11px;color:var(--t3);margin-top:3px;line-height:1.4">${r.summary}</div>` : ''}
-        </div>
-      </div>`;
-    }).join('');
-  }
-
-  // Update program health cards with real counts
-  const ps = data.program_summary || {};
-  if (Object.keys(ps).length > 0) {
-    document.querySelectorAll('.pcn').forEach(el => {
-      const cardName = el.textContent.trim().toLowerCase();
-      const match = Object.entries(ps).find(([k]) => {
-        const kl = k.toLowerCase();
-        return kl.includes(cardName.substring(0,6)) || cardName.includes(kl.substring(0,6));
-      });
-      if (match) {
-        const [, pdata] = match;
-        const pcs = el.parentElement?.querySelector('.pcs');
-        if (pcs) {
-          const pTotal = pdata.count || 0;
-          const pPos = pdata.positive || 0;
-          const pPct = pTotal > 0 ? Math.round((pPos / pTotal) * 100) : 0;
-          const dot = el.parentElement?.querySelector('.pdot');
-          if (dot) {
-            dot.style.background = pPct >= 70 ? 'var(--grn)' : pPct >= 40 ? 'var(--amb)' : 'var(--red)';
-          }
-          pcs.innerHTML = `<b>${pPct}% pos</b> · ${pTotal.toLocaleString()} mentions`;
+    try:
+        response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=400,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        raw = response.content[0].text.strip().replace("```json","").replace("```","").strip()
+        return json.loads(raw)
+    except Exception as e:
+        log.warning(f"Sentiment analysis failed: {e}")
+        return {
+            "sentiment": "neutral", "sentiment_score": 0.0,
+            "summary": "Analysis unavailable.", "key_theme": "other",
+            "language_note": "Standard English", "speaker_type": "unknown"
         }
-      }
-    });
-  }
 
-  // Update sentiment overview in sentiment engine section
-  const sentBars = document.querySelectorAll('.sent-bar');
-  if (sentBars.length > 0 && total > 0) {
-    sentBars.forEach(bar => {
-      const label = bar.dataset.sent;
-      let count = 0;
-      if (label === 'positive' || label === 'supportive') count = positive;
-      else if (label === 'negative') count = negative;
-      else if (label === 'neutral') count = neutral;
-      else if (label === 'mixed' || label === 'skeptical') count = mixed;
-      const pct = Math.round((count / total) * 100);
-      const fill = bar.querySelector('.sent-fill');
-      const val = bar.querySelector('.sent-val');
-      if (fill) fill.style.width = pct + '%';
-      if (val) val.textContent = count.toLocaleString();
-    });
-  }
-}
+def push_to_github(results: dict):
+    if not GITHUB_TOKEN:
+        log.warning("GITHUB_TOKEN not set — skipping GitHub push")
+        return
 
-// Check crawler health via GitHub JSON existence
-async function checkApiHealth() {
-  try {
-    const resp = await fetch(GITHUB_JSON + "?t=" + Date.now());
-    const dot = document.querySelector('.sb-fd');
-    if (resp.ok) {
-      if (dot) dot.style.background = 'var(--grn)';
-    } else {
-      if (dot) dot.style.background = 'var(--amb)';
+    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{RESULTS_FILE}"
+    headers = {
+        "Authorization": f"Bearer {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28"
     }
-  } catch(e) {
-    const dot = document.querySelector('.sb-fd');
-    if (dot) dot.style.background = 'var(--amb)';
-  }
-}
 
-// initCharts is called after login via iwSelectClient()
+    sha = None
+    try:
+        r = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=10)
+        log.info(f"SHA fetch status: {r.status_code}")
+        if r.status_code == 200:
+            sha = r.json().get("sha")
+            log.info(f"Existing SHA: {sha[:8]}...")
+        elif r.status_code == 404:
+            log.info("File does not exist yet — will create it")
+        else:
+            log.warning(f"SHA fetch error: {r.text[:200]}")
+    except Exception as e:
+        log.warning(f"SHA fetch exception: {e}")
 
-// AI ENGINE
-let aiRunning=false;
-const SYS=`You are the IMPACT PULSE AI analyst for Mastercard Foundation Nigeria programs. You cover all 15 active programs: Young Africa Works (Jobberman), Babban Gona CAFI & WEDI, TAFTA, WOFAN ICON 2, IITA I-Youth, Scholars Program, Project Juriya, Ethnocentrique Fashion Future, EDC, FCMB Easylift, Songhai Center, Christian Aid SEPTP, WISE Program, TracTrac/ISSAM, Young Africa YEB. You understand Nigerian media, Nigerian Pidgin, Hausa-language media, Yoruba-language media, and grassroots digital communities. Report recipients: Mastercard Foundation senior leadership, Imaginarium Marketing Communications (IMC IMPACT). Be direct, Nigeria-specific, actionable.`;
+    content_b64 = base64.b64encode(
+        json.dumps(results, ensure_ascii=False, indent=2).encode("utf-8")
+    ).decode("utf-8")
 
-async function ai(prompt,targetId){
-  if(aiRunning)return;
-  aiRunning=true;
-  const el=document.getElementById(targetId);
-  if(!el){aiRunning=false;return;}
-  el.innerHTML='<span style="color:var(--t3);font-style:italic">Analysing Mastercard Foundation Nigeria media…</span><span class="cur"></span>';
-  document.querySelectorAll('.apb').forEach(b=>b.disabled=true);
-  try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:SYS,messages:[{role:'user',content:prompt}]})});
-    if(!r.ok)throw new Error(r.status);
-    const d=await r.json();
-    const txt=d.content?.find(b=>b.type==='text')?.text||'No response.';
-    el.innerHTML='';
-    let i=0;const cur=document.createElement('span');cur.className='cur';el.appendChild(cur);
-    const iv=setInterval(()=>{
-      if(i<txt.length){el.insertBefore(document.createTextNode(txt[i++]),cur);}
-      else{clearInterval(iv);cur.remove();aiRunning=false;document.querySelectorAll('.apb').forEach(b=>b.disabled=false);}
-    },8);
-  }catch(e){
-    el.innerHTML='<span style="color:var(--red)">AI service unavailable. Check API key.</span>';
-    aiRunning=false;document.querySelectorAll('.apb').forEach(b=>b.disabled=false);
-  }
-}
+    payload = {
+        "message": f"Auto-update crawl results {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}",
+        "content": content_b64,
+        "branch": GITHUB_BRANCH,
+    }
+    if sha:
+        payload["sha"] = sha
 
-async function alertAI(prompt,outputId){
-  const el=document.getElementById(outputId);
-  if(!el)return;
-  el.style.display='block';
-  el.innerHTML='<span style="color:var(--t3);font-style:italic">Generating response…</span><span class="cur"></span>';
-  try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:SYS,messages:[{role:'user',content:prompt}]})});
-    if(!r.ok)throw new Error(r.status);
-    const d=await r.json();
-    const txt=d.content?.find(b=>b.type==='text')?.text||'No response.';
-    el.innerHTML='';
-    let i=0;const cur=document.createElement('span');cur.className='cur';el.appendChild(cur);
-    const iv=setInterval(()=>{
-      if(i<txt.length){el.insertBefore(document.createTextNode(txt[i++]),cur);}
-      else{clearInterval(iv);cur.remove();}
-    },8);
-  }catch(e){el.innerHTML='<span style="color:var(--red)">AI service unavailable.</span>';}
-}
+    try:
+        r = requests.put(api_url, headers=headers, json=payload, timeout=20)
+        if r.status_code in (200, 201):
+            log.info("✅ Results pushed to GitHub successfully")
+        else:
+            log.error(f"GitHub push failed: {r.status_code} — {r.text[:300]}")
+    except Exception as e:
+        log.error(f"GitHub push exception: {e}")
 
-// CHARTS
-function initCharts(){
-  // Destroy any existing charts to prevent "can't acquire context" error
-  // Safely destroy all existing chart instances before re-initialising
-  if (typeof Chart !== 'undefined') {
-    const existingCharts = Object.values(Chart.instances || {});
-    existingCharts.forEach(ch => { try { ch.destroy(); } catch(e){} });
-  }
-  Chart.defaults.font.family="'Inter',sans-serif";
-  Chart.defaults.font.size=11;
-  Chart.defaults.color='#6b7280';
-  Chart.defaults.borderColor='#e5e7eb';
-  const d10=Array.from({length:10},(_,i)=>{const d=new Date();d.setDate(d.getDate()-27+i*3);return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});});
+def run_crawl():
+    log.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    log.info(f"IMPACT PULSE — Crawl cycle starting {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
 
-  new Chart(document.getElementById('cVol'),{type:'line',data:{labels:d10,datasets:[{data:[142,210,340,398,480,542,530,500,548,610],borderColor:'#cf2e2e',backgroundColor:'rgba(207,46,46,.07)',fill:true,tension:.4,pointRadius:2,borderWidth:1.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}});
+    if os.path.exists(RESULTS_FILE):
+        with open(RESULTS_FILE, "r", encoding="utf-8") as f:
+            results = json.load(f)
+        for art in results.get("articles", []):
+            seen_hashes.add(art.get("id", ""))
+    else:
+        results = {
+            "last_updated": "",
+            "total_articles": 0,
+            "articles": [],
+            "program_summary": {},
+            "sentiment_overview": {"positive": 0, "negative": 0, "neutral": 0, "mixed": 0}
+        }
 
-  new Chart(document.getElementById('cSent'),{type:'doughnut',data:{labels:['Supportive','Neutral','Critical','Skeptical','Advocacy','Negative'],datasets:[{data:[42,20,16,10,8,4],backgroundColor:['#16a34a','#9ca3af','#d97706','#7c3aed','#0d9488','#dc2626'],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'right',labels:{boxWidth:8,padding:8}}}}});
+    new_count = 0
 
-  new Chart(document.getElementById('cProg'),{type:'bar',data:{labels:['YAW','Babban Gona','TAFTA','Jobberman','WOFAN','IITA','Scholars','Juriya','EDC','FCMB'],datasets:[{data:[1840,892,641,580,412,318,290,184,148,124],backgroundColor:['#cf2e2e','#e8a020','#16a34a','#2563eb','#7c3aed','#0d9488','#cf2e2e','#e8a020','#16a34a','#2563eb'],borderRadius:4,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'}}}}});
+    for feed_name, feed_url in RSS_FEEDS:
+        try:
+            feed = feedparser.parse(feed_url)
+            entries = feed.entries[:30]
+            log.info(f"  {feed_name}: {len(entries)} entries")
 
-  new Chart(document.getElementById('cSentD'),{type:'bar',data:{labels:['Supportive','Neutral','Critical','Skeptical','Advocacy','Negative'],datasets:[{data:[2640,1258,1005,628,502,251],backgroundColor:['#16a34a','#9ca3af','#d97706','#7c3aed','#0d9488','#dc2626'],borderRadius:4,borderWidth:0}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,.04)'}},y:{grid:{display:false}}}}});
+            for entry in entries:
+                url   = getattr(entry, "link", "")
+                title = getattr(entry, "title", "No title")
+                published = getattr(entry, "published", str(datetime.now(timezone.utc).date()))
 
-  new Chart(document.getElementById('cChanS'),{type:'bar',data:{labels:['News','Twitter','YouTube','LinkedIn','TikTok','Facebook','Radio','Blogs'],datasets:[{label:'Positive',data:[68,52,74,82,64,60,70,72],backgroundColor:'rgba(22,163,74,.7)',borderRadius:3},{label:'Negative',data:[14,32,10,8,28,24,14,16],backgroundColor:'rgba(220,38,38,.5)',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:7,padding:7}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,max:100,ticks:{callback:v=>v+'%'},grid:{color:'rgba(0,0,0,.04)'}}}}});
+                if not url:
+                    continue
 
-  new Chart(document.getElementById('cSentT'),{type:'line',data:{labels:d10,datasets:[{label:'Positive',data:[72,74,70,76,73,71,75,77,72,71],borderColor:'#16a34a',fill:false,tension:.3,borderWidth:1.5,pointRadius:2},{label:'Neg/Crit',data:[14,13,16,12,14,16,13,18,22,25],borderColor:'#dc2626',fill:false,tension:.3,borderWidth:1.5,pointRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:7,padding:7}}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'},grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}});
+                h = article_hash(url)
+                if h in seen_hashes:
+                    continue
 
-  new Chart(document.getElementById('cLang'),{type:'doughnut',data:{labels:['Nigerian English','Pidgin','Hausa','Yoruba','Other'],datasets:[{data:[44,28,18,8,2],backgroundColor:['#cf2e2e','#e8a020','#16a34a','#2563eb','#9ca3af'],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'right',labels:{boxWidth:8,padding:8}}}}});
+                entry_text = f"{title} {getattr(entry, 'summary', '')}"
+                matched_program = match_program(entry_text)
 
-  new Chart(document.getElementById('cVoice'),{type:'doughnut',data:{labels:['Participant','Media','Government','Influencer','Partner'],datasets:[{data:[28,34,14,12,12],backgroundColor:['#16a34a','#cf2e2e','#2563eb','#7c3aed','#0d9488'],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'right',labels:{boxWidth:8,padding:8}}}}});
+                if not matched_program:
+                    continue
 
-  new Chart(document.getElementById('cCmp'),{type:'bar',data:{labels:d10,datasets:[{label:'This period',data:[480,542,530,500,548,540,520,560,580,610],backgroundColor:'rgba(207,46,46,.7)',borderRadius:4},{label:'Previous',data:[360,398,410,390,430,420,400,440,460,490],backgroundColor:'rgba(207,46,46,.2)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:7,padding:7}}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'}}}}});
+                log.info(f"    ✓ [{matched_program}] {title[:70]}")
+                article_text = fetch_article_text(url)
 
-  new Chart(document.getElementById('cReach'),{type:'bar',data:{labels:['Apr','May','Jun','Jul','Aug','Sep'],datasets:[{label:'Reach (M)',data:[6.2,8.8,11.4,14.0,16.2,18.7],backgroundColor:'rgba(207,46,46,.6)',borderRadius:4,yAxisID:'y'},{label:'Value (₦M)',data:[88,140,188,232,272,312],borderColor:'#e8a020',fill:false,type:'line',tension:.3,borderWidth:1.5,pointRadius:2,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:7,padding:7}}},scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(0,0,0,.04)'},position:'left'},y1:{grid:{display:false},position:'right'}}}});
+                # Re-check with full text if only broad match
+                if matched_program == "General Coverage":
+                    full_match = match_program(article_text)
+                    if full_match and full_match != "General Coverage":
+                        matched_program = full_match
 
-  new Chart(document.getElementById('cState'),{type:'bar',data:{labels:['Lagos','Kano','Abuja','Kaduna','Adamawa','Nasarawa','Oyo','Edo','Abia','Bauchi'],datasets:[{data:[1240,820,690,580,480,410,380,320,280,260],backgroundColor:(ctx)=>[1,3,4].includes(ctx.dataIndex)?'rgba(217,119,6,.7)':'rgba(207,46,46,.6)',borderRadius:4,borderWidth:0}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'}},y:{grid:{display:false}}}}});
+                sentiment = analyse_sentiment(title, article_text, matched_program)
 
-  new Chart(document.getElementById('cZone'),{type:'bar',data:{labels:['SW','SE','SS','NC','NW','NE'],datasets:[{label:'Positive',data:[78,74,70,64,58,62],backgroundColor:'rgba(22,163,74,.7)',borderRadius:3},{label:'Negative',data:[12,14,18,24,34,28],backgroundColor:'rgba(220,38,38,.5)',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:7,padding:7}}},scales:{x:{grid:{display:false}},y:{max:100,ticks:{callback:v=>v+'%'},grid:{color:'rgba(0,0,0,.04)'}}}}});
+                article = {
+                    "id":              h,
+                    "program":         matched_program,
+                    "title":           title,
+                    "url":             url,
+                    "source":          feed_name,
+                    "published":       published,
+                    "crawled_at":      datetime.now(timezone.utc).isoformat(),
+                    "sentiment":       sentiment.get("sentiment", "neutral"),
+                    "sentiment_score": sentiment.get("sentiment_score", 0.0),
+                    "summary":         sentiment.get("summary", ""),
+                    "key_theme":       sentiment.get("key_theme", "other"),
+                    "language_note":   sentiment.get("language_note", "Standard English"),
+                    "speaker_type":    sentiment.get("speaker_type", "unknown"),
+                }
 
-  // Auto-load dashboard AI
-  setTimeout(()=>ai('In 2-3 sentences give the current media health status of Mastercard Foundation Nigeria programs. Name the biggest win and most urgent risk right now, with specific program names and states.','ai-dash'),800);
-}
-</script>
-</body>
-</html>
+                results["articles"].insert(0, article)
+                seen_hashes.add(h)
+                new_count += 1
+
+                s = article["sentiment"]
+                results["sentiment_overview"][s] = results["sentiment_overview"].get(s, 0) + 1
+
+        except Exception as e:
+            log.error(f"Feed error ({feed_name}): {e}")
+
+    results["articles"] = results["articles"][:500]
+
+    program_summary = {}
+    for art in results["articles"]:
+        p = art["program"]
+        if p not in program_summary:
+            program_summary[p] = {"count": 0, "positive": 0, "negative": 0, "neutral": 0, "mixed": 0, "last_article": ""}
+        program_summary[p]["count"] += 1
+        program_summary[p][art["sentiment"]] = program_summary[p].get(art["sentiment"], 0) + 1
+        if not program_summary[p]["last_article"]:
+            program_summary[p]["last_article"] = art["title"]
+
+    results["program_summary"] = program_summary
+    results["total_articles"]  = len(results["articles"])
+    results["last_updated"]    = datetime.now(timezone.utc).isoformat()
+
+    with open(RESULTS_FILE, "w", encoding="utf-8") as f:
+        json.dump(results, f, ensure_ascii=False, indent=2)
+
+    log.info(f"Crawl complete — {new_count} new articles found")
+    log.info(f"Total in database: {results['total_articles']}")
+    push_to_github(results)
+    log.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+
+if __name__ == "__main__":
+    log.info("IMPACT PULSE — IMC IMPACT / Imaginarium Marketing Communications")
+    log.info("Monitoring 15 Mastercard Foundation Nigeria programs")
+    run_crawl()
+    scheduler = BlockingScheduler(timezone="Africa/Lagos")
+    scheduler.add_job(run_crawl, "interval", minutes=120)
+    log.info("Scheduler active — next crawl in 120 minutes")
+    scheduler.start()
