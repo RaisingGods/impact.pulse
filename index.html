@@ -428,11 +428,11 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
 
       <!-- STATS -->
       <div class="stat-scroll">
-        <div class="stat cr"><div class="stat-lbl">Mentions (7d)</div><div class="stat-val">6,284</div><div class="stat-delta su">↑ 24% vs last week</div></div>
-        <div class="stat cg"><div class="stat-lbl">Est. Reach</div><div class="stat-val">18.7M</div><div class="stat-delta su">↑ 31% audience</div></div>
-        <div class="stat ca"><div class="stat-lbl">Sentiment Score</div><div class="stat-val">71<span style="font-size:12px;color:var(--t3)">/100</span></div><div class="stat-delta sdn">↓ 6pts this week</div></div>
-        <div class="stat cr"><div class="stat-lbl">Active Alerts</div><div class="stat-val">4</div><div class="stat-delta snt">2 critical · 2 moderate</div></div>
-        <div class="stat co"><div class="stat-lbl">Media Value</div><div class="stat-val">₦312M</div><div class="stat-delta su">↑ 18% earned</div></div>
+        <div class="stat cr"><div class="stat-lbl">Mentions (May 2026)</div><div class="stat-val" id="stat-mentions">17</div><div class="stat-delta su">Across 7 Tier 1 outlets</div></div>
+        <div class="stat cg"><div class="stat-lbl">Est. Reach</div><div class="stat-val" id="stat-reach">850K</div><div class="stat-delta su">National + digital outlets</div></div>
+        <div class="stat ca"><div class="stat-lbl">Sentiment Score</div><div class="stat-val" id="stat-sentiment">94<span style="font-size:12px;color:var(--t3)">/100</span></div><div class="stat-delta su">↑ 16 positive · 1 negative</div></div>
+        <div class="stat cr"><div class="stat-lbl">Active Alerts</div><div class="stat-val" id="stat-alerts">1</div><div class="stat-delta snt">Project Juriya — escalate</div></div>
+        <div class="stat co"><div class="stat-lbl">Positive : Negative</div><div class="stat-val" id="stat-ratio">16:1</div><div class="stat-delta su">Strong positive coverage</div></div>
       </div>
 
       <!-- HEALTH SCORES + CHARTS in 2 col -->
@@ -512,7 +512,7 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
       </div>
       <div class="card">
         <div class="tabs" id="cht">
-          <div class="tab on" onclick="switchFeed('all',this)">All (6,284)</div>
+          <div class="tab on" onclick="switchFeed('all',this)" id="feed-tab-all">All (17)</div>
           <div class="tab" onclick="switchFeed('news',this)">News</div>
           <div class="tab" onclick="switchFeed('twitter',this)">Twitter/X</div>
           <div class="tab" onclick="switchFeed('facebook',this)">Facebook</div>
@@ -746,10 +746,10 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
         <button class="fpill" onclick="setCmp(30,this)">This month</button>
       </div>
       <div class="stat-scroll" style="margin-bottom:14px">
-        <div class="stat cr"><div class="stat-lbl">Mentions</div><div class="stat-val">6,284</div><div class="stat-delta su">↑ 24% vs prev</div><div style="font-size:10px;color:var(--t3);margin-top:2px">Was 5,068</div></div>
-        <div class="stat cg"><div class="stat-lbl">Reach</div><div class="stat-val">18.7M</div><div class="stat-delta su">↑ 31% vs prev</div><div style="font-size:10px;color:var(--t3);margin-top:2px">Was 14.3M</div></div>
-        <div class="stat ca"><div class="stat-lbl">Sentiment</div><div class="stat-val">71</div><div class="stat-delta sdn">↓ 6pts vs prev</div><div style="font-size:10px;color:var(--t3);margin-top:2px">Was 77</div></div>
-        <div class="stat co"><div class="stat-lbl">Media value</div><div class="stat-val">₦312M</div><div class="stat-delta su">↑ 18% vs prev</div><div style="font-size:10px;color:var(--t3);margin-top:2px">Was ₦264M</div></div>
+        <div class="stat cr"><div class="stat-lbl">Mentions</div><div class="stat-val">17</div><div class="stat-delta su">May 2026</div><div style="font-size:10px;color:var(--t3);margin-top:2px">Verified articles</div></div>
+        <div class="stat cg"><div class="stat-lbl">Reach</div><div class="stat-val">850K</div><div class="stat-delta su">National outlets</div><div style="font-size:10px;color:var(--t3);margin-top:2px">7 Tier 1 outlets</div></div>
+        <div class="stat ca"><div class="stat-lbl">Sentiment</div><div class="stat-val">94</div><div class="stat-delta su">↑ Positive tone</div><div style="font-size:10px;color:var(--t3);margin-top:2px">16 positive · 1 negative</div></div>
+        <div class="stat co"><div class="stat-lbl">Positive ratio</div><div class="stat-val">16:1</div><div class="stat-delta su">Strong coverage</div><div style="font-size:10px;color:var(--t3);margin-top:2px">1 priority alert</div></div>
       </div>
       <div class="card">
         <div class="ch"><span class="ct">Mentions — this vs previous period</span></div>
@@ -1481,16 +1481,13 @@ function exportCSV(){
 // ── LIVE DATA FROM GITHUB ─────────────────────────────────────────────────────
 const GITHUB_JSON = "https://raw.githubusercontent.com/RaisingGods/impact.pulse/main/impact_pulse_results.json";
 
-// Sample data elements to hide when real data loads
-const SAMPLE_IDS = ['sample-stats','sample-feed','sample-hcards','sample-alerts'];
-
 async function fetchLiveResults() {
   try {
     const resp = await fetch(GITHUB_JSON + "?t=" + Date.now());
     if (!resp.ok) return null;
     return await resp.json();
   } catch(e) {
-    console.log("Live data not available yet:", e.message);
+    console.log("Live data fetch error:", e.message);
     return null;
   }
 }
@@ -1500,67 +1497,60 @@ async function updateDashboardWithLiveData() {
   const banner = document.getElementById('live-data-banner');
 
   if (!data || !data.articles || data.articles.length === 0) {
-    // No real data — show banner, keep sample data visible
     if (banner) banner.style.display = 'flex';
     return;
   }
 
-  // Real data exists — hide banner and hide sample data
+  // Hide banner — we have real data
   if (banner) banner.style.display = 'none';
-  SAMPLE_IDS.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  });
 
-  const articles = data.articles || [];
-  const total    = data.total_articles || articles.length;
-  const s        = data.sentiment_overview || {};
-  const positive = s.positive || 0;
-  const negative = s.negative || 0;
-  const neutral  = s.neutral  || 0;
-  const mixed    = s.mixed    || 0;
-  const posRate  = total > 0 ? Math.round((positive / total) * 100) : 0;
-  const reach    = total * 50000;
-  const reachStr = reach >= 1000000 ? (reach/1000000).toFixed(1)+'M' : (reach/1000).toFixed(0)+'K';
+  const articles   = data.articles || [];
+  const total      = data.total_articles || articles.length;
+  const s          = data.sentiment_overview || {};
+  const positive   = s.positive || 0;
+  const negative   = s.negative || 0;
+  const posRate    = total > 0 ? Math.round((positive / total) * 100) : 0;
+  const ratio      = negative > 0 ? `${positive}:${negative}` : `${positive}:0`;
 
-  // ── Inject live stat cards ──────────────────────────────────────────────────
-  const statsWrap = document.querySelector('.stats-row') || document.querySelector('.stat-row');
-  if (statsWrap) {
-    const liveStats = document.createElement('div');
-    liveStats.id = 'live-stats';
-    liveStats.style.cssText = 'display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px';
-    liveStats.innerHTML = `
-      <div class="stat cr"><div class="stat-lbl">Mentions (Live)</div><div class="stat-val">${total.toLocaleString()}</div><div class="stat-delta su">↑ Real data</div></div>
-      <div class="stat cg"><div class="stat-lbl">Est. Reach</div><div class="stat-val">${reachStr}</div><div class="stat-delta su">Across ${articles.length} articles</div></div>
-      <div class="stat cy"><div class="stat-lbl">Sentiment Score</div><div class="stat-val">${posRate}<span style="font-size:14px">/100</span></div><div class="stat-delta ${posRate>=70?'su':'sd'}">Based on live data</div></div>
-      <div class="stat cb"><div class="stat-lbl">Active Alerts</div><div class="stat-val">${negative > 0 ? negative : 0}</div><div class="stat-delta">Negative articles</div></div>
-    `;
-    statsWrap.parentNode.insertBefore(liveStats, statsWrap);
-  }
+  // Update stat cards by ID
+  const elMentions  = document.getElementById('stat-mentions');
+  const elReach     = document.getElementById('stat-reach');
+  const elSentiment = document.getElementById('stat-sentiment');
+  const elAlerts    = document.getElementById('stat-alerts');
+  const elRatio     = document.getElementById('stat-ratio');
 
-  // ── Update last crawl time ──────────────────────────────────────────────────
+  if (elMentions)  elMentions.textContent  = total.toLocaleString();
+  if (elSentiment) elSentiment.innerHTML   = `${posRate}<span style="font-size:12px;color:var(--t3)">/100</span>`;
+  if (elAlerts)    elAlerts.textContent    = negative.toString();
+  if (elRatio)     elRatio.textContent     = ratio;
+
+  // Update feed tab count
+  const feedTab = document.getElementById('feed-tab-all');
+  if (feedTab) feedTab.textContent = `All (${total})`;
+
+  // Update last updated
   if (data.last_updated) {
     const d = new Date(data.last_updated);
-    const ts = d.toLocaleString('en-NG', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
-    const footEl = document.querySelector('.sb-crawl');
-    if (footEl) footEl.textContent = 'Crawl active · ' + ts;
+    const ts = d.toLocaleString('en-NG', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'});
+    const crawlEl = document.querySelector('.sb-crawl');
+    if (crawlEl) crawlEl.textContent = 'Last updated · ' + ts;
   }
 
-  // ── Inject live feed ────────────────────────────────────────────────────────
+  // Update live feed with real articles
   const feedAll = document.getElementById('feed-all');
-  if (feedAll) {
-    feedAll.innerHTML = articles.slice(0, 25).map(r => {
+  if (feedAll && articles.length > 0) {
+    feedAll.innerHTML = articles.map(r => {
       const sentClass = r.sentiment === 'positive' ? 'cpos' :
                         r.sentiment === 'negative' ? 'cneg' :
                         r.sentiment === 'mixed'    ? 'cskp' : 'cneu';
       const srcAbbr = (r.source || 'SRC').substring(0,3).toUpperCase();
       const dateStr = r.published
-        ? new Date(r.published).toLocaleDateString('en-GB', {day:'2-digit', month:'short'})
+        ? new Date(r.published).toLocaleDateString('en-GB', {day:'numeric', month:'short'})
         : '';
       return `<div class="fi">
         <div class="fsrc" style="background:var(--off2);color:var(--t2)">${srcAbbr}</div>
         <div class="fbdy">
-          <div class="ftit"><a href="${r.url}" target="_blank" style="color:var(--t);text-decoration:none">${r.title}</a></div>
+          <div class="ftit"><a href="${r.url}" target="_blank" rel="noopener" style="color:var(--t);text-decoration:none">${r.title}</a></div>
           <div class="fmeta">
             <span>${r.source || ''} · ${dateStr}</span>
             ${r.program ? `<span class="fprog">${r.program}</span>` : ''}
@@ -1571,52 +1561,26 @@ async function updateDashboardWithLiveData() {
         </div>
       </div>`;
     }).join('');
-
-    // Update feed tab count
-    const allTab = document.querySelector('.tab.on');
-    if (allTab && allTab.textContent.includes('All')) {
-      allTab.textContent = `All (${total.toLocaleString()})`;
-    }
   }
 
-  // ── Update program health cards ─────────────────────────────────────────────
+  // Update program health cards with real data
   const ps = data.program_summary || {};
-  document.querySelectorAll('.pcn').forEach(el => {
+  document.querySelectorAll('.pcn, .hcard-name').forEach(el => {
     const cardName = el.textContent.trim().toLowerCase();
-    const match = Object.entries(ps).find(([k]) => {
-      const kl = k.toLowerCase();
-      return kl.includes(cardName.substring(0,6)) ||
-             cardName.includes(kl.substring(0,6));
-    });
-    if (match) {
-      const [, pd] = match;
-      const pcs  = el.parentElement?.querySelector('.pcs, .hcard-sub');
-      const pct  = pd.count > 0 ? Math.round(((pd.positive||0)/pd.count)*100) : 0;
-      const dot  = el.parentElement?.querySelector('.pdot');
-      if (pcs)  pcs.innerHTML = `<b>${pct}% pos</b> · ${(pd.count||0).toLocaleString()} mentions`;
-      if (dot)  dot.style.background = pct>=70?'var(--grn)':pct>=40?'var(--amb)':'var(--red)';
-    }
-  });
-
-  // ── Update program list in All Programs section ─────────────────────────────
-  document.querySelectorAll('.pc').forEach(el => {
-    const nameEl = el.querySelector('.pcn');
-    if (!nameEl) return;
-    const cardName = nameEl.textContent.trim().toLowerCase();
     const match = Object.entries(ps).find(([k]) => {
       const kl = k.toLowerCase();
       return kl.includes(cardName.substring(0,6)) || cardName.includes(kl.substring(0,6));
     });
     if (match) {
       const [, pd] = match;
-      const pcs = el.querySelector('.pcs');
+      const pcs = el.parentElement?.querySelector('.pcs, .hcard-sub');
       const pct = pd.count > 0 ? Math.round(((pd.positive||0)/pd.count)*100) : 0;
-      if (pcs) pcs.innerHTML = `<b>${pd.count||0}</b> · <span style="color:var(--grn)">${pct}%</span> pos`;
+      if (pcs) pcs.innerHTML = `<b>${pct}% pos</b> · ${pd.count} mentions`;
     }
   });
 }
 
-// ── Check crawler health via GitHub JSON ──────────────────────────────────────
+// Check crawler health
 async function checkApiHealth() {
   try {
     const resp = await fetch(GITHUB_JSON + "?t=" + Date.now());
