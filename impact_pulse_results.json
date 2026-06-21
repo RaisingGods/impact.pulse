@@ -1,12 +1,37 @@
 {
-  "last_updated": "2026-06-21T08:47:30.961825+00:00",
-  "total_articles": 0,
-  "articles": [],
-  "program_summary": {},
+  "last_updated": "2026-06-21T08:49:28.512133+00:00",
+  "total_articles": 1,
+  "articles": [
+    {
+      "id": "9eeecbae333eaf6dddc192c5a78a3bfa",
+      "program": "Young Africa Works",
+      "title": "Developing transformative pathways for youth inclusion and empowerment in agri-food systems: A change theory",
+      "url": "https://journals.plos.org/sustainabilitytransformation/article?id=10.1371/journal.pstr.0000255",
+      "source": "Plos.org",
+      "published": "2026-06-18T14:00:00Z",
+      "crawled_at": "2026-06-21T08:49:19.533839+00:00",
+      "sentiment": "mixed",
+      "sentiment_score": 0.3,
+      "summary": "Article explores theoretical framework for youth inclusion in African agri-food systems while acknowledging significant barriers to meaningful participation.",
+      "key_theme": "agriculture",
+      "language_note": "Standard English",
+      "speaker_type": "journalist"
+    }
+  ],
+  "program_summary": {
+    "Young Africa Works": {
+      "count": 1,
+      "positive": 0,
+      "negative": 0,
+      "neutral": 0,
+      "mixed": 1,
+      "last_article": "Developing transformative pathways for youth inclusion and empowerment in agri-food systems: A change theory"
+    }
+  },
   "sentiment_overview": {
     "positive": 0,
     "negative": 0,
     "neutral": 0,
-    "mixed": 0
+    "mixed": 1
   }
 }
