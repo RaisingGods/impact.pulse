@@ -419,9 +419,9 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
       <div class="crisis" style="margin-top:20px">
         <div class="crisis-ic">◬</div>
         <div>
-          <div class="crisis-t">Alert — Jobberman "scam" narrative trending on Twitter/X in Kano & Lagos</div>
-          <div class="crisis-d">Negative mentions up 190% in 8 hrs · 3 accounts (120K combined) amplifying · Response window: 3 hours</div>
-          <div class="crisis-m">Young Africa Works · Twitter/X · 1h 42m ago</div>
+          <div class="crisis-t">Opportunity — Fashion Future Program Aba pilot generating sustained national media momentum</div>
+          <div class="crisis-d">5 Tier 1 outlets covered the program milestone · 10,000+ jobs narrative gaining traction · Amplification window active</div>
+          <div class="crisis-m">Ethnocentrique Fashion Future · Guardian, Punch, Pulse NG, Leadership, Bella Naija · May 2026</div>
         </div>
         <button class="btn" style="font-size:11px;flex-shrink:0;margin-left:12px" onclick="nav('alerts',document.querySelector('.sb-ni:nth-child(3)'))">View alerts →</button>
       </div>
@@ -492,7 +492,7 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
           <div class="aio" id="ai-dash">Loading media health summary...</div>
           <div class="aipr">
             <button class="apb" onclick="ai('Summarise the most important media narratives across all Mastercard Foundation Nigeria programs this week. Include Pidgin, Hausa, and Yoruba signals. Flag the top risk.','ai-dash')">📊 Weekly narrative summary</button>
-            <button class="apb" onclick="ai('Analyse the Jobberman Young Africa Works scam narrative on Twitter. What are people saying in Pidgin? How serious is it and what should the response be?','ai-dash')">◬ Jobberman crisis response</button>
+            <button class="apb" onclick="ai('Analyse the media coverage of Mastercard Foundation Nigeria programs in May 2026. What are the key narratives, opportunities, and risks? Provide a strategic intelligence summary for IMC IMPACT leadership.','ai-dash')">◈ May 2026 intelligence summary</button>
             <button class="apb" onclick="ai('Write a senior leadership media summary for Mastercard Foundation Nigeria this week. Professional tone. Include reach, sentiment score, top program win, and one risk to watch.','ai-dash')">◇ Leadership summary</button>
           </div>
         </div>
@@ -580,11 +580,11 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
     <div id="v-alerts" class="view">
       <div style="margin-top:20px">
         <div class="ac acr">
-          <div class="ac-top"><div class="ac-title" style="color:var(--red)">◬ CRITICAL — Jobberman "scam" narrative</div><span class="chip cneg">ACTIVE</span></div>
-          <div class="ac-desc">Twitter thread alleging Jobberman YAW is fraudulent gaining traction. 3 accounts (120K combined). "Jobberman scam" trending Kano & Lagos. Negative mentions up 190% in 8 hours.</div>
-          <div class="ac-meta">Young Africa Works · Twitter/X · 1h 42m ago</div>
+          <div class="ac-top"><div class="ac-title" style="color:var(--red)">◬ WATCH — Project Juriya — Accountability narrative</div><span class="chip cneg">ACTIVE</span></div>
+          <div class="ac-desc">Opinion piece in The Nation (29 May) names Mastercard Foundation as funder of Project Juriya in Southern Kaduna. Community accountability questions raised around SCL implementation. Monitoring for escalation.</div>
+          <div class="ac-meta">Ethnocentrique Fashion Future · Guardian, Punch, Pulse NG, Leadership, Bella Naija · May 2026</div>
           <div style="display:flex;gap:7px;flex-wrap:wrap">
-            <button class="btn btn-red" style="font-size:11px" onclick="alertAI('Draft an urgent crisis response for Mastercard Foundation Nigeria on the Jobberman scam narrative on Twitter. Include key message, who posts it, a Twitter response in Nigerian English, and a Pidgin response for grassroots audiences.','aout1')">✦ Draft response</button>
+            <button class="btn btn-red" style="font-size:11px" onclick="alertAI('Draft a strategic communications advisory for IMC IMPACT on the Project Juriya accountability narrative in The Nation. Include recommended response approach, key messages, and stakeholder engagement plan.','aout1')">✦ Draft response</button>
             <button class="btn" style="font-size:11px;color:var(--grn)">✓ Resolve</button>
           </div>
           <div id="aout1" class="ac-ai-out"></div>
@@ -846,7 +846,7 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
           <select id="rpt-month" style="background:var(--w);border:1px solid var(--b2);border-radius:6px;padding:6px 10px;font-size:12px;font-family:var(--f);color:var(--t2)">
             <option>June 2026</option><option selected>May 2026</option><option>April 2026</option><option>March 2026</option>
           </select>
-          <button class="btn btn-red" onclick="exportReport()" style="font-size:12px">⬇ Download PDF Report</button>
+          <button class="btn btn-red" onclick="exportReport()" style="font-size:12px" title="Allow popups for this site if blocked">⬇ Download PDF Report</button>
           <button class="btn" onclick="exportCSV()" style="font-size:12px">⬇ Export CSV</button>
         </div>
       </div>
@@ -1464,9 +1464,12 @@ function exportReport(){
   </div>
 
   <div class="footer">IMPACT PULSE · Media Intelligence Platform · Imaginarium Marketing Communications (IMC IMPACT) · Confidential</div>
-  <script>window.onload=function(){window.print()}<\/script>
+  <script>setTimeout(function(){window.print()},800);<\/script>
   </body></html>`);
   w.document.close();
+  setTimeout(function(){
+    try { w.focus(); } catch(e) {}
+  }, 500);
 }
 
 function exportCSV(){
@@ -1606,7 +1609,7 @@ async function ai(prompt,targetId){
   el.innerHTML='<span style="color:var(--t3);font-style:italic">Analysing Mastercard Foundation Nigeria media…</span><span class="cur"></span>';
   document.querySelectorAll('.apb').forEach(b=>b.disabled=true);
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:SYS,messages:[{role:'user',content:prompt}]})});
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:600,system:SYS,messages:[{role:'user',content:prompt}]})});
     if(!r.ok)throw new Error(r.status);
     const d=await r.json();
     const txt=d.content?.find(b=>b.type==='text')?.text||'No response.';
@@ -1628,7 +1631,7 @@ async function alertAI(prompt,outputId){
   el.style.display='block';
   el.innerHTML='<span style="color:var(--t3);font-style:italic">Generating response…</span><span class="cur"></span>';
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:SYS,messages:[{role:'user',content:prompt}]})});
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:600,system:SYS,messages:[{role:'user',content:prompt}]})});
     if(!r.ok)throw new Error(r.status);
     const d=await r.json();
     const txt=d.content?.find(b=>b.type==='text')?.text||'No response.';
@@ -1638,7 +1641,7 @@ async function alertAI(prompt,outputId){
       if(i<txt.length){el.insertBefore(document.createTextNode(txt[i++]),cur);}
       else{clearInterval(iv);cur.remove();}
     },8);
-  }catch(e){el.innerHTML='<span style="color:var(--red)">AI service unavailable.</span>';}
+  }catch(e){el.innerHTML='<span style="color:var(--red)">AI analysis unavailable — please check your connection and try again.</span>';}
 }
 
 // CHARTS
