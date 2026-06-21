@@ -1192,10 +1192,21 @@ function iwLogin() {
   if (user && user.pass === pass) {
     currentUser = { email, ...user };
     err.style.display = 'none';
-    document.getElementById('ls1').style.display = 'none';
-    document.getElementById('ls2').style.display = 'block';
-    document.getElementById('iw-welcome').textContent = 'Welcome, ' + user.name + ' — select workspace';
-    iwRenderClients();
+    // Go straight to app - bypass client selection
+    document.getElementById('iw-login').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+    currentClient = { name: 'Mastercard Foundation', programs: '15 programs', icon: '🏦' };
+    // Update sidebar
+    try {
+      var cn = document.querySelector('.sb-cname');
+      var cs = document.querySelector('.sb-csub');
+      if(cn) cn.textContent = 'Mastercard Foundation';
+      if(cs) cs.textContent = '15 programs · Active monitoring';
+      var sbUser = document.querySelector('.sb-uname');
+      if(sbUser) sbUser.textContent = user.name;
+    } catch(e) {}
+    checkApiHealth();
+    updateDashboardWithLiveData();
   } else {
     err.style.display = 'block';
   }
