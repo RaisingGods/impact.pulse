@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-23T22:20:22.365343+00:00",
+  "last_updated": "2026-06-23T22:20:32.027231+00:00",
   "total_articles": 0,
   "articles": [],
   "program_summary": {},
@@ -8,7 +8,5 @@
     "negative": 0,
     "neutral": 0,
     "mixed": 0
-  },
-  "geographic_summary": {},
-  "platform_summary": {}
+  }
 }
