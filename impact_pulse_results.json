@@ -1,14 +1,42 @@
 {
-  "last_updated": "2026-06-24T08:15:02.531624+00:00",
-  "total_articles": 0,
-  "articles": [],
-  "program_summary": {},
-  "sentiment_overview": {
-    "positive": 0,
-    "negative": 0,
-    "neutral": 0,
-    "mixed": 0
+  "last_updated": "2026-06-24T09:00:00+00:00",
+  "total_articles": 17,
+  "data_source": "IMC IMPACT Media Monitoring Report — May 2026",
+  "articles": [
+    {"id":"ffp001","program":"Ethnocentrique Fashion Future","title":"Fashion Future Programme creates 10,000 jobs in Aba","url":"https://guardian.ng/business-services/fashion-future-programme-creates-10000-jobs-in-aba/","source":"The Guardian NG","published":"2026-05-15T08:00:00+00:00","sentiment":"positive","summary":"Fashion Future Program pilot phase closes in Aba with 10,000+ jobs created and 4,000+ MSMEs supported.","key_theme":"entrepreneurship","geographic_states":["Abia"]},
+    {"id":"ffp002","program":"Ethnocentrique Fashion Future","title":"Ethnocentrique Fashion Future Program concludes pilot — 10,379 people reached in Aba","url":"https://www.pulse.ng/","source":"Pulse NG","published":"2026-05-14T10:00:00+00:00","sentiment":"positive","summary":"Pulse NG covers Fashion Future pilot conclusion — 10,379 reached, 10,000+ jobs, 4,000+ MSMEs.","key_theme":"entrepreneurship","geographic_states":["Abia"]},
+    {"id":"ffp003","program":"Ethnocentrique Fashion Future","title":"Fashion Future Program Aba pilot phase closes with landmark job creation milestone","url":"https://punchng.com/","source":"Punch Newspapers","published":"2026-05-16T07:00:00+00:00","sentiment":"positive","summary":"Punch covers Fashion Future Program milestone in Aba.","key_theme":"entrepreneurship","geographic_states":["Abia"]},
+    {"id":"ffp004","program":"Ethnocentrique Fashion Future","title":"Mastercard Foundation Fashion Future Program: Empowering Aba creative economy","url":"https://leadership.ng/","source":"Leadership NG","published":"2026-05-17T09:00:00+00:00","sentiment":"positive","summary":"Leadership covers Fashion Future Program impact on Aba creative economy.","key_theme":"entrepreneurship","geographic_states":["Abia"]},
+    {"id":"ffp005","program":"Ethnocentrique Fashion Future","title":"How Mastercard Foundation is reshaping Nigeria fashion industry through Aba pilot","url":"https://bellanaija.com/","source":"Bella Naija","published":"2026-05-18T11:00:00+00:00","sentiment":"positive","summary":"Bella Naija covers Fashion Future Program transformative impact on Aba fashion sector.","key_theme":"entrepreneurship","geographic_states":["Abia"]},
+    {"id":"job001","program":"Jobberman","title":"Connecting job seekers to employers vital to Nigeria labour market economic development","url":"https://businessday.ng/life/article/connecting-job-seekers-to-employers-vital-to-nigerias-labour-market-economic-development-jobberman/","source":"BusinessDay","published":"2026-05-10T08:00:00+00:00","sentiment":"positive","summary":"BusinessDay profiles Jobberman role connecting 1.1M job seekers to employers.","key_theme":"employment","geographic_states":["Lagos"]},
+    {"id":"job002","program":"Jobberman","title":"Jobberman Partners Convening 2026 — landmark gathering of Nigeria employment ecosystem","url":"https://guardian.ng/","source":"The Guardian NG","published":"2026-05-12T10:00:00+00:00","sentiment":"positive","summary":"Guardian covers Jobberman Partners Convening in Lagos.","key_theme":"employment","geographic_states":["Lagos"]},
+    {"id":"job003","program":"Jobberman","title":"Jobberman convening: Building bridges between Nigerian youth and employers","url":"https://www.thisdaylive.com/","source":"ThisDay Live","published":"2026-05-13T08:00:00+00:00","sentiment":"positive","summary":"ThisDay covers Jobberman Partners Convening.","key_theme":"employment","geographic_states":["Lagos"]},
+    {"id":"job004","program":"Jobberman","title":"1.1 million Nigerians placed in jobs: Jobberman at 6 years under Mastercard Foundation","url":"https://businessday.ng/","source":"BusinessDay","published":"2026-05-20T09:00:00+00:00","sentiment":"positive","summary":"BusinessDay reports 1.1M Nigerians placed in employment over 6 years.","key_theme":"employment","geographic_states":["Lagos","Kano"]},
+    {"id":"sch001","program":"Scholars Program","title":"PAU Mastercard Foundation Scholarship 2026 — applications open for Nigerian students","url":"https://myschoolgist.com/scholarships/pau-mastercard-scholarship-186557/","source":"MySchoolGist","published":"2026-05-08T10:00:00+00:00","sentiment":"positive","summary":"MySchoolGist announces PAU Mastercard Foundation Scholarship 2026 applications.","key_theme":"education","geographic_states":["Lagos"]},
+    {"id":"sch002","program":"Scholars Program","title":"Mastercard Foundation Scholars Program 2026 at Pan-Atlantic University","url":"https://nigeriastartupsNews.com/","source":"Nigeria Startup News","published":"2026-05-09T09:00:00+00:00","sentiment":"positive","summary":"Nigeria Startup News covers Mastercard Foundation Scholars Program at PAU.","key_theme":"education","geographic_states":["Lagos"]},
+    {"id":"song001","program":"Songhai Center","title":"AIRBDA welcomes new batch of Songhai Mastercard Foundation trainees","url":"https://fmino.gov.ng/","source":"Federal Ministry of Information","published":"2026-05-22T08:00:00+00:00","sentiment":"positive","summary":"Federal Ministry covers Songhai Mastercard Foundation agribusiness trainee intake.","key_theme":"agriculture","geographic_states":["Nationwide"]},
+    {"id":"edc001","program":"EDC","title":"Sabou Capital targets Africa financing gap with $200M fund to scale SMEs","url":"https://businessday.ng/","source":"BusinessDay","published":"2026-05-25T09:00:00+00:00","sentiment":"positive","summary":"BusinessDay reports $200M Africa Growth Fund targeting SME financing gap.","key_theme":"entrepreneurship","geographic_states":["Lagos"]},
+    {"id":"iita001","program":"IITA I-Youth","title":"UNILAG research calls for safer inclusive creative spaces for young women in Africa","url":"https://unilag.edu.ng/","source":"University of Lagos","published":"2026-05-19T10:00:00+00:00","sentiment":"positive","summary":"UNILAG-led research highlights need for inclusive creative spaces for young African women.","key_theme":"education","geographic_states":["Lagos"]},
+    {"id":"yaw001","program":"Young Africa Works","title":"Which 10 AI skills make African graduates more employable than a degree?","url":"https://www.afterschoolafrica.com/116903/which-10-ai-skills-make-african-graduates-more-employable-than-a-degree/","source":"AfterSchool Africa","published":"2026-05-21T08:00:00+00:00","sentiment":"positive","summary":"AfterSchool Africa examines AI skills for African graduate employability.","key_theme":"employment","geographic_states":["Nationwide"]},
+    {"id":"yaw002","program":"Young Africa Works","title":"Africa digital economy at risk without stronger public systems — Microsoft","url":"https://businessday.ng/","source":"BusinessDay","published":"2026-05-27T09:00:00+00:00","sentiment":"mixed","summary":"Microsoft warns Africa digital ambitions may fail without stronger public systems.","key_theme":"technology","geographic_states":["Lagos"]},
+    {"id":"juriya001","program":"Project Juriya","title":"Demo Farms or Graveyards? — Mastercard Foundation named in abandoned Project Juriya farms","url":"https://thenationonlineng.net/demo-farms-or-graveyards/","source":"The Nation","published":"2026-05-29T07:00:00+00:00","sentiment":"negative","summary":"PRIORITY ALERT: The Nation names Foundation as funder of abandoned Project Juriya farms in Southern Kaduna.","key_theme":"agriculture","geographic_states":["Kaduna"]}
+  ],
+  "program_summary": {
+    "Ethnocentrique Fashion Future": {"count":5,"positive":5,"negative":0,"neutral":0,"mixed":0},
+    "Jobberman": {"count":4,"positive":4,"negative":0,"neutral":0,"mixed":0},
+    "Scholars Program": {"count":2,"positive":2,"negative":0,"neutral":0,"mixed":0},
+    "Songhai Center": {"count":1,"positive":1,"negative":0,"neutral":0,"mixed":0},
+    "EDC": {"count":1,"positive":1,"negative":0,"neutral":0,"mixed":0},
+    "IITA I-Youth": {"count":1,"positive":1,"negative":0,"neutral":0,"mixed":0},
+    "Young Africa Works": {"count":2,"positive":1,"negative":0,"neutral":0,"mixed":1},
+    "Project Juriya": {"count":1,"positive":0,"negative":1,"neutral":0,"mixed":0}
   },
-  "geographic_summary": {},
-  "platform_summary": {}
+  "sentiment_overview": {"positive":15,"negative":1,"neutral":0,"mixed":1},
+  "geographic_summary": {
+    "Abia": {"count":5},
+    "Lagos": {"count":7},
+    "Kaduna": {"count":2},
+    "Nationwide": {"count":3}
+  },
+  "platform_summary": {"News":17}
 }
