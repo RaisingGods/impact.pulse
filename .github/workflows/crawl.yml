@@ -1,0 +1,32 @@
+name: IMPACT PULSE Crawler
+
+on:
+  schedule:
+    - cron: '0 6,12,18,0 * * *'  # Runs at 6am, 12pm, 6pm, midnight UTC every day
+  workflow_dispatch:  # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests anthropic
+
+      - name: Run crawler
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_REPO: RaisingGods/impact.pulse
+        run: python crawler.py
+
+      - name: Confirm completion
+        run: echo "Crawl complete at $(date)"
