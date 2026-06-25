@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-25T19:43:34.053500+00:00",
+  "last_updated": "2026-06-25T19:44:20.378709+00:00",
   "total_articles": 100,
   "new_this_run": 100,
   "sentiment": {
@@ -1028,5 +1028,139 @@
       "sentiment": "neutral",
       "crawled_at": "2026-06-25T19:43:31.772824+00:00"
     }
-  ]
+  ],
+  "program_summary": {
+    "WISE Program": {
+      "count": 7,
+      "positive": 7,
+      "negative": 0,
+      "neutral": 0,
+      "mixed": 0,
+      "last_article": "Mastercard Foundation, IDH Partner Ekiti to Deepen Cassava Value Chain Development - eksginfo.ng"
+    },
+    "Jobberman": {
+      "count": 7,
+      "positive": 7,
+      "negative": 0,
+      "neutral": 0,
+      "mixed": 0,
+      "last_article": "Jobberman, Mastercard Foundation Empower Ondo Youths with Career Development Skills - MSME Africa"
+    },
+    "World Food Programme": {
+      "count": 8,
+      "positive": 4,
+      "negative": 2,
+      "neutral": 2,
+      "mixed": 0,
+      "last_article": "World Food Programme, Mastercard Foundation Back N100m Solar Drying Hub to Empower 5,000 Kano Youths - Businessday NG"
+    },
+    "Fashion Future Program": {
+      "count": 6,
+      "positive": 5,
+      "negative": 0,
+      "neutral": 1,
+      "mixed": 0,
+      "last_article": "The Fashion Future Program Reaches 10,379 People as Pilot Phase Concludes in Aba - BellaNaija"
+    },
+    "Youth Employability Booster": {
+      "count": 6,
+      "positive": 5,
+      "negative": 0,
+      "neutral": 1,
+      "mixed": 0,
+      "last_article": "The Pan‑Atlantic University Mastercard Foundation Scholars Program 2026 for young Africans (Fully Funded) - Opportunities For Africans"
+    },
+    "Songhai Center": {
+      "count": 2,
+      "positive": 1,
+      "negative": 0,
+      "neutral": 1,
+      "mixed": 0,
+      "last_article": "AIRBDA Welcomes Another Batch Of SONGHAI Mastercard Foundation Batch Trainees - Federal Ministry of Information and National Orientation"
+    },
+    "Project Juriya": {
+      "count": 4,
+      "positive": 2,
+      "negative": 1,
+      "neutral": 1,
+      "mixed": 0,
+      "last_article": "Mastercard Foundation, FG deepen collaboration to support young farmers - The Guardian Nigeria News"
+    },
+    "IITA I-Youth": {
+      "count": 7,
+      "positive": 6,
+      "negative": 0,
+      "neutral": 1,
+      "mixed": 0,
+      "last_article": "I-Youth wraps up first phase with over 90,000 jobs for women, PWDs - The Guardian Nigeria News"
+    },
+    "Babban Gona": {
+      "count": 7,
+      "positive": 5,
+      "negative": 0,
+      "neutral": 2,
+      "mixed": 0,
+      "last_article": "Babban Gona, Mastercard Foundation partner to create jobs for 560,000 youths, women - Businessday NG"
+    },
+    "TracTrac ISSAM": {
+      "count": 3,
+      "positive": 0,
+      "negative": 0,
+      "neutral": 3,
+      "mixed": 0,
+      "last_article": "TracTrac boosts yields, cuts costs for 125,000 farmers across Nigeria - Tribune Online"
+    },
+    "TAFTA": {
+      "count": 7,
+      "positive": 7,
+      "negative": 0,
+      "neutral": 0,
+      "mixed": 0,
+      "last_article": "TAFTA, Mastercard Foundation Empower 2,000 Women at Kreatives Summit - THISDAYLIVE"
+    },
+    "Christian Aid SEPTP": {
+      "count": 6,
+      "positive": 4,
+      "negative": 0,
+      "neutral": 2,
+      "mixed": 0,
+      "last_article": "Apply: Christian Aid, Mastercard Foundation SEPTP Poultry Programme - Nigeria Startup News"
+    },
+    "WOFAN ICON 2": {
+      "count": 9,
+      "positive": 3,
+      "negative": 0,
+      "neutral": 6,
+      "mixed": 0,
+      "last_article": "WOFAN, Mastercard Foundation launch support initiative for hearing-impaired youths in agriculture - The Nation Newspaper"
+    },
+    "FCMB Easylift": {
+      "count": 9,
+      "positive": 3,
+      "negative": 0,
+      "neutral": 6,
+      "mixed": 0,
+      "last_article": "Oyo, FCMB, Mastercard Foundation Disburse N1.5bn to Young Farmers - THISDAYLIVE"
+    },
+    "EDC Transforming Nigerian Youths": {
+      "count": 7,
+      "positive": 5,
+      "negative": 0,
+      "neutral": 2,
+      "mixed": 0,
+      "last_article": "EDC, Keystone Bank, others task SMEs on sustainable growth - The Guardian Nigeria News"
+    },
+    "Del-York YAPPI": {
+      "count": 5,
+      "positive": 4,
+      "negative": 0,
+      "neutral": 1,
+      "mixed": 0,
+      "last_article": "YAPPI Celebrates International Youth Day with Empowerment & Inclusive Dialogues - BellaNaija"
+    }
+  },
+  "geographic_summary": {},
+  "platform_summary": {
+    "News": 100
+  }
 }
