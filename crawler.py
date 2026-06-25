@@ -5,15 +5,12 @@ import os
 import re
 from datetime import datetime, timezone
 from xml.etree import ElementTree as ET
-import anthropic
 
 GITHUB_TOKEN = os.environ.get('GH_TOKEN', '')
 GITHUB_REPO = os.environ.get('GITHUB_REPO', 'RaisingGods/impact.pulse')
 GITHUB_FILE = 'impact_pulse_results.json'
 ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY', '')
 
-# 16 Mastercard Foundation Nigeria programs
-# Every search includes "Mastercard Foundation" to ensure relevance
 PROGRAMS = [
     {
         "name": "WISE Program",
@@ -29,7 +26,6 @@ PROGRAMS = [
         "queries": [
             "Jobberman Nigeria Mastercard Foundation",
             "Jobberman Young Africa Works Mastercard Foundation",
-            "Jobberman youth employment Nigeria Mastercard",
         ]
     },
     {
@@ -37,7 +33,7 @@ PROGRAMS = [
         "implementer": "WFP",
         "queries": [
             "World Food Programme Nigeria Mastercard Foundation",
-            "WFP Nigeria youth Mastercard Foundation",
+            "WFP Nigeria Mastercard Foundation",
         ]
     },
     {
@@ -46,7 +42,6 @@ PROGRAMS = [
         "queries": [
             "Ethnocentrique Fashion Future Nigeria Mastercard Foundation",
             "Fashion Future Program Aba Nigeria Mastercard",
-            "Ethnocentrique Nigeria Mastercard Foundation",
         ]
     },
     {
@@ -70,9 +65,7 @@ PROGRAMS = [
         "implementer": "SCL / Sa'anwara / Ijumai Consultaire",
         "queries": [
             "Project Juriya Nigeria Mastercard Foundation",
-            "Juriya Southern Kaduna Mastercard Foundation",
             "SCL Nigeria Mastercard Foundation Juriya",
-            "Ijumai Consultaire Nigeria Mastercard Foundation",
         ]
     },
     {
@@ -80,8 +73,7 @@ PROGRAMS = [
         "implementer": "IITA",
         "queries": [
             "IITA I-Youth Nigeria Mastercard Foundation",
-            "International Institute Tropical Agriculture youth Nigeria Mastercard Foundation",
-            "IITA youth employment Nigeria Mastercard",
+            "IITA youth Nigeria Mastercard Foundation",
         ]
     },
     {
@@ -89,7 +81,6 @@ PROGRAMS = [
         "implementer": "CAFI & WEDI",
         "queries": [
             "Babban Gona Nigeria Mastercard Foundation",
-            "Babban Gona CAFI WEDI Mastercard Foundation",
             "Babban Gona farmers Nigeria Mastercard",
         ]
     },
@@ -99,7 +90,6 @@ PROGRAMS = [
         "queries": [
             "TracTrac Nigeria Mastercard Foundation",
             "ISSAM Nigeria agriculture Mastercard Foundation",
-            "TracTrac ISSAM Nigeria Mastercard",
         ]
     },
     {
@@ -108,7 +98,6 @@ PROGRAMS = [
         "queries": [
             "TAFTA Nigeria Mastercard Foundation",
             "Terra Academy Arts Nigeria Mastercard Foundation",
-            "TAFTA fashion graduates Nigeria Mastercard",
         ]
     },
     {
@@ -116,7 +105,6 @@ PROGRAMS = [
         "implementer": "Christian Aid",
         "queries": [
             "Christian Aid SEPTP Nigeria Mastercard Foundation",
-            "Christian Aid youth employment Nigeria Mastercard Foundation",
             "SEPTP Nigeria Mastercard Foundation",
         ]
     },
@@ -125,7 +113,6 @@ PROGRAMS = [
         "implementer": "Women Farmers Advancement Network",
         "queries": [
             "WOFAN Nigeria Mastercard Foundation",
-            "Women Farmers Advancement Network ICON 2 Nigeria Mastercard Foundation",
             "WOFAN ICON 2 Mastercard Foundation",
         ]
     },
@@ -134,8 +121,7 @@ PROGRAMS = [
         "implementer": "First City Monument Bank",
         "queries": [
             "FCMB Easylift Nigeria Mastercard Foundation",
-            "First City Monument Bank Easylift Mastercard Foundation",
-            "FCMB youth loan Nigeria Mastercard Foundation",
+            "FCMB youth Nigeria Mastercard Foundation",
         ]
     },
     {
@@ -144,7 +130,6 @@ PROGRAMS = [
         "queries": [
             "Enterprise Development Centre Nigeria Mastercard Foundation",
             "EDC Transforming Nigerian Youths Mastercard Foundation",
-            "EDC Nigeria youth Mastercard Foundation",
         ]
     },
     {
@@ -152,28 +137,25 @@ PROGRAMS = [
         "implementer": "Del-York Group",
         "queries": [
             "Del-York YAPPI Nigeria Mastercard Foundation",
-            "Del-York Group Nigeria Mastercard Foundation",
-            "YAPPI Nigeria creative arts Mastercard Foundation",
+            "YAPPI Nigeria Mastercard Foundation",
         ]
     },
 ]
 
 POSITIVE_WORDS = [
-    'success', 'launch', 'achieve', 'milestone', 'graduate', 'empower',
-    'impact', 'grow', 'expand', 'reach', 'train', 'create', 'job', 'employ',
-    'award', 'partner', 'fund', 'invest', 'support', 'opportunity', 'develop',
-    'skill', 'place', 'hire', 'transform', 'uplift', 'beneficiar', 'pioneer',
-    'breakthrough', 'celebrate', 'complete', 'deliver', 'commission'
+    'success','launch','achieve','milestone','graduate','empower','impact',
+    'grow','expand','reach','train','create','job','employ','award','partner',
+    'fund','invest','support','opportunity','develop','skill','place','hire',
+    'transform','uplift','beneficiar','pioneer','celebrate','complete','deliver'
 ]
 NEGATIVE_WORDS = [
-    'fail', 'scam', 'fraud', 'corrupt', 'abandon', 'delay', 'problem',
-    'crisis', 'accuse', 'probe', 'investigate', 'allege', 'concern', 'risk',
-    'threat', 'loss', 'protest', 'demand', 'accountability', 'missing'
+    'fail','scam','fraud','corrupt','abandon','delay','problem','crisis',
+    'accuse','probe','investigate','allege','concern','risk','threat','loss',
+    'protest','demand','accountability','missing','graveyard','ghost'
 ]
 
 
 def google_news_rss(query):
-    """Fetch Google News RSS — free, no API key needed."""
     url = f"https://news.google.com/rss/search?q={requests.utils.quote(query)}&hl=en-NG&gl=NG&ceid=NG:en"
     headers = {'User-Agent': 'Mozilla/5.0 (compatible; IMCImpactCrawler/2.0)'}
     try:
@@ -195,7 +177,7 @@ def google_news_rss(query):
                 })
         return items
     except Exception as e:
-        print(f"  RSS error for '{query}': {e}")
+        print(f"  RSS error: {e}")
         return []
 
 
@@ -210,48 +192,67 @@ def score_sentiment(title):
     return 'neutral'
 
 
-def analyse_with_claude(articles_summary):
-    """Use Claude to generate weekly narrative summary."""
+def analyse_with_claude(articles_text):
+    """Generate AI weekly summary using Anthropic API."""
     if not ANTHROPIC_API_KEY:
         return None
     try:
-        client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
-        prompt = f"""You are a senior communications analyst at IMC IMPACT in Nigeria.
-Based on these recent media mentions of Mastercard Foundation Nigeria programs, write a concise weekly intelligence summary (max 300 words).
+        headers = {
+            'x-api-key': ANTHROPIC_API_KEY,
+            'anthropic-version': '2023-06-01',
+            'content-type': 'application/json'
+        }
+        prompt = f"""You are a senior communications analyst at IMC IMPACT Nigeria.
+Based on these recent media mentions of Mastercard Foundation Nigeria programs, write a concise weekly intelligence summary.
 
-Articles found this week:
-{articles_summary}
+Articles found:
+{articles_text}
 
-Write the summary in this format:
+Write in this format:
 WEEKLY INTELLIGENCE SUMMARY
 Period: {datetime.now(timezone.utc).strftime('%B %Y')}
 
 AT A GLANCE
-[3 bullet points: total mentions, sentiment, top program]
+- Total mentions this run: [number]
+- Overall sentiment: [positive/mixed]
+- Top performing program: [name]
 
 TOP STORY
-[Most significant coverage this week]
+[Most significant coverage in 2 sentences]
 
 PRIORITY ALERT
-[Any negative or accountability coverage requiring attention. Write NONE if nothing.]
+[Any negative coverage requiring attention. Write NONE if nothing critical.]
 
 RECOMMENDATIONS
-[2-3 specific actions for the communications team]
+1. [Action]
+2. [Action]
+3. [Action]
 
-Keep it factual, professional, and actionable."""
+Keep it factual, professional, and under 250 words."""
 
-        message = client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=600,
-            messages=[{"role": "user", "content": prompt}]
+        payload = {
+            'model': 'claude-sonnet-4-6',
+            'max_tokens': 600,
+            'messages': [{'role': 'user', 'content': prompt}]
+        }
+        r = requests.post(
+            'https://api.anthropic.com/v1/messages',
+            headers=headers,
+            json=payload,
+            timeout=30
         )
-        return message.content[0].text
+        if r.status_code == 200:
+            return r.json()['content'][0]['text']
+        else:
+            print(f"  Claude API error: {r.status_code} {r.text[:100]}")
+            return None
     except Exception as e:
-        print(f"  Claude analysis error: {e}")
+        print(f"  Claude error: {e}")
         return None
 
 
 def load_existing():
+    """Load current JSON from GitHub."""
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE}"
     headers = {
         'Authorization': f'token {GITHUB_TOKEN}',
@@ -261,36 +262,54 @@ def load_existing():
         r = requests.get(url, headers=headers, timeout=15)
         if r.status_code == 200:
             import base64
-            data = json.loads(base64.b64decode(r.json()['content']).decode())
-            sha = r.json()['sha']
+            content = r.json()
+            data = json.loads(base64.b64decode(content['content']).decode())
+            sha = content['sha']
             return data, sha
+        elif r.status_code == 404:
+            print("  No existing file — will create new")
+            return None, None
     except Exception as e:
         print(f"  Load error: {e}")
     return None, None
 
 
 def save_to_github(data, sha=None):
+    """Save results JSON to GitHub with retry on 409 conflict."""
     import base64
+
+    # Always get fresh SHA before saving to avoid 409 conflicts
+    fresh_sha = sha
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE}"
     headers = {
         'Authorization': f'token {GITHUB_TOKEN}',
         'Accept': 'application/vnd.github.v3+json'
     }
+
+    # Get latest SHA
+    try:
+        r = requests.get(url, headers=headers, timeout=15)
+        if r.status_code == 200:
+            fresh_sha = r.json()['sha']
+    except:
+        pass
+
     payload = {
-        'message': f'IMPACT PULSE crawl — {datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")} UTC',
-        'content': base64.b64encode(json.dumps(data, indent=2).encode()).decode()
+        'message': f'IMPACT PULSE — {datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")} UTC — {data.get("total_articles", 0)} articles',
+        'content': base64.b64encode(json.dumps(data, indent=2, ensure_ascii=False).encode()).decode()
     }
-    if sha:
-        payload['sha'] = sha
+    if fresh_sha:
+        payload['sha'] = fresh_sha
+
     try:
         r = requests.put(url, headers=headers, json=payload, timeout=20)
         if r.status_code in (200, 201):
-            print(f"  GitHub updated successfully")
+            print(f"  GitHub updated — {data.get('total_articles', 0)} total articles saved")
             return True
         else:
-            print(f"  GitHub error: {r.status_code}")
+            print(f"  GitHub save error: {r.status_code} — {r.text[:150]}")
     except Exception as e:
-        print(f"  GitHub save error: {e}")
+        print(f"  GitHub exception: {e}")
     return False
 
 
@@ -310,12 +329,16 @@ def crawl():
     for prog in PROGRAMS:
         print(f"\n[{prog['name']}]")
         found_for_program = []
+        seen_urls = set()
 
         for query in prog['queries']:
             items = google_news_rss(query)
             for item in items:
                 if item['url'] in existing_urls:
                     continue
+                if item['url'] in seen_urls:
+                    continue
+                seen_urls.add(item['url'])
                 sentiment = score_sentiment(item['title'])
                 article = {
                     'program': prog['name'],
@@ -330,43 +353,34 @@ def crawl():
                 found_for_program.append(article)
                 existing_urls.add(item['url'])
                 print(f"  NEW [{sentiment.upper()}]: {item['title'][:70]}")
-
             time.sleep(1)
 
-        # Deduplicate within program
-        seen = set()
-        for a in found_for_program:
-            if a['url'] not in seen:
-                seen.add(a['url'])
-                new_articles.append(a)
-
+        new_articles.extend(found_for_program)
         program_counts[prog['name']] = len(found_for_program)
 
-    # Merge new articles
+    # Merge and keep last 500
     all_articles = all_articles + new_articles
-
-    # Keep last 500 articles
     all_articles = all_articles[-500:]
 
-    # Calculate stats
+    # Stats
     total = len(all_articles)
     pos = sum(1 for a in all_articles if a['sentiment'] == 'positive')
     neg = sum(1 for a in all_articles if a['sentiment'] == 'negative')
     neu = sum(1 for a in all_articles if a['sentiment'] == 'neutral')
     pos_rate = round(pos / total * 100) if total else 0
 
-    # Generate AI summary if we have new articles
+    # AI summary
     ai_summary = existing.get('ai_summary', '') if existing else ''
     if new_articles and ANTHROPIC_API_KEY:
-        print(f"\nGenerating AI summary with Claude...")
+        print(f"\nGenerating AI summary...")
         articles_text = '\n'.join([
-            f"- [{a['program']}] {a['title']} ({a['source']}) [{a['sentiment']}]"
+            f"- [{a['program']}] {a['title']} [{a['sentiment']}]"
             for a in new_articles[:20]
         ])
         summary = analyse_with_claude(articles_text)
         if summary:
             ai_summary = summary
-            print(f"  AI summary generated")
+            print(f"  AI summary generated successfully")
 
     result = {
         'last_updated': datetime.now(timezone.utc).isoformat(),
@@ -380,7 +394,7 @@ def crawl():
     }
 
     print(f"\n{'='*60}")
-    print(f"RESULTS: {len(new_articles)} new articles | {total} total | {pos_rate}% positive")
+    print(f"RESULTS: {len(new_articles)} new | {total} total | {pos_rate}% positive")
     print(f"{'='*60}")
 
     save_to_github(result, sha)
@@ -388,6 +402,6 @@ def crawl():
 
 
 if __name__ == '__main__':
-    print("IMPACT PULSE Crawler v2.0")
+    print("IMPACT PULSE Crawler v2.1")
     print("Google News RSS | 16 MCF Nigeria Programs")
     crawl()
