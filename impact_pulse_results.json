@@ -1,31 +1,31 @@
 {
-  "last_updated": "2026-06-25T13:59:11.115550+00:00",
-  "total_articles": 98,
-  "new_this_run": 98,
+  "last_updated": "2026-06-25T13:59:23.348012+00:00",
+  "total_articles": 103,
+  "new_this_run": 5,
   "sentiment": {
-    "positive": 67,
+    "positive": 69,
     "negative": 3,
-    "neutral": 28
+    "neutral": 31
   },
-  "positive_rate": 68,
+  "positive_rate": 67,
   "ai_summary": "",
   "program_counts": {
-    "WISE Program": 7,
-    "Jobberman": 7,
-    "World Food Programme": 8,
-    "Fashion Future Program": 6,
-    "Youth Employability Booster": 6,
-    "Songhai Center": 2,
-    "Project Juriya": 4,
-    "IITA I-Youth": 5,
-    "Babban Gona": 7,
-    "TracTrac ISSAM": 3,
-    "TAFTA": 7,
-    "Christian Aid SEPTP": 6,
-    "WOFAN ICON 2": 9,
-    "FCMB Easylift": 9,
-    "EDC Transforming Nigerian Youths": 7,
-    "Del-York YAPPI": 5
+    "WISE Program": 1,
+    "Jobberman": 0,
+    "World Food Programme": 1,
+    "Fashion Future Program": 0,
+    "Youth Employability Booster": 1,
+    "Songhai Center": 0,
+    "Project Juriya": 0,
+    "IITA I-Youth": 0,
+    "Babban Gona": 1,
+    "TracTrac ISSAM": 0,
+    "TAFTA": 0,
+    "Christian Aid SEPTP": 0,
+    "WOFAN ICON 2": 1,
+    "FCMB Easylift": 0,
+    "EDC Transforming Nigerian Youths": 0,
+    "Del-York YAPPI": 0
   },
   "articles": [
     {
@@ -1007,140 +1007,56 @@
       "date": "Mon, 16 Jun 2025 07:00:00 GMT",
       "sentiment": "neutral",
       "crawled_at": "2026-06-25T11:23:14.533188+00:00"
+    },
+    {
+      "program": "WISE Program",
+      "implementer": "IDH",
+      "title": "Firm empowers over 625,000 farmers through 16 years of inclusive agricultural development - Vanguard News",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQVy12WE1LVTZwcDBTdFVGLVpEOUdoQ3hkcWpjSXpPUk96ZTNkVU9yMXVsMnY5Qi1mc0hFWFpWeU9GLWt6ZlhCdjhsdGZ4clc2LXhCMmdSdThPeXgwWW9qY0hOSjU1aWhtZXpMUVh5RVg3NlVlcTFjZkdOQ2JMTHY1M1FDUW43eDNjNWJfSXZ5ZDhwUlZtVmRJallMSTh0SkNmMDU3M1F5QmFVNHQtX3BaZ0VPLWNDdVFlSFdrZ3RsSjRTYlNKQUpUa9IByAFBVV95cUxQVy12WE1LVTZwcDBTdFVGLVpEOUdoQ3hkcWpjSXpPUk96ZTNkVU9yMXVsMnY5Qi1mc0hFWFpWeU9GLWt6ZlhCdjhsdGZ4clc2LXhCMmdSdThPeXgwWW9qY0hOSjU1aWhtZXpMUVh5RVg3NlVlcTFjZkdOQ2JMTHY1M1FDUW43eDNjNWJfSXZ5ZDhwUlZtVmRJallMSTh0SkNmMDU3M1F5QmFVNHQtX3BaZ0VPLWNDdVFlSFdrZ3RsSjRTYlNKQUpUaw?oc=5",
+      "source": "Vanguard News",
+      "date": "Tue, 23 Jun 2026 12:10:05 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T13:58:42.486432+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "Bridging Nigeria’s 2% energy gap to secure food sovereignty - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOQkQ2NmtzaHZqNjV1WHQ1WnZWR1F2Z2NydGVXa19hTVFNSE5oTzhNeDV2QzlhZE9IWXRWVm5ORkpiQ0d3MlUxbHZfbXFHcWJwY3dQVjVpSUFja09jRjM2R19CcURJVVZ5c1lyMlpPN2JUaGhRMWFWX3dIRndwZUt3MVlLWFY3T1RRaFB3cE9ybFVGbzVBSzREcGFzTW1SeDZ5ajhGcEpiUWxadw?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Sat, 24 Jan 2026 08:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T13:58:46.898157+00:00"
+    },
+    {
+      "program": "Youth Employability Booster",
+      "implementer": "Young Africa International",
+      "title": "Call for Applications: Mastercard Foundation Associates Program 2026 (12-Month Paid Internship for Young Africans) - MSME Africa",
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPZUxKUmN2Wk1EMURTM1kyRWQ3NHJlSndhN2xLTUFCNU9mOGZTdGJHeXhCRXR3VTNnTzBsUEdwZ082LUhUb2FSMWtQM0ljWWlsdUJnY3BUb1FiR2MwajFmZVpwS0hHTEQtTHN5RFRzZ0YyUnE2MTU0cFBaTVVId0M4MkpRYjBGV3JiZnRfX2lVZ01KMmxwMGp6bjBEcU5TTldLMjE1cFlBb19iRUUxWEEyMkJHaVp2am5DREduNGZuVXZUQzRBT2o5N2lkVU4tbDBBbzNuaE8ySm4?oc=5",
+      "source": "MSME Africa",
+      "date": "Wed, 25 Mar 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T13:58:52.276976+00:00"
+    },
+    {
+      "program": "Babban Gona",
+      "implementer": "CAFI & WEDI",
+      "title": "560,000 Nigerian Youth to Secure Work through Babban Gona - allAfrica.com",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBPdTdOSjRXNGdXd3R0RFU4Q0hSMW14RGdMU0owMVdsSi1fcEUybEJiMU01M1VtR2lmOFNmODdkeXBmSnBCVTdkenVBZElFY0pDekZsUnFHUGVBQW0za19xaWRTcU1qcTVUcHdr?oc=5",
+      "source": "allAfrica.com",
+      "date": "Mon, 17 May 2021 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T13:59:03.856821+00:00"
+    },
+    {
+      "program": "WOFAN ICON 2",
+      "implementer": "Women Farmers Advancement Network",
+      "title": "WOFAN, Mastercard Foundation launch support initiative for hearing-impaired youths in agriculture - The Nation Newspaper",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPeXNzSmxrTTVTQ2E1QmlZcHp1THlaTWpzMFlXaVdlWVlJaHlrTDdENXcxcHAzc1FwMUQ0cUtvOU9rQ0dEMUxaZkNuRFJES3pkZElQbzJ5VF9VVWM4UUNXRFhUTm9IdXJqaXR5NE5tLWwxMFg2ME0xTDVjOWhhczdVWTEwcVhpUkVXaHdWZ0o0WEY1VGhudmc5MUJvM2hnUmhmOXF5S2pndWxiangtQk8wUnRqdTI4eGgxUmJxZTFBdS1rS3MxRkHSAcsBQVVfeXFMTmxtclRfaXRtVHBPcXJoc3hSUnY0S1V5d1VQcHI4OWNEV3lSUWtpOXNNcnpiWV81SVk4SDB4ZGpvcklsRzhhUklqb3JUS1FvclNWRXM3RmtPQjItUk4zcEQtUjJtdUthb2Fubm1wSnExblIwMTdRSWhxUmN3YnpnNmZWcmMyN21ja1h3TUEwaFFUY2JjOTBIZDNKR3FYTEZtZ1pwTjJvNGY1T3BpSHlnRW80YlNSRnFGeGJYSk1kUnlvQXlJOE1ic1VGXzQ?oc=5",
+      "source": "The Nation Newspaper",
+      "date": "Wed, 18 Jun 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T13:59:13.082627+00:00"
     }
-  ],
-  "program_summary": {
-    "WISE Program": {
-      "count": 7,
-      "positive": 7,
-      "negative": 0,
-      "neutral": 0,
-      "mixed": 0,
-      "last_article": "Mastercard Foundation, IDH Partner Ekiti to Deepen Cassava Value Chain Development - eksginfo.ng"
-    },
-    "Jobberman": {
-      "count": 7,
-      "positive": 7,
-      "negative": 0,
-      "neutral": 0,
-      "mixed": 0,
-      "last_article": "Jobberman, Mastercard Foundation Empower Ondo Youths with Career Development Skills - MSME Africa"
-    },
-    "World Food Programme": {
-      "count": 8,
-      "positive": 4,
-      "negative": 2,
-      "neutral": 2,
-      "mixed": 0,
-      "last_article": "World Food Programme, Mastercard Foundation Back N100m Solar Drying Hub to Empower 5,000 Kano Youths - Businessday NG"
-    },
-    "Fashion Future Program": {
-      "count": 6,
-      "positive": 5,
-      "negative": 0,
-      "neutral": 1,
-      "mixed": 0,
-      "last_article": "The Fashion Future Program Reaches 10,379 People as Pilot Phase Concludes in Aba - BellaNaija"
-    },
-    "Youth Employability Booster": {
-      "count": 6,
-      "positive": 6,
-      "negative": 0,
-      "neutral": 0,
-      "mixed": 0,
-      "last_article": "The Pan‑Atlantic University Mastercard Foundation Scholars Program 2026 for young Africans (Fully Funded) - Opportunities For Africans"
-    },
-    "Songhai Center": {
-      "count": 2,
-      "positive": 1,
-      "negative": 0,
-      "neutral": 1,
-      "mixed": 0,
-      "last_article": "AIRBDA Welcomes Another Batch Of SONGHAI Mastercard Foundation Batch Trainees - Federal Ministry of Information and National Orientation"
-    },
-    "Project Juriya": {
-      "count": 4,
-      "positive": 2,
-      "negative": 1,
-      "neutral": 1,
-      "mixed": 0,
-      "last_article": "Mastercard Foundation, FG deepen collaboration to support young farmers - The Guardian Nigeria News"
-    },
-    "IITA I-Youth": {
-      "count": 5,
-      "positive": 4,
-      "negative": 0,
-      "neutral": 1,
-      "mixed": 0,
-      "last_article": "IITA, Mastercard Foundation engages investors on agribusiness - TheCable"
-    },
-    "Babban Gona": {
-      "count": 7,
-      "positive": 6,
-      "negative": 0,
-      "neutral": 1,
-      "mixed": 0,
-      "last_article": "Babban Gona, Mastercard Foundation partner to create jobs for 560,000 youths, women - Businessday NG"
-    },
-    "TracTrac ISSAM": {
-      "count": 3,
-      "positive": 0,
-      "negative": 0,
-      "neutral": 3,
-      "mixed": 0,
-      "last_article": "TracTrac boosts yields, cuts costs for 125,000 farmers across Nigeria - Tribune Online"
-    },
-    "TAFTA": {
-      "count": 7,
-      "positive": 7,
-      "negative": 0,
-      "neutral": 0,
-      "mixed": 0,
-      "last_article": "TAFTA, Mastercard Foundation Empower 2,000 Women at Kreatives Summit - THISDAYLIVE"
-    },
-    "Christian Aid SEPTP": {
-      "count": 6,
-      "positive": 4,
-      "negative": 0,
-      "neutral": 2,
-      "mixed": 0,
-      "last_article": "Apply: Christian Aid, Mastercard Foundation SEPTP Poultry Programme - Nigeria Startup News"
-    },
-    "WOFAN ICON 2": {
-      "count": 9,
-      "positive": 2,
-      "negative": 0,
-      "neutral": 7,
-      "mixed": 0,
-      "last_article": "Towards agricultural revolution in Nigeria - Businessday NG"
-    },
-    "FCMB Easylift": {
-      "count": 9,
-      "positive": 3,
-      "negative": 0,
-      "neutral": 6,
-      "mixed": 0,
-      "last_article": "Oyo, FCMB, Mastercard Foundation Disburse N1.5bn to Young Farmers - THISDAYLIVE"
-    },
-    "EDC Transforming Nigerian Youths": {
-      "count": 7,
-      "positive": 5,
-      "negative": 0,
-      "neutral": 2,
-      "mixed": 0,
-      "last_article": "EDC, Keystone Bank, others task SMEs on sustainable growth - The Guardian Nigeria News"
-    },
-    "Del-York YAPPI": {
-      "count": 5,
-      "positive": 4,
-      "negative": 0,
-      "neutral": 1,
-      "mixed": 0,
-      "last_article": "YAPPI Celebrates International Youth Day with Empowerment & Inclusive Dialogues - BellaNaija"
-    }
-  },
-  "geographic_summary": {},
-  "platform_summary": {
-    "News": 98
-  }
+  ]
 }
