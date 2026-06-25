@@ -1,14 +1,1012 @@
 {
-  "last_updated": "2026-06-25T11:22:51.006096+00:00",
-  "total_articles": 0,
-  "articles": [],
-  "program_summary": {},
-  "sentiment_overview": {
-    "positive": 0,
-    "negative": 0,
-    "neutral": 0,
-    "mixed": 0
+  "last_updated": "2026-06-25T11:23:16.763432+00:00",
+  "total_articles": 98,
+  "new_this_run": 98,
+  "sentiment": {
+    "positive": 67,
+    "negative": 3,
+    "neutral": 28
   },
-  "geographic_summary": {},
-  "platform_summary": {}
+  "positive_rate": 68,
+  "ai_summary": "",
+  "program_counts": {
+    "WISE Program": 7,
+    "Jobberman": 7,
+    "World Food Programme": 8,
+    "Fashion Future Program": 6,
+    "Youth Employability Booster": 6,
+    "Songhai Center": 2,
+    "Project Juriya": 4,
+    "IITA I-Youth": 5,
+    "Babban Gona": 7,
+    "TracTrac ISSAM": 3,
+    "TAFTA": 7,
+    "Christian Aid SEPTP": 6,
+    "WOFAN ICON 2": 9,
+    "FCMB Easylift": 9,
+    "EDC Transforming Nigerian Youths": 7,
+    "Del-York YAPPI": 5
+  },
+  "articles": [
+    {
+      "program": "WISE Program",
+      "implementer": "IDH",
+      "title": "Mastercard Foundation, IDH Partner Ekiti to Deepen Cassava Value Chain Development - eksginfo.ng",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQcnBpSlduTGpJaW4yOHJmcG5yMHp5UkRwMXZjQUNvdDBVVGIzOWZzS2t1Y1prUkdLeHhrM3dkdHNEZHloNVdTa0tydFdxenFPUlNoS3FlS3ZUUlV5MWFwc3BEdkNKMUtMV1kzQUdPLWFCcV96alN5YlZHTTlTVzJPTzVzalJ5c0NlQ3I4VnJhSjRNVzhhUVdJWElzajFSZXB1amNXVzZ3MzJUUWU4SVRDQ1hRTHBCM0Ry?oc=5",
+      "source": "eksginfo.ng",
+      "date": "Mon, 20 Apr 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:35.171803+00:00"
+    },
+    {
+      "program": "WISE Program",
+      "implementer": "IDH",
+      "title": "BOA, IDH partner to boost financing for women in cassava value chain - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNelFXVnFXRWlNV1FBeFdyZ1FyQTFtQ0FpbXJmUmVKSGNGaVRWdGVkR3UzRVY3cVlyYjM5V2s4bm1oS2R5U1BLSV9fLUYxV3JUZkdfZHIycEZ3aTgwUjlSQVF1Yms5aHNrbDBrQTNyT0hjYU0tODhBaEhGcDVBMTJfcXY0WHFpSDRRaGp1TVVlRXZGOUVjdHNWc3FlbFVBRE9EOWdHYlJJZWhmakFJQzRiYg?oc=5",
+      "source": "Businessday NG",
+      "date": "Thu, 13 Nov 2025 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:35.171823+00:00"
+    },
+    {
+      "program": "WISE Program",
+      "implementer": "IDH",
+      "title": "PVNL empowers over 625,000 farmers through 16 years of agricultural development initiatives - PM News Nigeria",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPU0J2WHExUmZKYkVmdzdBX3lxNVpQcTBXN3hIeEhSTEhNb3lqaDZubGY0ZThraWxINUNkMkZRcWllQ3kzSjgxMWNpUTBYN2tiRnpKSGZOcDlPc0k2cnBqdS00V3ZCc0dNel81T1RlQnJXc3J2XzB6NEE0Y0IxVDZIMzVtWl95MWMwRzBURmdLaWVjRHNnd1FheFp1dm9kbTFkSEN4QWZDODZMYVJ0NnRJU1RrUnB3TmE5YUNNYWlaMXFncmM5WXJR?oc=5",
+      "source": "PM News Nigeria",
+      "date": "Wed, 24 Jun 2026 05:23:04 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:36.454244+00:00"
+    },
+    {
+      "program": "WISE Program",
+      "implementer": "IDH",
+      "title": "Palm Valley Nigeria Empowers Over 625,000 Farmers Through 16 Years Of Inclusive Agricultural Development - Independent Newspaper Nigeria",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOTE9LUU1xMnFLclpkWXZNcVdFN01sSDhobHhWVmdsbFJSNXg4RzByQUJSaGQ4SnpUQTZrc05qUFFkVXRxWHJzdFJGQm9oSnZjMjRReDZOeFBmWGREeXVrTkVadWRzenRlX095Qm42Q0pzVlQzUGdXbmwxY1ZGNmthSmhEc2hubEUxSmVTTVZKZW1INmR3NWNSOFRfXzJBR0V0VXljRnNJQ0FuVFdzR2xMLXM0RWtQMThvaXpreTBsLXd4cEdqVUE?oc=5",
+      "source": "Independent Newspaper Nigeria",
+      "date": "Mon, 22 Jun 2026 23:14:30 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:36.454265+00:00"
+    },
+    {
+      "program": "WISE Program",
+      "implementer": "IDH",
+      "title": "Palm Valley Nigeria Limited: Over 16 Years of Transforming Lives Through Inclusive Agricultural Development - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMihAJBVV95cUxQSTdMQ08yODJwWTFfWGRXMzlXRmx2TTVOczZMdWNiR3NBeURsVTRhdWtQQUVSdnBaRnhHWE1JcTR4TjVLdXVNMXV6UzRBa0ZhNXRVbElpdGlJRlV3ZF84NDIwc0VEX2djanZVdnJMbVJMZnBDM2RzWjhGMkhoT2wtWndZWVhiUFA3dmFyOTZsR1JwWURSTk1EMHlEcWhlYzZjTURjVlRpUWRKSWc3Wm42allIc3hhM044X2ZVU0VodU1QR2hxNzdueGhVYXduUmVTZl9PaHJfZmpqSEhYNEVKVnNCWUs0LW9lN19IcUg1alE0V2JFZWdoUXZGbWU2OFdtZGEtdg?oc=5",
+      "source": "Businessday NG",
+      "date": "Sat, 20 Jun 2026 11:42:42 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:36.454277+00:00"
+    },
+    {
+      "program": "WISE Program",
+      "implementer": "IDH",
+      "title": "NADF, partners inaugurate project to empower 12,000 women in Oyo - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNNnFMaEtyTXhxWUJ2UWFKY1BjVUsyMGZLRE85WkNnWkpjOGxBUXRlUGhrNlZjNi1ublJYZ2xyTzZnRmM2V3d3ZHJmbjk5SHJaREJkR1VMNnBkbnVsa0Q2SjctSnp1YzBWNGFHMFJmVjE1eU9YYWRZVnpFS0dkQ2pwTlFGeGJBSEpOQnI1NnZuRFJEQQ?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Mon, 24 Nov 2025 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:36.454287+00:00"
+    },
+    {
+      "program": "WISE Program",
+      "implementer": "IDH",
+      "title": "NADF, FCMB partner to support women cassava farmers in Oyo - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOUG5XYW1fV2U0TnpIV0hPajg5bEVOOVEtTXp0bHZSUkEwMXUyWEN3V0R1UEdlLUUyN2EtWnpEdEZHQkxhdk00VndmR2JLdWtPeGd3OXhnaHY0MDBHUDkzMkFjb21EeklWSG5Sb3J3QVNYSkxUT1p2bkFQcE5fdHZZSU9ZcXNYclN1enJaT0lrMFZzb1pDb2t0Q2EzeFY4bVEtS3BZ?oc=5",
+      "source": "Businessday NG",
+      "date": "Mon, 24 Nov 2025 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:36.454301+00:00"
+    },
+    {
+      "program": "Jobberman",
+      "implementer": "Young Africa Works",
+      "title": "Jobberman, Mastercard Foundation Empower Ondo Youths with Career Development Skills - MSME Africa",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNbGxFSWZod1ltRWN2WVprZHY2cG55MFg0cVNjeTU4QUloM2E4WjNPNTB1akVuWFZDT0JnUjJQWEdwMDBfOC1oWDJDZHliUlhoRHFpclk1UW9BOVVQQ1N5NGwzZE9xWko4RE1ZWW1HaTRUYmllRmFZTzVYTGRUMzdDdmhCaWM0WWVuZHhwbl92NjRDV2NDckZfVWJFajFyWHJfb2lSSnBvU2JITlVuQXQ2OWN3?oc=5",
+      "source": "MSME Africa",
+      "date": "Fri, 12 Jun 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:37.928892+00:00"
+    },
+    {
+      "program": "Jobberman",
+      "implementer": "Young Africa Works",
+      "title": "Jobberman, Mastercard Foundation tackle youth unemployment - Punch Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPdi1QS3YtRU9PVWI2Z2JUREFQZ0gtb3dHVGVDLUthcWRNY1NQSUw0ZVM3ZGo4UURadUVuWUhtZS1uTHFYd3JBM3FMTlVxMmJsVlBzZFZxVEd4YS1ZT0RzUkZnNTBjSU00bWJXVWh2a0pXMjlXSUhXVTJGdHR3eGNoV3dyTi0?oc=5",
+      "source": "Punch Newspapers",
+      "date": "Fri, 27 Mar 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:37.928910+00:00"
+    },
+    {
+      "program": "Jobberman",
+      "implementer": "Young Africa Works",
+      "title": "Jobberman, Mastercard Foundation commit to talents-employers linkage to tackle youth unemployment - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOZVVxUE5qNUNvdzFIOWJkNWtvT1BBUTRzZ1NvZy1KcndXdkFKV1B3Tzlid2paZlZIVXl3TzkyeWk0Vzl1Xy1IZHZuTW9PMVdkaGZseXpzNlNidzhjWGx2cUZ2Qjg1TzN6alZma00zcjlTUkVBOXdaZ0tua0tiaTF3TDZDUUJfNExBWGJMbVBSNmY0V0JNX3ppa1pmYkVseGN2cUxCLUp3NkpyN0lkUVVlMzJtb29OWWpWRWNwTXBzT0RBN1lrNExoRHd3STQ0UQ?oc=5",
+      "source": "Businessday NG",
+      "date": "Sun, 29 Mar 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:37.928921+00:00"
+    },
+    {
+      "program": "Jobberman",
+      "implementer": "Young Africa Works",
+      "title": "Ogbonnaya Onu Polytechnic Finalists Gain Workplace Readiness Training - The Whistler Newspaper",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNdG9uanlZOWRmY1Q0bFE5V0FWUG1yRjZrR3pNSm9DX25EQkE3RldSTFlmWDQ1dDd4T2pTRno5Sjc5MXVySVl0RFRMMVhmUS1iQ21MS2o3YjBFZHpETUFqWWdQVDJYOXdpSGswdXhxMURCYzhaOXAzZzdLajdQVGE5V3dMdkNUb1FIR1lNVWVGX0UzU1ZqWWg5Mw?oc=5",
+      "source": "The Whistler Newspaper",
+      "date": "Fri, 05 Jun 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:37.928931+00:00"
+    },
+    {
+      "program": "Jobberman",
+      "implementer": "Young Africa Works",
+      "title": "Ogbonnaya Onu Poly, partners Jobberman to boost students’ employability - Vanguard News",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOTzJPN0dLWmh4QnFkX3dtUDYwUjhEWUV4cU05ZUJ6aVBRWGcwUVI3UnRjZ21TYzRRVHBWSTQ0OTIzYTVmUXVaMEVqZ2RoaFlMaExwbzJxZWltRm1MTHlyS1o2LW0ybUhvd1pJMmFXWWszeDFDSHgyZUE2V1hGUng5b3NOclJnaktQVGh3R19EZUNrQWRvaGVUR2EyUENQd1k2SFZLWDBaczJ5d9IBrwFBVV95cUxQaUl5Vll4dGp1SldwSDlGdjBjNTVLNDZQTGhNaG1YczN6YmZjc2tkSEVGWDQ4RUloeGQ1LWRlXzdja2ozTjlVWnJhY294R1FWV1NsUE9ZcmRnVFFvcXJ1OTlaOVFtcUdDZXJETV9oazJ2NVRYZVo1SlZqNkl3ZGtkYzdJM0tIZzRKTjc2VHNVYWUzcTFldG1UUHFMdjJyTTVCYUJkdzNZWVE0YVFjSzdv?oc=5",
+      "source": "Vanguard News",
+      "date": "Mon, 08 Jun 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:37.928947+00:00"
+    },
+    {
+      "program": "Jobberman",
+      "implementer": "Young Africa Works",
+      "title": "Jobberman pushes for partnership to tackle youth unemployment - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOZzFIZnRGRXhGVnZnTFNrRVk2M0s5dmhjaUlScVRIMzFhVTZCU1lDTDZoSXFjNG5VQ0V2VWROVGxGQWxjV1U5clRxMGtOdk1FenFyN01heXZPREJtTnlLSGQ3NXhCSTZ3NTNBdzBUUnh1OS1ua2F3TlA0WEctMFhwM2FkMFhycnNuQkJWekhXbW1CUW5NY3hIdEh3OA?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Tue, 12 May 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:39.274937+00:00"
+    },
+    {
+      "program": "Jobberman",
+      "implementer": "Young Africa Works",
+      "title": "Jobberman, Partners, Other Stakeholders Champion Collaborative Action for Youth, Women’s Employment in Nigeria - THISDAYLIVE",
+      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQS3ZoVVI4dnRHTERHTk9WUXYxaWV6V1MwZXNzQnZqQndZY2xGSGVRT042SVVRcHRYZG8ta1FBUW1UYW5jY3NsX01NTFl6Ulp1WFN1N2dnMFNYaGNORFBKUXZoVDVuNndtM1doaGw0UGtJR2ZBTnpReUVXV3FIS2JJNk9BMDRjS3d4OVdlMFI4eUpQX1JwTEZYUGpsWXBWQzc5LV91ZW15MkxsbEVqTXJ1TkZFZ3RadEJrcFNJam9OaXlUemw5WWFjU1hOVS12djc1OGFuZlZaS2JMdURQYjJFTm5R?oc=5",
+      "source": "THISDAYLIVE",
+      "date": "Wed, 13 May 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:39.274980+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "World Food Programme, Mastercard Foundation Back N100m Solar Drying Hub to Empower 5,000 Kano Youths - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPU0xKbnR6Z0k3ZVBVNUFXcVNUdmY1UFVya1RqbWRXNXV6YWd1elVqZUlITlExMzJPOFpTV1N4Rmc1SUNyRmFfTUV2c042SWJtMG1NakxFZ21ReHEyYVlfVmVOOGhiNy03Z21sLW9WdDVwNm44YTlCZzAyRk1VUkVlWGpqNTZ1ZlFtVWlYQmtGdXhJOUgyMTNmdXE4ZXBEOUk5Z0d2b3pLSDlNQmJsamhtZXNoZVV2YUdfcmVYRmVlWmFUc2RTeUQxdDd3NEZzdWhm?oc=5",
+      "source": "Businessday NG",
+      "date": "Fri, 13 Feb 2026 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:40.716980+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "Call for Applications: CcHub–Mastercard Foundation EdTech Fellowship - MSME Africa",
+      "url": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxNTUh1RjRsTFZCUVV3RWJzT2V5dkZBQmNTdjE3bl9NUlZTWjlVOWM2cmViN1IwbnFOWnlqaExmU01mREx1WE9VLTlaWVYzckNMTVVYWUVkTFU3NW1ya1lITW1sWExBeE9WUjRRbGNmckotQlVCTHVRU1FNVHZuNkhhaUlhQU0yd0JJY1g2cHptOXB0NUxDRkFNNlNZLWZ6UHZWZ1gxN2g1QXotX0l0ODVyOGpCeEtvY20wLWg0b012YjR2dlJWc19PTFh5MmJCLV8wckJ2b2psdlZrdm9iRGlZbG1QcV9CZXgwYU9mUDhsbVhrcmZWb0N6bHF1aw?oc=5",
+      "source": "MSME Africa",
+      "date": "Sat, 28 Feb 2026 08:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:22:40.717001+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "WFP, Mastercard Foundation to support 200,000 farmers in North - Daily Trust",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOTjhjLVVJNW1PdXUwWUVZOU9uMlBLWjB2dzdlbG52TzR4T2VIZ3V6YWY0S3EyNEtVVkthLWh1bFZDMWJzX3JFaGdCRUI5OThhZnBFMU41Q0lmYkR0SS1OTzcxMEFfVzk2WkdpSUhFR0FyRlJEWlZmS29sYjR1ZGNJeDVYbHdnYmZSUXBjMg?oc=5",
+      "source": "Daily Trust",
+      "date": "Fri, 21 Feb 2025 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:40.717012+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "Earth University MasterCard Scholarships 2026 Fully-funded for Study in the Caribbean - After School Africa",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNMWhielh3QVVRaEtfZUVCTFgyM2hYR3dqWGlCVkJHcEJvS2NkbnhtdlVXLUtWU3JrX3NSbG9HTGhJMHpVUklGLVBBYVFNam1IZVdEUDdXYWN2bFFjV21STzNTcFk2UGRmMDhhOWNXdW1jbzJLNkM2ZGwtV1RKQmtTdjJSelVwWmc?oc=5",
+      "source": "After School Africa",
+      "date": "Tue, 13 Jan 2026 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:40.717023+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "April 2026 Deadlines: Funding You Shouldn’t Miss - fundsforNGOs",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOV1dBR3lHdmVlRWliQVdYV3BCU0VjdUZsX09FaktjRHJDaHRUMDJQMG1ZN2x5WlZfQ0xPZHdRQmRzZHVrTGhEUGN4dGh2dGpydkJ3ZWM5d0I0NUozUG1fOG1IcS1HYzYtbmw4QjVjeWhrMWY5UmxFajVVaVpMYVAzVXQ3V1BrS1lkcHE4YlFB0gGTAUFVX3lxTE9EVlVZU3pib3dHTHN5NTVHd3FWSnpPUi1ncmFCRzM1YUhSaGppenhrSlMwOE1weEtfTmpDQTlfWEhrdnVtMEdUN05CWjh2WkNMa3dXMEIxa2NXaGNaNHE0M0dGS05QbXlSVE8tM21nUGZkcFNpY3RtMkJkSEUtcElTQkU4bGtuQTh0NUlHemN0SzhnOA?oc=5",
+      "source": "fundsforNGOs",
+      "date": "Fri, 10 Apr 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:40.717033+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "WFP inaugurates N100m solar drying hub to reduce post-harvest losses - EnviroNews Nigeria",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQckdscW1KUzZJcjlpUktmdnZuRzdEZ2s0RW1Pb290VHMtNXQtWTZXLUpid1dycGRSMi1RRk9ld3dFZlowbnU1YWhObVlwMGxIcVlsN2E1ajdTc0dFR2RYY29xRzRKTUxaQ1A0ZGgwdHZ2ai1iNEYtSWUwMVRlSC1QbW1OZEtEN1E0RFM1b0N6Vms4YmU3QVBfUUtibDY5NUhDTU5OTkZB?oc=5",
+      "source": "EnviroNews Nigeria",
+      "date": "Thu, 12 Feb 2026 08:00:00 GMT",
+      "sentiment": "negative",
+      "crawled_at": "2026-06-25T11:22:41.946397+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "Back to the farm: Africa’s youth power up food security - UN World Food Programme",
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBvNHFvMHRKbkJVWHFxekFsSk5aVU1MSWZnb0xhbkJDTWdyU3NlZ1ZYWm93OHR2SXZtWHdzWmZSd0s4bkJPN2pCU0Joam1YYklMN0FPU0hYUURRTndQLXBMYjAxWE1STUs3RjhFMk81X2czVDZYNmg2YXZsdw?oc=5",
+      "source": "UN World Food Programme",
+      "date": "Mon, 11 Aug 2025 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:22:41.946418+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "WFP, AfDB move against post-harvest losses in N’East - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNTENUMXIzTDZoUUtPWEk1TS1ncDFmVTZiUjJYZmJKMFhDam1lai1KMU1ERm9KbVdETklxT3ZueTZvOWhVREdrR2xkVTM0bFFhX1BLUjdaQUIxS01taDlMeC1HZmM5YU9JMmV1OWtabFdoZkNZbHE0QW9CVkNsUVFMaEZR?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Mon, 24 Feb 2025 08:00:00 GMT",
+      "sentiment": "negative",
+      "crawled_at": "2026-06-25T11:22:41.946432+00:00"
+    },
+    {
+      "program": "Fashion Future Program",
+      "implementer": "Ethnocentrique",
+      "title": "The Fashion Future Program Reaches 10,379 People as Pilot Phase Concludes in Aba - BellaNaija",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNOGxLZzlKY1BmUEhsM2R0cXZtSXRKUFY5NGhOeTJPc0pCNUlIRHBrOUFETUNEVjNDbzFndHlibGs5U3F6RjBNdE5KM3FvZlRKamMxUDVJSVBtaWVmMkVZeUhHaTB0N25WVXU1ZDZkVHpNMXVfYnNWYUFNMnBRdGJUYVRvOXMwTllkOTF3?oc=5",
+      "source": "BellaNaija",
+      "date": "Sat, 16 May 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:43.198529+00:00"
+    },
+    {
+      "program": "Fashion Future Program",
+      "implementer": "Ethnocentrique",
+      "title": "Fashion Future Programme creates 10,000 jobs in Aba - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOMUw1eU85bVR3eERWN0tjMHp0YVNlLTBUajY0SmRadEF6MGlmTXFiMXR1TEtXaEpxM2RXMUVGM1RWZTJPellpcXMxanlDR2t6Z203OWN3RjEwMTlVNEZ4RGJrSHlqRWVvUnFJSklLbjVFZHdoYXZaZ3VyZ1BzQjQ5UlhZeE9mYjl4Vk56bWNxaHFOalk?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Sat, 02 May 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:43.198546+00:00"
+    },
+    {
+      "program": "Fashion Future Program",
+      "implementer": "Ethnocentrique",
+      "title": "Ethnocentrique closes fashion programme with 10,000 jobs - Punch Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPc2V4TnVKQkpBR2xFaWRqcGlOU1pXZElLVmVnLXpMcWEtUy1xbjZQQ096MmFKY3hYdGdHMUdMazlPZ0xKcmtQbUdOWmVmUUp0d2RGWDlhSlNEU3N6OXVxUkZJYW1ic0FpSFZBUV9YQzhuTjIwaVdfNDJ5ZllpQ0lHX2xB?oc=5",
+      "source": "Punch Newspapers",
+      "date": "Sun, 03 May 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:43.198556+00:00"
+    },
+    {
+      "program": "Fashion Future Program",
+      "implementer": "Ethnocentrique",
+      "title": "Ethnocentrique drives 10,000 jobs as fashion future program closes pilot phase - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOVGQ1b09Fc3AycDR1dGtsYzF2ZjBnaDh6b3dVaGlVeDRpa1RpLVRDYXV6emd0NFhzQUk3Q1U3SmRCNzF5YTItSUl6WXdjNC16NnNsZ2YybTlGQUV1MG9QNXNiU29EaFJ3bzFsU1Z2RHJJYjJOMXBWWXdkYjFvbERnLTVILWFLc2s5OUIxTVlGT0g3Nnkxa0JyTWRjbVd3bVlGaWMxaTBQdXd0NU5KdjhOR2FtTDA?oc=5",
+      "source": "Businessday NG",
+      "date": "Thu, 30 Apr 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:43.198565+00:00"
+    },
+    {
+      "program": "Fashion Future Program",
+      "implementer": "Ethnocentrique",
+      "title": "The Fashion Games 2025: Fashion Future Program Graduates 2,000 Youths in a - MSME Africa",
+      "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxNQWdRUFlEekV6NEJjcjl4eFI2NnNhQmI4R3VMUXk5R1hTQkU4cFk5dzd4akpOdXozMXduY1ZOeVJvTnN2SHpEX1RXczVTWFd5cU5JUUdPX3lCN3RJQTVMQjZhaTN2NWEzN2VNd3M1RERfUklXam0wWFRVN0RqSFkzM0w0R3cxZVc3bG1QdHdvSDJLeUI3N0piM2x5bmVnNFZNaHNoNVMwRnJtRDl0NU5sd2RZRHFUN1NFZld5dWs0X3FjNXNVeGJ6ekRCbDdmS2NFd0IwWTNobUlfdzZGX1hEMm9XS0tlOGF2aGVhNjVB?oc=5",
+      "source": "MSME Africa",
+      "date": "Fri, 09 May 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:43.198574+00:00"
+    },
+    {
+      "program": "Fashion Future Program",
+      "implementer": "Ethnocentrique",
+      "title": "Aba Set for Second Edition of Fashion Games 2026 in April - Voice of Nigeria",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPei0yNUtSdjdUQ3Jxd2NkazJ0VS1MQ25JYnMxcDVNbkV0LVB2MFNfMkllNUJ2RTBDLWE4bVJnZVpoa3A3SXBnaG5FcDB1ZFNob3Y2V1BwM01HdUQxQ2VsYlFWclZCOXR1dEFqLW9zMGFuNy00NEd2cHVSUFdiMjBjNm1Tdw?oc=5",
+      "source": "Voice of Nigeria",
+      "date": "Wed, 15 Apr 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:22:44.517719+00:00"
+    },
+    {
+      "program": "Youth Employability Booster",
+      "implementer": "Young Africa International",
+      "title": "The Pan‑Atlantic University Mastercard Foundation Scholars Program 2026 for young Africans (Fully Funded) - Opportunities For Africans",
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPNnUtU1ZkbkxqdWx5dFI4TTh1LU9UbjRTRm1fVFZZck5wMkZkWmpISkRfc2FOTGJreEc2ZkFwSDlmM1pIWTZHa2daUVhRMHJ2U1huV3JFakJFSFRteWlrMUpaNi1qMm9OenpBbTNRRlJLblU3enNBaWN4M3E3NjdudUZiT1hDOUk4Z21tWnN3X1UxQ0FmQlRfTHpoc0JiWFo5anEyaEZTd3lPeWNXeVZpT1ZvVnU4OHNTUnNKTXI2MTBKX1RZR2VwT0pUeDF6Q0V5anhIWjl4RjhnVHV2VXc?oc=5",
+      "source": "Opportunities For Africans",
+      "date": "Tue, 28 Apr 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:45.986119+00:00"
+    },
+    {
+      "program": "Youth Employability Booster",
+      "implementer": "Young Africa International",
+      "title": "I-Youth wraps up first phase with over 90,000 jobs for women, PWDs - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNSmhlVXRQMjhJS016bTRBcGtqY2JzaVlQTW9nS1AwQnFPaDR2YzZYTjhnQmFpakVwRjk5WGlpNnJWZ3JBaFJGX3oyeng3M3EtOXd1X1VDc1dMVkhuTGEtYVhUbzRqRjlHbHpCVGRKUmhGLTByWUR0eHM2WDhqQmNTcnJqR1lKQVVhNVQzZm0yTS02VzN6cW9fNHVlRzNUdW5fblcybUN6WTFyZS1aVlZQam1lTQ?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Fri, 23 Jan 2026 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:45.986138+00:00"
+    },
+    {
+      "program": "Youth Employability Booster",
+      "implementer": "Young Africa International",
+      "title": "NIGERIA: Project provides employability training for youth - missionnewswire.org",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNZk04bVd2M0FXc3YxTTkyZTFrb3l2UUk2UkRaNG5Fc3ZnZjNOT2RndmtIRXp5a0F0bU9IajhhZWhqY0hhOTMtUE9CMW5RM1Z2ZkdBdk94RGtNUS1SWkVOZFBPTTRUR0FWS2xiVmhkckRQaFdBNU4ta2VhaDJReTh2Q25ZUE1WdlIzX2pxWGpCYw?oc=5",
+      "source": "missionnewswire.org",
+      "date": "Fri, 03 Apr 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:47.429480+00:00"
+    },
+    {
+      "program": "Youth Employability Booster",
+      "implementer": "Young Africa International",
+      "title": "GATEWAY Program to Train Nigerian Youths for Gig Economy Opportunities - HipTV",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5wNFU4aDRoRXdVWUZYUTUzN3NEZXBnZ0d0cTQxbXlxS1Y0WlhLSXV0Z2FsQmNFajlSTWdoNlFHeVNIc2prcXFRS2ZwNVV5VXRJMUl1M3lveWNROUJRcWNQLVZYcw?oc=5",
+      "source": "HipTV",
+      "date": "Wed, 22 Apr 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:47.429497+00:00"
+    },
+    {
+      "program": "Youth Employability Booster",
+      "implementer": "Young Africa International",
+      "title": "Jobberman champions inclusive hiring to boost economic growth - The Sun Nigeria",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOYVF3UDJLdnBDZGtzYndQdTlhaEU1aVVIaTUxNHg3U2ZlNllKeTJnSkEzYWNuRnZKbktLaVI5MU1EbkpkZFhkTkZfaXN3bGRiNURQX29XQk5ZU0lESGdPQ0IzRDdUN1dBZjBKZXZ3R1RCczZGSE9JWUM1akRINmZha1RuYzE5YjTSAYwBQVVfeXFMT2pzMlhfbkZQb0JON2Rzb2lZeFJoVnp1V0JWRllxQzhuenIxMjJKZDNPblNmYUtsLTI3LWtCMzFQQlROOS0xMHQ0WjBUUHZsT0pPVlQ0Z01Ua2xEY2ZTSG9TQlRNQXhmYjdaNzhueFRIbUUwLVJWcFphMWw2VDI3MVg4OXFnT0phU215Y1o?oc=5",
+      "source": "The Sun Nigeria",
+      "date": "Wed, 25 Feb 2026 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:47.429508+00:00"
+    },
+    {
+      "program": "Youth Employability Booster",
+      "implementer": "Young Africa International",
+      "title": "Mastercard Foundation, partners launch skills project for 18,300 Nigerian youth - Daily Trust",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPbnF2RF9pUEpiYml4VVJ5TmdXa19RTE5fTDdEeUc0cXh2MHpqOTlVUFRzcGIwbmczMW12SHRCeW1LYmFmUGhxZnhaN19CeDZwTmJRR2FlTlZHUXlpMXlaYUdvV05QMmU3cUpvUXBJd0VkeGhrWXNlZkRPNlJDNU9QSmVtTU5hRE9RWVE2MnFEUUNlRGRqQkJUcVBxUDFDNnAtRmNR?oc=5",
+      "source": "Daily Trust",
+      "date": "Sat, 31 May 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:47.429518+00:00"
+    },
+    {
+      "program": "Songhai Center",
+      "implementer": "Songhai",
+      "title": "AIRBDA Welcomes Another Batch Of SONGHAI Mastercard Foundation Batch Trainees - Federal Ministry of Information and National Orientation",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOREJqaDNXQXBURU9RTHV6RUZHZWpacVNFYkg4MkhCQnpLRmRRakZWRFMyUzZlYjltWDlFV2xITEZXeG81Y1VnLVZiU0lIZktnUms4RTc0NG5XeS1aa1dsNmVqV1J2TUg4a09MRGh2THNfQmwxWjV5VHlyZFc2WUwxMlh4U2pRckxfbE5nWnAzQ0FmZFYyU1dGNmdPc2x1V0ZH?oc=5",
+      "source": "Federal Ministry of Information and National Orientation",
+      "date": "Wed, 20 May 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:48.723307+00:00"
+    },
+    {
+      "program": "Songhai Center",
+      "implementer": "Songhai",
+      "title": "Songhai/Mastercard Integrated Agriculture Scholarship 2025 for young Nigerians (Fully Sponsored) - Opportunities For Africans",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPSGVqSEF6TlV1cGNYLW9HU0VaLVY3RHdyTlUxM29ZOVcyQWJkMENieWdyT2lCcDRTV2NLbmlwYXJ2eDVkTXZNMXBnWEJkLWFVWmZqUnNDZnNWamFOZDdpZ0YyamdwMUllU1hZV3Y1WDFTZ0s0QWNFaHplT3RwQm5hSzRDS3ZSYURIbkE3WFFHR2dhSkNRM2M4ZUdaOHFMS3NqdHc?oc=5",
+      "source": "Opportunities For Africans",
+      "date": "Tue, 14 Jan 2025 08:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:22:48.723334+00:00"
+    },
+    {
+      "program": "Project Juriya",
+      "implementer": "SCL / Sa'anwara / Ijumai Consultaire",
+      "title": "Mastercard Foundation, FG deepen collaboration to support young farmers - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPRzRfNUlkVmZXcVcxU3FWN2xHV1lsY0Z1YUdKNk5VWXpnQ0dISDNpSFJCbjZrZjd3ZHJnM2xoR09jclhpaURCSkNnZnJ3UUJlYy1WR2c1VjRDdHFDMXdRSUdnenl5c1NncjltRnMwbUtsYUJCUkhDNFRTQ1hOWXFlUlhJZGVtcTk1ZTJLbDE1YzRDNWV1ZGp1OVpBc2RRTWNqamxFaGtXMTZOLUxMTGpWYy1GaDA1SWxLSjg4?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Tue, 04 Nov 2025 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:51.236067+00:00"
+    },
+    {
+      "program": "Project Juriya",
+      "implementer": "SCL / Sa'anwara / Ijumai Consultaire",
+      "title": "92 Leaders Of SCL Project Juriya Mutual Trust Groups Receive Certificates In Kaduna - LEADERSHIP Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNVEl4emZSSXJEcGVFalU1UTNBSExtVjRUa1dDYWlKS1gxYTNZem93MThHbFFFeUNVdDF2Q3hUUDdYWXQ0RWxTNUpJT09yQzNqdDFEdUEzYzlqV21LdzZPWVZ3QjNJaVBqczJsdTJTM2hQd19XcWxZUkdmTHNsWUdEcmF2OUdmcjgzdUVVUHFyQWRoTmdXdDdYQnd0TXhacEpWU1FhS1hmZm9lZw?oc=5",
+      "source": "LEADERSHIP Newspapers",
+      "date": "Sat, 20 Apr 2024 07:50:06 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:22:51.236087+00:00"
+    },
+    {
+      "program": "Project Juriya",
+      "implementer": "SCL / Sa'anwara / Ijumai Consultaire",
+      "title": "Demo farms or graveyards? - The Nation Newspaper",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5HQy1KWVB4Zl9sdHBTNC1HNnAxdWhtM29YdmtMVUFKX0dlWWg1RzV6V0RGeGZkdV9JR2o1V0tLUXRBUG1QbXl5Yk9Rc2VWUFhtUTJ3b01CVXIyUjg0LUdaZUpDSURVQQ?oc=5",
+      "source": "The Nation Newspaper",
+      "date": "Thu, 28 May 2026 07:00:00 GMT",
+      "sentiment": "negative",
+      "crawled_at": "2026-06-25T11:22:51.236096+00:00"
+    },
+    {
+      "program": "Project Juriya",
+      "implementer": "SCL / Sa'anwara / Ijumai Consultaire",
+      "title": "SCL trains Adamawa farmers on financial skills, regenerated agric - Blueprint Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQVWFmZXBaWDN2Qm1WUDYyNjRtSkdfYllSb1VFRm5WTVV6RlV6aG1paWM4UjB3Q0NIWWJQZ1pPdzVsNWlYQWtxNmo4WUdCZnBQemo4aGI5SzNyenNmUzFRS1BZOWtRVlRsNmRLQ1A0bzVxN3BKbEN4RUt4bmhJMzVCUjZCQnZOT2loSnFYRzVacw?oc=5",
+      "source": "Blueprint Newspapers",
+      "date": "Tue, 23 Apr 2024 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:51.236106+00:00"
+    },
+    {
+      "program": "IITA I-Youth",
+      "implementer": "IITA",
+      "title": "IITA, Mastercard Foundation engages investors on agribusiness - TheCable",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOVjZZMHJrb1NUdXhWLWxUM1RjdFNZR25DTDV4V25IMy1rRndKX0s2R05FR0Rlb3hZMXpZSUxybHBXVGE3TkJhSDMxcXpjTEJOQ2M1WG1jMnhJQUtOSmxycWRDOHhveGs1eWJHZ09DN2plUU9TV2dRb2cycmlNY0hFNngyT0JJNXdiSDAyZldn?oc=5",
+      "source": "TheCable",
+      "date": "Sun, 07 Apr 2024 18:26:45 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:53.807802+00:00"
+    },
+    {
+      "program": "IITA I-Youth",
+      "implementer": "IITA",
+      "title": "IITA and Mastercard Foundation engage investors in agribusinesses - CGIAR",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOWkxQcUJKV2J6NWplMlRoMTdHN2NiNmdUdmZZNy13RFJDay05Q3NfVjZ6UkZmM2lxRUdYbFltVmZoTmxPMjliRW5fV3NvQ1lwN2w0UTdHemtSc0hYNjFVcmswNV9wX0k4cExqMk9IejdmWTQ1UVVzQ2dDazQ3bjM0R0RYc1BUenVlNXFzalFpTzlpa203ODd2a3liTWluQzdCNXNpVUNZMA?oc=5",
+      "source": "CGIAR",
+      "date": "Thu, 11 Dec 2025 00:09:04 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:53.807860+00:00"
+    },
+    {
+      "program": "IITA I-Youth",
+      "implementer": "IITA",
+      "title": "IITA, Mastercard Foundation Engage Investors On Agribusiness - LEADERSHIP Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOb1dhTXB0T2lsX3pnV2FMVnBFUkJNYlVBXy1TVTZweC1UQm9aQTRFRWZ1ODRkelAxd3Y5UUc1ck9TMWVra0RUY0c4clc1LWQ2NTlCNUJsZmhWNTZSdV9VUEpRbjRYbzRHZG5hZkNFOXFlcXM1dE9kcmN2SGMzcVBWSGpBY2ZiM2N4NXc?oc=5",
+      "source": "LEADERSHIP Newspapers",
+      "date": "Sat, 25 Jun 2022 07:25:01 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:53.807871+00:00"
+    },
+    {
+      "program": "IITA I-Youth",
+      "implementer": "IITA",
+      "title": "I-Youth project empowers over 90,000 Nigerians with agribusiness opportunities - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNRmx0a2VheHBQMWNhMUVhalVBT3BweUo3NGYzX2paU2V6QTFBZG5FNzNFVHZ4SVZjZjVWazVyWnNKVEpfMkxqSnNZSGtjQmYxNDJvVzZaZU9XNm9NZWlZVXV1MWFwSW9yVFVtX0pOcTd3VV9xOGxITjIzXzNSYXZqUEJ5V0g0QXhaOVdhbW5IaGRIbVYzemZna0x6QlFyXzNSTHhvME9OdGU5anFtcTRoa0M1NHpqM0FiamNvakctQUhtQlFY?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Tue, 20 Jan 2026 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:55.050319+00:00"
+    },
+    {
+      "program": "IITA I-Youth",
+      "implementer": "IITA",
+      "title": "Mastercard Foundation: Towards Agricultural Revolution in Nigeria - THISDAYLIVE",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPdG5PV3JmTWtsUXhUcy16eVlIejFZUDBaRl90ZDYtRzVwMHJSMWQzZXBEOWh4QmowdTROS3E3Ny11NkVLNEJxeFphY2xBOC1UamswUnZPaE1yUGI5LXp3NkE4aHJOQVo2c2xiTUxacGFQRHU4YUhCWHFEMkJPd2lsenVDWHRWMVZJblktZWNfNHZuOHpTcWlDX1k5RTVneXJtblFNTlZyYw?oc=5",
+      "source": "THISDAYLIVE",
+      "date": "Sun, 13 Aug 2023 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:22:55.050342+00:00"
+    },
+    {
+      "program": "Babban Gona",
+      "implementer": "CAFI & WEDI",
+      "title": "Babban Gona, Mastercard Foundation partner to create jobs for 560,000 youths, women - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPajF6RWdDbVNDUWt5S05KNGZmYVB0U3l1TjFHb0ljNjBkSGl2S1hpbWI1X0lVRU5tT25MYlRsdnZiNGRYb3ZydFQ2dW1Ib2hVUE5pLWJMRHNwVlFBckRCdkdHVnJNR3B2X2t2aHFQeG8yMHRtOXFCeUwzTm1FQkd1TzNrSXJSNDFGaW5XTjJMTVYxaHU1NHdfUkRibnhaQ19PY1d5dEVfVVI2b2ZOZmlPZ2J5WjhxdWowZ0MyV0RnS05jZw?oc=5",
+      "source": "Businessday NG",
+      "date": "Fri, 14 May 2021 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:56.338218+00:00"
+    },
+    {
+      "program": "Babban Gona",
+      "implementer": "CAFI & WEDI",
+      "title": "560,000 Young People in Nigeria to Secure Work Through Babban Gona Mastercard Foundation Partnership - allAfrica.com",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5HLUV3WHBXbmhETFVtNTBkS0ZhV1NITFpkck1Ic3pIMVI5MUE1dkpGbmxoUzZLNnVnSGlmamk3VGgzMjdNUlhIZ3h4T01LNC1KeU5rdVlPQS1FTHc?oc=5",
+      "source": "allAfrica.com",
+      "date": "Mon, 17 May 2021 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:56.338245+00:00"
+    },
+    {
+      "program": "Babban Gona",
+      "implementer": "CAFI & WEDI",
+      "title": "Mastercard Foundation signs agreement with Nigeria to empower 10m youths by 2030 - TheCable",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNLVV6RXpJaGNBcjQ4Q3BnZnEwa2owUWFIbmluX19KQ1U1NmlNUDd2MkFoYllGZVh1TERJbU1jdGVMQTRtTFhQc0szaTBRREJVWkl5YnZJcmhOSy1jUl9uR0d0eXdDUEZad1pGeU9fOHJWSkRCTjU5MFBlUk5VS1l2ZXBNTmtUTmw3cll1emR6eTRKdzFSME1qQTBULTNHQXZSa0hHUmdFQ24?oc=5",
+      "source": "TheCable",
+      "date": "Thu, 01 Jul 2021 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:56.338262+00:00"
+    },
+    {
+      "program": "Babban Gona",
+      "implementer": "CAFI & WEDI",
+      "title": "Mastercard Foundation Signs Host Country Agreement in Nigeria to Enable 10 Million Young People Access Dignified, Fulfilling Jobs by 2030 - Daily Post Nigeria",
+      "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxNN0dfVmZlUjgxMUp4bGlwOWZod1d6cEo4LW4yU1dnalpaelBMUDk1NDFQYjR2ME5kSW1iRS1VR0h5SUxfNzFYOTY2ZWhCeDNwTjl6eDM0Sm9FODQzRk4yTHAxWFlhNTR5ZHZJUTNRbTZtRHBac0U1dUdtWUxhZVQyQWVoQWIwUFlqZGYyVExDRjY5WkpRS2o3R0ZKZ1ExY1BrRGN1UWxudTY4RDRwU3pqd2EzVnVmU2VGeUljbk1GMWJlMzk1SUNqSEFOSHBWX181QUpXc2NNcGZDZVJlTlVfdk10WDE0aHJlbExBR2VBeWdrdFZ6ZUIyNlgtbGk5dw?oc=5",
+      "source": "Daily Post Nigeria",
+      "date": "Thu, 01 Jul 2021 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:56.338281+00:00"
+    },
+    {
+      "program": "Babban Gona",
+      "implementer": "CAFI & WEDI",
+      "title": "FCMB congratulates Babban Gona on Schwab award - Vanguard News",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQSWM0NzJmaENwRERRUEZsNEk4R1ZTZDdmWXhIaFBtNEp1Yy1ENG9WLWVvTlRUQ2F0RjYzWVI3NTlMY3RpUS1Nb2ROSnYyMkhwR1NNalVLYjlfb1Awb3VDMHEwSlZNeXQ1UUtFSFpFRjZBZFFPdXlkN3ZyYTh6TVZtYk1xWmpuM3JXOC1r0gGQAUFVX3lxTE03R0FjMWE2cnVVa1dvSHhYOVJ2ZHVaOUFRRHVIa2hCUTQyS19DaEdrUTJZdG9YUkhIQmpiQzhyN2psX0h3N2pvR3ctdlhfT2JUNUZycW5sUGtqWDM5VWdraDNVZFNkMmlTNHZFS2RLTVFjaVUyRlVVYjd1R1Q4RU1qS0JmT21Xd1pRSm5BWlJiVg?oc=5",
+      "source": "Vanguard News",
+      "date": "Mon, 06 Mar 2023 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:56.338295+00:00"
+    },
+    {
+      "program": "Babban Gona",
+      "implementer": "CAFI & WEDI",
+      "title": "FCMB: Supporting Women, Farmers in Fight Against Hunger in Nigeria - THISDAYLIVE",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNcWZITHdNVF8yeS0xTHdIVTBEMl9iQkdnbUVCQWQxNWo1TWhNdklHNTVqQXNzM2J1MDl4cnVRQ2tGd0FsUEl5SXpOQjlGYTJjdWg0VndrYVRETVdyV01kS2JNakdTbzM1cTEya3hGSHo5eS1lSVl0STZUZTE0YTdIZlBhWV9uNTNidGZlOW5VbnpwZGJndkNjdi1HdXhfUU9iLVo5RkRKYw?oc=5",
+      "source": "THISDAYLIVE",
+      "date": "Thu, 25 Jul 2024 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:22:57.624856+00:00"
+    },
+    {
+      "program": "Babban Gona",
+      "implementer": "CAFI & WEDI",
+      "title": "Our goal is to make 1m farmers richer by 2025— Masha - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQVVJHTDNyc3JlVnhuSjd2LVkxNzRGUWhfMjhBV2pUR1h2Q2RtWEdnMDdQQUFYS204S0VPeGFPV1VYQm1nNmxpd0VaUjZ2Z1dhcy1tTFdTb19TSkhWbW5TZDlNUlh6TV9VZGV6REg4UEdPU1ZWamp5NUNpQ2JibEo0SXJvU3B6NlV0QjdxRFZJVmpxaEN1NlhsT2hjVU9sbEhTaGdXTFJqei1vQQ?oc=5",
+      "source": "Businessday NG",
+      "date": "Mon, 25 Nov 2019 08:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:22:57.624876+00:00"
+    },
+    {
+      "program": "TracTrac ISSAM",
+      "implementer": "TracTrac",
+      "title": "TracTrac boosts yields, cuts costs for 125,000 farmers across Nigeria - Tribune Online",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNMGlHZ0JnOUJXTzl2YTVJM2Nvb2g3eEFrdVlaalBIUmlxVTRVdXZlVG1JdWJoZ1F0ZEVNakVqeXVoUDl2MjJPN1RxNlVJVHg5MVB1WkJXSjIwNzRrR1pvMDJqSVRXU0dyM2ZuUEIxcHZPRk1JNEUyWm1WbnMwbDBfaF9fTkxWTEc4OWNPbHlVSERGa0hiTVNRWFQ0NlXSAaIBQVVfeXFMUGJmLWxBWmlKeFNUSUFLY0xqbzhvczJNNFJKX2pMVkhvMUhYRDNJSXBWR21RQkJOeVVJM1ktQkdkbXl3UUN0R2xfZ3pqbk4wWXkyM3NhSUZ3VnpHM3FPTXQyZ3FqY2NldkkxcGRSY2JBajNqRkpDTVU4Tl96eks3VnY4alYwT3gyWElZSGdUY0RDblFGc0dPeEFDa0xhZEtaT3FR?oc=5",
+      "source": "Tribune Online",
+      "date": "Tue, 02 Sep 2025 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:22:58.910372+00:00"
+    },
+    {
+      "program": "TracTrac ISSAM",
+      "implementer": "TracTrac",
+      "title": "How TracTrac is stimulating mechanised agriculture in Nigeria - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOUkNZazN0TGpLbk5jSjBmbk4yNUtrTkRLdHlMQTQyUV9kUmFhdzhZRlJzMlptQkpIOFh0Znh2YjhTN2M1TDJ4dmJxZkdYTUljVURLenFaTEU3RzBIQjY2cUNBNW1GOVR2UVdvVlF5cVc0N3dZSzJicFQ0cXFmX0pEcDBwWkxEdzQ3dUw1MEg1cXBYQVhIdG1vdVY1d3ZIc3R3cnN3STNYb1V3dm1FT2VV?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Sat, 20 Sep 2025 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:22:58.910390+00:00"
+    },
+    {
+      "program": "TracTrac ISSAM",
+      "implementer": "TracTrac",
+      "title": "TracTrac: Scaling Up Tractor Services, Others For Food Security - New Telegraph",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOZnR5ZWNzYkd6WUZhMHZFUnoyN2J1aFlGSDhLaTdGNklid3gyUXdCVlo1aHhmdExqQlA5bE5Uc0Y5N3FkVWlZa1oxQ1F4SVdUZ3RUcFo4aDNhU3ktX21QZExJX1RDb2g5WmZRR0NUS2JXRmJJQU1jWWktaU9IVEMtcFB5RExiVDFfUWJQcURTV2dxQUU?oc=5",
+      "source": "New Telegraph",
+      "date": "Fri, 19 Sep 2025 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:22:58.910400+00:00"
+    },
+    {
+      "program": "TAFTA",
+      "implementer": "Terra Academy for the Arts",
+      "title": "TAFTA, Mastercard Foundation Empower 2,000 Women at Kreatives Summit - THISDAYLIVE",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQbWhrYzFfSGZpZXJlZnNzOWl2SWphcEt2bUVhaTFJdDRxNmZwZDlTS2Y5NlZKTFNzUzVtOUI2dDN0QWJTdm5ZVEQtYmxXamRyd2VHazlzOWl2SUlYYzMzY3dDV3R3M1NZSWhTeV92eTF0dGFQOUhtbXlJOFkxR3pLMDdlX3NzbjFhNERmUnpZMkZFSmIyV05LWTFaVUZJWWNCMHNHM2YwZGViQQ?oc=5",
+      "source": "THISDAYLIVE",
+      "date": "Thu, 19 Mar 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:01.479773+00:00"
+    },
+    {
+      "program": "TAFTA",
+      "implementer": "Terra Academy for the Arts",
+      "title": "TAFTA, Mastercard Foundation empower creatives - Punch Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBfWFIya2xGX3lmc190NlBUNFo2dXd3dWNIcVpic25RZUxLeW5SWmJ0bFQwM29qeGtTVWd5aE1aM0lTN0Iyd0FZODZKMXQxWjBhWURSSVJuYl9Ta2RORnlDMGV0TnZwNkFVTlhIbEZXWW9fb3ZL?oc=5",
+      "source": "Punch Newspapers",
+      "date": "Sat, 01 Nov 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:01.479790+00:00"
+    },
+    {
+      "program": "TAFTA",
+      "implementer": "Terra Academy for the Arts",
+      "title": "TAFTA calls for creative transformation, inclusive opportunity - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQeC03dFRONUxQZ0MxMDZUNFZlWWFLWjF3Ym9OdUFSdWNwb3dqVGpORFpoQ2VYajRRNDhxRURUbW1LNVdmM0dzSWx0UjF6UEVXWGdwUnNia09UNEFSWVJTc0VyRTdfMF9YS1U0a3ZNOFQ4bTRGS1JEQWhGTjhsLVpIQjlKa3p1a09PeFlCQU05MA?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Sat, 12 Apr 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:01.479801+00:00"
+    },
+    {
+      "program": "TAFTA",
+      "implementer": "Terra Academy for the Arts",
+      "title": "TAFTA Partners Mastercard Foundation To Empower 65,600 Youths - LEADERSHIP Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPMUg1TnJyN1NIY1A1cG45ajBSUGVlX1dXaU5NVVpCaFZ1ekdlaGlxRk5oSHpSM1RMZU04OFY4eWpMSWpGdFUzd1ZpVWdtc213aUI2bTYyeWk1R2N6ZGd4d3ZQSHl0NWRrVmJxcnNCcEtLV0RlUkFjVTZKNnN1ZEFvMWtYUjRUQldZdXZv?oc=5",
+      "source": "LEADERSHIP Newspapers",
+      "date": "Thu, 18 Aug 2022 10:26:13 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:01.479810+00:00"
+    },
+    {
+      "program": "TAFTA",
+      "implementer": "Terra Academy for the Arts",
+      "title": "TAFTA graduates 9,000, celebrates growing female participation in creative industry - Premium Times Nigeria",
+      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQUWtpazlPY2Zya3BzcWd6Y2o0OHVaREswaE1rQlhDcW1kSFRVQW5VS3ZVWUN3bmt3eWdBYUVjYXo1Z05IcjNLdFFxazVUejRWckFPaDJyak9tUmNoaU4xcm1HM0U4U3lQVDBEVGpZYUZMRUJXU3BMcUNrUkc5SzVFalJ4YVVPeEN3RjBPbEtMUnVUVFVWQ013UHB0N01jVllCVW9ZclpCVkd0WWJfVEFzdjJqT3lWbjViWjd4U28tYlNNeHRjLWY1cHFtalhvNk1ldVVwUFkyZ1hqX0tLZzg1eFl3?oc=5",
+      "source": "Premium Times Nigeria",
+      "date": "Sun, 13 Apr 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:01.479820+00:00"
+    },
+    {
+      "program": "TAFTA",
+      "implementer": "Terra Academy for the Arts",
+      "title": "TAFTA Empowers Female Creatives Through Groundbreaking Women Entrepreneurs Devt Bootcamp - TVC News",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNVDN6OWtqaHFLVnBNZWU0XzU5aXZ3OUN0bWlpYlhVcDhXR3RXRmUxZjNNZnh4ZGVBTUVsRC1uREpLUDJTWVpMb29RMFZkZ1JMUUgxdThwS3E0SjFVNEF1OXpUOFJtY3NnemN2VGpOZTFzbFBzTF9INWFDWUl0UEtRLXpYeHE2b2RpdnFkVWdGNUN2Q3VLdmFtV3FmLTRTSGdIeHJWTUtNRWlEb0g0dmZZRzh3?oc=5",
+      "source": "TVC News",
+      "date": "Fri, 31 Oct 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:02.720876+00:00"
+    },
+    {
+      "program": "TAFTA",
+      "implementer": "Terra Academy for the Arts",
+      "title": "Terra Academy to empower over 65,600 youths in arts, culture - - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNaXRRTzU5cWNoeHZZWDBfdnVKOWx4aWsyeDBWM1RDY0ZaSnNWWkFLVG10T3F1VzE5cS1hSGtEQlNLcDJfSW91RzY4VmtkcWlEYU5NNWg4U1hfRmg1TEVXTjY5aEx3LXZyaE50OXJCck0wUXZnSkI2WkVvNU9GVm95SXpCbHNVQ0toNVVrQV83Ukd6Q2hPbWgwME1EOU9rZC1mcFE?oc=5",
+      "source": "Businessday NG",
+      "date": "Tue, 16 Aug 2022 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:02.720896+00:00"
+    },
+    {
+      "program": "Christian Aid SEPTP",
+      "implementer": "Christian Aid",
+      "title": "Apply: Christian Aid, Mastercard Foundation SEPTP Poultry Programme - Nigeria Startup News",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxON2JpcXVtelppYzk0SFNkbTMtOUU2cE9DeGQwX3kySFkzZlptYlJLNG4wTjV3b3JLajdEZktFYmNwZ0o2Y1M1TkxRU1RuWDBDZDNrY1MtdjJJXzB1djhRRWZMTXpHYVpWOXpQX09Tc1RWY1EtMXlyQ0JfNW04elNMcmVyNGhUcC12T3J1UnZ5SzVDSjN4YXdaYkFNbzhJelB00gGoAUFVX3lxTE50LVkxdG1kbXdGcnNMSkJBcFZqWDkwVW50VURRWFBvUl8tZnZjMmo3YW9YR2R4dG1fQnB1dFI1WFU4eTZ2YlBEZXc5Nl9oaXNNX3ZZTllTSmZDN1hqREZCelVYb0ZzOVNoWWdRRWtPV0t2QzNIVUtBc0FudDBmejZtMldOYVNJS0F3WHlFUEZSdnNzeG1pdWN6eVhiR1VEbmlGVE5ZTmJGMQ?oc=5",
+      "source": "Nigeria Startup News",
+      "date": "Tue, 16 Dec 2025 08:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:04.019580+00:00"
+    },
+    {
+      "program": "Christian Aid SEPTP",
+      "implementer": "Christian Aid",
+      "title": "Benue Career Clinic: Jobberman, Mastercard Foundation empower entrepreneurs, job seekers in Benue - The Sun Nigeria",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQUTNoMFZMb2ZDWmJ5TUFla25kOUktTVhUdHd0VlNjQVNqMjZ2T2ZYRGo3SlR2VkpxVUo3aUZ3dUdaamo2cTgyd2lURGtWT0R4SmxQOXJGb1ctaHlSemRfcTJseVU2TmtSZTdKZzVqREJKZ1h0bHl6c2NmN0hSajdrak5NdzJhYk0wWGtnMmFxTXBnRGVhVzlOcWlwLVgwZWxQZFcwMWJGM3h3aWdEcXBTcnJOONIBuAFBVV95cUxNTklXWTJ0eF9fYUxuVGZoRzdnR0dEMVllc0s3ZXB0ZGw4UkU0WW9la2VJRVgzTU0zQzdfUkZRamROU0Z2eS1tb0NFc2xqZ05iZ2NjTkVhbzk0a24zblZZVVN4N3ktNUZIVF9DMHNYN2NHaEJSbmZSbEJGMG5YcDZFOTlkRVVVaEVRVkRTTTJ2NzlIaVhrVHdVY3lGaUl3YTBoSGg1RGIzVlFEN21Ja0hCUFdCQjRsVmQ1?oc=5",
+      "source": "The Sun Nigeria",
+      "date": "Sat, 13 Sep 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:05.384747+00:00"
+    },
+    {
+      "program": "Christian Aid SEPTP",
+      "implementer": "Christian Aid",
+      "title": "Mastercard Foundation Graduate Internship Program 2026 for young Africans. - Opportunities For Africans",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNSWdOZ0tDLU8tVngxX2w4UjIyY3BJTEd6ZElIR29NeWVXYmNHZHdHdnVJVTJmaXpWdmtTU3JHOXRjN0EwNFk5OG5SVFBmYzBBSlNmSHI4b0w2M3pydEZTRlVVRmVsUFhXQmhMY2EyMURBYV9oeHl2QU9qcnJCaS1qX1pLUmJoZUIwWHE5SzRrMHBEZnFXakZvWV9FR1VmN192eTI0cmgtT2k2YktiTFlLaWZSaFhIUQ?oc=5",
+      "source": "Opportunities For Africans",
+      "date": "Tue, 02 Sep 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:05.384768+00:00"
+    },
+    {
+      "program": "Christian Aid SEPTP",
+      "implementer": "Christian Aid",
+      "title": "MasterCard Foundation & Wema Bank Nigerian Youths Program 2025 (Free enterprise training for 50,000 young women in business) - After School Africa",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFA5NVFiX2R0VlpidDQ4NGRQcGx0UGV5Z2FldXNqUlBlWHhwMi1SRGM4V1JEMW5YR2EtZXA2ckJONUF0WFV6aHMyLVVqYTZWdHRuQVdTbTVzYVhHd1Q0Z1UwU3ZxTGR0UXBCYUtUc2Rid2ExcEdibjN1LUF5YnBRTk0?oc=5",
+      "source": "After School Africa",
+      "date": "Tue, 19 Aug 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:05.384781+00:00"
+    },
+    {
+      "program": "Christian Aid SEPTP",
+      "implementer": "Christian Aid",
+      "title": "Arizona State University Mastercard Foundation Innovation and Technology Scholarships 2026 for young African professionals(Fully Funded) - Opportunities For Africans",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQUTA2VVpORXVQaUVCWU5XeGlkbktadDdIZXhTYkJhTTA1VXJDTXZYZE1uNmcxWGZNWExtQTg5cmRBSGJTcU5saXkwakJIczV1b3VNVTRGcEw4aUpjZGFyQ25FZlNQRy1ZcWNmczZKZWhQN21YWTc2aW9kNHh0dS01cVlqSUIybkZLZVd0aVJzaUlXT3hreDlnX2NPd0s3SXMxcjU0WFFjd1N0aHVFbDVQdlJ5YlZXZ0VJa3pWMXhjSGdYU2FSWU05QnMwZWY?oc=5",
+      "source": "Opportunities For Africans",
+      "date": "Mon, 11 Aug 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:05.384792+00:00"
+    },
+    {
+      "program": "Christian Aid SEPTP",
+      "implementer": "Christian Aid",
+      "title": "Cohort of Mastercard Foundation Scholars poised to become AI leaders in Africa - ASU News",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQOThIWVh3MDBQODZTYlk0UmR1bVB6MEFTMDQ2RmFFWlgyTURhVi03MjJ6eWlJdG4wUnZrSFZCa0lvWF9OZFJEVVRvZzlvbnM3VVRfRDBTOU1oaWpZcElTei1RM01nN1lVbVlXOURCZG5sZ2pSM3lROFFlUWRCU1piSHZkS3pIVXZFa3A2UVFGM3F2VGJ1MVREaDdKUVY3UVdIN3pwQU41M1dpSmkyWWgwRVE3NUI?oc=5",
+      "source": "ASU News",
+      "date": "Thu, 03 Oct 2024 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:05.384801+00:00"
+    },
+    {
+      "program": "WOFAN ICON 2",
+      "implementer": "Women Farmers Advancement Network",
+      "title": "Towards agricultural revolution in Nigeria - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNZ2dQNkRLdHVRZGVnTF9IRXE5ODVuZ0U3Y3BNN21WYmNYVHlKa3RIVzFXUFk0ZjV2VHFxd19PZ2hRUW5xVEs5Y3JHLWhieFgzaFlDbU9YZm9VMVhNcjFPTHowcWpPOTdWZ2xybTBkY3BrQmU2M0t1Y3l5U3VNWXVBM1R1VzFrd2VNTnkwUg?oc=5",
+      "source": "Businessday NG",
+      "date": "Mon, 14 Aug 2023 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:06.612269+00:00"
+    },
+    {
+      "program": "WOFAN ICON 2",
+      "implementer": "Women Farmers Advancement Network",
+      "title": "WOFAN moves to improve agric in 10 Northern states - Daily Trust",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9oTzhzeUhqMHlkVVZuWVFtcDI0blFxZmd6eGVTT0xHUFNrRkpfekxnRzFtWTNKS2x1dFhyY3g2VVlhUmExdzZLeGItcUJRTDc5S3JxemxtVXRhNVRvYWNiYVQxbTR3UTk2RzgtY21nTXp2aERUSVJVcnZkYXhWT2c?oc=5",
+      "source": "Daily Trust",
+      "date": "Mon, 30 Jan 2023 08:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:06.612286+00:00"
+    },
+    {
+      "program": "WOFAN ICON 2",
+      "implementer": "Women Farmers Advancement Network",
+      "title": "WOFAN Distributes Farm Inputs To 3,000 Farmers - LEADERSHIP Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFB1Z3V6bTVxODJzQmJxWVhjREZ2NEFuMjlHVERvMDVqNXFyNjE0NG1jRG16UGFMWU1paTExSEw3aUp2QkVma0VGczJQb3NTelJDbi1NQkRXTy1naEpQRnV2SkExZXFZMWpZWFBJS3JsUF9LMkxrajBn?oc=5",
+      "source": "LEADERSHIP Newspapers",
+      "date": "Fri, 16 May 2025 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:06.612296+00:00"
+    },
+    {
+      "program": "WOFAN ICON 2",
+      "implementer": "Women Farmers Advancement Network",
+      "title": "Women, PWDs begin crops harvest under WOFAN initiative in Kano - The Nation Newspaper",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQcWd0a29Ca0N2S1kzeTZieUdVdWl0NjI1MFJNMmRzbTFPUEYtZUxQRHVrLTlfcHRwQ0IxT1lwbHJ4RC0tV1hwd0xZSHRJcHEzT1NBbHRJZDBLZWdIS09RZlZiLWVjSy1HUU5VUjIzOEdwcjhiZ3RJQzFRNUJyNk5kVkp4MGVaQkIybFpWb1dVLWlNaDZnM25j?oc=5",
+      "source": "The Nation Newspaper",
+      "date": "Sat, 22 Mar 2025 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:06.612305+00:00"
+    },
+    {
+      "program": "WOFAN ICON 2",
+      "implementer": "Women Farmers Advancement Network",
+      "title": "18,000 WOFAN-ICON2 farmers acquire tractors to boost production, enhance income - Tribune Online",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxObXNPNENFamdvU0Nvc1VHdGduQnc2VFBCbFJObjF4UGRmelFjVWVQX0E4Z2pjU25RRHJ1VVBFT05LWkxCWW95TXhnRDB0YTVQdk9GZ1l0ZXZPSmd2aS1Jd2s4dDkxQ0hsOFB3NXZ4am13ZndiTXc0SWd4SEMwQzlOZkNzUlRTbFVXajRGMnh5UjZOdG1fT1M2Ml9qSHRoRk9OelMxdGlEUjhOQQ?oc=5",
+      "source": "Tribune Online",
+      "date": "Fri, 11 Apr 2025 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:06.612314+00:00"
+    },
+    {
+      "program": "WOFAN ICON 2",
+      "implementer": "Women Farmers Advancement Network",
+      "title": "WOFAN begins ICON2 project year two implementation - Tribune Online",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQdDg1WEFVUWxiMWdfOERydWdxc1NiM1ZadkVvYmtqV2E4R0cyeF9MRDEyTG54VG1YQXVfd2UtWnlNWENxLWozRjlzS296Nl8wcjJ6ZW5EWnI4WEs4dG1pV1dOU3JHOUpITzhKTm5pcC1tYm1xTU55SzdoTlRoZ0h0SmRzVVhEdw?oc=5",
+      "source": "Tribune Online",
+      "date": "Tue, 28 Nov 2023 08:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:07.955118+00:00"
+    },
+    {
+      "program": "WOFAN ICON 2",
+      "implementer": "Women Farmers Advancement Network",
+      "title": "WOFAN ICON 2, Palm Valley engage stakeholders in Kaduna communities on project sustainability - Apex News Exclusive",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPZTNBUVUwTk9WeGNXMGFzUHBfdC1BNlZwZTVndFAzSVlYb29WRTJ1MmZSUDNRQURLUkI3aWlzcFJwOXdWWEU4TXJvWkRyWjZkU3pFbGtCbWxUeF9tTE5nMGpNcGlCWWxsQVA3RGMwN19wbldValZVdEQ5REpTaEFabUdjdnNoMTluZ3F6eWMzV0pNbGlYakIzamlNVERua2l0YVBDS3dWckNXMlVMSDVSa1hqTFl6TFR0X1hyVElZSFI?oc=5",
+      "source": "Apex News Exclusive",
+      "date": "Sat, 24 Aug 2024 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:07.955137+00:00"
+    },
+    {
+      "program": "WOFAN ICON 2",
+      "implementer": "Women Farmers Advancement Network",
+      "title": "WOFAN supports 18,000 farmers with tractors, crop harvesters - The Nation Newspaper",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPc3pmbXFIQm9oLXZDbWZoaTVYRXJZUl9MWmR3SkdHem4wNjYwM0FoQnd1RFFuNWVFR0s3cWIyNDBzb3duenJZTEV5LUxjWkgzcWtRbUNnaHh2MjlBLWhiTzlaM1l5V3FIb0lRVUw5VW15Z1RGU2hzck9oVEoxUmowOU8wV2pyT2txZHVZSFlfLVN3WG8?oc=5",
+      "source": "The Nation Newspaper",
+      "date": "Sat, 12 Apr 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:07.955148+00:00"
+    },
+    {
+      "program": "WOFAN ICON 2",
+      "implementer": "Women Farmers Advancement Network",
+      "title": "300 PWDs, Women Benefit As WOFAN Empowers Kano Farmers - LEADERSHIP Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPbUU3ZnhDUkRYTlRNSGZZUWhmY3RzdjJCUjc0MElOdUJPeUFCRjRzdXFOUTUwcUMwUFVWVGVmX0dzWnkxV2pMNlpwcW9RemhsZFpMX0VyblpwRHBDVzVZYkZ2YVN5cVEtbUZxV3dFLXZnN1R2VlB2V1psNUhmNGFUa1lR?oc=5",
+      "source": "LEADERSHIP Newspapers",
+      "date": "Mon, 24 Mar 2025 06:31:03 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:07.955156+00:00"
+    },
+    {
+      "program": "FCMB Easylift",
+      "implementer": "First City Monument Bank",
+      "title": "Oyo, FCMB, Mastercard Foundation Disburse N1.5bn to Young Farmers - THISDAYLIVE",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQOTFTQ2tFUDl5dl83TDRBWFNXVzMzZVdXOG5OeXp0dU56aG5Oc3V5SElFSlNfRjZSNVllYW5DMzlQQ190M3pNZ0tsaHg3R2RTZW5DMFh4TjhzaWhENXNFNUVNNTBUNk94NURuLTNUcUR6WnBjRDF6bTFjWFV5THFqTzFmb3BnZ1VvVFZWNl9nbkZZaHVqN2NhV0dNdnFyejNBUG5KazlB?oc=5",
+      "source": "THISDAYLIVE",
+      "date": "Thu, 09 Apr 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:09.242902+00:00"
+    },
+    {
+      "program": "FCMB Easylift",
+      "implementer": "First City Monument Bank",
+      "title": "FCMB, Oyo disburse N1.5 billion to youth farmers - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQYzlTcDFwV3djNGZOXzJMYU93Ql9SVm9EeU44WjZ2LVFhcUROX0w0UXRmTlZfclREcnNyV0lmZENJVTU1TzMxb3U3NzR4ZkdJVkhvWUhLRmt1ZDVzUjhiUUwydGFoZkZpelpvaGRoanBmbFlJeWhmNmhMcmdkNzZtcURJd2FNSHVDQWRQUDBEOA?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Wed, 08 Apr 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:09.242919+00:00"
+    },
+    {
+      "program": "FCMB Easylift",
+      "implementer": "First City Monument Bank",
+      "title": "Oyo State, FCMB, Mastercard Foundation disburse ₦1.5 billion to youth farmers - Business Insider Africa",
+      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOaVBvMnM1Z2YwbDdGMy1IMGxPaU41LTcxMjVKaTNoRnpCbHpxQng0ZEJDRl9qTnZaSHV0aVpaX1NRTks2Z0U4ZkhBaHNLRm8yTlhRUUF0cU4taFRLZlVpTldmc2gyVGZaeHBWbjlrMXg5cHVkNUZtU1FDYjM3MUtla1NNZG9mNkNUcDBLVmtzQ2ZDQV9Eb2tLUVZzTW9VM1UzeFBWTW9iNG5uWlF3MVVSQUZrZHlFRmxNTXdBcnlqamlaRUI2YUtjZnJoaEl0OEhq?oc=5",
+      "source": "Business Insider Africa",
+      "date": "Thu, 02 Apr 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:09.243112+00:00"
+    },
+    {
+      "program": "FCMB Easylift",
+      "implementer": "First City Monument Bank",
+      "title": "Oyo, FCMB, disburse N1.5bn to youth farmers - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNTEcwUk9iZnpCUHJXR2hDTFBXZkdDOWpTZ1N5bzZZdGpjclE5VmpUY0YwbGZBZ1RDd1EwVzFVb1JtNFhLREpmd0hrQ3MxX0pyZW1LMkxvOEZTWnZvVVVhYkIzUG9Hc29BdTBEajUwWkowalRxdG5fWUpZYXhtbHVPc1FqU18?oc=5",
+      "source": "Businessday NG",
+      "date": "Fri, 10 Apr 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:09.243124+00:00"
+    },
+    {
+      "program": "FCMB Easylift",
+      "implementer": "First City Monument Bank",
+      "title": "Oyo, FCMB, Mastercard Foundation give youth farmers N1.5b - The Nation Newspaper",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNRE9ZX0lTZms3TThKaFhhYjJTN2xCTFZPa0NQYUo0ajR0NW9rMktxY3NySk53SlN4dzhlSXppM1NvMS1FYjJXbEVHOWhOLUhOY1Q0SjRhZ3BfcU5Rd1VkU3JtUFdOZXZ0b0tqbWhrUmlhellEMGU4N2pKRVEzVzAyQVU2alV3LUx3QzlnbU9mYw?oc=5",
+      "source": "The Nation Newspaper",
+      "date": "Thu, 02 Apr 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:09.243133+00:00"
+    },
+    {
+      "program": "FCMB Easylift",
+      "implementer": "First City Monument Bank",
+      "title": "FCMB, Mastercard Foundation collaboration underscores growing need of purpose-driven finance - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPdEZCdUd5YmFpOE5IVmhpSjRRdUtlS2JCYUF0ZHVwSzlWOVZKNmpPX3VXWkpMcll4Q2ZqVEl2c09vbDlTREYzdk5xVkFYWUUydGNKeXlwZzJEdWtWTkFVS3lNN0l4ajNHZ25DU1o1U0tVdDU5TFpSR1RzTDVLSFNuLWtKN2FzaWU5TzZ6U00wN3VkSk5fNW9YcDEwYzNoZDlENURJQUZtNmFDbUlXMjgxSm1PZVZOX3ZJQ1ZtUXNIeXV1Tl9FLXF3?oc=5",
+      "source": "Businessday NG",
+      "date": "Wed, 19 Nov 2025 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:10.479946+00:00"
+    },
+    {
+      "program": "FCMB Easylift",
+      "implementer": "First City Monument Bank",
+      "title": "₦1.5 Billion Youth Loan Rollout Begins: YEAP-SAfer Beneficiaries to Collect Funds via FCMB - MSME Africa",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNQklhcHBUU25fYTB6WWxrbTcwRDVVSUZ1OXZUV3BrUXQyM1FKOXJ5QzFjOWhRWFhTTy03WnphdkF5SXBPaXFmNnZaenpmYUFSazk0T1NaNThRUWtuT0VfQmFxR2FQVEk1ZWRvbGpwdWFSVkFyNWxpaW9tU2poYm1nSDVDMmVqYzU0UlBJa01GT1FnMlhDeWljUmhabXFSYjN2WEhRczN4UXhhdHBGclJPQXowaXNVdEg0MnNBMGtTVk5EZEpheGc?oc=5",
+      "source": "MSME Africa",
+      "date": "Fri, 24 Apr 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:10.480145+00:00"
+    },
+    {
+      "program": "FCMB Easylift",
+      "implementer": "First City Monument Bank",
+      "title": "Financial Inclusion; Mastercard Foundation Honours FCMB - THISDAYLIVE",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQUTBkUWtmNjUyVmhtQ1RCR0U3eUp2eGFyeVJaTlU2MUhBUUVoVl9VMnNWQWNpX0JQRUk3dVVnYVhSdG1TclloWTJVS01hQkhYdGdXYXdPUnlqSllhTVBoVHFBb1RYdGo3ajhBYXliQjc4c21rcXVSOUNCRmxGei1GcDdtRTlEM2o5NGVsQzlKM3pLTFlqNDVjWHN3?oc=5",
+      "source": "THISDAYLIVE",
+      "date": "Mon, 24 Nov 2025 08:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:10.480161+00:00"
+    },
+    {
+      "program": "FCMB Easylift",
+      "implementer": "First City Monument Bank",
+      "title": "NADF, Mastercard, FCMB to impact 12,000 women in Oyo - The Nation Newspaper",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQWWwzTDM0a1pKQ2pmRTd5NGwzQjNnd0RScGhoM0p1QlJoYVNmVk9rYzZEUDdRQmR4RVpWMXRZeTNwSTR3RmZsRTJRWjl1Y0V4TUhxb0M5eXlxbG01ajc1enIxcTR2Q09fRkY0Y3hWaThiM3FrM3pMSFJnU2NWRGstbk9nSEg2czA?oc=5",
+      "source": "The Nation Newspaper",
+      "date": "Mon, 24 Nov 2025 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:10.480170+00:00"
+    },
+    {
+      "program": "EDC Transforming Nigerian Youths",
+      "implementer": "Enterprise Development Centre",
+      "title": "EDC, Keystone Bank, others task SMEs on sustainable growth - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQUy1qaFBtWVlGOXN1M0YzbmtrUUczclQ0MDdZTXNjR1FhN0JuQmdEZF9KMlpValp6S0FNTXpfdHBFZ3ZaWFltekhuTnRONEpRV1lodzBDa1FFbm1iZUM3U3NYbHVVUWhKRjlhcXNvNElSa1kzb1JQY3h1THlibnJYUHNjNjFPX0xsbkF5cFhrSm9BSkZtS1RvazF5bw?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Sat, 01 Nov 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:12.009282+00:00"
+    },
+    {
+      "program": "EDC Transforming Nigerian Youths",
+      "implementer": "Enterprise Development Centre",
+      "title": "EDC, Keystone Bank, others back SMEs - Punch Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBrVDFYTTQ0ejl6RnRxTXZVN1ZoT3JNWGlBUEJvSVB1UUNtOTMwaC10eWZ1cC1iZVZVMXpUd2lLN09ORE9jUnlaeDNPYURoWW9pWmdjT294RmwtUUJIVnZnb3Ezd2ZyQQ?oc=5",
+      "source": "Punch Newspapers",
+      "date": "Thu, 30 Oct 2025 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:12.009473+00:00"
+    },
+    {
+      "program": "EDC Transforming Nigerian Youths",
+      "implementer": "Enterprise Development Centre",
+      "title": "SARA BY WEMA Transforming Nigerian Youths Cohort 3 for young Nigerian entrepreneurs (2.5 million Naira grant) - Opportunities For Africans",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOeUtGdHlMTjRnVGRMLVFHVlVEdjhBQ3hnc09ocEFVcDlnaEtxUFlXanF0ZmV0LUx0ZlFWbVhpZi12Qkc5Ymt5NkdPYktuc0ljWjUzdDMxa2NONFk3VXk2SFZwWWt0MVVMQjFMWmtlSzlqVlNGV2RxaTlMc1VfWmN0Y0hvbmk4Q2NoaDF2VWZ6eVFvM1ZtZFFkaXZCdHViUXc1VTZ3eHVibTMyZ1pCTktVQUw2bXA1bGZTUjVYcFlId19KV0U?oc=5",
+      "source": "Opportunities For Africans",
+      "date": "Mon, 18 Aug 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:12.009487+00:00"
+    },
+    {
+      "program": "EDC Transforming Nigerian Youths",
+      "implementer": "Enterprise Development Centre",
+      "title": "EDC, FastCredit, sign N2billion credit access for MSMEs, inaugurate a single-digit financing initiative - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxORnZjeEZDWHRCbmtXcnFTR1I5M21BSE44NXlKX1VYS2E5UVBWNWxtR19relpfak4xdXlfQ0Rjd3B6cmFsaXFuN09mekpBcXpycVNuWksxTGdJSTVtVUhxOVB5TGtiMm9HMTNWMXFmUDdyRTFRbVBEUHYwOFlGWnFyYzhvdHVoTk01ZnBPLXc0azNpQkpLRm1UWmFqQ01GclFoOE5uQmJxbVZTb3dhNmhVODMxZy1VdkFQRk53TjlOcHJfbUtvQ1hNckxSVjA0T1BtLVRj?oc=5",
+      "source": "Businessday NG",
+      "date": "Tue, 25 Nov 2025 08:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:12.009498+00:00"
+    },
+    {
+      "program": "EDC Transforming Nigerian Youths",
+      "implementer": "Enterprise Development Centre",
+      "title": "Enterprise Development Centre and Mastercard Foundation Announce the Fifth Year of the Transforming Nigerian Youth Program - Punch Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPSkJWYzZOSENIX0h3MnJjR3lRUHpXc0tiZmtvM0Z5SVB4ckVSb0VaSTdpT1ZjZlBobV83LXA1eDkxdkszU1UzZmotNlBjM1pOUG9wWldZUDBlUndOZUxTbkRTNGhiVmFfdDBrRHNOT3FaQ2hNTmVzeUEzTGtseHNzUWhUZmR5c0RIS1dFQnNoSkk0S2NOVFBtdGNHOUpkcEFiOEh2NGhWelV5YjBwcWdEWUhkdzhpYkNSTWt1QzhzRXp6bnFrTXlSdmphUElfQXV6UmVHX0JiV0F2NDQ?oc=5",
+      "source": "Punch Newspapers",
+      "date": "Thu, 25 Jul 2024 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:13.269483+00:00"
+    },
+    {
+      "program": "EDC Transforming Nigerian Youths",
+      "implementer": "Enterprise Development Centre",
+      "title": "Call For Applications:SARA BY WEMA/ EDC/ Mastercard Foundation Transforming - MSME Africa",
+      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQRC15MU9pTDRBQm11U2h4WFRiZ3J4RE1tR0JDSFlKUUVERFh3MkR3bTdoV1RyRjFfWjRScklWRkJDdWpkeE9FWkcxTE1IeHJxQXd5MlBIekNYNVVWRDJ0a0ZzZmJiR1pndjJBbEdxeGl5RzhyYkhUWGo0YkNrZWpsSS11dTVqdFY1VWdSU3MyTXBTUDhZdmRtSERlRnU1cGMwcndXNkQ1TEFnTF9scmJpODFycFM1STVHNmZRWXZ0dl95RzZ3NGJiWGh1TGFHb0otd3pZei1WZzBlNXp2NE56VkR1RjY?oc=5",
+      "source": "MSME Africa",
+      "date": "Thu, 12 Dec 2024 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:13.269506+00:00"
+    },
+    {
+      "program": "EDC Transforming Nigerian Youths",
+      "implementer": "Enterprise Development Centre",
+      "title": "SARA/WEMA collaborate with Mastercard Foundation, EDC to empower Nigerian youths - Businessday NG",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPYUZYQ0tXc1gwV2J6dUtGZUIyS2NOeno3c2JZQWI4WUNvQzNzSVlkQ1c5N3JSOVNEZ1phOGdzSVNSVDVJZ05KM2U0aHluaHMxYlhrSWpBaW5Zcl9mck5rYWxsa29BN2VBX1ktMTh4OWNkRXBfcjE4Y1hwYVFEalR6WE5JM01IV0tseElrZUp1NVF5b0RFMFdPSVd0UTlWdDZlVTNBQkl2Y2toUGxnRG85X1ZRSW9telBuWTR0MF9RUzdob19rY1JqTm1KVVNaSkM5ZGc0akR3?oc=5",
+      "source": "Businessday NG",
+      "date": "Fri, 06 Oct 2023 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:13.269517+00:00"
+    },
+    {
+      "program": "Del-York YAPPI",
+      "implementer": "Del-York Group",
+      "title": "YAPPI Celebrates International Youth Day with Empowerment & Inclusive Dialogues - BellaNaija",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTjhhQUc3QnU2LVIySXlaOGY4TUw1eVk0djlfT21QbEp6ZDJrdGZNMXlOMnNYazB3Y1E3eDlUS3lRWVZQQ2xBX29xeVdHUC1WVFJNU2pMbmNUYlZQSEV5dUJTYlBTWnpudnlWVG5mV1IwUS1zVzBvSnBsQmttbTBzOWNn?oc=5",
+      "source": "BellaNaija",
+      "date": "Thu, 21 Aug 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:14.533127+00:00"
+    },
+    {
+      "program": "Del-York YAPPI",
+      "implementer": "Del-York Group",
+      "title": "Del-York Creative Academy, YABATECH Partner to Train 10,000 Students in Digital Creativity, Animation - THISDAYLIVE",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQRWpLVm9HSHdTZkREZXhzQlI0SUZuU0QyZ3o1M043MXI5R1otQURJNXQwTlNCMnNwbjVHcldmRGxsZ0hlaGNtcVVlWGJIaGlRRC1JeDRWZ2g2NEo1SWlwaUdIMVdKaTI3RWNGOU5SU2xCZXoxR01TRTdlZlprVXFZOTkzQXlPU2FZM1hCX1cwRFZXQTNJM1RfU0VydkVsTnRCdXZXa1h4MHRKdmJQTGN0QTRTQ3dtQ1p0QmRkdlVsX2lLRmFfSldBT1VjNkthcXJseWFiaQ?oc=5",
+      "source": "THISDAYLIVE",
+      "date": "Fri, 29 Aug 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:14.533149+00:00"
+    },
+    {
+      "program": "Del-York YAPPI",
+      "implementer": "Del-York Group",
+      "title": "Unleash Your Creativity with Tuition-FREE 3D Animation and Post-Production Training with YAPPI Today - University Of Lagos",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQQXdSb2JjSzNVd2pCNVY0Zzl6eGgyUC00VzRRX1NPa0YyS0p1RlFLM1J1SGVHTXZmV05BbDMyWnpHZmtteW95UFVQWEIxTGFnTnV1UXRkYjV4dnc2T1hNdUtDVE5kWkd2QmdzekJxTlRuNGphQm9KZFozcFJMMXJHNTlOQXVxdkI1X3dpSHFLbXZMcHNINkhDVWxISWNwMHJOeFR6ekxiaEJkMklrQUNSZEh4cU9TdzlVcHRlT25FNzg?oc=5",
+      "source": "University Of Lagos",
+      "date": "Sat, 05 Apr 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:14.533166+00:00"
+    },
+    {
+      "program": "Del-York YAPPI",
+      "implementer": "Del-York Group",
+      "title": "Del-York Academy to empower 10,000 students in digital creativity - Vanguard News",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNemI5Wk0yaml3N01tVEhNa2FrVGNpb1NWWXJ6VnF4d1RlSzB4a05LeEZ6eDdrYXhPRnFYcTdsTnpFYWZETHZ0MWl4MG95dk05Mk1XRmRiTHQ5RTBPSkNhSDhvSXAxaHo1ZVFONjJ6VnpmaGhJX0xNbG1aNlVyNVdkUEpmemMzMXhRM05hYXZ0RkgySFU1MmZmUGdEdmpXY3BsOVBB0gGoAUFVX3lxTE9ydkRnZFltQm90cXlKNXRONk14bTFQRXpid0VVSHdDZFNIOHlGT0pfQnA5bTNjOTM4c1dIZlBSbFd1ak5CMnI5cVZ4M1FHNjU5WlVTSnNxNDZwc3VTU0xwOHEzdHBaODliU2tFelQ3bHVKRnB0b19JVzVYUWRxQWQ2VVVmRC16dFVRRXlVZkFmQXk1SS0zZzFab084NzAtS0Q0NVV5Smlxbw?oc=5",
+      "source": "Vanguard News",
+      "date": "Thu, 11 Sep 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-25T11:23:14.533177+00:00"
+    },
+    {
+      "program": "Del-York YAPPI",
+      "implementer": "Del-York Group",
+      "title": "YAPPI Creative Fusion Lab 2.0 Proves the Power of Collaboration and Inclusion - BellaNaija",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1rTS16aDJqNjBrVlR5RTUxbmhuX01iTXpzSTFjMVVmSFltRTMybGNicGQyRFNROXFsRWJkRk45c0hqUURsYjI0UnZrbDNUQ3VqZWFFckpCRktpVjhJS3FuYTNqamRGdE9sM3cwcVFCVFNDWjg?oc=5",
+      "source": "BellaNaija",
+      "date": "Mon, 16 Jun 2025 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-25T11:23:14.533188+00:00"
+    }
+  ]
 }
