@@ -1,30 +1,30 @@
 {
-  "last_updated": "2026-06-26T13:56:57.754110+00:00",
-  "total_articles": 103,
-  "new_this_run": 6,
+  "last_updated": "2026-06-26T19:26:37.844369+00:00",
+  "total_articles": 106,
+  "new_this_run": 3,
   "sentiment": {
-    "positive": 70,
+    "positive": 71,
     "negative": 3,
-    "neutral": 30
+    "neutral": 32
   },
-  "positive_rate": 68,
+  "positive_rate": 67,
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
     "Jobberman": 0,
-    "World Food Programme": 2,
+    "World Food Programme": 3,
     "Fashion Future Program": 0,
-    "Youth Employability Booster": 1,
+    "Youth Employability Booster": 0,
     "Songhai Center": 0,
     "Project Juriya": 0,
     "IITA I-Youth": 0,
-    "Babban Gona": 1,
+    "Babban Gona": 0,
     "TracTrac ISSAM": 0,
-    "TAFTA": 1,
+    "TAFTA": 0,
     "Christian Aid SEPTP": 0,
     "WOFAN ICON 2": 0,
     "FCMB Easylift": 0,
-    "EDC Transforming Nigerian Youths": 1,
+    "EDC Transforming Nigerian Youths": 0,
     "Del-York YAPPI": 0
   },
   "priority_alerts": [
@@ -1076,6 +1076,36 @@
       "date": "Thu, 30 Oct 2025 07:00:00 GMT",
       "sentiment": "positive",
       "crawled_at": "2026-06-26T13:56:52.823758+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "Inside Darki Market's Thriving Honey Business #trusttvnews - instagram.com",
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9ZQVRoVDc2N29GTi1yeUJvZC1LT2IxcEFmR1p4T0lSQ09qQy0tY0tuUlNQREk4NG1obFZpQnI3SGtEVTk1WS12b1VGa0NURV9obkJqekxR?oc=5",
+      "source": "instagram.com",
+      "date": "Sat, 13 Jun 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-26T19:26:01.243647+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "Yobe, WFP engage youths, women in post-insurgency recovery projects - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNV0p4em56NEpmcXZha05pbGpjUTIyM0tWWXZsSkZRLTFuRGRhbEdNX0MxTi1jYkdORHg3R1pqZ0NHT3pUUVNab0FOUE0yY1NTeTJHbDI1Y21sMUZvT0J2LTNBQTgwZHBUOXlVNDQ2eEU1NDBWbXRXWF9hX25LTlZLcWVuUnI3aXlPeDI4NmpPN2MtdFRDZWNpbWNOU0taZGVkbkxrSmNOUnY5ZXBIaWZfekZodzY?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Fri, 25 Jul 2025 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-26T19:26:02.573453+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "Rwanda, Evaluation of WFP and Mastercard Foundation project on strengthening food systems to promote increased value chain employment opportunities for youth in Rwanda 2022-2027 - UN World Food Programme",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNNGFnOGhtcEN4QWJPMllsaGhwcFdxdW1EZGpwUWpqWktPb2c1clNFeHROOWd6U1lRTHFCaTFLSklrakp5WGhxWHViNWR4VWE0RGxUWHZiUHpyblZpU2xCdEFYa0hRZmJ1V1BZekZUb0J2MlhnN3l4VDlKYzFYaHFFRDdBdU1qU1JXa0hFMWlRM25zOHFoeU5NX1RaQmVGbmUtUW5CX1B1SnBFSklNck5pVldNUnZ6Zw?oc=5",
+      "source": "UN World Food Programme",
+      "date": "Tue, 07 Jan 2025 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-26T19:26:02.573537+00:00"
     }
   ]
 }
