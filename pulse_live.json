@@ -1,31 +1,31 @@
 {
-  "last_updated": "2026-06-26T11:28:53.048213+00:00",
-  "total_articles": 97,
-  "new_this_run": 97,
+  "last_updated": "2026-06-26T13:56:57.754110+00:00",
+  "total_articles": 103,
+  "new_this_run": 6,
   "sentiment": {
-    "positive": 66,
+    "positive": 70,
     "negative": 3,
-    "neutral": 28
+    "neutral": 30
   },
   "positive_rate": 68,
   "ai_summary": "",
   "program_counts": {
-    "WISE Program": 7,
-    "Jobberman": 6,
-    "World Food Programme": 8,
-    "Fashion Future Program": 6,
-    "Youth Employability Booster": 6,
-    "Songhai Center": 2,
-    "Project Juriya": 4,
-    "IITA I-Youth": 5,
-    "Babban Gona": 7,
-    "TracTrac ISSAM": 3,
-    "TAFTA": 7,
-    "Christian Aid SEPTP": 6,
-    "WOFAN ICON 2": 9,
-    "FCMB Easylift": 9,
-    "EDC Transforming Nigerian Youths": 7,
-    "Del-York YAPPI": 5
+    "WISE Program": 0,
+    "Jobberman": 0,
+    "World Food Programme": 2,
+    "Fashion Future Program": 0,
+    "Youth Employability Booster": 1,
+    "Songhai Center": 0,
+    "Project Juriya": 0,
+    "IITA I-Youth": 0,
+    "Babban Gona": 1,
+    "TracTrac ISSAM": 0,
+    "TAFTA": 1,
+    "Christian Aid SEPTP": 0,
+    "WOFAN ICON 2": 0,
+    "FCMB Easylift": 0,
+    "EDC Transforming Nigerian Youths": 1,
+    "Del-York YAPPI": 0
   },
   "priority_alerts": [
     {
@@ -1016,6 +1016,66 @@
       "date": "Mon, 16 Jun 2025 07:00:00 GMT",
       "sentiment": "neutral",
       "crawled_at": "2026-06-26T11:28:50.824212+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "Bridging Nigeria’s 2% energy gap to secure food sovereignty - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOQkQ2NmtzaHZqNjV1WHQ1WnZWR1F2Z2NydGVXa19hTVFNSE5oTzhNeDV2QzlhZE9IWXRWVm5ORkpiQ0d3MlUxbHZfbXFHcWJwY3dQVjVpSUFja09jRjM2R19CcURJVVZ5c1lyMlpPN2JUaGhRMWFWX3dIRndwZUt3MVlLWFY3T1RRaFB3cE9ybFVGbzVBSzREcGFzTW1SeDZ5ajhGcEpiUWxadw?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Sat, 24 Jan 2026 08:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-26T13:56:21.414678+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "2026 WFP IGNITE Food Systems Challenge Rwanda for food systems innovators ($24,000 in equity-free funding) - Opportunities For Africans",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxORmg1ckcxa0g1QjRTcFpvbGF3OHA1TmFVakZxUlZDVzJOb3ltY0NNZUEwUDlxZnotTjUyWjBtMEZTVHRiSDFYMGlMVE50Smd2c3FHWU9SeTNwTnpVSnR6Y0x5T2M5aWZYN1ktZzBveWI3NjhxWlRwU1hZWnUzSkk2OUlEdDlPeXV6QV9LRTczS24?oc=5",
+      "source": "Opportunities For Africans",
+      "date": "Thu, 19 Mar 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-26T13:56:21.414712+00:00"
+    },
+    {
+      "program": "Youth Employability Booster",
+      "implementer": "Young Africa International",
+      "title": "The Mastercard Foundation Associates Program 2026 for young Africans (12-month internship plus monthly stipend) - Opportunities For Africans",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNNEpkTXFyV3k4U29rSkczYUVaMlJ1U0FKQ0tKenl3Q3Jab041RFFXVEY2eXdHLUxtNDdpLTJ1VFBjU2xpZkhtcjlSazI2WlBPdWlmV2RuNURqWUItRGVMakpJcHFEOUQ2MTlVbmpfUHA1Nmg5XzVoenh5TXNLdkVkT2M3M1NpV18tUzBWUFJOZjdxWVFfUFE?oc=5",
+      "source": "Opportunities For Africans",
+      "date": "Tue, 24 Mar 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-26T13:56:26.627165+00:00"
+    },
+    {
+      "program": "Babban Gona",
+      "implementer": "CAFI & WEDI",
+      "title": "FCMB: Supporting Women, Farmers in Fight Against Hunger in Nigeria - THISDAYLIVE",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNcWZITHdNVF8yeS0xTHdIVTBEMl9iQkdnbUVCQWQxNWo1TWhNdklHNTVqQXNzM2J1MDl4cnVRQ2tGd0FsUEl5SXpOQjlGYTJjdWg0VndrYVRETVdyV01kS2JNakdTbzM1cTEya3hGSHo5eS1lSVl0STZUZTE0YTdIZlBhWV9uNTNidGZlOW5VbnpwZGJndkNjdi1HdXhfUU9iLVo5RkRKYw?oc=5",
+      "source": "THISDAYLIVE",
+      "date": "Thu, 25 Jul 2024 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-26T13:56:38.340877+00:00"
+    },
+    {
+      "program": "TAFTA",
+      "implementer": "Terra Academy for the Arts",
+      "title": "Terra Kulture, Mastercard Foundation Partner To Empower, Create Work Opportunities For 65,000 Young Creatives - Independent Newspaper Nigeria",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOc1IzYnlXY1Jtb05MUi1xaERjYkRHcm4ybkJPSVl5ZFdaMnE3b2FCVTk0dkNtZklPUk56NW0teVRiTGFEc09pWC1YZDhyQ3pwNWc3My1KVTFKRmRTakVrT25qYnNEVXBlWHpsTWVreUYzTDhCcEs5bk50ZTh6WEQ4YXhka01kdEItNF90VnRWRjVZN1dBR3pDcXQ5RVV0NkFSS3VTbU9uRGtzN2x1VDBnM2t4RDhtV3BNN3puXzRtOTF1MU45aDdrZUpB?oc=5",
+      "source": "Independent Newspaper Nigeria",
+      "date": "Thu, 16 Jun 2022 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-26T13:56:43.535894+00:00"
+    },
+    {
+      "program": "EDC Transforming Nigerian Youths",
+      "implementer": "Enterprise Development Centre",
+      "title": "EDC, Keystone Bank, Others Urge SMEs To Drive Sustainable, Inclusive Growth - Independent Newspaper Nigeria",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPQWtHVFUtU25WckVFX0drRWFyYWtVLUdMQzFUVFMzTlNIcVI4MTJzczFrOVJReXJIUTNOQy1qQ1pPaUtkS3VUeXV1dHJSdlJ1WHlqUzUzQ21jRUtETnU1SDVmRV9LV3JCMTJmb2E4LWZaLTlybGktVXFLNGJIdmticklzR1Y1a1d5bzJFRjI4NkNlaE9qeXNsRnN4RjQ?oc=5",
+      "source": "Independent Newspaper Nigeria",
+      "date": "Thu, 30 Oct 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-26T13:56:52.823758+00:00"
     }
   ]
 }
