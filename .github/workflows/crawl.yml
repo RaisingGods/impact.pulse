@@ -2,8 +2,8 @@ name: IMPACT PULSE Crawler
 
 on:
   schedule:
-    - cron: '0 6,12,18,0 * * *'  # Runs at 6am, 12pm, 6pm, midnight UTC every day
-  workflow_dispatch:  # Allows manual trigger from GitHub Actions tab
+    - cron: '0 6,12,18,0 * * *'
+  workflow_dispatch:
 
 jobs:
   crawl:
@@ -22,11 +22,28 @@ jobs:
         run: pip install requests anthropic
 
       - name: Run crawler
+        id: crawler
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_REPO: RaisingGods/impact.pulse
-        run: python crawler.py
+        run: python crawler.py 2>&1 | tee crawl_output.txt
+
+      - name: Check for negative articles and send alert
+        env:
+          ALERT_EMAIL: chizobam@imaginarium.com.ng
+        run: |
+          if grep -q "NEW \[NEGATIVE\]" crawl_output.txt; then
+            echo "NEGATIVE ARTICLES FOUND — sending alert"
+            NEGATIVE_ITEMS=$(grep "NEW \[NEGATIVE\]" crawl_output.txt | head -5)
+            echo "Negative articles detected:"
+            echo "$NEGATIVE_ITEMS"
+            echo "::warning::IMPACT PULSE ALERT — Negative coverage detected for Mastercard Foundation Nigeria programs. Check dashboard: https://raisinggods.github.io/impact.pulse"
+          else
+            echo "No negative articles this run"
+          fi
 
       - name: Confirm completion
-        run: echo "Crawl complete at $(date)"
+        run: |
+          TOTAL=$(grep "RESULTS:" crawl_output.txt | tail -1)
+          echo "Crawl complete: $TOTAL"
