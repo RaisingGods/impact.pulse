@@ -151,7 +151,10 @@ POSITIVE_WORDS = [
 NEGATIVE_WORDS = [
     'fail','scam','fraud','corrupt','abandon','delay','problem','crisis',
     'accuse','probe','investigate','allege','concern','risk','threat','loss',
-    'protest','demand','accountability','missing','graveyard','ghost'
+    'protest','demand','accountability','missing','graveyard','ghost',
+    'collapse','betray','dormant','overgrown','unused','abandoned','wasted',
+    'communities demand','press statement','audit','non-performance',
+    'rusting','unfulfilled','promises broken','failed project'
 ]
 
 
@@ -359,8 +362,12 @@ def crawl():
         program_counts[prog['name']] = len(found_for_program)
 
     # Merge and keep last 500
-    all_articles = all_articles + new_articles
-    all_articles = all_articles[-500:]
+    # Only update if we found articles OR existing is empty
+    if new_articles or not all_articles:
+        all_articles = all_articles + new_articles
+        all_articles = all_articles[-500:]
+    else:
+        print(f"  No new articles found — preserving {len(all_articles)} existing")
 
     # Stats
     total = len(all_articles)
@@ -382,6 +389,22 @@ def crawl():
             ai_summary = summary
             print(f"  AI summary generated successfully")
 
+    # Hardcoded priority alerts — real verified events
+    priority_alerts = [
+        {
+            'id': 'juriya_ccsk_2026',
+            'level': 'CRISIS',
+            'program': 'Project Juriya',
+            'title': 'CCSK Press Statement: Southern Kaduna Communities Demand Accountability as Juriya Agricultural Project Collapses',
+            'summary': 'Concerned Citizens of Southern Kaduna issued formal press statement 19 June 2026. Demo farms abandoned across 12+ communities. Formal demands for independent audit within 90 days, suspension of SCL disbursements. Ruben Abati has amplified nationally.',
+            'date': '2026-06-19',
+            'source': 'CCSK / The Nation / Ruben Abati Blog',
+            'communities': 'Kurmin Gwazah, Kudah, Ikkah Gida, Kurmin Sara, Assako, Anchuna, Kamuru, Ungwan Akau, Kubacha',
+            'demands': ['Independent 90-day audit', 'Suspend SCL disbursements', 'SCL public report', 'Hand over farms to cooperatives'],
+            'status': 'ACTIVE'
+        }
+    ]
+
     result = {
         'last_updated': datetime.now(timezone.utc).isoformat(),
         'total_articles': total,
@@ -390,6 +413,7 @@ def crawl():
         'positive_rate': pos_rate,
         'ai_summary': ai_summary,
         'program_counts': program_counts,
+        'priority_alerts': priority_alerts,
         'articles': all_articles
     }
 
