@@ -600,8 +600,8 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
     <div id="v-alerts" class="view">
       <div style="margin-top:20px">
         <div class="ac acr">
-          <div class="ac-top"><div class="ac-title" style="color:var(--red)">◬ WATCH — Project Juriya — Accountability narrative</div><span class="chip cneg">ACTIVE</span></div>
-          <div class="ac-desc">Opinion piece in The Nation (29 May) names Foundation as funder of Project Juriya in Southern Kaduna.</div>
+          <div class="ac-top"><div class="ac-title" style="color:var(--red)">🔴 CRISIS — Project Juriya Collapse — CCSK Demands Independent Audit</div><span class="chip cneg">ACTIVE</span></div>
+          <div class="ac-desc">CCSK formal press statement 19 June 2026: Juriya programme collapsed across 12+ communities. Demo farms abandoned. Ruben Abati amplified. Demands: 90-day audit, suspend SCL disbursements, SCL public report, hand over farms to cooperatives.</div>
           <div class="ac-meta">Young Africa Works · Twitter/X · 1h 42m ago</div>
           <div style="display:flex;gap:7px;flex-wrap:wrap">
             <button class="btn btn-red" style="font-size:11px" onclick="alertAI('juriya scl nation accountability','aout1')">✦ Draft response</button>
@@ -1826,7 +1826,7 @@ function mn(id){['dash','feed','alerts','progs','report'].forEach(function(k){va
 
 // LIVE DATA LOADER
 (function(){
-  var URL='https://raw.githubusercontent.com/RaisingGods/impact.pulse/main/impact_pulse_results.json';
+  var URL='https://raw.githubusercontent.com/RaisingGods/impact.pulse/main/pulse_live.json';
   fetch(URL).then(function(r){return r.json();}).then(function(data){
     console.log('IMPACT PULSE: '+data.total_articles+' articles loaded');
     var el;
