@@ -8,7 +8,7 @@ from xml.etree import ElementTree as ET
 
 GITHUB_TOKEN = os.environ.get('GH_TOKEN', '')
 GITHUB_REPO = os.environ.get('GITHUB_REPO', 'RaisingGods/impact.pulse')
-GITHUB_FILE = 'impact_pulse_results.json'
+GITHUB_FILE = 'pulse_live.json'
 ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY', '')
 
 PROGRAMS = [
