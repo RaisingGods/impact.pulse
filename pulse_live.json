@@ -1,20 +1,20 @@
 {
-  "last_updated": "2026-06-27T13:04:28.213174+00:00",
-  "total_articles": 112,
-  "new_this_run": 1,
+  "last_updated": "2026-06-27T19:01:01.408310+00:00",
+  "total_articles": 115,
+  "new_this_run": 3,
   "sentiment": {
-    "positive": 77,
+    "positive": 78,
     "negative": 3,
-    "neutral": 32
+    "neutral": 34
   },
-  "positive_rate": 69,
+  "positive_rate": 68,
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
     "Jobberman": 0,
     "World Food Programme": 0,
     "Fashion Future Program": 0,
-    "Youth Employability Booster": 0,
+    "Youth Employability Booster": 1,
     "Songhai Center": 0,
     "Project Juriya": 0,
     "IITA I-Youth": 1,
@@ -22,7 +22,7 @@
     "TracTrac ISSAM": 0,
     "TAFTA": 0,
     "Christian Aid SEPTP": 0,
-    "WOFAN ICON 2": 0,
+    "WOFAN ICON 2": 1,
     "FCMB Easylift": 0,
     "EDC Transforming Nigerian Youths": 0,
     "Del-York YAPPI": 0
@@ -1166,6 +1166,36 @@
       "date": "Wed, 21 Jun 2023 07:00:00 GMT",
       "sentiment": "positive",
       "crawled_at": "2026-06-27T13:04:05.764111+00:00"
+    },
+    {
+      "program": "Youth Employability Booster",
+      "implementer": "Young Africa International",
+      "title": "Call for Applications: Mastercard Foundation Associates Program 2026 (12-Month Paid Internship for Young Africans) - MSME Africa",
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPZUxKUmN2Wk1EMURTM1kyRWQ3NHJlSndhN2xLTUFCNU9mOGZTdGJHeXhCRXR3VTNnTzBsUEdwZ082LUhUb2FSMWtQM0ljWWlsdUJnY3BUb1FiR2MwajFmZVpwS0hHTEQtTHN5RFRzZ0YyUnE2MTU0cFBaTVVId0M4MkpRYjBGV3JiZnRfX2lVZ01KMmxwMGp6bjBEcU5TTldLMjE1cFlBb19iRUUxWEEyMkJHaVp2am5DREduNGZuVXZUQzRBT2o5N2lkVU4tbDBBbzNuaE8ySm4?oc=5",
+      "source": "MSME Africa",
+      "date": "Wed, 25 Mar 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-27T19:00:31.136752+00:00"
+    },
+    {
+      "program": "IITA I-Youth",
+      "implementer": "IITA",
+      "title": "IITA and Mastercard Foundation engage investors in agribusinesses - CGIAR",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOWkxQcUJKV2J6NWplMlRoMTdHN2NiNmdUdmZZNy13RFJDay05Q3NfVjZ6UkZmM2lxRUdYbFltVmZoTmxPMjliRW5fV3NvQ1lwN2w0UTdHemtSc0hYNjFVcmswNV9wX0k4cExqMk9IejdmWTQ1UVVzQ2dDazQ3bjM0R0RYc1BUenVlNXFzalFpTzlpa203ODd2a3liTWluQzdCNXNpVUNZMA?oc=5",
+      "source": "CGIAR",
+      "date": "Thu, 11 Dec 2025 00:09:04 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-27T19:00:38.803039+00:00"
+    },
+    {
+      "program": "WOFAN ICON 2",
+      "implementer": "Women Farmers Advancement Network",
+      "title": "Women farmers, journalists, traditional rulers push for sustainable agriculture - Business News Nigeria",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxON01JRmdOSm13NGhXZExwUWNfNGpxZVJmaVFrLW1JWVh4TWpiNDllTmFXTlRxZG5KWHZ3a0FCa050X1BsV3F2RU9CTEFkNUlxeDVuWGEwdUw5ZldLaktBeXdiM1ZnR2lwWTdMQUc3c2tUVVNfZk9YWU91bFlFaHc0MG1DZ2JMUW1UdDFqSFBvZ2pDYWxxSWhtV2F6U3R4bkU0TVJxZzFuT3pFVWQ2dFZhR2x6Z3ZkYnhOVExJWVJB?oc=5",
+      "source": "Business News Nigeria",
+      "date": "Fri, 28 Feb 2025 08:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-27T19:00:52.603761+00:00"
     }
   ]
 }
