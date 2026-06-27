@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-06-27T01:58:08.826481+00:00",
-  "total_articles": 110,
-  "new_this_run": 4,
+  "last_updated": "2026-06-27T08:24:14.825710+00:00",
+  "total_articles": 111,
+  "new_this_run": 1,
   "sentiment": {
-    "positive": 75,
+    "positive": 76,
     "negative": 3,
     "neutral": 32
   },
@@ -12,13 +12,13 @@
   "program_counts": {
     "WISE Program": 0,
     "Jobberman": 0,
-    "World Food Programme": 2,
+    "World Food Programme": 0,
     "Fashion Future Program": 0,
-    "Youth Employability Booster": 0,
+    "Youth Employability Booster": 1,
     "Songhai Center": 0,
     "Project Juriya": 0,
-    "IITA I-Youth": 1,
-    "Babban Gona": 1,
+    "IITA I-Youth": 0,
+    "Babban Gona": 0,
     "TracTrac ISSAM": 0,
     "TAFTA": 0,
     "Christian Aid SEPTP": 0,
@@ -1146,6 +1146,16 @@
       "date": "Tue, 19 Jul 2016 07:00:00 GMT",
       "sentiment": "positive",
       "crawled_at": "2026-06-27T01:57:48.931118+00:00"
+    },
+    {
+      "program": "Youth Employability Booster",
+      "implementer": "Young Africa International",
+      "title": "Jobberman champions inclusive hiring to boost economic growth - The Sun Nigeria",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOYVF3UDJLdnBDZGtzYndQdTlhaEU1aVVIaTUxNHg3U2ZlNllKeTJnSkEzYWNuRnZKbktLaVI5MU1EbkpkZFhkTkZfaXN3bGRiNURQX29XQk5ZU0lESGdPQ0IzRDdUN1dBZjBKZXZ3R1RCczZGSE9JWUM1akRINmZha1RuYzE5YjTSAYwBQVVfeXFMT2pzMlhfbkZQb0JON2Rzb2lZeFJoVnp1V0JWRllxQzhuenIxMjJKZDNPblNmYUtsLTI3LWtCMzFQQlROOS0xMHQ0WjBUUHZsT0pPVlQ0Z01Ua2xEY2ZTSG9TQlRNQXhmYjdaNzhueFRIbUUwLVJWcFphMWw2VDI3MVg4OXFnT0phU215Y1o?oc=5",
+      "source": "The Sun Nigeria",
+      "date": "Wed, 25 Feb 2026 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-27T08:23:46.556225+00:00"
     }
   ]
 }
