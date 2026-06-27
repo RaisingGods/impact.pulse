@@ -1,24 +1,24 @@
 {
-  "last_updated": "2026-06-26T19:26:37.844369+00:00",
-  "total_articles": 106,
-  "new_this_run": 3,
+  "last_updated": "2026-06-27T01:58:08.826481+00:00",
+  "total_articles": 110,
+  "new_this_run": 4,
   "sentiment": {
-    "positive": 71,
+    "positive": 75,
     "negative": 3,
     "neutral": 32
   },
-  "positive_rate": 67,
+  "positive_rate": 68,
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
     "Jobberman": 0,
-    "World Food Programme": 3,
+    "World Food Programme": 2,
     "Fashion Future Program": 0,
     "Youth Employability Booster": 0,
     "Songhai Center": 0,
     "Project Juriya": 0,
-    "IITA I-Youth": 0,
-    "Babban Gona": 0,
+    "IITA I-Youth": 1,
+    "Babban Gona": 1,
     "TracTrac ISSAM": 0,
     "TAFTA": 0,
     "Christian Aid SEPTP": 0,
@@ -1106,6 +1106,46 @@
       "date": "Tue, 07 Jan 2025 08:00:00 GMT",
       "sentiment": "positive",
       "crawled_at": "2026-06-26T19:26:02.573537+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "April 2026 Deadlines: Funding You Shouldn’t Miss - fundsforNGOs",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOV1dBR3lHdmVlRWliQVdYV3BCU0VjdUZsX09FaktjRHJDaHRUMDJQMG1ZN2x5WlZfQ0xPZHdRQmRzZHVrTGhEUGN4dGh2dGpydkJ3ZWM5d0I0NUozUG1fOG1IcS1HYzYtbmw4QjVjeWhrMWY5UmxFajVVaVpMYVAzVXQ3V1BrS1lkcHE4YlFB0gGTAUFVX3lxTE9EVlVZU3pib3dHTHN5NTVHd3FWSnpPUi1ncmFCRzM1YUhSaGppenhrSlMwOE1weEtfTmpDQTlfWEhrdnVtMEdUN05CWjh2WkNMa3dXMEIxa2NXaGNaNHE0M0dGS05QbXlSVE8tM21nUGZkcFNpY3RtMkJkSEUtcElTQkU4bGtuQTh0NUlHemN0SzhnOA?oc=5",
+      "source": "fundsforNGOs",
+      "date": "Fri, 10 Apr 2026 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-27T01:57:30.524489+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "Sowing Success: African Youth Return to the Land to Secure the Continent’s Future - The Voice of Africa",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxObTExSXhIWF9LcjdTU3JiVGtrOVlSVWZQMzRYWENHM1U0cHRUektLeHBYSk90NlJseHp3VHNYSHRrSUQtYVNFd1JlNGRDRUdBTVRjR3lPbWpIVWpFb0N5R0QyT213UEZ6TnJuYmlBNV9zbmFpbUxSc0hxZ2hJTkhxQWg3dXVaLU9YN3NOWjI5VmNWdnRjdG5yMVIwWjgtWXlnbTBVUU1oVktRUV9pVXphRF91bGRxZHN1amhMdQ?oc=5",
+      "source": "The Voice of Africa",
+      "date": "Tue, 12 Aug 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-27T01:57:32.039999+00:00"
+    },
+    {
+      "program": "IITA I-Youth",
+      "implementer": "IITA",
+      "title": "IITA, Mastercard Foundation create 90,000 jobs through I-Youth - Nigeria Startup News",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNUUNFUTNVb3V2a2hZWTlBZXphdlVUNWxYQkQ3OE9QZE5hVmlvSnZmX3dtM29IaWZwbU44a0M3MnJvTVppN2pBTWt5RDE1bndNMEtyOFNHR0hMWEhSdnJVSE83M1hmbk0xU0szMEhzWXVNNHRXT1ZuNjlta0dXaDl5YV84YjYwSXROeHg1RkpCcDA4MjBfNk1jRXdR0gGiAUFVX3lxTE9XVDJ1MHdOZnA2d2p2eW5DNUtLX0pzd2l4Q204YXVOclc1cm5yV3F6T1c1M2c2WWY1cWZXb3dDMFdJS3lzSmVtRjd3Y3pZNEtBbndJNnNWbGlVZXBLSEJIcGJaRzJSU0FLcWVsa3ZxYTNYQTFXalhkVHF4RDAyWjZfTV9rUUFCdnZaN2JfbURoVkJvbGhRS1J2dDBUakNKNjdUZw?oc=5",
+      "source": "Nigeria Startup News",
+      "date": "Tue, 20 Jan 2026 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-27T01:57:44.780599+00:00"
+    },
+    {
+      "program": "Babban Gona",
+      "implementer": "CAFI & WEDI",
+      "title": "U.S Launches $2 million Partnerships with two Local Agribusinesses to Boost Agriculture in Nigeria - BellaNaija",
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPRGZZbWZfbFVxbXh1Y0NKNi1UYW11TElmandoeDAzU3YzYWwwWFg5TTgzVkI5ZHBrRjhhUXRSZmppQTFiU25Lckg3bWNiVDdfSlhrM0NWV1hRckRLS0dzejAzcTdCbzMzN3hxWWhKTGFvbGhLSWM2TDQ3VVBKQ0lfclhDZ3ZXS3FlS0EzOEZEbGlpTGIwWUlQSXQtQ1Nxc2ZFTmtyMjhvTDRGa2tPUzRRbnJzWS1rTEJpWXN4RUdHcDJKSUhGMWpwYXctTTZxZw?oc=5",
+      "source": "BellaNaija",
+      "date": "Tue, 19 Jul 2016 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-27T01:57:48.931118+00:00"
     }
   ]
 }
