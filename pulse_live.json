@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-06-27T11:54:42.752711+00:00",
-  "total_articles": 111,
-  "new_this_run": 0,
+  "last_updated": "2026-06-27T13:04:28.213174+00:00",
+  "total_articles": 112,
+  "new_this_run": 1,
   "sentiment": {
-    "positive": 76,
+    "positive": 77,
     "negative": 3,
     "neutral": 32
   },
-  "positive_rate": 68,
+  "positive_rate": 69,
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
@@ -17,7 +17,7 @@
     "Youth Employability Booster": 0,
     "Songhai Center": 0,
     "Project Juriya": 0,
-    "IITA I-Youth": 0,
+    "IITA I-Youth": 1,
     "Babban Gona": 0,
     "TracTrac ISSAM": 0,
     "TAFTA": 0,
@@ -1156,6 +1156,16 @@
       "date": "Wed, 25 Feb 2026 08:00:00 GMT",
       "sentiment": "positive",
       "crawled_at": "2026-06-27T08:23:46.556225+00:00"
+    },
+    {
+      "program": "IITA I-Youth",
+      "implementer": "IITA",
+      "title": "IITA youth in agribusiness advocates for more investment and youth empowerment to boost the agro-industry in Nigeria - TheCable",
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNS2RocFhDc25KZ01NNzcxZHZIUm1GZ1ZqbzNxZ3Yybkk4ZF9rMXNqNEJfTXkyaXFVZUgyS3hPRHZwTnVUZFFUUVBiMC1qcy1RU0E2MGp2M0Ntbkk5cVpCSkZZY21qMmpzaXh1VnhGZlh0bGpqdjU1MWNmS0tpWkJhemdxSkdRcnltbnNnMkI0bkhielo1cWlsOENTR2NkLUFOemZqR3FRXzF3WlZvSGwtWDBrZEU2dVJyME8zVWY3SFAyS0Y0TkdGbG5yZ21NajE5RTN1anV6Uno?oc=5",
+      "source": "TheCable",
+      "date": "Wed, 21 Jun 2023 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-27T13:04:05.764111+00:00"
     }
   ]
 }
