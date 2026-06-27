@@ -604,7 +604,8 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
           <div class="ac-desc">CCSK formal press statement 19 June 2026: Juriya programme collapsed across 12+ communities. Demo farms abandoned. Ruben Abati amplified. Demands: 90-day audit, suspend SCL disbursements, SCL public report, hand over farms to cooperatives.</div>
           <div class="ac-meta">Young Africa Works · Twitter/X · 1h 42m ago</div>
           <div style="display:flex;gap:7px;flex-wrap:wrap">
-            <button class="btn btn-red" style="font-size:11px" onclick="alertAI('juriya scl nation accountability','aout1')">✦ Draft response</button>
+            <button class="btn btn-red" style="font-size:11px" onclick="alertAI('juriya scl nation accountability crisis CCSK collapse demands audit southern kaduna','aout1')">✦ Draft crisis response</button>
+            <a href="https://thenationonlineng.net/demo-farms-or-graveyards/" target="_blank" class="btn" style="font-size:11px;text-decoration:none">🔗 The Nation article</a>
             <button class="btn" style="font-size:11px;color:var(--grn)">✓ Resolve</button>
           </div>
           <div id="aout1" class="ac-ai-out"></div>
@@ -1157,7 +1158,7 @@ const NAMES={dash:'Overview Dashboard',feed:'Live Media Feed',alerts:'Crisis & A
 function nav(id, el){
   VIEWS.forEach(v=>{const vEl=document.getElementById('v-'+v);if(vEl)vEl.classList.remove('on');});
   document.querySelectorAll('.sb-ni').forEach(n=>n.classList.remove('on'));
-  const v=document.getElementById('v-'+id);if(v)v.classList.add('on');
+  const v=document.getElementById('v-'+id);if(v){v.classList.add('on');v.style.display='block';}
   if(el) el.classList.add('on');
   document.getElementById('tb-tag').textContent=TAGS[id]||'';
   const nm=document.getElementById('tb-name');if(nm)nm.textContent=NAMES[id]||id;
@@ -1841,7 +1842,7 @@ function mn(id){['dash','feed','alerts','progs','report'].forEach(function(k){va
     if(data.articles&&data.articles.length>0){
       var feedEl=document.getElementById('feed-all');
       if(feedEl){
-        var latest=data.articles.slice(-30).reverse();
+        var sorted=data.articles.slice().sort(function(a,b){var da=a.date?new Date(a.date):new Date(0);var db=b.date?new Date(b.date):new Date(0);return db-da;});var latest=sorted.slice(0,40);
         var html='';
         latest.forEach(function(a){
           var sc=a.sentiment==='positive'?'var(--grn)':a.sentiment==='negative'?'var(--red)':'var(--t3)';
