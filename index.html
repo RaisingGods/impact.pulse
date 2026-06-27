@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IMPACT PULSE</title>
+<!-- v2.3 - 27Jun2026 feed-sort-fix -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
@@ -441,7 +442,7 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
         <div>
           <div class="crisis-t">Opportunity — Fashion Future Program Aba generating sustained national coverage</div>
           <div class="crisis-d">Negative mentions up 190% in 8 hrs · 3 accounts (120K combined) amplifying · Response window: 3 hours</div>
-          <div class="crisis-m">Young Africa Works · Twitter/X · 1h 42m ago</div>
+          <div class="crisis-m">Project Juriya · SCL / Southern Kaduna · 19 June 2026 · The Nation + CCSK + Ruben Abati</div>
         </div>
         <button class="btn" style="font-size:11px;flex-shrink:0;margin-left:12px" onclick="nav('alerts',document.querySelector('.sb-ni:nth-child(3)'))">View alerts →</button>
       </div>
@@ -532,7 +533,7 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
       </div>
       <div class="card">
         <div class="tabs" id="cht">
-          <div class="tab on" onclick="switchFeed('all',this)">All (6,284)</div>
+          <div class="tab on" onclick="switchFeed('all',this)" id="feed-tab-all">All</div>
           <div class="tab" onclick="switchFeed('news',this)">News</div>
           <div class="tab" onclick="switchFeed('twitter',this)">Twitter/X</div>
           <div class="tab" onclick="switchFeed('facebook',this)">Facebook</div>
@@ -602,7 +603,7 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
         <div class="ac acr">
           <div class="ac-top"><div class="ac-title" style="color:var(--red)">🔴 CRISIS — Project Juriya Collapse — CCSK Demands Independent Audit</div><span class="chip cneg">ACTIVE</span></div>
           <div class="ac-desc">CCSK formal press statement 19 June 2026: Juriya programme collapsed across 12+ communities. Demo farms abandoned. Ruben Abati amplified. Demands: 90-day audit, suspend SCL disbursements, SCL public report, hand over farms to cooperatives.</div>
-          <div class="ac-meta">Young Africa Works · Twitter/X · 1h 42m ago</div>
+          <div class="ac-meta">Project Juriya · SCL / Southern Kaduna · 19 June 2026 · The Nation + CCSK + Ruben Abati</div>
           <div style="display:flex;gap:7px;flex-wrap:wrap">
             <button class="btn btn-red" style="font-size:11px" onclick="alertAI('juriya scl nation accountability crisis CCSK collapse demands audit southern kaduna','aout1')">✦ Draft crisis response</button>
             <a href="https://thenationonlineng.net/demo-farms-or-graveyards/" target="_blank" class="btn" style="font-size:11px;text-decoration:none">🔗 The Nation article</a>
@@ -1858,6 +1859,9 @@ function mn(id){['dash','feed','alerts','progs','report'].forEach(function(k){va
             +'</div></div></div>';
         });
         feedEl.innerHTML=html;
+        // Update tab count with real number
+        var tabAll=document.getElementById('feed-tab-all');
+        if(tabAll)tabAll.textContent='All ('+data.total_articles+')';
       }
     }
     if(data.ai_summary){BT.may=data.ai_summary;BT.weekly=data.ai_summary;}
