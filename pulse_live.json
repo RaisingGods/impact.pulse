@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-06-28T02:08:25.614872+00:00",
-  "total_articles": 115,
-  "new_this_run": 0,
+  "last_updated": "2026-06-28T08:38:35.100685+00:00",
+  "total_articles": 116,
+  "new_this_run": 1,
   "sentiment": {
-    "positive": 78,
+    "positive": 79,
     "negative": 3,
     "neutral": 34
   },
@@ -24,7 +24,7 @@
     "Christian Aid SEPTP": 0,
     "WOFAN ICON 2": 0,
     "FCMB Easylift": 0,
-    "EDC Transforming Nigerian Youths": 0,
+    "EDC Transforming Nigerian Youths": 1,
     "Del-York YAPPI": 0
   },
   "priority_alerts": [
@@ -1196,6 +1196,16 @@
       "date": "Fri, 28 Feb 2025 08:00:00 GMT",
       "sentiment": "neutral",
       "crawled_at": "2026-06-27T19:00:52.603761+00:00"
+    },
+    {
+      "program": "EDC Transforming Nigerian Youths",
+      "implementer": "Enterprise Development Centre",
+      "title": "MTN Foundation Partners with Mastercard, EDC to Equip 20,000 Female Entrepreneurs - bhmng.com",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPWlc2Njg0U1Bjb3V4VmMyc1NNU2M1U25ZWS1ZVVJNRTl2SWZYUGIxb2hyQUhJZk5UWG1kZ2plMVZZTHFGRUVTRjVGblhEMU1lVWRkSTJrVTNVQlhRZF9oZzNlNzFYeW9SeVpQUnFKOU14My1vWTRibWx4VEprb3hHYUptamdrdkhWQmp1czF0UzJ0VDJxNHMyX2hDeXlaMDg?oc=5",
+      "source": "bhmng.com",
+      "date": "Thu, 31 Aug 2023 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-28T08:38:30.083285+00:00"
     }
   ]
 }
