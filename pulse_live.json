@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-06-28T08:38:35.100685+00:00",
-  "total_articles": 116,
-  "new_this_run": 1,
+  "last_updated": "2026-06-28T13:10:01.191617+00:00",
+  "total_articles": 119,
+  "new_this_run": 3,
   "sentiment": {
-    "positive": 79,
+    "positive": 80,
     "negative": 3,
-    "neutral": 34
+    "neutral": 36
   },
-  "positive_rate": 68,
+  "positive_rate": 67,
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
@@ -21,9 +21,9 @@
     "Babban Gona": 0,
     "TracTrac ISSAM": 0,
     "TAFTA": 0,
-    "Christian Aid SEPTP": 0,
+    "Christian Aid SEPTP": 1,
     "WOFAN ICON 2": 0,
-    "FCMB Easylift": 0,
+    "FCMB Easylift": 1,
     "EDC Transforming Nigerian Youths": 1,
     "Del-York YAPPI": 0
   },
@@ -1206,6 +1206,36 @@
       "date": "Thu, 31 Aug 2023 07:00:00 GMT",
       "sentiment": "positive",
       "crawled_at": "2026-06-28T08:38:30.083285+00:00"
+    },
+    {
+      "program": "Christian Aid SEPTP",
+      "implementer": "Christian Aid",
+      "title": "TMA Nigeria Elects Dr Steve Ogidan President - The Whistler Newspaper",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5OVTk3MGQ5UURyYTBQcUhrVzYzazlIbU1EbENsQ2V2aEZmWUUwOWQ5RDJkdXo2QXJTdVJ5bXFTNzl5b2VQejdNemE0WDc0RmIxakFSX293VHhaNmZaNFhraFYxeVBrTHFOUDJSMHVZYUxnSWJ6d2gw?oc=5",
+      "source": "The Whistler Newspaper",
+      "date": "Tue, 10 Sep 2024 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-28T13:09:49.874191+00:00"
+    },
+    {
+      "program": "FCMB Easylift",
+      "implementer": "First City Monument Bank",
+      "title": "Oyo State, FCMB, Mastercard Foundation disburse ₦1.5 Billion to Youth Agripreneurs - Nigerian NewsDirect",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQMm1YVHRsMVhndXpyMGdUbzVPSTk3RHZvNmxNblVWUmJGQmMxcDdJTXJ1X1BPRWRNZ1Z6VVAxQWNkWFhzVUJmMmtHaERfTkZhXzZGWG05cTR1RVBsY1g3R1ZkblljMWNORHFjRXRPZmxPMWs3cU5QWjZQbDAwQnIwaGw3cXdpNUlvMElCMFhwUDFsR0d5TUdiMWdQcTJFRDNoamd6ZGo0STZOSjNKZklSMXdkM2Y5cHQ2WGtfaQ?oc=5",
+      "source": "Nigerian NewsDirect",
+      "date": "Fri, 03 Apr 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-28T13:09:53.626410+00:00"
+    },
+    {
+      "program": "EDC Transforming Nigerian Youths",
+      "implementer": "Enterprise Development Centre",
+      "title": "Niger govt partners EDC, MasterCard foundation to trains 10,000 youths - Tribune Online",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNSWIyaVB0T3lNYzV2ZWVoOHFxa3JLZ28ydHE2Und1Q2tPN1hjZlRFbWdXQUczX0tPX0Nnck42a1RIdkxyelkzYjhDazAySjNTQW1jaFZJRTc2bDhsb0MwRHJNaFJ6X0U5azJpT0ZPNlpvajlUajNFLW5idTdlc1V6ajlIODBaZy05OVE5d2p0YlpfcllBSnZMcm1xejctZ9IBowFBVV95cUxQaUdaMjJGSHZXS0Q4WEpGM013NjB1cEd2UEN0OUlTbmxwcFFiSXZqZjdaSW85aEVNcldZTmZEUlZQUW43QmpMYUZWMW8zSjlfQkVvTDdFc3RmS3ZPX2xiUjN2d0ZDRUprLXJJMHhzY09DS1poUUtWUWxWdUNGZTZlWDl6WjB3VDRGamJFR0xnUXMyM3hST1U5ai16YkQ2XzlyVjBF?oc=5",
+      "source": "Tribune Online",
+      "date": "Sat, 15 Mar 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-28T13:09:57.686722+00:00"
     }
   ]
 }
