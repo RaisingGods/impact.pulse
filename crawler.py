@@ -433,6 +433,36 @@ def crawl():
         new_articles.extend(found_for_program)
         program_counts[prog['name']] = len(found_for_program)
 
+    # General Mastercard Foundation CSE search — catches body-text mentions
+    # that program-specific queries miss (e.g. opinion pieces, Saturday Magazine)
+    print("\n[General MCF Search — CSE body text]")
+    general_queries = [
+        '"Mastercard Foundation" Nigeria',
+        '"Mastercard Foundation" Nigeria youth',
+        '"Mastercard Foundation" Nigeria programme',
+    ]
+    seen_general = {a['url'] for a in all_articles + new_articles}
+    for gq in general_queries:
+        cse_results = google_custom_search(gq)
+        for item in cse_results:
+            if item['url'] in seen_general:
+                continue
+            seen_general.add(item['url'])
+            sentiment = score_sentiment(item['title'] + ' ' + item.get('snippet', ''))
+            article = {
+                'program': 'General / Mastercard Foundation',
+                'implementer': 'Mastercard Foundation',
+                'title': item['title'],
+                'url': item['url'],
+                'source': item['source'],
+                'date': item['date'],
+                'sentiment': sentiment,
+                'found_by': 'cse_general',
+                'crawled_at': datetime.now(timezone.utc).isoformat()
+            }
+            new_articles.append(article)
+            print(f"  NEW GENERAL CSE [{sentiment.upper()}]: {item['title'][:70]}")
+
     # Merge and keep last 500
     # Only update if we found articles OR existing is empty
     if new_articles or not all_articles:
