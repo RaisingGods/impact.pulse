@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-06-28T13:10:01.191617+00:00",
-  "total_articles": 119,
-  "new_this_run": 3,
+  "last_updated": "2026-06-28T18:59:49.492010+00:00",
+  "total_articles": 120,
+  "new_this_run": 1,
   "sentiment": {
-    "positive": 80,
+    "positive": 81,
     "negative": 3,
     "neutral": 36
   },
-  "positive_rate": 67,
+  "positive_rate": 68,
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
@@ -17,14 +17,14 @@
     "Youth Employability Booster": 0,
     "Songhai Center": 0,
     "Project Juriya": 0,
-    "IITA I-Youth": 0,
+    "IITA I-Youth": 1,
     "Babban Gona": 0,
     "TracTrac ISSAM": 0,
     "TAFTA": 0,
-    "Christian Aid SEPTP": 1,
+    "Christian Aid SEPTP": 0,
     "WOFAN ICON 2": 0,
-    "FCMB Easylift": 1,
-    "EDC Transforming Nigerian Youths": 1,
+    "FCMB Easylift": 0,
+    "EDC Transforming Nigerian Youths": 0,
     "Del-York YAPPI": 0
   },
   "priority_alerts": [
@@ -1236,6 +1236,16 @@
       "date": "Sat, 15 Mar 2025 07:00:00 GMT",
       "sentiment": "positive",
       "crawled_at": "2026-06-28T13:09:57.686722+00:00"
+    },
+    {
+      "program": "IITA I-Youth",
+      "implementer": "IITA",
+      "title": "IITA, Mastercard Foundation Engages Investors On Agribusiness - Independent Newspaper Nigeria",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNNG9jTWYzT2MtSGdlZWdYeEllQzEycHpTYURMVUZSMnZSS1E2WWZQRG43NDhvdEpCSWlVYnVPUW1mdTFZejlHTDRjbmNOU0gzYmFJaUV6c19HQ2t4NWRybVBnVUhaU2taQi1SOGgwNkc3eTI4WDZjTU1zWFptZ1NVTktfYzF1RndpQW9rYw?oc=5",
+      "source": "Independent Newspaper Nigeria",
+      "date": "Tue, 28 Jun 2022 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-28T18:59:26.756409+00:00"
     }
   ]
 }
