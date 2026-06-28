@@ -9,6 +9,10 @@ from xml.etree import ElementTree as ET
 GITHUB_TOKEN = os.environ.get('GH_TOKEN', '')
 GITHUB_REPO = os.environ.get('GITHUB_REPO', 'RaisingGods/impact.pulse')
 GITHUB_FILE = 'pulse_live.json'
+
+# Google Custom Search API credentials
+GOOGLE_CSE_KEY = os.environ.get('GOOGLE_CSE_KEY', '')
+GOOGLE_CSE_ID  = os.environ.get('GOOGLE_CSE_ID', '')
 ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY', '')
 
 PROGRAMS = [
@@ -184,6 +188,49 @@ def google_news_rss(query):
         return []
 
 
+def google_custom_search(query):
+    """Search using Google Custom Search API — finds body-text mentions RSS misses."""
+    if not GOOGLE_CSE_KEY or not GOOGLE_CSE_ID:
+        return []
+    try:
+        url = 'https://www.googleapis.com/customsearch/v1'
+        params = {
+            'key': GOOGLE_CSE_KEY,
+            'cx': GOOGLE_CSE_ID,
+            'q': query,
+            'num': 10,
+            'lr': 'lang_en',
+            'gl': 'ng',
+            'dateRestrict': 'm1',  # last 1 month only
+        }
+        r = requests.get(url, params=params, timeout=20)
+        r.raise_for_status()
+        data = r.json()
+        items = data.get('items', [])
+        results = []
+        for item in items:
+            title = item.get('title', '')
+            link  = item.get('link', '')
+            snippet = item.get('snippet', '')
+            source = item.get('displayLink', '')
+            # Only include if Mastercard Foundation mentioned in title or snippet
+            combined = (title + ' ' + snippet).lower()
+            if 'mastercard' not in combined and 'mastercard foundation' not in combined:
+                continue
+            results.append({
+                'title':  title,
+                'url':    link,
+                'source': source,
+                'date':   '',
+                'snippet': snippet,
+            })
+        if results:
+            print(f"    CSE found {len(results)} result(s) for: {query[:50]}")
+        return results
+    except Exception as e:
+        print(f"    CSE error: {e}")
+        return []
+
 def score_sentiment(title):
     t = title.lower()
     pos = sum(1 for w in POSITIVE_WORDS if w in t)
@@ -335,6 +382,7 @@ def crawl():
         seen_urls = set()
 
         for query in prog['queries']:
+            # RSS crawl — headline matches
             items = google_news_rss(query)
             for item in items:
                 if item['url'] in existing_urls:
@@ -355,7 +403,31 @@ def crawl():
                 }
                 found_for_program.append(article)
                 existing_urls.add(item['url'])
-                print(f"  NEW [{sentiment.upper()}]: {item['title'][:70]}")
+                print(f"  NEW RSS [{sentiment.upper()}]: {item['title'][:70]}")
+
+            # CSE crawl — body text matches (catches articles RSS misses)
+            cse_items = google_custom_search(query)
+            for item in cse_items:
+                if item['url'] in existing_urls:
+                    continue
+                if item['url'] in seen_urls:
+                    continue
+                seen_urls.add(item['url'])
+                sentiment = score_sentiment(item['title'] + ' ' + item.get('snippet',''))
+                article = {
+                    'program': prog['name'],
+                    'implementer': prog['implementer'],
+                    'title': item['title'],
+                    'url': item['url'],
+                    'source': item['source'],
+                    'date': item['date'],
+                    'sentiment': sentiment,
+                    'found_by': 'cse',
+                    'crawled_at': datetime.now(timezone.utc).isoformat()
+                }
+                found_for_program.append(article)
+                existing_urls.add(item['url'])
+                print(f"  NEW CSE [{sentiment.upper()}]: {item['title'][:70]}")
             time.sleep(1)
 
         new_articles.extend(found_for_program)
