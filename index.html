@@ -410,6 +410,7 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
       <div class="sb-ni" onclick="nav('report',this)"><span class="sb-nic">⬇</span>Reports & Export</div>
       <div class="sb-nlbl">System</div>
       <div class="sb-ni" onclick="nav('crawler',this)"><span class="sb-nic">⬡</span>Crawler Status</div>
+      <div class="sb-ni" onclick="nav('manual',this)"><span class="sb-nic">✚</span>Add Article</div>
       <div class="sb-ni" onclick="nav('settings',this)"><span class="sb-nic">◎</span>Settings</div>
     </div>
     <div class="sb-foot"><span class="sb-fd"></span>Crawl active · 18 min ago</div>
@@ -1112,7 +1113,86 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
       </div>
     </div>
 
-    <!-- SETTINGS -->
+    <!-- MANUAL ARTICLE ENTRY -->
+    <div id="v-manual" class="view">
+      <div class="sec-lbl" style="margin-top:20px">Add Article Manually</div>
+      <div style="background:var(--bl2);border:1px solid var(--blb);border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:13px;color:var(--blu)">
+        ◈ Use this form to add articles the crawler cannot find — body-text mentions, Saturday Magazine pieces, blog posts, WhatsApp screenshots, or press releases. Added articles appear in the Live Feed immediately.
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div class="ch"><span class="ct">Article Details</span></div>
+        <div class="cb" style="display:flex;flex-direction:column;gap:10px">
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--t2);margin-bottom:4px">Article Title *</div>
+            <input id="ma-title" type="text" placeholder="e.g. Displaced people can help build stronger economies" style="width:100%;background:var(--off);border:1px solid var(--b2);border-radius:7px;padding:10px 12px;font-size:13px;font-family:var(--f);color:var(--t);outline:none;box-sizing:border-box">
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--t2);margin-bottom:4px">Article URL *</div>
+            <input id="ma-url" type="text" placeholder="https://guardian.ng/saturday-magazine/..." style="width:100%;background:var(--off);border:1px solid var(--b2);border-radius:7px;padding:10px 12px;font-size:13px;font-family:var(--f);color:var(--t);outline:none;box-sizing:border-box">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--t2);margin-bottom:4px">Source / Outlet *</div>
+              <input id="ma-source" type="text" placeholder="e.g. The Guardian Nigeria" style="width:100%;background:var(--off);border:1px solid var(--b2);border-radius:7px;padding:10px 12px;font-size:13px;font-family:var(--f);color:var(--t);outline:none;box-sizing:border-box">
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--t2);margin-bottom:4px">Date Published *</div>
+              <input id="ma-date" type="date" style="width:100%;background:var(--off);border:1px solid var(--b2);border-radius:7px;padding:10px 12px;font-size:13px;font-family:var(--f);color:var(--t);outline:none;box-sizing:border-box">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--t2);margin-bottom:4px">Program *</div>
+              <select id="ma-program" style="width:100%;background:var(--off);border:1px solid var(--b2);border-radius:7px;padding:10px 12px;font-size:13px;font-family:var(--f);color:var(--t);outline:none;box-sizing:border-box">
+                <option value="">— Select program —</option>
+                <option>WISE Program</option>
+                <option>Jobberman</option>
+                <option>World Food Programme</option>
+                <option>Fashion Future Program</option>
+                <option>Youth Employability Booster</option>
+                <option>Songhai Center</option>
+                <option>Project Juriya</option>
+                <option>IITA I-Youth</option>
+                <option>Babban Gona</option>
+                <option>TracTrac ISSAM</option>
+                <option>TAFTA</option>
+                <option>Christian Aid SEPTP</option>
+                <option>WOFAN ICON 2</option>
+                <option>FCMB Easylift</option>
+                <option>EDC Transforming Nigerian Youths</option>
+                <option>Del-York YAPPI</option>
+                <option>General / Mastercard Foundation</option>
+              </select>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--t2);margin-bottom:4px">Sentiment</div>
+              <select id="ma-sentiment" style="width:100%;background:var(--off);border:1px solid var(--b2);border-radius:7px;padding:10px 12px;font-size:13px;font-family:var(--f);color:var(--t);outline:none;box-sizing:border-box">
+                <option value="positive">Positive</option>
+                <option value="neutral" selected>Neutral</option>
+                <option value="negative">Negative</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--t2);margin-bottom:4px">Notes (optional)</div>
+            <textarea id="ma-notes" placeholder="e.g. Mastercard Foundation mentioned in body — World Refugee Day piece. Author is Luka Zang, Zang Global." style="width:100%;background:var(--off);border:1px solid var(--b2);border-radius:7px;padding:10px 12px;font-size:13px;font-family:var(--f);color:var(--t);outline:none;box-sizing:border-box;height:70px;resize:vertical"></textarea>
+          </div>
+          <div id="ma-status" style="display:none;padding:10px 12px;border-radius:7px;font-size:13px;margin-top:2px"></div>
+          <button onclick="addArticleManually()" class="btn btn-red btn-full" style="font-size:13px;padding:12px">✚ Add Article to Dashboard</button>
+        </div>
+      </div>
+
+      <!-- Recently added articles -->
+      <div class="card">
+        <div class="ch"><span class="ct">Manually Added Articles</span><span class="cm2" id="ma-count">0 articles</span></div>
+        <div class="cb" style="padding-top:8px" id="ma-list">
+          <div style="font-size:12px;color:var(--t3);text-align:center;padding:20px 0">No articles added yet. Use the form above to add your first article.</div>
+        </div>
+      </div>
+    </div>
+
+<!-- SETTINGS -->
     <div id="v-settings" class="view">
       <div class="sec-lbl" style="margin-top:20px">Settings</div>
       <div class="card">
@@ -1152,9 +1232,9 @@ body{background:var(--off);color:var(--t);font-family:var(--f);font-size:14px;}
 
 
 // NAVIGATION
-const VIEWS=['dash','feed','alerts','progs','sent','lang','voice','compare','calendar','whatsapp','report','geo','crawler','settings'];
-const TAGS={dash:'OVERVIEW',feed:'MONITORING',alerts:'ALERTS',progs:'PROGRAMS',sent:'NLP INTEL',lang:'LANGUAGE',voice:'VOICES',compare:'COMPARE',calendar:'CALENDAR',whatsapp:'WHATSAPP',report:'REPORTING',geo:'GEO INTEL',crawler:'CRAWLER',settings:'SETTINGS'};
-const NAMES={dash:'Overview Dashboard',feed:'Live Media Feed',alerts:'Crisis & Alerts',progs:'Program Monitor',sent:'Sentiment Engine',lang:'Language Intelligence',voice:'Participant Voice',compare:'Period Comparison',calendar:'Campaign Calendar',whatsapp:'WhatsApp Intelligence',report:'Reports & Export',geo:'Geographic Intelligence',crawler:'Crawler Status',settings:'Settings'};
+const VIEWS=['dash','feed','alerts','progs','sent','lang','voice','compare','calendar','whatsapp','report','geo','crawler','manual','settings'];
+const TAGS={dash:'OVERVIEW',feed:'MONITORING',alerts:'ALERTS',progs:'PROGRAMS',sent:'NLP INTEL',lang:'LANGUAGE',voice:'VOICES',compare:'COMPARE',calendar:'CALENDAR',whatsapp:'WHATSAPP',report:'REPORTING',geo:'GEO INTEL',crawler:'CRAWLER',manual:'ADD ARTICLE',settings:'SETTINGS'};
+const NAMES={dash:'Overview Dashboard',feed:'Live Media Feed',alerts:'Crisis & Alerts',progs:'Program Monitor',sent:'Sentiment Engine',lang:'Language Intelligence',voice:'Participant Voice',compare:'Period Comparison',calendar:'Campaign Calendar',whatsapp:'WhatsApp Intelligence',report:'Reports & Export',geo:'Geographic Intelligence',crawler:'Crawler Status',manual:'Add Article Manually',settings:'Settings'};
 
 function nav(id, el){
   VIEWS.forEach(v=>{const vEl=document.getElementById('v-'+v);if(vEl)vEl.classList.remove('on');});
@@ -1219,7 +1299,7 @@ function doAccess() {
     currentClient = { name: 'Mastercard Foundation', programs: '15 programs', icon: 'MC' };
     try { document.querySelector('.sb-cname').textContent = 'Mastercard Foundation'; } catch(e) {}
     if (typeof initCharts === 'function') initCharts();
-    setTimeout(updateDashboardWithLiveData, 800);
+    setTimeout(updateDashboardWithLiveData, 800); setTimeout(loadManualArticles, 1000);
     setTimeout(checkApiHealth, 500);
   } else {
     if (err) { err.style.display = 'block'; }
@@ -1824,6 +1904,134 @@ window.alertAI=function(prompt,outputId){
 };
 function toggleMob(){var s=document.querySelector('.sidebar'),o=document.getElementById('mob-ov');if(s)s.classList.toggle('mopen');if(o)o.classList.toggle('on');}
 function closeMob(){var s=document.querySelector('.sidebar'),o=document.getElementById('mob-ov');if(s)s.classList.remove('mopen');if(o)o.classList.remove('on');}
+function addArticleManually(){
+  var title=document.getElementById('ma-title').value.trim();
+  var url=document.getElementById('ma-url').value.trim();
+  var source=document.getElementById('ma-source').value.trim();
+  var date=document.getElementById('ma-date').value;
+  var program=document.getElementById('ma-program').value;
+  var sentiment=document.getElementById('ma-sentiment').value;
+  var notes=document.getElementById('ma-notes').value.trim();
+  var status=document.getElementById('ma-status');
+  
+  if(!title||!url||!source||!program){
+    status.style.display='block';
+    status.style.background='var(--r2)';
+    status.style.border='1px solid var(--rb)';
+    status.style.color='var(--red)';
+    status.textContent='Please fill in Title, URL, Source and Program.';
+    return;
+  }
+  
+  // Build article object
+  var article={
+    program:program,
+    title:title,
+    url:url,
+    source:source,
+    date:date?new Date(date).toUTCString():'',
+    sentiment:sentiment,
+    notes:notes,
+    manually_added:true,
+    crawled_at:new Date().toISOString()
+  };
+  
+  // Save to localStorage
+  var saved=JSON.parse(localStorage.getItem('impact_manual_articles')||'[]');
+  saved.unshift(article);
+  localStorage.setItem('impact_manual_articles',JSON.stringify(saved));
+  
+  // Add to live feed
+  var feedEl=document.getElementById('feed-all');
+  if(feedEl){
+    var sc=sentiment==='positive'?'var(--grn)':sentiment==='negative'?'var(--red)':'var(--t3)';
+    var chipCol=sentiment==='positive'?'cpos':sentiment==='negative'?'cneg':'cneu';
+    var newItem='<div class="fi" style="padding:12px 0;border-bottom:1px solid var(--b);background:rgba(37,99,235,0.04)">'
+      +'<div style="flex:1"><div class="ftit"><a href="'+url+'" target="_blank" style="color:inherit;text-decoration:none">'+title+'</a></div>'
+      +'<div class="fmeta" style="margin-top:4px;display:flex;gap:8px;flex-wrap:wrap">'
+      +'<span style="font-size:10px;color:var(--t3)">'+source+'</span>'
+      +'<span style="font-size:10px;color:var(--t3)">'+(date||'')+'</span>'
+      +'<span class="chip '+chipCol+'" style="font-size:10px">'+sentiment+'</span>'
+      +'<span style="font-size:10px;color:var(--t3);background:var(--off);padding:1px 6px;border-radius:4px">'+program+'</span>'
+      +'<span style="font-size:10px;color:var(--blu);background:var(--bl2);padding:1px 6px;border-radius:4px;border:1px solid var(--blb)">Manual</span>'
+      +'</div></div></div>';
+    feedEl.insertAdjacentHTML('afterbegin',newItem);
+  }
+  
+  // Show success
+  status.style.display='block';
+  status.style.background='var(--g2)';
+  status.style.border='1px solid var(--gb)';
+  status.style.color='var(--grn)';
+  status.textContent='✓ Article added to Live Feed successfully.';
+  
+  // Clear form
+  document.getElementById('ma-title').value='';
+  document.getElementById('ma-url').value='';
+  document.getElementById('ma-source').value='';
+  document.getElementById('ma-date').value='';
+  document.getElementById('ma-program').value='';
+  document.getElementById('ma-notes').value='';
+  
+  // Refresh manual list
+  loadManualArticles();
+  
+  // Update stat counter
+  var statEl=document.getElementById('stat-mentions');
+  if(statEl){var cur=parseInt(statEl.textContent)||0;statEl.textContent=cur+1;}
+}
+
+function loadManualArticles(){
+  var saved=JSON.parse(localStorage.getItem('impact_manual_articles')||'[]');
+  var list=document.getElementById('ma-list');
+  var count=document.getElementById('ma-count');
+  if(count)count.textContent=saved.length+' article'+(saved.length!==1?'s':'');
+  if(!list)return;
+  if(saved.length===0){
+    list.innerHTML='<div style="font-size:12px;color:var(--t3);text-align:center;padding:20px 0">No articles added yet.</div>';
+    return;
+  }
+  list.innerHTML=saved.map(function(a,i){
+    var sc=a.sentiment==='positive'?'var(--grn)':a.sentiment==='negative'?'var(--red)':'var(--t3)';
+    return '<div class="fi" style="padding:10px 0;border-bottom:1px solid var(--b)">'
+      +'<div style="flex:1"><div class="ftit" style="font-size:12px"><a href="'+a.url+'" target="_blank" style="color:inherit;text-decoration:none">'+a.title+'</a></div>'
+      +'<div class="fmeta" style="margin-top:3px;display:flex;gap:6px;flex-wrap:wrap">'
+      +'<span style="font-size:10px;color:var(--t3)">'+a.source+'</span>'
+      +'<span style="font-size:10px;color:var(--t3)">'+a.program+'</span>'
+      +'<span style="font-size:10px;font-weight:600;color:'+sc+'">'+a.sentiment+'</span>'
+      +'</div></div>'
+      +'<button onclick="removeManualArticle('+i+')" style="border:none;background:none;color:var(--t3);cursor:pointer;font-size:16px;padding:0 4px;flex-shrink:0">×</button>'
+      +'</div>';
+  }).join('');
+}
+
+function removeManualArticle(idx){
+  var saved=JSON.parse(localStorage.getItem('impact_manual_articles')||'[]');
+  saved.splice(idx,1);
+  localStorage.setItem('impact_manual_articles',JSON.stringify(saved));
+  loadManualArticles();
+}
+
+// Load manual articles into feed on startup
+(function(){
+  var saved=JSON.parse(localStorage.getItem('impact_manual_articles')||'[]');
+  if(saved.length===0)return;
+  var feedEl=document.getElementById('feed-all');
+  if(!feedEl)return;
+  saved.forEach(function(a){
+    var chipCol=a.sentiment==='positive'?'cpos':a.sentiment==='negative'?'cneg':'cneu';
+    var item='<div class="fi" style="padding:12px 0;border-bottom:1px solid var(--b);background:rgba(37,99,235,0.04)">'
+      +'<div style="flex:1"><div class="ftit"><a href="'+a.url+'" target="_blank" style="color:inherit;text-decoration:none">'+a.title+'</a></div>'
+      +'<div class="fmeta" style="margin-top:4px;display:flex;gap:8px;flex-wrap:wrap">'
+      +'<span style="font-size:10px;color:var(--t3)">'+a.source+'</span>'
+      +'<span class="chip '+chipCol+'" style="font-size:10px">'+a.sentiment+'</span>'
+      +'<span style="font-size:10px;color:var(--t3);background:var(--off);padding:1px 6px;border-radius:4px">'+a.program+'</span>'
+      +'<span style="font-size:10px;color:var(--blu);background:var(--bl2);padding:1px 6px;border-radius:4px;border:1px solid var(--blb)">Manual</span>'
+      +'</div></div></div>';
+    feedEl.insertAdjacentHTML('afterbegin',item);
+  });
+})();
+
 function mn(id){['dash','feed','alerts','progs','report'].forEach(function(k){var el=document.getElementById('mn-'+k);if(el)el.style.color=k===id?'var(--red)':'var(--t3)';});closeMob();}
 
 // LIVE DATA LOADER
