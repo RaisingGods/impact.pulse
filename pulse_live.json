@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-06-29T02:08:43.661647+00:00",
-  "total_articles": 124,
-  "new_this_run": 4,
+  "last_updated": "2026-06-29T10:17:57.723810+00:00",
+  "total_articles": 125,
+  "new_this_run": 1,
   "sentiment": {
-    "positive": 83,
+    "positive": 84,
     "negative": 3,
     "neutral": 38
   },
@@ -12,16 +12,16 @@
   "program_counts": {
     "WISE Program": 0,
     "Jobberman": 0,
-    "World Food Programme": 0,
+    "World Food Programme": 1,
     "Fashion Future Program": 0,
-    "Youth Employability Booster": 1,
+    "Youth Employability Booster": 0,
     "Songhai Center": 0,
     "Project Juriya": 0,
     "IITA I-Youth": 0,
-    "Babban Gona": 1,
+    "Babban Gona": 0,
     "TracTrac ISSAM": 0,
-    "TAFTA": 1,
-    "Christian Aid SEPTP": 1,
+    "TAFTA": 0,
+    "Christian Aid SEPTP": 0,
     "WOFAN ICON 2": 0,
     "FCMB Easylift": 0,
     "EDC Transforming Nigerian Youths": 0,
@@ -1286,6 +1286,16 @@
       "date": "Tue, 03 Sep 2024 07:00:00 GMT",
       "sentiment": "neutral",
       "crawled_at": "2026-06-29T02:08:32.284028+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "Nigerian Businesses, RMI, and the Global Energy Alliance for People and Planet Collaborate to Empower Women and Youth Through Renewable Technology - RMI",
+      "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxOdmxDT3IxQjJzMUR3MW1tbWQ3cGxRblpkSnJQNUU2U3lDYWlZX0lnc25VNG5LdzU2RjNSM0wwN2g5czRORVprQmVzWFhJeXBPcDdfb2FudUJxQjZ1RDdiWGdXTmdwVUNjaGxlOTk4N25RbDNId1Rna0NERU5FRWhPVGM2dnFzNHRBU0RvUTUtTWFFOU04Y004SVNDMUo2bk1vUjZjYkUxNE40Wk10cWtkMktDY2VrTlU3cEhCUWgtSXRmaHdSR2k1RjRYWnpXclJnbE1fdDUtQ1RWdU9hbk4zRHpRUmotcnNydlJuZlFuNExIbUlSTTdFbTNn?oc=5",
+      "source": "RMI",
+      "date": "Fri, 16 Jan 2026 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-29T10:17:19.847722+00:00"
     }
   ]
 }
