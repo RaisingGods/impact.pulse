@@ -1,27 +1,27 @@
 {
-  "last_updated": "2026-06-28T21:51:59.505319+00:00",
-  "total_articles": 120,
-  "new_this_run": 0,
+  "last_updated": "2026-06-29T02:08:43.661647+00:00",
+  "total_articles": 124,
+  "new_this_run": 4,
   "sentiment": {
-    "positive": 81,
+    "positive": 83,
     "negative": 3,
-    "neutral": 36
+    "neutral": 38
   },
-  "positive_rate": 68,
+  "positive_rate": 67,
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
     "Jobberman": 0,
     "World Food Programme": 0,
     "Fashion Future Program": 0,
-    "Youth Employability Booster": 0,
+    "Youth Employability Booster": 1,
     "Songhai Center": 0,
     "Project Juriya": 0,
     "IITA I-Youth": 0,
-    "Babban Gona": 0,
+    "Babban Gona": 1,
     "TracTrac ISSAM": 0,
-    "TAFTA": 0,
-    "Christian Aid SEPTP": 0,
+    "TAFTA": 1,
+    "Christian Aid SEPTP": 1,
     "WOFAN ICON 2": 0,
     "FCMB Easylift": 0,
     "EDC Transforming Nigerian Youths": 0,
@@ -1246,6 +1246,46 @@
       "date": "Tue, 28 Jun 2022 07:00:00 GMT",
       "sentiment": "positive",
       "crawled_at": "2026-06-28T18:59:26.756409+00:00"
+    },
+    {
+      "program": "Youth Employability Booster",
+      "implementer": "Young Africa International",
+      "title": "Mastercard Foundation: Partner Convening and the Drive to Provide Jobs - THISDAYLIVE",
+      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNTUNMR1JPcnJNUWhXbmlkMG9iYmlSeDJEcmJKWEFvbTkxa2drVDFsajFpdnU0Mm9wNXBtQ1JPVVhiVVlxMm9xNUw0VnBVV01CSUpMbVd1ZHhLem55T3Zac3U5NGpZbFQtdHRELXBaaWwzcWJ3bHRiUm8teXNBLUlYN0x2a3NSQTJYTFdVdFFIbk9uc1hzUVJIcmdsY1JieUQ0cUt2TDMwQ1R5OVNKZ3c?oc=5",
+      "source": "THISDAYLIVE",
+      "date": "Thu, 25 Dec 2025 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-29T02:08:13.239259+00:00"
+    },
+    {
+      "program": "Babban Gona",
+      "implementer": "CAFI & WEDI",
+      "title": "New Work Opportunities in Agriculture for 600,000 Ethiopians - allAfrica.com",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFA4cVRFV2ZJa2V5LXExdXEwdWNDNDNCbk1rdVZXb3JqUHJRbzR6aWJuODd1MHF5R1pnRHFIYUE4QXJCR3p0clcwV1pnWXgxU0xpS2o5U0N1aE41UlE1Y3N4bnpkcjQ0cGNCZ1Rz?oc=5",
+      "source": "allAfrica.com",
+      "date": "Thu, 26 Oct 2023 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-29T02:08:24.698816+00:00"
+    },
+    {
+      "program": "TAFTA",
+      "implementer": "Terra Academy for the Arts",
+      "title": "Excitement as TAFTA graduates 8,000 students - Vanguard News",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQMUZjR1ZQN3Bya0pGOVk0VnQwc1BCQWN2ZnJPbk5IcUxWVHdwaHgwSWpYeXM0c2gzUXBnSnJVc0dscDc5Zjhuc2MtS1cwdzJORmJFQjdLczMxNGVuSE4wQ0FLcURFUDBzd2ZGS090RkRkUHdzMldkb2dLTXlyYnNCcEN2WkM1T0nSAYwBQVVfeXFMUHl4YWxHdjhOa1BxWm5MSlEyck1tWWZhbk8tc0hIclQtTmx5RXRFZ1Ntc0xVNWdlbVVjVGxsbF9tSFhWZU1hMEZIOTlfOFBZT25Pc1M5UlMtUmVSSE43RGptMjNuYjl4azducHlTM2VFQmw4clZQU281Wm1VMTFTYWFTR3RiYzQ0em5YaEQ?oc=5",
+      "source": "Vanguard News",
+      "date": "Mon, 14 Apr 2025 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-29T02:08:28.419301+00:00"
+    },
+    {
+      "program": "Christian Aid SEPTP",
+      "implementer": "Christian Aid",
+      "title": "African-led startups showcase health-care innovations - University of Toronto",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNekpxNjdyNWdhRWRHcjdUM3dFRUU3UGdsblB0dWtfcVN5TGhNUXFweVhMeDIyVzVzcnRRM0FrQnRQTG5WOF81REM5QXFBZmIxd0psN0VCVTk4ZG0wR1EyOWk0TTc4cWpMN1RtLUlwMnNYNjQwX1JROHF1MEg5SHJ2WFM5alJIWDNVVXhvWGQtQXE4bzc3M3E1Q3ZOUXNnTHp3anVsM3RwdVd2OGF0ZzE2eQ?oc=5",
+      "source": "University of Toronto",
+      "date": "Tue, 03 Sep 2024 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-29T02:08:32.284028+00:00"
     }
   ]
 }
