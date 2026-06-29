@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-06-29T10:17:57.723810+00:00",
-  "total_articles": 125,
+  "last_updated": "2026-06-29T15:25:35.472353+00:00",
+  "total_articles": 126,
   "new_this_run": 1,
   "sentiment": {
-    "positive": 84,
+    "positive": 85,
     "negative": 3,
     "neutral": 38
   },
@@ -11,8 +11,8 @@
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
-    "Jobberman": 0,
-    "World Food Programme": 1,
+    "Jobberman": 1,
+    "World Food Programme": 0,
     "Fashion Future Program": 0,
     "Youth Employability Booster": 0,
     "Songhai Center": 0,
@@ -1296,6 +1296,16 @@
       "date": "Fri, 16 Jan 2026 08:00:00 GMT",
       "sentiment": "positive",
       "crawled_at": "2026-06-29T10:17:19.847722+00:00"
+    },
+    {
+      "program": "Jobberman",
+      "implementer": "Young Africa Works",
+      "title": "Jobberman, partners, organise career fair for 500 displaced persons in Benue - The Guardian Nigeria News",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOOGRqbDh3UlJSNFNPdGhRS1NXX2ptTnc2YTFJdk9sdGU2eno0dldTRWZYSG95VTllSFFla1JGQ01vc2h5ZHJBOUsxbjNndTVMTUk3bjdWZjVnb0ZZWVFHQnFzYkhTVElubEcwQXQwd0lZZGROTDV2alhZSktzM2hLWUp2ZEhhUGZtZnpYUW8zZTRMQUZ5dlkyNXBiUHJWdFI3Rnc?oc=5",
+      "source": "The Guardian Nigeria News",
+      "date": "Mon, 29 Jun 2026 13:52:16 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-29T15:24:56.524769+00:00"
     }
   ]
 }
