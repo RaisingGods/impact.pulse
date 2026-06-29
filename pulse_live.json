@@ -1,17 +1,17 @@
 {
-  "last_updated": "2026-06-29T15:25:35.472353+00:00",
-  "total_articles": 126,
+  "last_updated": "2026-06-29T19:30:36.523024+00:00",
+  "total_articles": 127,
   "new_this_run": 1,
   "sentiment": {
     "positive": 85,
     "negative": 3,
-    "neutral": 38
+    "neutral": 39
   },
   "positive_rate": 67,
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
-    "Jobberman": 1,
+    "Jobberman": 0,
     "World Food Programme": 0,
     "Fashion Future Program": 0,
     "Youth Employability Booster": 0,
@@ -19,7 +19,7 @@
     "Project Juriya": 0,
     "IITA I-Youth": 0,
     "Babban Gona": 0,
-    "TracTrac ISSAM": 0,
+    "TracTrac ISSAM": 1,
     "TAFTA": 0,
     "Christian Aid SEPTP": 0,
     "WOFAN ICON 2": 0,
@@ -1306,6 +1306,16 @@
       "date": "Mon, 29 Jun 2026 13:52:16 GMT",
       "sentiment": "positive",
       "crawled_at": "2026-06-29T15:24:56.524769+00:00"
+    },
+    {
+      "program": "TracTrac ISSAM",
+      "implementer": "TracTrac",
+      "title": "Agri-tech firm targets 36,000 youths to drive farm mechanisation - The Nation Newspaper",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNcmVaSC1SeTVoVFh1ME1aOTdRVF80UnFKTDRSU2hWVVhJT3BnNlEwVUc4QWhQTmk4T2diMllNd3UxMEc4Qlo0TVBydUh3Qi1ZRGQxb3gteXRCdVZTNHktU3ZEVzJfVWluM1VKOEdNZXhEYUh6MU5pbTB0Q2FZSEhqbUVmSHJKaUVrLTBlcm9tRkNSd2EtTlkzTXVR?oc=5",
+      "source": "The Nation Newspaper",
+      "date": "Mon, 29 Jun 2026 16:55:19 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-29T19:30:18.146777+00:00"
     }
   ]
 }
