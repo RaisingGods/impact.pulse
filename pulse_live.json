@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-06-30T13:51:41.701061+00:00",
+  "last_updated": "2026-06-30T19:29:14.790809+00:00",
   "total_articles": 140,
-  "new_this_run": 2,
+  "new_this_run": 0,
   "sentiment": {
     "positive": 92,
     "negative": 3,
@@ -12,14 +12,14 @@
   "program_counts": {
     "WISE Program": 0,
     "Jobberman": 0,
-    "World Food Programme": 1,
+    "World Food Programme": 0,
     "Fashion Future Program": 0,
     "Youth Employability Booster": 0,
     "Songhai Center": 0,
     "Project Juriya": 0,
     "IITA I-Youth": 0,
     "Babban Gona": 0,
-    "TracTrac ISSAM": 1,
+    "TracTrac ISSAM": 0,
     "TAFTA": 0,
     "Christian Aid SEPTP": 0,
     "WOFAN ICON 2": 0,
