@@ -1,30 +1,30 @@
 {
-  "last_updated": "2026-06-30T08:52:54.994797+00:00",
-  "total_articles": 138,
-  "new_this_run": 8,
+  "last_updated": "2026-06-30T13:51:41.701061+00:00",
+  "total_articles": 140,
+  "new_this_run": 2,
   "sentiment": {
-    "positive": 91,
+    "positive": 92,
     "negative": 3,
-    "neutral": 44
+    "neutral": 45
   },
   "positive_rate": 66,
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
-    "Jobberman": 2,
-    "World Food Programme": 2,
+    "Jobberman": 0,
+    "World Food Programme": 1,
     "Fashion Future Program": 0,
     "Youth Employability Booster": 0,
     "Songhai Center": 0,
     "Project Juriya": 0,
     "IITA I-Youth": 0,
-    "Babban Gona": 1,
-    "TracTrac ISSAM": 2,
+    "Babban Gona": 0,
+    "TracTrac ISSAM": 1,
     "TAFTA": 0,
     "Christian Aid SEPTP": 0,
     "WOFAN ICON 2": 0,
     "FCMB Easylift": 0,
-    "EDC Transforming Nigerian Youths": 1,
+    "EDC Transforming Nigerian Youths": 0,
     "Del-York YAPPI": 0
   },
   "priority_alerts": [
@@ -1426,6 +1426,26 @@
       "date": "Thu, 10 Aug 2023 07:00:00 GMT",
       "sentiment": "positive",
       "crawled_at": "2026-06-30T08:52:51.533753+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "AfDB, WFP Assist Flood Victims In Northeast - LEADERSHIP Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5JUjJmQWN0VkJpNDhjekJIbGtPQUpwYzE1YjI0Rko5aGlQRldSY3FxZjRjdlV6VGJVaDJmTl9FSE03MHM3Y3lsTWk5TEU1b3NJQTdrLW0xQXU3X3AxR1Z2dlpNbHdPRlNKRXBLZVNlWW1lOU0?oc=5",
+      "source": "LEADERSHIP Newspapers",
+      "date": "Sat, 22 Feb 2025 07:45:04 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-30T13:51:05.570334+00:00"
+    },
+    {
+      "program": "TracTrac ISSAM",
+      "implementer": "TracTrac",
+      "title": "36,000 youth set for agricultural mechanisation training - Tribune Online",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNcGRySTlFY0FjYm9LaFhkWW11dmo0bVc1MkdjVU9TWU9pUzZwbmoyQnhaczQxeDdOVUViUW1QeEExYTkwbGcwLXZDeU1kSmtBYmhnMEpwelV3VlJCSUFjXzVZazdyMk1RZXczaE5MSzRuSFE0aGFwampLZXNXM2NMYVI4MFhKbUc3a0tjbm9VZDRnZ9IBkgFBVV95cUxNcGRySTlFY0FjYm9LaFhkWW11dmo0bVc1MkdjVU9TWU9pUzZwbmoyQnhaczQxeDdOVUViUW1QeEExYTkwbGcwLXZDeU1kSmtBYmhnMEpwelV3VlJCSUFjXzVZazdyMk1RZXczaE5MSzRuSFE0aGFwampLZXNXM2NMYVI4MFhKbUc3a0tjbm9VZDRnZw?oc=5",
+      "source": "Tribune Online",
+      "date": "Tue, 30 Jun 2026 07:35:13 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-30T13:51:23.093729+00:00"
     }
   ]
 }
