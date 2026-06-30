@@ -1,31 +1,31 @@
 {
-  "last_updated": "2026-06-30T02:03:21.785998+00:00",
-  "total_articles": 130,
-  "new_this_run": 3,
+  "last_updated": "2026-06-30T08:52:54.994797+00:00",
+  "total_articles": 138,
+  "new_this_run": 8,
   "sentiment": {
-    "positive": 86,
+    "positive": 91,
     "negative": 3,
-    "neutral": 41
+    "neutral": 44
   },
   "positive_rate": 66,
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
-    "Jobberman": 0,
-    "World Food Programme": 0,
+    "Jobberman": 2,
+    "World Food Programme": 2,
     "Fashion Future Program": 0,
     "Youth Employability Booster": 0,
     "Songhai Center": 0,
     "Project Juriya": 0,
     "IITA I-Youth": 0,
-    "Babban Gona": 0,
-    "TracTrac ISSAM": 1,
+    "Babban Gona": 1,
+    "TracTrac ISSAM": 2,
     "TAFTA": 0,
     "Christian Aid SEPTP": 0,
     "WOFAN ICON 2": 0,
     "FCMB Easylift": 0,
-    "EDC Transforming Nigerian Youths": 0,
-    "Del-York YAPPI": 2
+    "EDC Transforming Nigerian Youths": 1,
+    "Del-York YAPPI": 0
   },
   "priority_alerts": [
     {
@@ -1346,6 +1346,86 @@
       "date": "Thu, 08 May 2025 07:00:00 GMT",
       "sentiment": "neutral",
       "crawled_at": "2026-06-30T02:03:20.784972+00:00"
+    },
+    {
+      "program": "Jobberman",
+      "implementer": "Young Africa Works",
+      "title": "Benue Career Fair drives employment opportunities for displaced persons - Punch Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOWTZzLWx1Q3RVb1hCak5rWWJ6c3Q2a1o5MXJMV3pqc1lQR1FCY05CSnRkUkR4X1RsVndXaUcydUlnZkRnU0NFMXJGc2c0TWZkd1RLZC05bWJIc2FSbkxvUG8yeTZzUUVISFF0Y2pUUWd5bmdrVDd3bkludDVzTU92R3lieTNRMnFxNFNzVVZhSk9lczN2X0ZwMVFyNEk5Q2pVdnVMR3BnZDJic3gwUHVFc1dZZDhOMUNmaEFZaGR5QWZHYWc1enFLelFyNi1xdw?oc=5",
+      "source": "Punch Newspapers",
+      "date": "Tue, 30 Jun 2026 02:33:32 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-30T08:52:18.533497+00:00"
+    },
+    {
+      "program": "Jobberman",
+      "implementer": "Young Africa Works",
+      "title": "Jobberman, Mastercard Foundation drive inclusion with AbilityX - Vanguard News",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPdGpJWTRMdUJGQmhsWEh4OUdsanFpTHdpS0tYRnY0bnZ1Y0U3V0hYWGRLWUM4eEhDTE5GUi1RQzVJUFc5OXdTY2I3czRGd1dIYlBVci1scFpJNGJxcjlEU3FPbVR0OE02LUFVaWF1azFxMXRNOGtnd1lRMGl6WlpnTzY4czROdXZLQUt4MGNXeGRBQW5WOFd3ZGppSFUxcEXSAaQBQVVfeXFMUEFscXFfUlpDNUlzbTJXQ1cyNm9PMy1WZlBJVU45N1F5X3NUYU1TVTF5RnRRNDJrTExJbmZjenV6Nmw1SmJORDNBQzRueTBhTlo1VXd1djkxbnF2b0pteWJ6bktuZGdBcUhDN1JJZFVvd29kUXJsUVV5bWlCSkRsVjB0Y2FQZm5VaVRVNXQ1Tl9KZjRzT0NRQ3pDZGF1S2tUc0R5RmE?oc=5",
+      "source": "Vanguard News",
+      "date": "Tue, 30 Dec 2025 08:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-30T08:52:18.533528+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "Call For Applications: Mastercard Foundation Associates Program Paid - MSME Africa",
+      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQaUg5OVFzMk1qblZubk9yTXlXdHowcDI0VUZtbkNrTFU4eWRWamxDZFN6eWhDRWtlNE84NXNLOHVtNzFTRFBLUmxQX2E2SmUxTnE0WGc2Y25LU3Nya2hmTTM5aGJIM3BHU3VZajQyOVBDTzh6RzF0c3pNaXhvd3hYUWZDWVptTjVKMlBhWWRobE9Tb2RwR2dndWdiRDJVcGFQeWxZT3V3QVVVSUxMS0YxTzFBNDBuVmQtaFVzcWQ5Q1JvNXFIZDNocF9SUjJlcmRMTE5ZLVhMSnpUd21feG1MWFlWVTlZUkRGRUpGY1FlRkQ?oc=5",
+      "source": "MSME Africa",
+      "date": "Mon, 08 Jun 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-30T08:52:19.986258+00:00"
+    },
+    {
+      "program": "World Food Programme",
+      "implementer": "WFP",
+      "title": "Bringing Clean Energy Opportunities to Women and Youth in Nigerian Agriculture - RMI",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPTzdZMWFEc29tRk4xT2lsODR0TER3ZThWRUtiUVZydjRpNjNJWmtZdEFPZHVpZHRiXzBqVEh0a1EybUhtbFBmUVlEYU9wZTFXR2RhQTlsV2FJanRsWFNXZWVTdmhBTnd0WkNUUEhJTDNudGhyelNSNjR1b0c4SlZGYUJvNVB1Z3ZMbERKdVhGWVE1R0YwZ2xEM2Q5T2xLdFJHZkp3S3BRQnQ?oc=5",
+      "source": "RMI",
+      "date": "Thu, 09 Apr 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-30T08:52:19.986287+00:00"
+    },
+    {
+      "program": "Babban Gona",
+      "implementer": "CAFI & WEDI",
+      "title": "How many employees work at Babban Gona Farmer Svcs? - Revelio Labs",
+      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFAyLXdmNlZ6VWlhaXcwNFZWeHpXTWJwY2g2YjJfcm40d01HaWJJX1p1eTJnallkZUlBQUM5MERxMER0OHVLcVJ1Z05LRXN1ekhna3FxYm5aMExhUXBUVTB5T0E4RkFWUjJNcXBObG8zd01wYmhGX1cwTFFQblQ?oc=5",
+      "source": "Revelio Labs",
+      "date": "Thu, 07 May 2026 02:41:24 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-30T08:52:36.477305+00:00"
+    },
+    {
+      "program": "TracTrac ISSAM",
+      "implementer": "TracTrac",
+      "title": "‘Nigeria needs 250,000 tractors’ - Punch Newspapers",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE54X3NOSnVGZGsybUJfbDREazVhX2xqN0dCYmtUZkw4QW5wREtMTzd2SUszYXFxcUwxN09YSkhtNGltR0JicU8tcFlGdXVMS3pjTVd2TnJFNW5fTjNqOG5B?oc=5",
+      "source": "Punch Newspapers",
+      "date": "Tue, 30 Jun 2026 06:57:43 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-30T08:52:37.688405+00:00"
+    },
+    {
+      "program": "TracTrac ISSAM",
+      "implementer": "TracTrac",
+      "title": "36,000 youth set for agricultural mechanisation training - Tribune Online",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOUVBHQWRqT3JFY09SSWFncXFmaTZpZkVrU1BnZjNoVmRiUURTM21YT1VlSmRscHlMV2pmSUhndnhUeWtOSnhMMUlvcGdCcG5kUmlFVDg1SmdNekNadDlYV3Ffc2h3SW81MUt1T3ZaU2Myc2ZCemRrbWtqNTd5QjlVdWk2NzZ2aWNPVl9XVdIBkgFBVV95cUxNcGRySTlFY0FjYm9LaFhkWW11dmo0bVc1MkdjVU9TWU9pUzZwbmoyQnhaczQxeDdOVUViUW1QeEExYTkwbGcwLXZDeU1kSmtBYmhnMEpwelV3VlJCSUFjXzVZazdyMk1RZXczaE5MSzRuSFE0aGFwampLZXNXM2NMYVI4MFhKbUc3a0tjbm9VZDRnZw?oc=5",
+      "source": "Tribune Online",
+      "date": "Tue, 30 Jun 2026 07:35:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-30T08:52:37.688434+00:00"
+    },
+    {
+      "program": "EDC Transforming Nigerian Youths",
+      "implementer": "Enterprise Development Centre",
+      "title": "Wema Bank/EDC Mastercard Foundation Transforming Nigerian Youths Program 2023 for Young Female Entrepreneurs. - Opportunities For Africans",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQaHVYeWVMYjR3TWtYMWJLcHBiUjN2aFFnMjFuYk1mcWpCdFVLWmcxTm1NM2J4MXNjX0RwbkgwNHpiQko5VndMdTdoTjJobTZjM0djVUFXWlJpRFFuX1FWeFdDNVVDb1ZyTEZyNHVWeG9HODltSUpOUTBlOU5mQXduUmd5dXZ5Q2hDOUVZQU9fdXlaS015TzluN0QyN0Y0ZGE1YURCTVh1SkRuTUpRT1FKdU5hQnpJQWJRYnFN?oc=5",
+      "source": "Opportunities For Africans",
+      "date": "Thu, 10 Aug 2023 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-30T08:52:51.533753+00:00"
     }
   ]
 }
