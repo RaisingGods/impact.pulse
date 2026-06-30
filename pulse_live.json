@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-06-29T19:30:36.523024+00:00",
-  "total_articles": 127,
-  "new_this_run": 1,
+  "last_updated": "2026-06-30T02:03:21.785998+00:00",
+  "total_articles": 130,
+  "new_this_run": 3,
   "sentiment": {
-    "positive": 85,
+    "positive": 86,
     "negative": 3,
-    "neutral": 39
+    "neutral": 41
   },
-  "positive_rate": 67,
+  "positive_rate": 66,
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
@@ -25,7 +25,7 @@
     "WOFAN ICON 2": 0,
     "FCMB Easylift": 0,
     "EDC Transforming Nigerian Youths": 0,
-    "Del-York YAPPI": 0
+    "Del-York YAPPI": 2
   },
   "priority_alerts": [
     {
@@ -1316,6 +1316,36 @@
       "date": "Mon, 29 Jun 2026 16:55:19 GMT",
       "sentiment": "neutral",
       "crawled_at": "2026-06-29T19:30:18.146777+00:00"
+    },
+    {
+      "program": "TracTrac ISSAM",
+      "implementer": "TracTrac",
+      "title": "Firm eyes 36,000 youths to drive farm mechanisation - The Nation Newspaper",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxObTA0ZlRPamJVUi1TaHRZRDA5NkRzdmxmLXFsRmU1eS1EZ28ybVRiTDMwQ1djT0dnckVlLUVVd1VMcFZJLVBIRzhwOUZYOGlJRU5pb1Q3MjRPLVFQZHpLc0FqbGIwQzNEZnBhTlV2bm1oMlVtbWhjSkxSRDBlSVozUGh0RWhSUElt?oc=5",
+      "source": "The Nation Newspaper",
+      "date": "Tue, 30 Jun 2026 01:54:48 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-30T02:03:04.093238+00:00"
+    },
+    {
+      "program": "Del-York YAPPI",
+      "implementer": "Del-York Group",
+      "title": "Unveiling the Curtains Behind Nigerian Animation: Struggles, Successes and Solutions - Nollywood Reporter",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQX3ZsRUtHMnJYV2NfTXg5blJCUUpFOU1sXzhuNjFzc2FaTGkwT3pldVNWZW9WdGo3SHNXR21aSWswMWV2ZEJfY09tS1d3MU93dEZqNHZCelFPZzk0S1BRQmpZUUlwMzktWWw5Q3VHSDNXMVVQNHYwUFR5Q09ic1FQZGtfZ0UxYVdreDFkX2EwUXFIbTM1SlhJckZ2X0ZCWE8zazdXZTJHN2djS2RfczdkRzZWWTVYcFFBMktvR3ZB?oc=5",
+      "source": "Nollywood Reporter",
+      "date": "Sat, 21 Sep 2024 07:00:00 GMT",
+      "sentiment": "positive",
+      "crawled_at": "2026-06-30T02:03:19.554710+00:00"
+    },
+    {
+      "program": "Del-York YAPPI",
+      "implementer": "Del-York Group",
+      "title": "YAPPI Ignites Lagos with Creative Hub for Young Women in Animation - BellaNaija",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9YSVZweHJEclA3anpnUU1DUEFLNmhmSXBhOWhXREtLd21uaDJUbXpIUUNqeGZDWkpoaV9aWVRuUFA5eFo0aGJ0X0VSenE1OEwwSXZTMDdRWFUySEFHWVBFX2NIODBrdw?oc=5",
+      "source": "BellaNaija",
+      "date": "Thu, 08 May 2025 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-06-30T02:03:20.784972+00:00"
     }
   ]
 }
