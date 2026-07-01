@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-06-30T19:29:14.790809+00:00",
-  "total_articles": 140,
-  "new_this_run": 0,
+  "last_updated": "2026-07-01T02:09:02.083700+00:00",
+  "total_articles": 142,
+  "new_this_run": 2,
   "sentiment": {
     "positive": 92,
     "negative": 3,
-    "neutral": 45
+    "neutral": 47
   },
-  "positive_rate": 66,
+  "positive_rate": 65,
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
@@ -19,13 +19,13 @@
     "Project Juriya": 0,
     "IITA I-Youth": 0,
     "Babban Gona": 0,
-    "TracTrac ISSAM": 0,
+    "TracTrac ISSAM": 1,
     "TAFTA": 0,
     "Christian Aid SEPTP": 0,
     "WOFAN ICON 2": 0,
     "FCMB Easylift": 0,
     "EDC Transforming Nigerian Youths": 0,
-    "Del-York YAPPI": 0
+    "Del-York YAPPI": 1
   },
   "priority_alerts": [
     {
@@ -1446,6 +1446,26 @@
       "date": "Tue, 30 Jun 2026 07:35:13 GMT",
       "sentiment": "positive",
       "crawled_at": "2026-06-30T13:51:23.093729+00:00"
+    },
+    {
+      "program": "TracTrac ISSAM",
+      "implementer": "TracTrac",
+      "title": "Agric Mechanization: TracTrac to build capacity of 36,000 youth under YPiM initiative - Vanguard News",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOXzFaQ3lWT3hTMDNBVk1mZElmUjdWSk1NX2VvVUEyMVgtNmJhSVhTeEJtV2JiR0tkY1FkR2dYZVlseVBDdlI0U1BJcTltaW5sbmpqYksyQTZNUXpHTThfeVNJdy04NUVpN0ZWaWZUSU9HUm9NSWN6TUEtYm94Vi1vTjhjeWdRYS1YbWk0X3Q3OUZhMl84b1JLdmtxdV93OC1ndUJBNTZieFZCXzYyenlndHhWTzNzWTgzODhObdIBwgFBVV95cUxPVFl4aTUtc1FwZWlDX2F0b1JWWkNjQWpiYUhHd3RNLUlxOGMwMmZOb0N0WVg1c3ZxYTMzajVCeGxCd3BmcFFHbklxdV9wQlFIU3l4Nlo0cjNqSkVuQVRwaU9xWGRucklJeGpFRUZpT3o5OXR4bTBWbXV2aDFGT1N3LTMzdDVOVWRtZTkzaTNaLWhnYXIwcU1hWHNVbmVCOUFIVUFXUG5kRGdsWWt5d0VwMVJ1V1l2cURkQ2habUhReGdDUQ?oc=5",
+      "source": "Vanguard News",
+      "date": "Wed, 01 Jul 2026 00:15:35 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-07-01T02:08:44.334146+00:00"
+    },
+    {
+      "program": "Del-York YAPPI",
+      "implementer": "Del-York Group",
+      "title": "YAPPI - Here’s How to Become a Master in Animation for Free & Get Global Work Opportunities - BellaNaija",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBnX2ZFa1phSDg1QWI2b0phMEdnM0UzR0lxSE5sQ2Z5d1N5UlZXSk5qQ19mNnpVMkNjZm9NOHBDdUZ3REFPaUdwLUkyQnMzdFJ1Rjc3dWZqc09EM1pXQWJoME1oYTV1UVpTQUhfUTBXT1YxVWRBeDVB?oc=5",
+      "source": "BellaNaija",
+      "date": "Fri, 09 Jun 2023 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-07-01T02:09:01.082971+00:00"
     }
   ]
 }
