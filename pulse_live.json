@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-07-01T14:02:46.722903+00:00",
-  "total_articles": 145,
-  "new_this_run": 0,
+  "last_updated": "2026-07-01T19:27:42.248602+00:00",
+  "total_articles": 146,
+  "new_this_run": 1,
   "sentiment": {
     "positive": 94,
     "negative": 3,
-    "neutral": 48
+    "neutral": 49
   },
-  "positive_rate": 65,
+  "positive_rate": 64,
   "ai_summary": "",
   "program_counts": {
     "WISE Program": 0,
@@ -23,7 +23,7 @@
     "TAFTA": 0,
     "Christian Aid SEPTP": 0,
     "WOFAN ICON 2": 0,
-    "FCMB Easylift": 0,
+    "FCMB Easylift": 1,
     "EDC Transforming Nigerian Youths": 0,
     "Del-York YAPPI": 0
   },
@@ -1496,6 +1496,16 @@
       "date": "Sun, 13 Aug 2023 07:00:00 GMT",
       "sentiment": "positive",
       "crawled_at": "2026-07-01T09:26:17.271918+00:00"
+    },
+    {
+      "program": "FCMB Easylift",
+      "implementer": "First City Monument Bank",
+      "title": "Oyo, FCMB Back 1,000 Agripreneurs with N1.5bn Loans to Boost Food Production - MSME Africa",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOTHdTV0xhNGpTRzhWd25uNkpLc1phMTJ5LXA0WS1rX3RzR0FWT0cwZl9BZUhBcGJjNVI1YldmODdaUWRpcnZOb1B4SmhqNzNndnA4Smp1dXRnREZieXVzTl9qbl82MzJGLWxCMmR2ZFFzS3lDQkExQkV0SnFtSmR0LTBfUWN3eFh4X0JTSmMxbjZCdldCNDRtMkNwZEF3V1ZmLWJnd2hlMA?oc=5",
+      "source": "MSME Africa",
+      "date": "Thu, 02 Apr 2026 07:00:00 GMT",
+      "sentiment": "neutral",
+      "crawled_at": "2026-07-01T19:27:34.521845+00:00"
     }
   ]
 }
